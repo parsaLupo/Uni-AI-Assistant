@@ -114,7 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = "en-us"
+# Persian-first (AGENTS.md "Language & Localization", docs/11 section "Language and
+# Localization Requirements"): user-facing text, including DRF/Django validation
+# messages, renders in Persian. Both Django and DRF ship an `fa` translation
+# catalog, so this needs no extra dependency.
+LANGUAGE_CODE = env_str("DJANGO_LANGUAGE_CODE") or "fa"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True

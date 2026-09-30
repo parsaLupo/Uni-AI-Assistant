@@ -40,3 +40,22 @@ Important metrics/logs should include:
 - authentication failures
 
 Do not log secrets or unnecessary personal content.
+
+## Language and Localization Requirements
+
+The primary language of the system is Persian (fa-IR).
+
+Requirements:
+
+- All user-facing UI must be Persian.
+- The entire application must use RTL layout.
+- AI responses must be Persian by default.
+- User questions are primarily expected in Persian.
+- Admin interfaces must be Persian and RTL.
+- Validation and error messages shown to users must be Persian.
+- Search must support Persian text normalization.
+- The system must properly handle Persian characters such as:
+  - ی / ي
+  - ک / ك
+  - نیم‌فاصله
+- Academic dates should support Jalali calendar representation where appropriate.

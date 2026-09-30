@@ -8,8 +8,13 @@ retrieval augmented generation, with citations.
 Phase status and the full specification live in
 [`university-assistant-docs/`](university-assistant-docs/START-HERE.md). Start any
 work by reading `university-assistant-docs/AGENTS.md`, then
-`university-assistant-docs/START-HERE.md`. Current phase: **PHASE_01** (Phase 00
-baseline is `DONE`).
+`university-assistant-docs/START-HERE.md`. Current phase: **PHASE_00** (`DONE`,
+re-validated after the Persian/RTL documentation amendment); next up **PHASE_01**.
+
+The product is Persian-first: the UI is Persian and RTL, user-facing API messages
+are Persian, and the assistant will answer in Persian by default. Technical
+identifiers — code, API field names, error codes, database columns — stay English
+(ADR-010).
 
 ## Layout
 

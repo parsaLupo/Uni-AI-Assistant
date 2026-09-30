@@ -25,3 +25,16 @@ Implement grounded natural-language question answering.
 Before implementation, read `AGENTS.md` and all documents referenced by this phase. Do not start later phases unless explicitly instructed.
 
 At completion, report changed files, tests run, migrations, acceptance criteria status, and known limitations.
+
+## Persian Retrieval Requirements
+
+The retrieval pipeline must support Persian-language documents.
+
+The system should account for:
+
+- Persian character normalization
+- Arabic/Persian character variants
+- Persian punctuation
+- نیم‌فاصله
+- Persian and Latin numbers
+- Common Persian word-form variations

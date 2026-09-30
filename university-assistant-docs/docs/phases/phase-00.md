@@ -2,7 +2,9 @@
 
 ## Status
 
-`DONE` — closed 2026-09-30. See the verification record at the end of this file.
+`DONE` — closed 2026-09-30 and re-validated the same day after the Persian/RTL
+documentation amendment (see "Localization amendment" at the end of this file).
+See the verification record below.
 
 ## Objective
 Freeze the first implementation baseline before writing production code.
@@ -46,13 +48,13 @@ Environment: Windows, Python 3.13.5, Node 22, `backend/.venv`.
 
 | Check | Command | Result |
 |---|---|---|
-| Backend tests | `python -m pytest` | 12 passed (health, error envelope, request id, settings contract) |
+| Backend tests | `python -m pytest` | 15 passed (health, error envelope, request id, settings contract, Persian localization contract) |
 | Backend lint | `python -m ruff check .` | no findings |
 | Config validity (debug off) | `python manage.py check` | system check identified no issues |
 | Migration state | `python manage.py makemigrations --check --dry-run` | no changes detected |
 | Frontend types | `npm run typecheck` | clean |
-| Frontend tests | `npm run test` | 5 passed |
-| Frontend build | `npm run build` | built, 220 kB / 68.9 kB gzip |
+| Frontend tests | `npm run test` | 12 passed (API client + localization/RTL contract) |
+| Frontend build | `npm run build` | built, 220 kB / 69.0 kB gzip (includes `styles.css`) |
 | Live response shape | `GET /api/v1/health/` | `200` with `status/service/version/request_id/checks`, `X-Request-ID` echoed |
 | Unknown API path | `GET /api/v1/does-not-exist/` | `404` with `{"error":{"code":"NOT_FOUND","message","details"}}` |
 | Access logging | same probe | `request_id=... method=GET path=... status=... latency_ms=...` |
@@ -72,4 +74,36 @@ feature implementation), so there is nothing to migrate.
    the settings contract test.
 4. `OA-01` (registration policy) and `OA-02` (login identifier) must be answered
    before Phase 02 starts; they do not block Phase 01.
+
+## Localization amendment (2026-09-30, after closeout)
+
+The documentation was amended to make the product **Persian-first and RTL**
+(`AGENTS.md` rules 11–14 plus its "Language & Localization" section, `docs/02`,
+`docs/06`, `docs/11`, `docs/20-ui-navigation.md`). Phase 00 was re-checked against
+the amended documents and the baseline adjusted so `main` satisfies the new rules.
+No feature or UI work was added, so the non-goals still hold.
+
+| Item | Before | After |
+|---|---|---|
+| Default language | `LANGUAGE_CODE = "en-us"` | `"fa"`, overridable by `DJANGO_LANGUAGE_CODE` (ADR-010; `.env.example`) |
+| API error text | English sentences | Persian sentences, while `error.code` values stay English identifiers |
+| Field-level validation text | DRF English | DRF's bundled `fa` catalog — verified at runtime and pinned by `test_framework_validation_details_are_persian` |
+| Shell direction/typography | inline styles, no stylesheet | `frontend/src/styles.css` with logical CSS properties only and a Persian font stack |
+| UI strings | hard-coded in `App.tsx` | `frontend/src/i18n/fa.ts`, which also maps error codes to Persian display text |
+| Frontend devDependency | — | `@types/node` (types only), so a test can pin `lang="fa" dir="rtl"` |
+
+Re-ran the full gate after the change: 15 backend tests, 12 frontend tests, ruff
+clean, `manage.py check` clean, no pending migrations, typecheck clean, build
+clean. `index.html` already declared `lang="fa" dir="rtl"` before the amendment,
+and the amendment also corrected `FILE-INVENTORY.md`, which listed 57 of the 61
+tracked documents (ADR-007/008/009 and `docs/21` were missing); it is now 62.
+
+Deferred on purpose — a later phase must choose the tool, the baseline must not
+guess: Jalali date formatting (OA-18, Phases 03/05), Persian text normalization
+for search and RAG (OA-19, Phase 09), Persian webfont (OA-20, Phase 05), language
+switching (OA-21).
+
+Phase 05's own acceptance criteria ("Frontend is fully RTL", "User-facing UI is
+Persian", Persian forms and validation) remain **open**: the baseline proves the
+shell is Persian/RTL-capable, not that screens exist.
 

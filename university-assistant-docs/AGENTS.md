@@ -41,6 +41,13 @@ For regulations, deadlines, exams, schedules, course prerequisites, and other un
 8. RAG ingestion and retrieval logic must be isolated from HTTP presentation code.
 9. The AI layer must be provider-agnostic where practical. Use an adapter/service interface so the LLM provider can change without rewriting the application.
 10. Do not introduce a new infrastructure dependency unless the phase explicitly requires it and the decision is documented.
+11. The frontend must support RTL and Persian text correctly.
+
+12. Do not introduce an LTR-only UI pattern unless explicitly required.
+
+13. Persian text normalization must be considered for search and RAG.
+
+14. AI responses must be generated in Persian unless the user explicitly requests another language.
 
 ## 4. Project boundaries
 
@@ -172,3 +179,26 @@ A task is done only when all applicable items are true:
 - security implications reviewed
 - no unrelated feature regressions identified
 - phase status updated
+
+## Language & Localization
+
+The application is Persian-first.
+
+- Primary language: Persian (fa-IR)
+- UI language: Persian
+- UI direction: RTL
+- AI responses: Persian by default
+- User questions: Persian-first
+- Admin panel: Persian / RTL
+- System messages: Persian
+- Validation messages: Persian
+- University documents: primarily Persian
+
+The frontend must be designed as an RTL application from the beginning.
+
+English is allowed for:
+- source code
+- variable names
+- API field names
+- database identifiers
+- technical documentation

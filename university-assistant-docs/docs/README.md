@@ -54,3 +54,10 @@
 11. Current phase file only
 12. Related API document(s)
 13. Relevant ADR(s)
+
+## Language
+
+This project is a Persian-first university assistant.
+
+The application UI is Persian and RTL.
+The AI assistant responds in Persian by default.

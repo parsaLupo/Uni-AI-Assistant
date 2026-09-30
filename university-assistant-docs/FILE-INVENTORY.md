@@ -1,6 +1,6 @@
 # Documentation Inventory
 
-Total files: 61
+Total files: 62
 
 - `AGENTS.md`
 - `BACKLOG.md`
@@ -28,6 +28,7 @@ Total files: 61
 - `docs/18-master-agent-prompt.md`
 - `docs/19-git-and-release.md`
 - `docs/20-ui-navigation.md`
+- `docs/21-open-assumptions.md`
 - `docs/README.md`
 - `docs/api/auth.md`
 - `docs/api/calendar.md`
@@ -42,6 +43,10 @@ Total files: 61
 - `docs/decisions/ADR-004-auth.md`
 - `docs/decisions/ADR-005-hybrid-ai.md`
 - `docs/decisions/ADR-006-ai-provider-adapter.md`
+- `docs/decisions/ADR-007-repository-layout.md`
+- `docs/decisions/ADR-008-pinned-baseline-toolchain.md`
+- `docs/decisions/ADR-009-error-taxonomy-extensions.md`
+- `docs/decisions/ADR-010-persian-first-localization.md`
 - `docs/phases/phase-00.md`
 - `docs/phases/phase-01.md`
 - `docs/phases/phase-02.md`

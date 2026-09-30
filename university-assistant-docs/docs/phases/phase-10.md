@@ -24,3 +24,11 @@ Create a persistent ChatGPT-like conversation experience.
 Before implementation, read `AGENTS.md` and all documents referenced by this phase. Do not start later phases unless explicitly instructed.
 
 At completion, report changed files, tests run, migrations, acceptance criteria status, and known limitations.
+
+## Language Requirements
+
+- The assistant responds in Persian by default.
+- Persian user queries must be supported.
+- The system should preserve Persian terminology from official university sources.
+- The assistant should avoid inventing Persian terminology when an official term exists.
+- If the retrieved source is Persian, the response should normally use the same terminology.

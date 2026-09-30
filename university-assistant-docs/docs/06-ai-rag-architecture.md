@@ -147,7 +147,14 @@ RETRIEVED SOURCES
 
 RESPONSE REQUIREMENTS
 - concise
-- Persian by default unless user asks otherwise
+- User questions are primarily in Persian.
+- AI responses must be generated in Persian by default.
+- The RAG pipeline must support Persian documents.
+- Retrieval must support Persian text normalization.
+- The system should handle Persian spelling variations.
+- Source titles and citations should be displayed in Persian when the source is Persian.
+
+The system may respond in another language only when explicitly requested by the user.
 - include sources when applicable
 ```
 

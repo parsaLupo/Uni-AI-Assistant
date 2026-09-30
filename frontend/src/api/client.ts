@@ -10,6 +10,7 @@
  */
 
 import type { ApiErrorBody } from '../types/api'
+import { fallbackErrorMessage } from '../i18n/fa'
 
 const DEFAULT_BASE_URL = '/api/v1'
 
@@ -89,8 +90,9 @@ export async function toApiError(response: Response): Promise<ApiError> {
   }
 
   // A response that ignores the contract is surfaced as INTERNAL_ERROR so the
-  // UI can still show a stable message (docs/12 section 2).
-  return new ApiError('INTERNAL_ERROR', 'The service returned an unexpected response.', response.status, {}, requestId)
+  // UI can still show a stable message (docs/12 section 2). The text is Persian
+  // because users must never see an English error (docs/11 localization).
+  return new ApiError('INTERNAL_ERROR', fallbackErrorMessage, response.status, {}, requestId)
 }
 
 export async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {

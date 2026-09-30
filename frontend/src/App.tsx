@@ -3,17 +3,18 @@
  *
  * Phase 00 non-goals forbid UI implementation; this placeholder only proves the
  * React + TypeScript build pipeline works and that the document renders in RTL
- * as required by docs/20-ui-navigation.md. Real screens (routes in
- * docs/20-ui-navigation.md) arrive in later phases.
+ * Persian, as required by AGENTS.md ("Language & Localization") and
+ * docs/20-ui-navigation.md. Strings come from src/i18n/fa.ts rather than being
+ * written inline (docs/02-system-architecture.md). Real screens from
+ * docs/20-ui-navigation.md arrive in later phases.
  */
+import { appShell } from './i18n/fa'
+
 export function App() {
   return (
-    <main style={{ fontFamily: 'system-ui', padding: '2rem' }}>
-      <h1>دستیار هوشمند دانشگاه</h1>
-      <p>
-        اسکلت پایهٔ فرانت‌اند ساخته شده است. رابط کاربری در فازهای بعدی پیاده‌سازی
-        می‌شود.
-      </p>
+    <main className="app-shell">
+      <h1 className="app-shell__title">{appShell.title}</h1>
+      <p className="app-shell__note">{appShell.baselineNote}</p>
     </main>
   )
 }

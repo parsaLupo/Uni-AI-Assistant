@@ -15,10 +15,12 @@
 
 ## Current phase
 
-`PHASE_01`
+`PHASE_00` — status `DONE` (re-validated after the Persian/RTL documentation
+amendment; acceptance criteria and verification record:
+`docs/phases/phase-00.md`).
 
-Phase 00 is `DONE` (acceptance criteria and verification record:
-`docs/phases/phase-00.md`). Start Phase 01 only; do not implement Phase 02+ work.
+The next phase to start is `PHASE_01`. Start Phase 01 only; do not implement
+Phase 02+ work.
 
 ## First objective
 

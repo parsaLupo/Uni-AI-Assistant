@@ -48,7 +48,7 @@ class HealthView(APIView):
             return Response(
                 errors.build_error_payload(
                     errors.INTERNAL_ERROR,
-                    "Service is temporarily unavailable.",
+                    "سرویس موقتاً در دسترس نیست.",
                     {"checks": {"database": database_state}},
                 ),
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -95,7 +95,7 @@ class UnmatchedApiRouteView(APIView):
     def _not_found(self):
         raise errors.ApiError(
             errors.NOT_FOUND,
-            "No API route matches this path.",
+            "هیچ مسیر API با این نشانی مطابقت ندارد.",
             http_status=status.HTTP_404_NOT_FOUND,
         )
 

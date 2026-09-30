@@ -1,0 +1,61 @@
+/*
+ * Baseline stylesheet for the Persian-first, RTL application shell.
+ *
+ * Direction comes from the `dir="rtl"` attribute on <html> in index.html, so it is
+ * deliberately not repeated here. Every rule below uses logical properties
+ * (margin-inline, padding-inline, text-align: start …) instead of physical
+ * left/right ones, because docs/02-system-architecture.md requires that
+ * direction-sensitive behaviour stay correct in RTL and AGENTS.md rule 12 forbids
+ * LTR-only UI patterns.
+ *
+ * Vazirmatn is used when the font is available locally and otherwise falls back to
+ * Tahoma/Segoe UI, which render Persian correctly. No webfont is downloaded yet:
+ * that is a Phase 05 typography decision (docs/21-open-assumptions.md, OA-20).
+ */
+
+:root {
+  --color-text: #16181d;
+  --color-muted: #5b6472;
+  --color-background: #f5f6f8;
+  --font-ui: 'Vazirmatn', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  /* Persian text needs more leading than Latin to stay readable. */
+  line-height: 1.75;
+  text-align: start;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  margin-inline: auto;
+  max-width: 56rem;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.app-shell__title {
+  font-size: 1.75rem;
+  margin-block-start: 0;
+  margin-block-end: var(--space-md);
+}
+
+.app-shell__note {
+  margin: 0;
+  color: var(--color-muted);
+}

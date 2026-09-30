@@ -121,3 +121,16 @@ HTTP Request
 - API contracts are versioned.
 - Academic facts that change by term are modeled historically.
 - AI responses should be traceable to evidence for university-specific facts.
+
+## Frontend Localization
+
+The frontend is Persian-first and RTL.
+
+Requirements:
+
+- React application must use RTL layout.
+- Persian should be the default locale.
+- UI components must support Persian typography.
+- Direction-sensitive components must behave correctly in RTL.
+- Dates displayed to users should support Jalali formatting where required.
+- User-facing strings should not be hard-coded throughout components.

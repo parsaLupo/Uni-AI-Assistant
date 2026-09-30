@@ -56,7 +56,7 @@ class ApiError(APIException):
 
     status_code = status.HTTP_400_BAD_REQUEST
     code = VALIDATION_ERROR
-    default_message = "The request could not be completed."
+    default_message = "درخواست انجام نشد."
 
     def __init__(
         self,
@@ -118,32 +118,33 @@ def _translate(exc: APIException, handled: Response) -> tuple[str, str, dict[str
     if isinstance(exc, ValidationError):
         return (
             VALIDATION_ERROR,
-            "One or more fields are invalid.",
+            "یک یا چند فیلد نامعتبر است.",
             _details_from_detail(exc.detail),
             status.HTTP_400_BAD_REQUEST,
         )
     if isinstance(exc, (NotAuthenticated, AuthenticationFailed)):
         return (
             AUTHENTICATION_REQUIRED,
-            "Authentication credentials were not provided or are invalid.",
+            "گواهی احراز هویت ارائه نشده یا نامعتبر است.",
             {},
             status_code,
         )
     if isinstance(exc, PermissionDenied):
-        message = _message_from_detail(exc.detail, "Access denied.")
+        message = _message_from_detail(exc.detail, "دسترسی مجاز نیست.")
         return PERMISSION_DENIED, message, {}, status_code
     if isinstance(exc, (NotFound, Http404)):
-        message = _message_from_detail(exc.detail, "Resource not found.")
+        message = _message_from_detail(exc.detail, "منبع موردنظر یافت نشد.")
         return NOT_FOUND, message, {}, status_code
     if isinstance(exc, MethodNotAllowed):
-        message = "HTTP method not allowed for this endpoint."
+        message = "این روش درخواست برای این مسیر مجاز نیست."
         return METHOD_NOT_ALLOWED, message, {}, status_code
     if isinstance(exc, Throttled):
         details = {"retry_after_seconds": exc.wait} if exc.wait else {}
-        return RATE_LIMITED, "Too many requests. Please retry later.", details, status_code
+        message = "تعداد درخواست‌ها بیش از حد مجاز است؛ لطفاً بعداً تلاش کنید."
+        return RATE_LIMITED, message, details, status_code
 
     code = _code_for_status(status_code)
-    fallback = _message_from_detail(exc.detail, "The request could not be completed.")
+    fallback = _message_from_detail(exc.detail, "درخواست انجام نشد.")
     return code, fallback, _details_from_detail(exc.detail), status_code
 
 
@@ -160,12 +161,12 @@ def handle_exception(exc: Exception, context: dict | None = None) -> Response | 
     # Django exceptions DRF's default handler does not convert.
     if isinstance(exc, Http404):
         return Response(
-            build_error_payload(NOT_FOUND, "Resource not found."),
+            build_error_payload(NOT_FOUND, "منبع موردنظر یافت نشد."),
             status=status.HTTP_404_NOT_FOUND,
         )
     if isinstance(exc, DjangoPermissionDenied):
         return Response(
-            build_error_payload(PERMISSION_DENIED, "Access denied."),
+            build_error_payload(PERMISSION_DENIED, "دسترسی مجاز نیست."),
             status=status.HTTP_403_FORBIDDEN,
         )
 
@@ -181,7 +182,7 @@ def handle_exception(exc: Exception, context: dict | None = None) -> Response | 
             "path": getattr(request, "path", "-"),
         },
     )
-    message = "An unexpected error occurred. Please try again later."
+    message = "خطای غیرمنتظره‌ای رخ داد؛ لطفاً بعداً تلاش کنید."
     return Response(
         build_error_payload(INTERNAL_ERROR, message),
         status=status.HTTP_500_INTERNAL_SERVER_ERROR,

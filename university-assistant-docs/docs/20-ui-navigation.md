@@ -56,3 +56,15 @@ An answer may contain:
 - related questions
 
 The frontend must not fabricate citation content; all source labels come from the API response.
+
+## UI Language
+
+- Default language: Persian
+- Layout direction: RTL
+- Navigation labels: Persian
+- Buttons: Persian
+- Forms: Persian
+- Notifications: Persian
+- Error messages: Persian
+- Empty states: Persian
+- Loading states: Persian

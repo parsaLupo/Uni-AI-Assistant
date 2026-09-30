@@ -145,3 +145,44 @@ def test_pagination_contract_is_configured_globally():
     assert rest_settings["DEFAULT_PAGINATION_CLASS"].endswith("StandardResultsSetPagination")
     expected_auth = ["rest_framework.permissions.IsAuthenticated"]
     assert rest_settings["DEFAULT_PERMISSION_CLASSES"] == expected_auth
+
+
+def is_persian_text(value: str) -> bool:
+    """True when the string contains Persian/Arabic script characters."""
+    return any("\u0600" <= char <= "\u06ff" for char in value)
+
+
+def test_default_language_is_persian():
+    """AGENTS.md "Language & Localization": primary language is fa-IR."""
+    assert settings.LANGUAGE_CODE.startswith("fa")
+
+
+@pytest.mark.django_db
+def test_error_message_shown_to_users_is_persian(client):
+    """docs/11: error messages shown to users must be Persian, codes stay English."""
+    response = client.get("/api/v1/not-a-real-route/")
+    body = response.json()["error"]
+
+    assert body["code"] == "NOT_FOUND"
+    assert body["message"] == "هیچ مسیر API با این نشانی مطابقت ندارد."
+    assert is_persian_text(body["message"])
+
+
+def test_framework_validation_details_are_persian():
+    """Field-level validation text must not reach users in English.
+
+    Relies on the `fa` catalog DRF ships (no extra dependency, ADR-010).
+    """
+    from django.utils import translation
+    from rest_framework import serializers
+
+    class _SampleSerializer(serializers.Serializer):
+        title = serializers.CharField()
+
+    with translation.override("fa"):
+        serializer = _SampleSerializer(data={})
+        assert not serializer.is_valid()
+        message = str(serializer.errors["title"][0])
+
+    assert message != "This field is required."
+    assert is_persian_text(message)
