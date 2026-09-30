@@ -1,0 +1,105 @@
+"""Configuration loaded from environment variables.
+
+`docs/09-deployment.md` section 3 requires environment-based configuration and
+states that variable names must match `.env.example`. `.env` files are read only
+as a local convenience (Docker Compose injects variables directly), and an
+explicit process variable always wins over a `.env` entry.
+
+A third-party dotenv package is deliberately not used; see ADR-008.
+"""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+from urllib.parse import unquote, urlparse
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def load_env_file(path: Path | None = None) -> None:
+    """Load simple ``KEY=VALUE`` lines from ``backend/.env`` when present."""
+    env_path = path or BASE_DIR / ".env"
+    if not env_path.is_file():
+        return
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        if not key:
+            continue
+        os.environ.setdefault(key, value.strip().strip('"').strip("'"))
+
+
+load_env_file()
+
+SUPPORTED_DB_SCHEMES = {"postgres", "postgresql"}
+
+
+def env_str(name: str, default: str = "") -> str:
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return default
+    return value
+
+
+def env_bool(name: str, default: bool = False) -> bool:
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def env_int(name: str, default: int) -> int:
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return default
+    try:
+        return int(value)
+    except ValueError:
+        return default
+
+
+def env_list(name: str, default: tuple[str, ...] = ()) -> list[str]:
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return list(default)
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def database_config() -> dict:
+    """Build Django DATABASES entry from ``DATABASE_URL``.
+
+    ``DATABASE_URL`` is optional only for local/offline convenience: when it is
+    absent the project falls back to a SQLite file so the baseline can be
+    verified without Docker. PostgreSQL + pgvector remains the target engine
+    (ADR-002) and is always used when ``DATABASE_URL`` is provided.
+    """
+    url = env_str("DATABASE_URL")
+    if not url:
+        return {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": str(BASE_DIR / "dev.sqlite3"),
+            "USER": "",
+            "PASSWORD": "",
+            "HOST": "",
+            "PORT": "",
+        }
+
+    parsed = urlparse(url)
+    if parsed.scheme not in SUPPORTED_DB_SCHEMES:
+        raise ValueError(
+            f"Unsupported DATABASE_URL scheme '{parsed.scheme}'. "
+            f"Expected one of: {', '.join(sorted(SUPPORTED_DB_SCHEMES))}."
+        )
+
+    return {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": unquote(parsed.path.lstrip("/")),
+        "USER": unquote(parsed.username or ""),
+        "PASSWORD": unquote(parsed.password or ""),
+        "HOST": parsed.hostname or "",
+        "PORT": str(parsed.port or ""),
+    }

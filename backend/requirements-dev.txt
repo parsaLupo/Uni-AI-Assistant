@@ -1,0 +1,9 @@
+# Development-only tooling. Versions pinned from the verified Phase 00 install.
+-r requirements.txt
+
+# Test runner + Django integration (docs/08-testing-strategy.md section 6 gates).
+pytest==9.1.1
+pytest-django==4.14.0
+
+# Linter/formatter used by the CI baseline.
+ruff==0.16.9

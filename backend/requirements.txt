@@ -1,0 +1,14 @@
+# Runtime dependencies for the University Smart Assistant API.
+# Pinned deliberately: the stack is frozen for MVP by AGENTS.md section 1 and
+# ADR-001; upgrades must be an explicit, documented change (see ADR-008).
+#
+# Versions verified against PyPI during Phase 00.
+
+# LTS release (security support until April 2028) chosen over the newer 6.x
+# major so the baseline does not absorb breaking changes mid-project.
+Django==5.2.17
+djangorestframework==3.18.1
+django-cors-headers==4.9.0
+
+# PostgreSQL driver (ADR-002). Binary wheel: no local compiler needed.
+psycopg[binary]==3.3.6

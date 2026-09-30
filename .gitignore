@@ -1,0 +1,62 @@
+# --- Python / Django (backend) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+backend/.venv/
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+coverage.xml
+backend/staticfiles/
+backend/media/
+backend/logs/
+*.log
+
+# --- Django local database used when DATABASE_URL is unset ---
+*.sqlite3
+*.sqlite3-journal
+
+# --- Node / React (frontend) ---
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Environment / secrets (AGENTS.md §9: never commit secrets) ---
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+*.pem
+*.key
+
+# --- Docker local state ---
+pgdata/
+postgres-data/
+
+# --- Editors / OS ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Agent scratch ---
+.probe_versions.py
