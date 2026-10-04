@@ -1,12 +1,16 @@
 # Documentation Inventory
 
-Total files: 62
+Total files: 66
 
 - `AGENTS.md`
 - `BACKLOG.md`
 - `FILE-INVENTORY.md`
 - `README.md`
 - `START-HERE.md`
+- `full detailed checklist.md`
+- `architecture.md`
+- `pipeline.md`
+- `improvements.md`
 - `docs/00-project-overview.md`
 - `docs/01-requirements.md`
 - `docs/02-system-architecture.md`

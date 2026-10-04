@@ -25,6 +25,13 @@
 - `21-open-assumptions.md`
 - `decisions/`
 
+## Execution (summary views)
+
+- `../full detailed checklist.md` — merged phase checklist (00–16), validation notes, gates
+- `../architecture.md` — corrected production architecture (deviations marked C-nn)
+- `../pipeline.md` — all automated flows end to end (corrections marked P-nn)
+- `../improvements.md` — prioritized P0/P1/P2 improvement backlog (I-01…I-28)
+
 ## Execution
 
 - `phases/`
@@ -51,9 +58,11 @@
 8. `docs/04-api-specification.md`
 9. `docs/05-authentication.md`
 10. `docs/06-ai-rag-architecture.md`
-11. Current phase file only
-12. Related API document(s)
-13. Relevant ADR(s)
+11. `../full detailed checklist.md` (merged view — status, blocking decisions)
+12. `docs/21-open-assumptions.md` (open decisions before Phases 03/05/08)
+13. Current phase file only
+14. Related API document(s)
+15. Relevant ADR(s)
 
 ## Language
 
