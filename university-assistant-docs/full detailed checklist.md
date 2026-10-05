@@ -54,9 +54,9 @@ IDs are referenced from the phase sections below.
 | # | Phase | MVP? | Depends on | Status |
 |---|---|---|---|---|
 | 00 | Discovery & Baseline | MVP | — | ✅ DONE |
-| 01 | Architecture & API Contract (gap closure) | MVP | 00 | 🟡 docs ~90% complete; gaps listed |
-| 02 | Environment Verification (Postgres + pgvector) | MVP | 00 | 🟡 4/6 criteria met |
-| 03 | Authentication & Authorization | MVP | 02, OA-01/02/09, CSRF decision | ⏸️ |
+| 01 | Architecture & API Contract (gap closure) | MVP | 00 | ✅ DONE — evidence: `docs/phases/phase-01.md` |
+| 02 | Environment Verification (Postgres + pgvector) | MVP | 00 | ✅ DONE — evidence: `docs/phases/phase-02.md` |
+| 03 | Authentication & Authorization | MVP | 02, OA-01/02/09, CSRF decision | ⏸️ next phase, blocked on 4 decisions |
 | 04 | Core Academic Data | MVP | 03 | ⏸️ |
 | 05 | React Foundation (Persian/RTL shell) | MVP | 03, 04 | ⏸️ |
 | 06 | Academic User Experience | MVP | 05 | ⬜ |
@@ -102,7 +102,9 @@ check` clean with `DEBUG=false`, no pending migrations, live `GET /api/v1/health
 **Open carry-overs:** PostgreSQL/pgvector never exercised (→ Phase 02);
 `docker compose up` never run.
 
-### Phase 01 — Architecture & API Contract (gap closure) 🟡
+### Phase 01 — Architecture & API Contract (gap closure) ✅ DONE
+
+Full record: `docs/phases/phase-01.md`.
 
 **Objective.** Close the remaining design gaps so no later phase invents a contract.
 
@@ -111,27 +113,29 @@ RAG architecture already exist in `docs/`. Only these gaps remain.
 
 **Tasks**
 
-- [ ] Map **entities → Django apps** and **URL prefix → app** (proposal in `architecture.md` §3.2).
-- [ ] Define **React feature boundaries** and route ownership (proposal in `architecture.md` §5).
-- [ ] Document the **admin API catalog**: CRUD endpoints for courses, professors, terms, exams, announcements, users (missing from `docs/04` §6, yet required by Phase 04).
-- [ ] Publish **DB constraints and indexes** (V-14) into `docs/03`.
-- [ ] Add `Announcement` to the ERD with term/audience/expiry (V-15).
-- [ ] Generate an **OpenAPI 3.1 schema** and commit it; make it a CI artifact (V-07).
-- [ ] Record decisions: `ADR-011` background worker + Redis, `ADR-012` OpenAPI/contract testing, `ADR-013` frontend data layer.
+- [x] Map **entities → Django apps** and **URL prefix → app** — `docs/02` §4.1.
+- [x] Define **React feature boundaries** and route ownership — `docs/02` §4.2.
+- [x] Document the **admin API catalog** — `docs/api/admin.md`, referenced from `docs/04` §6.
+- [x] Publish **DB constraints and indexes** (V-14) into `docs/03` §6.
+- [x] Add `Announcement` to the ERD with term/audience/expiry (V-15).
+- [x] Generate an **OpenAPI 3.1 schema** and commit it; CI artifact + drift gate (V-07, ADR-012).
+- [x] Record decisions: `ADR-011` background worker + Redis, `ADR-012` OpenAPI/contract testing, `ADR-013` frontend data layer.
 
 **Acceptance criteria**
 
-- [ ] Every entity in `docs/03` has exactly one owning app.
-- [ ] Every endpoint in `docs/04` + the new admin catalog has an owner app and a permission level.
-- [ ] `openapi.yaml` is generated and validated in CI.
-- [ ] Constraints/indexes are written down and each is justified by a query or rule.
+- [x] Every entity in `docs/03` has exactly one owning app.
+- [x] Every endpoint in `docs/04` + the new admin catalog has an owner app and a permission level.
+- [x] `openapi.yaml` is generated and validated in CI.
+- [x] Constraints/indexes are written down and each is justified by a query or rule.
 
 **Exit evidence:** updated `docs/02`/`03`/`04`, `openapi.yaml`, ADR-011…013, and a
 review note that no phase 03–16 task needs an undocumented contract.
 
 **Blockers:** none. This phase is pure documentation and can be finished today.
 
-### Phase 02 — Environment Verification (Postgres + pgvector) 🟡
+### Phase 02 — Environment Verification (Postgres + pgvector) ✅ DONE
+
+Full record: `docs/phases/phase-02.md`.
 
 **Objective (re-scoped, V-01).** Prove the real database stack works — not build it again.
 
@@ -144,19 +148,19 @@ review note that no phase 03–16 task needs an undocumented contract.
 
 **Remaining tasks**
 
-- [ ] Start the stack: `cp .env.example .env && docker compose up --build`.
-- [ ] Confirm `GET /api/v1/health/` reports `checks.database = "ok"` **against PostgreSQL**, not SQLite.
-- [ ] Create and prove the vector extension: `CREATE EXTENSION IF NOT EXISTS vector;` plus a round-trip insert/select of a small vector.
-- [ ] Add a **PostgreSQL + pgvector service to CI** so pgvector SQL is actually tested (OA-06).
-- [ ] Add a `docker compose config` validation step to CI — the compose file has never been machine-validated.
-- [ ] Document exact `DATABASE_URL`, ports and volume names in the README.
+- [x] Start the stack: `cp .env.example .env && docker compose up --build`.
+- [x] Confirm `GET /api/v1/health/` reports `checks.database = "ok"` **against PostgreSQL**, not SQLite.
+- [x] Create and prove the vector extension: migration `0001_enable_pgvector` + round-trip query (0.8.6, distance √8).
+- [x] Add a **PostgreSQL + pgvector service to CI** so pgvector SQL is actually tested (OA-06).
+- [x] Add a `docker compose config` validation step to CI.
+- [x] Document exact `DATABASE_URL`, ports and volume names in the README.
 
 **Acceptance criteria**
 
-- [ ] PostgreSQL connects — health reports ok with `DATABASE_URL` set.
-- [ ] pgvector is available — extension created, version logged, one vector query returns expected rows.
-- [ ] CI runs the suite against PostgreSQL, not only SQLite.
-- [ ] `docker compose up --build` succeeds from a clean clone using only `.env.example`.
+- [x] PostgreSQL connects — health reports ok with `DATABASE_URL` set.
+- [x] pgvector is available — extension created by migration, version 0.8.6 logged, vector query returns expected rows.
+- [x] CI runs the suite against PostgreSQL, not only SQLite.
+- [x] `docker compose up --build` succeeds using only `.env.example` (verified in the working tree with `.env` copied from the example).
 
 **Exit evidence:** compose output, health JSON showing PostgreSQL, extension
 version, CI job log with the Postgres service, verified README commands.

@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: University Smart Assistant API
+  version: 1.0.0
+  description: 'Versioned REST API under /api/v1/. Errors always use the envelope
+    from docs/04-api-specification.md section 3; codes are listed in docs/12-error-handling-observability.md.
+    Generated source of truth: ADR-012.'
+paths:
+  /api/v1/health/:
+    get:
+      operationId: health_retrieve
+      description: '``GET /api/v1/health/`` — unauthenticated liveness + database
+        check.'
+      summary: Liveness and dependency health
+      tags:
+      - system
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+          description: ''
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable code from docs/12-error-handling-observability.md.
+        message:
+          type: string
+          description: Human-readable, Persian message (ADR-010); never an internal
+            detail.
+        details:
+          type: object
+          additionalProperties: {}
+          description: Field-level errors or machine-readable metadata.
+      required:
+      - code
+      - message
+    ErrorEnvelope:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+      required:
+      - error
+    HealthChecks:
+      type: object
+      properties:
+        database:
+          type: string
+          description: '''ok'' or ''unavailable''.'
+        database_latency_ms:
+          type: number
+          format: double
+          nullable: true
+        ai_provider:
+          type: string
+          description: Provider availability; 'not_configured' until the AI phase
+            (ADR-006).
+      required:
+      - ai_provider
+      - database
+      - database_latency_ms
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        service:
+          type: string
+        version:
+          type: string
+        request_id:
+          type: string
+          description: Correlation id (docs/12 section 4).
+        checks:
+          $ref: '#/components/schemas/HealthChecks'
+      required:
+      - checks
+      - request_id
+      - service
+      - status
+      - version

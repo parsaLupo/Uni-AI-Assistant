@@ -77,6 +77,55 @@ backend/
 
 Apps may be consolidated or split based on implementation experience, but boundaries should remain clear.
 
+### 4.1 Backend app boundaries (fixed in Phase 01)
+
+Every entity in `docs/03-database-design.md` belongs to exactly one app, and each
+public URL prefix is served by exactly one app. Internal service apps (`rag`, `ai`)
+expose no URLs of their own.
+
+| App | Owns (entities) | URL prefix | Phase |
+|---|---|---|---|
+| `accounts` | User, Role | `/auth/*` | 03 |
+| `students` | StudentProfile, Enrollment | `/students/me/` | 04 |
+| `academics` | Faculty, Department, AcademicTerm | `/terms/` | 04 |
+| `courses` | Course, CoursePrerequisite, CourseOffering, ClassSchedule | `/courses/*`, `/course-offerings/*` | 04 |
+| `professors` | Professor | `/professors/*` | 04 |
+| `calendar` | AcademicEvent | `/calendar/events/` | 04 |
+| `exams` | Exam | `/exams/*` | 04 |
+| `announcements` | Announcement | `/announcements/*` | 04 |
+| `documents` | Document, DocumentChunk | `/admin/documents/*` | 07 |
+| `rag` | extraction, chunking, embedding, retrieval services | — (internal) | 08 |
+| `ai` | QuestionRouter, PromptService, LLMProvider, AnswerFormatter, CitationService | — (internal) | 09 |
+| `conversations` | Conversation, Message, MessageSource | `/conversations/*` | 10 |
+| `notifications` | Notification | `/notifications/*` | 12 (post-MVP) |
+| `analytics` | AuditLog, metric aggregation | `/admin/analytics/*` | 13 (post-MVP) |
+| `common` | error envelope, request-id middleware, logging, pagination, health, schema | `/health/*`, `/api/v1/schema/` | 00–02 |
+
+Admin CRUD endpoints for these entities are catalogued in `docs/api/admin.md`.
+
+### 4.2 Frontend feature boundaries (fixed in Phase 01)
+
+One feature slice per bounded context; slices own their screens, hooks and API
+calls, and never import another slice' internals.
+
+| Feature slice | Routes (`docs/20-ui-navigation.md`) | Phase |
+|---|---|---|
+| `auth` | `/login`, `/register`, protected-route guard | 03/05 |
+| `dashboard` | `/dashboard` | 06 |
+| `courses` | `/courses`, `/courses/:id` | 06 |
+| `professors` | `/professors`, `/professors/:id` | 06 |
+| `calendar` | `/calendar` | 06 |
+| `exams` | `/exams` | 06 |
+| `announcements` | (announcement lists/feeds inside dashboard and `/announcements`) | 06 |
+| `profile` | `/profile` | 06 |
+| `chat` | `/assistant`, `/conversations/:id` | 09/10 |
+| `admin` | `/admin/*` | 13 (post-MVP) |
+
+Cross-cutting modules stay outside the slices: `api/` (client + generated types),
+`i18n/` (Persian strings), `components/` (design-system primitives), `lib/`
+(formatters, normalizer), `styles/`. Server state is managed in one place
+(ADR-013), never per page.
+
 ## 5. AI execution modes
 
 ### Structured

@@ -12,3 +12,7 @@ django-cors-headers==4.9.0
 
 # PostgreSQL driver (ADR-002). Binary wheel: no local compiler needed.
 psycopg[binary]==3.3.6
+
+# OpenAPI generation — the committed openapi.yaml is the API contract
+# (ADR-012, Phase 01). Installed dependency, documented per AGENTS rule 10.
+drf-spectacular==0.30.0

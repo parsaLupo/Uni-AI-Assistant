@@ -1,6 +1,6 @@
 # Documentation Inventory
 
-Total files: 66
+Total files: 70
 
 - `AGENTS.md`
 - `BACKLOG.md`
@@ -51,6 +51,9 @@ Total files: 66
 - `docs/decisions/ADR-008-pinned-baseline-toolchain.md`
 - `docs/decisions/ADR-009-error-taxonomy-extensions.md`
 - `docs/decisions/ADR-010-persian-first-localization.md`
+- `docs/decisions/ADR-011-background-worker.md`
+- `docs/decisions/ADR-012-openapi-contract.md`
+- `docs/decisions/ADR-013-frontend-data-layer.md`
 - `docs/phases/phase-00.md`
 - `docs/phases/phase-01.md`
 - `docs/phases/phase-02.md`

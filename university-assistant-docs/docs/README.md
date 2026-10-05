@@ -39,6 +39,7 @@
 ## API details
 
 - `api/auth.md`
+- `api/admin.md` (admin CRUD catalog, Phase 01 contract)
 - `api/courses.md`
 - `api/professors.md`
 - `api/calendar.md`

@@ -1,7 +1,10 @@
-# CI test baseline (BACKLOG EPIC 1, docs/08-testing-strategy.md section 6).
-# Docker is intentionally not used here: the suite runs on SQLite so the gate is
-# fast and free of external services. A PostgreSQL service is tracked as an open
-# assumption (OA-06) for the phase that first needs pgvector SQL.
+# CI gate (BACKLOG EPIC 1, docs/08-testing-strategy.md section 6).
+#
+# The backend suite runs against a real PostgreSQL + pgvector service so that
+# constraints, extensions and (from Phase 08) vector SQL are actually exercised
+# (pipeline.md section 6, P-06; closes OA-06). A local `pytest` still defaults
+# to SQLite for speed — backend/conftest.py only switches when
+# TEST_DATABASE_URL is set.
 
 name: CI
 
@@ -16,6 +19,25 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.6-pg16
+        env:
+          POSTGRES_DB: usa_db
+          POSTGRES_USER: usa_user
+          POSTGRES_PASSWORD: ci_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U usa_user -d usa_db"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      DJANGO_SECRET_KEY: ci-only-not-a-secret
+      DJANGO_DEBUG: "false"
+      ALLOWED_HOSTS: localhost
+      TEST_DATABASE_URL: postgresql://usa_user:ci_password@localhost:5432/usa_db
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,10 +48,15 @@ jobs:
       - run: ruff check .
       - name: Verify no uncommitted migrations
         run: python manage.py makemigrations --check --dry-run
-        env:
-          DJANGO_SECRET_KEY: ci-only-not-a-secret
-          ALLOWED_HOSTS: localhost
-      - run: python -m pytest
+      - name: Backend tests against PostgreSQL + pgvector
+        run: python -m pytest
+      - name: OpenAPI contract — valid and no drift (ADR-012)
+        run: |
+          python manage.py spectacular --file ../openapi.yaml --validate
+          git diff --exit-code -- ../openapi.yaml
+      - name: Validate docker compose file
+        working-directory: ${{ github.workspace }}
+        run: docker compose config --quiet
 
   frontend:
     runs-on: ubuntu-latest
@@ -47,3 +74,4 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+

@@ -8,8 +8,11 @@ retrieval augmented generation, with citations.
 Phase status and the full specification live in
 [`university-assistant-docs/`](university-assistant-docs/START-HERE.md). Start any
 work by reading `university-assistant-docs/AGENTS.md`, then
-`university-assistant-docs/START-HERE.md`. Current phase: **PHASE_00** (`DONE`,
-re-validated after the Persian/RTL documentation amendment); next up **PHASE_01**.
+`university-assistant-docs/START-HERE.md`. Current phase: **PHASE_03** — phases 00,
+01 and 02 are `DONE`, each with a verification record in `docs/phases/`.
+
+The API contract is the generated [`openapi.yaml`](openapi.yaml) (ADR-012): it is
+regenerated from the Django code and CI fails if the committed file drifts.
 
 The product is Persian-first: the UI is Persian and RTL, user-facing API messages
 are Persian, and the assistant will answer in Persian by default. Technical

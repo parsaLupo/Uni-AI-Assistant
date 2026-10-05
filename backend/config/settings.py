@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    # Machine-readable API contract (ADR-012): generates and serves openapi.yaml.
+    "drf_spectacular",
     "apps.common",
 ]
 
@@ -153,6 +155,23 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "apps.common.pagination.StandardResultsSetPagination",
     "PAGE_SIZE": 20,
     "EXCEPTION_HANDLER": "apps.common.errors.handle_exception",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# OpenAPI 3 contract (ADR-012). The generated file is committed as openapi.yaml
+# at the repository root and drift-checked in CI, so a contract change cannot
+# merge silently (AGENTS.md section 6).
+SPECTACULAR_SETTINGS = {
+    "TITLE": "University Smart Assistant API",
+    "VERSION": "1.0.0",
+    "DESCRIPTION": (
+        "Versioned REST API under /api/v1/. Errors always use the envelope from "
+        "docs/04-api-specification.md section 3; codes are listed in "
+        "docs/12-error-handling-observability.md. Generated source of truth: "
+        "ADR-012."
+    ),
+    "SERVE_PUBLIC": True,
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
 }
 
 # Observability -------------------------------------------------------------

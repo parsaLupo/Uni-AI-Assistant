@@ -33,6 +33,7 @@ erDiagram
     COURSE_OFFERING ||--o{ ENROLLMENT : includes
 
     ACADEMIC_TERM ||--o{ ACADEMIC_EVENT : contains
+    ACADEMIC_TERM ||--o{ ANNOUNCEMENT : scopes
 
     DOCUMENT ||--o{ DOCUMENT_CHUNK : contains
 
@@ -174,6 +175,8 @@ Suggested status values:
 
 ### Announcement
 
+- term (nullable — `NULL` means university-wide)
+- audience (nullable: faculty/department/program — `NULL` means everyone)
 - title
 - body
 - priority
@@ -270,3 +273,21 @@ Exact index strategy must be validated against actual queries before over-indexi
 ## 5. Historical correctness
 
 Never overwrite old exam/schedule facts merely because the current term changed. Each offering/exam is attached to a specific academic term. Documents similarly require effective/version metadata.
+
+## 6. Constraints (enforced by the database)
+
+`docs/07` §1 requires database constraints; uniqueness must not depend on every
+future endpoint remembering to check. Each constraint exists because a specific
+rule or query needs it (added in Phase 01, implemented in Phase 04 migrations).
+
+| Invariant | Constraint | Why |
+|---|---|---|
+| At most one current term | partial unique index on `AcademicTerm(is_current) WHERE is_current` | "current term" is used as the default everywhere; two rows would make it ambiguous |
+| One section per course per term | unique `(course, term, section_code)` | offering identity for enrollment and schedules |
+| One enrollment per student per offering | unique `(student, course_offering)` | prevents double enrollment and grade rows |
+| One exam per offering | `CourseOffering.exam` one-to-one | an exam belongs to a concrete offering, not a course (`docs/17`) |
+| Stable codes | unique `Course.code`, unique `(faculty, code)`, unique `(department, code)` | codes are referenced by students and external systems |
+| Valid time ranges | `CHECK (starts_at < ends_at)` on terms, events, exams, schedules | invalid ranges corrupt calendar and conflict checks |
+| No self-prerequisite | `CHECK (course_id <> prerequisite_course_id)` | a course cannot require itself |
+
+Indexes are listed separately in §4 and must each be justified by a query; over-indexing is a maintenance cost, so re-check them with `EXPLAIN` once real data exists.

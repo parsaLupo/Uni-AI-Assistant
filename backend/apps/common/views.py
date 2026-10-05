@@ -13,12 +13,14 @@ import logging
 from time import perf_counter
 
 from django.db import connections
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.common import errors
+from apps.common.serializers import ErrorEnvelopeSerializer, HealthResponseSerializer
 
 logger = logging.getLogger("app.errors")
 
@@ -34,6 +36,11 @@ STATE_UNAVAILABLE = "unavailable"
 AI_PROVIDER_NOT_CONFIGURED = "not_configured"
 
 
+@extend_schema(
+    tags=["system"],
+    summary="Liveness and dependency health",
+    responses={200: HealthResponseSerializer, 503: ErrorEnvelopeSerializer},
+)
 class HealthView(APIView):
     """``GET /api/v1/health/`` — unauthenticated liveness + database check."""
 
@@ -82,6 +89,7 @@ class HealthView(APIView):
         return STATE_OK, round((perf_counter() - started) * 1000, 2)
 
 
+@extend_schema(exclude=True)
 class UnmatchedApiRouteView(APIView):
     """Return the documented NOT_FOUND envelope for unknown ``/api/v1/`` paths.
 

@@ -1,0 +1,4 @@
+# YAML contracts must have identical line endings everywhere, otherwise the CI
+# OpenAPI drift check (ADR-012) fails on whitespace alone.
+*.yaml text eol=lf
+*.yml text eol=lf

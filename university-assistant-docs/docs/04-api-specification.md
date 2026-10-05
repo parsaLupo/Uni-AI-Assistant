@@ -59,6 +59,10 @@ Typical parameters:
 
 ## 6. Endpoint catalog
 
+Admin CRUD for courses, professors, terms, offerings, exams, calendar events,
+announcements, enrollments and users is catalogued in `docs/api/admin.md`
+(Phase 01 contract; implemented in Phase 04).
+
 | Area | Method | Endpoint | Purpose |
 |---|---|---|---|
 | Auth | POST | `/auth/login/` | Login |

@@ -15,12 +15,15 @@
 
 ## Current phase
 
-`PHASE_00` — status `DONE` (re-validated after the Persian/RTL documentation
-amendment; acceptance criteria and verification record:
-`docs/phases/phase-00.md`).
+`PHASE_03` — Authentication & Authorization (next).
 
-The next phase to start is `PHASE_01`. Start Phase 01 only; do not implement
-Phase 02+ work.
+Completed: `PHASE_00` (baseline), `PHASE_01` (architecture & API contract),
+`PHASE_02` (environment verification) — each `DONE` with a verification record in
+`docs/phases/phase-00.md`, `phase-01.md`, `phase-02.md`.
+
+Before Phase 03 starts, answer the blocking decisions in `docs/21-open-assumptions.md`:
+OA-01 (registration policy), OA-02 (login identifier), OA-09 (rate-limit values),
+and the CSRF strategy for the cookie-based refresh endpoint.
 
 ## First objective
 
