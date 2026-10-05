@@ -15,15 +15,16 @@
 
 ## Current phase
 
-`PHASE_03` — Authentication & Authorization (next).
+`PHASE_04` — Core Academic Data (next).
 
 Completed: `PHASE_00` (baseline), `PHASE_01` (architecture & API contract),
-`PHASE_02` (environment verification) — each `DONE` with a verification record in
-`docs/phases/phase-00.md`, `phase-01.md`, `phase-02.md`.
+`PHASE_02` (environment verification), `PHASE_03` (authentication & authorization)
+— each `DONE` with a verification record in `docs/phases/phase-00.md`,
+`phase-01.md`, `phase-02.md`, `phase-03.md`.
 
-Before Phase 03 starts, answer the blocking decisions in `docs/21-open-assumptions.md`:
-OA-01 (registration policy), OA-02 (login identifier), OA-09 (rate-limit values),
-and the CSRF strategy for the cookie-based refresh endpoint.
+The Phase 03 blockers were answered in `ADR-014` (registration policy, email as
+login identifier, rate limits, double-submit CSRF) and recorded in
+`docs/21-open-assumptions.md` as `ACCEPTED`.
 
 ## First objective
 

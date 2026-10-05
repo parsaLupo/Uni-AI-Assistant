@@ -22,6 +22,24 @@ export const appShell = {
   retry: 'تلاش دوباره',
 } as const
 
+/** Phase 03 authentication screens (docs/20-ui-navigation.md section 2). */
+export const auth = {
+  loginTitle: 'ورود به حساب',
+  registerTitle: 'ساخت حساب دانشجویی',
+  email: 'ایمیل دانشگاهی',
+  password: 'گذرواژه',
+  firstName: 'نام',
+  lastName: 'نام خانوادگی',
+  submitLogin: 'ورود',
+  submitRegister: 'ثبت‌نام و ورود',
+  toRegister: 'حساب ندارید؟ ثبت‌نام کنید',
+  toLogin: 'قبلاً ثبت‌نام کرده‌اید؟ وارد شوید',
+  logout: 'خروج از حساب',
+  welcome: 'خوش آمدید',
+  dashboardNote: 'محتوای داشبورد در فاز ۰۶ پیاده‌سازی می‌شود.',
+  sessionRestoring: 'در حال بازیابی نشست…',
+} as const
+
 /**
  * Persian display text for the codes in docs/12-error-handling-observability.md
  * section 1. The UI branches on `error.code`, never on the raw server message

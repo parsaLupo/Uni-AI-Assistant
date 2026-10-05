@@ -1,6 +1,6 @@
 # Documentation Inventory
 
-Total files: 70
+Total files: 72
 
 - `AGENTS.md`
 - `BACKLOG.md`
@@ -34,6 +34,7 @@ Total files: 70
 - `docs/20-ui-navigation.md`
 - `docs/21-open-assumptions.md`
 - `docs/README.md`
+- `docs/api/admin.md` (admin CRUD catalog, Phase 01 contract)
 - `docs/api/auth.md`
 - `docs/api/calendar.md`
 - `docs/api/chat.md`
@@ -54,6 +55,8 @@ Total files: 70
 - `docs/decisions/ADR-011-background-worker.md`
 - `docs/decisions/ADR-012-openapi-contract.md`
 - `docs/decisions/ADR-013-frontend-data-layer.md`
+- `docs/decisions/ADR-014-authentication-policy.md`
+- `docs/decisions/ADR-015-react-router.md`
 - `docs/phases/phase-00.md`
 - `docs/phases/phase-01.md`
 - `docs/phases/phase-02.md`

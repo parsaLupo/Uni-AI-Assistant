@@ -9,7 +9,10 @@ error envelope, and server-side authorization.
 
 ## Common rules (apply to every endpoint below)
 
-- **Permissions:** `ADMIN` unless stated; user/role management requires `SUPERADMIN`.
+- **Permissions:** `ADMIN` unless stated. For users specifically: listing,
+  reading and creating **non-privileged** accounts is `ADMIN`; creating or changing a
+  role to `ADMIN`/`SUPERADMIN`, and deactivating any privileged account, requires
+  `SUPERADMIN`; nobody may deactivate their own account (`409 CONFLICT`).
   Authorization is enforced in Django — UI visibility is never sufficient.
 - **Writes are audited:** create/update/delete emit an `AuditLog` row (actor,
   action, entity, before/after ids) per `docs/07` §7.

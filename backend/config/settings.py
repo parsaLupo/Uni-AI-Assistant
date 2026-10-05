@@ -10,6 +10,7 @@ repository `.env.example`.
 """
 
 import sys
+from datetime import timedelta
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -17,6 +18,7 @@ from config.environment import (
     BASE_DIR,
     database_config,
     env_bool,
+    env_int,
     env_list,
     env_str,
 )
@@ -67,7 +69,13 @@ INSTALLED_APPS = [
     # Machine-readable API contract (ADR-012): generates and serves openapi.yaml.
     "drf_spectacular",
     "apps.common",
+    "apps.accounts",
 ]
+
+# Custom user model (ADR-014). Set while no other feature model exists — Phase 03
+# precedes Phase 04 deliberately, so no later migration has to rewrite user
+# references (AUTH_USER_MODEL cannot change after feature models exist).
+AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     # First, so every log line and the response header carry the correlation
@@ -146,7 +154,10 @@ CORS_ALLOWED_ORIGINS = env_list(
 # fixes the list-response shape that docs/04-api-specification.md section 4
 # requires to stay consistent across the API.
 REST_FRAMEWORK = {
+    # Bearer/JWT first (docs/05 section 3, ADR-014); session auth remains only
+    # so the browsable API still works during development.
     "DEFAULT_AUTHENTICATION_CLASSES": [
+        "apps.accounts.auth.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
@@ -156,6 +167,11 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
     "EXCEPTION_HANDLER": "apps.common.errors.handle_exception",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # Rate limits (OA-09 / ADR-014): login+register per IP, refresh per user.
+    "DEFAULT_THROTTLE_RATES": {
+        "auth_ip": env_str("RATE_AUTH_IP", "10/min"),
+        "auth_refresh": env_str("RATE_AUTH_REFRESH", "30/min"),
+    },
 }
 
 # OpenAPI 3 contract (ADR-012). The generated file is committed as openapi.yaml
@@ -173,6 +189,36 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PUBLIC": True,
     "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
 }
+
+# Authentication (docs/05, ADR-014) ------------------------------------------
+# Short-lived access token (frontend memory only) + refresh token in an HttpOnly
+# cookie that rotates on every use. Lifetimes come from .env.example so the
+# deployment contract matches docs/09 section 3.
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=env_int("JWT_ACCESS_MINUTES", 5)),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=env_int("JWT_REFRESH_DAYS", 7)),
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_CLAIM": "user_id",
+}
+
+# Cookie flags (docs/07 section 1, docs/05 section 3): secure automatically in
+# production (DEBUG off), explicitly overridable. Used by the refresh cookie and
+# mirrored for session/CSRF cookies.
+COOKIE_SECURE = env_bool("COOKIE_SECURE", not DEBUG)
+SESSION_COOKIE_SECURE = COOKIE_SECURE
+CSRF_COOKIE_SECURE = COOKIE_SECURE
+CSRF_COOKIE_SAMESITE = "Lax"
+
+# Argon2id first (docs/07 section 2, ADR-014); older hashers stay registered so
+# any previously stored hash can still be verified during login.
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 # Observability -------------------------------------------------------------
 # Request logs carry request id, method, path, status and latency

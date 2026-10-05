@@ -16,3 +16,10 @@ psycopg[binary]==3.3.6
 # OpenAPI generation — the committed openapi.yaml is the API contract
 # (ADR-012, Phase 01). Installed dependency, documented per AGENTS rule 10.
 drf-spectacular==0.30.0
+
+# Authentication (ADR-014, Phase 03): JWT issue/verify for access tokens;
+# rotation, reuse detection and cookies are project code in apps/accounts.
+djangorestframework-simplejwt==5.5.1
+
+# Argon2id password hashing (docs/07 section 2, ADR-014 decision 6).
+argon2-cffi==25.1.0

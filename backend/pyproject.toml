@@ -16,3 +16,6 @@ select = ["E", "F", "W", "I", "UP", "C4", "B"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+# Django's migration generator writes long deconstruction lines; re-wrapping them
+# by hand risks diverging from what `makemigrations` would emit.
+"**/migrations/*.py" = ["E501"]

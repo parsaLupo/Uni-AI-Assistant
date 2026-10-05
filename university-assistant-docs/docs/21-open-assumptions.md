@@ -10,15 +10,15 @@ low cost. `DECISION NEEDED` = must be answered before the listed phase starts.
 
 | ID | Question / assumption | Baseline assumption today | Blocking phase | Status |
 |---|---|---|---|---|
-| OA-01 | Is student registration open or admin-provisioned? (FR-AUTH-001 says "according to project policy") | Accounts are created by an admin; `/register` exists in `docs/20-ui-navigation.md` but no policy is written | Phase 02 | DECISION NEEDED |
-| OA-02 | Login identifier: email or username? (`docs/03-database-design.md` says "email/username according to policy") | Custom user model keyed on a unique `username` field, email optional | Phase 02 | DECISION NEEDED |
+| OA-01 | Is student registration open or admin-provisioned? (FR-AUTH-001 says "according to project policy") | **Decided (ADR-014):** self-service registration is open and always creates role `STUDENT`; `PROFESSOR`/`ADMIN`/`SUPERADMIN` accounts are created only by an admin. `/register` stays a public route | Phase 03 | ACCEPTED |
+| OA-02 | Login identifier: email or username? (`docs/03-database-design.md` says "email/username according to policy") | **Decided (ADR-014):** login identifier is the email address — `USERNAME_FIELD="email"`, API field `email`; no separate username | Phase 03 | ACCEPTED |
 | OA-03 | How do roles relate to `is_staff`/`is_superuser`? | `role` enum (`STUDENT`/`PROFESSOR`/`ADMIN`/`SUPERADMIN`) is authoritative for app permissions; `is_staff` only gates Django admin, which is disabled | Phase 02 | ACCEPTED |
 | OA-04 | Is the Django admin UI part of the MVP admin surface? | No: admin works through `/api/v1/admin/` REST endpoints; `django.contrib.admin` is not installed | Phase 04 | DECISION NEEDED |
 | OA-05 | Which LLM and embedding provider/model? Embedding dimension fixes the pgvector column | Unset (`AI_PROVIDER`, `AI_MODEL`, `EMBEDDING_MODEL` read from env; health reports `ai_provider: not_configured`) | Phase 06 | DECISION NEEDED |
 | OA-06 | Does CI need PostgreSQL? | No: tests run on SQLite via `conftest.py` forcing `DATABASE_URL=""`; pgvector-specific SQL is untested | Phase 06 | DECISION NEEDED |
 | OA-07 | Retention period for chat messages, audit logs, uploaded documents (`docs/07-security.md` section 6 requires this before production) | No retention/deletion implemented | Before production | DECISION NEEDED |
 | OA-08 | Upload limits and allowed types beyond PDF; storage backend for documents | Not implemented (no upload endpoint yet) | Phase 05 | DECISION NEEDED |
-| OA-09 | Concrete rate limits for auth and AI endpoints ("where appropriate") | No throttling configured | Phase 02 (auth), Phase 07 (AI) | DECISION NEEDED |
+| OA-09 | Concrete rate limits for auth and AI endpoints ("where appropriate") | **Decided (ADR-014):** `auth_ip=10/min` for login+register per IP, `auth_refresh=30/min` per user (IP fallback when the token is unverifiable); AI limits remain open for Phase 07 | Phase 03 (auth) | ACCEPTED (AI part open, Phase 07) |
 | OA-10 | Is course/professor content Persian-only, or is localized storage required? | Single `title`/`name` text fields, no per-language duplicates | Phase 03 | ACCEPTED |
 | OA-11 | `AcademicTerm.is_current` — may more than one term be current? | Assumed at most one; must be enforced by a constraint, not by convention | Phase 03 | DECISION NEEDED |
 | OA-12 | Grade scale and type for `Enrollment.grade` | Not yet modeled; the eligibility engine assumes a numeric 0–20 scale | Phase 09 | DECISION NEEDED |
@@ -33,6 +33,7 @@ low cost. `DECISION NEEDED` = must be answered before the listed phase starts.
 | OA-20 | Persian webfont: self-host Vazirmatn (licence, subset, build size) or rely on system fonts (`docs/02` "Persian typography") | System stack only — `Vazirmatn` if locally installed, else `Tahoma`/`Segoe UI`; no font files or CDN added in the baseline | Phase 05 | DECISION NEEDED |
 | OA-21 | Is the UI Persian-only, or must a user be able to switch language? (`docs/11` says Persian; no bilingual requirement is written) | Persian-only: no language switcher, no runtime i18n dependency; strings centralized in `frontend/src/i18n/fa.ts` so a switcher can be added later (ADR-010) | Before production | ACCEPTED |
 | OA-22 | Who translates framework-generated messages (DRF validation/auth): DRF's bundled `fa` catalog or project-owned gettext catalogs | DRF/Django `fa` catalogs via `LANGUAGE_CODE="fa"`, pinned by `test_framework_validation_details_are_persian` (ADR-010); project sentences are Persian literals | — | ACCEPTED |
+| OA-23 | CSRF strategy for the cookie-based refresh/logout endpoints (ADR-004 said CSRF "must be tested") | **Decided (ADR-014):** double-submit cookie — login sets a readable `csrftoken`, the client echoes it in `X-CSRFToken`, and `csrf_protect` guards refresh + logout; failure returns `403 PERMISSION_DENIED` | Phase 03 | ACCEPTED |
 
 ## Rule for closing an item
 

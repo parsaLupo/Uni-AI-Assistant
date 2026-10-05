@@ -50,3 +50,32 @@ export interface HealthResponse {
     ai_provider: string
   }
 }
+
+/** Roles from ADR-014 / docs/17. The server is authoritative about role checks. */
+export type UserRole = 'STUDENT' | 'PROFESSOR' | 'ADMIN' | 'SUPERADMIN'
+
+/** GET /api/v1/auth/me/ output (docs/api/auth.md). */
+export interface AuthUser {
+  id: number
+  email: string
+  first_name: string
+  last_name: string
+  role: UserRole
+  is_active: boolean
+}
+
+/**
+ * POST /auth/login/, /auth/register/, /auth/refresh/ output. The refresh cookie
+ * itself is HttpOnly and never crosses this boundary (docs/05 section 3): only
+ * the short-lived access token lives in frontend memory.
+ */
+export interface AuthSession {
+  access: string
+  user: {
+    id: number
+    email: string
+    role: UserRole
+    first_name?: string
+    last_name?: string
+  }
+}

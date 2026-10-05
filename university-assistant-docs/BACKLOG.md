@@ -13,12 +13,12 @@
 
 ## EPIC 2 — Authentication
 
-- [ ] User model
-- [ ] JWT login
-- [ ] Refresh/logout
-- [ ] Roles
-- [ ] Permissions
-- [ ] React auth flow
+- [x] User model
+- [x] JWT login
+- [x] Refresh/logout
+- [x] Roles
+- [x] Permissions
+- [x] React auth flow
 
 ## EPIC 3 — Academic Core
 

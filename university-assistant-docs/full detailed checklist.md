@@ -167,38 +167,42 @@ version, CI job log with the Postgres service, verified README commands.
 
 **Blockers:** needs a machine with a Docker daemon — the one unverified item in the repo.
 
-### Phase 03 — Authentication & Authorization ⏸️
+### Phase 03 — Authentication & Authorization ✅ (DONE 2026-10-05)
 
 **Objective.** Secure accounts with server-enforced roles.
 
-**Decisions required before coding (V-12):** OA-01 registration policy · OA-02
-login identifier · OA-09 concrete rate limits · CSRF strategy for the
-cookie-based refresh endpoint · refresh-token rotation + reuse detection.
+**Decisions resolved before coding (V-12) → `ADR-014`:** OA-01 self-service
+registration always creating `STUDENT` · OA-02 email as `USERNAME_FIELD` ·
+OA-09 `auth_ip=10/min`, `auth_refresh=30/min` · OA-23 double-submit CSRF ·
+refresh-token rotation with family revocation on reuse. All four rows in
+`docs/21` are `ACCEPTED`.
 
 **Tasks**
 
-- [ ] Custom user model (`USERNAME_FIELD` per OA-02) + role enum (`STUDENT`, `PROFESSOR`, `ADMIN`, `SUPERADMIN`).
-- [ ] Registration per OA-01 (admin-provisioned or self-serve).
-- [ ] `POST /auth/login/` → access token in body, refresh token in HttpOnly + Secure + SameSite cookie.
-- [ ] `POST /auth/refresh/` → rotate the refresh token, detect reuse, revoke the token family on reuse.
-- [ ] `POST /auth/logout/` → revoke refresh, clear cookie.
-- [ ] Permission classes per role; DRF default `IsAuthenticated`; admin scopes enforced server-side.
-- [ ] Argon2 hashing (`django-argon2`) — **C-08**.
-- [ ] Throttle scopes `auth` / `anon` / `user` with the OA-09 values.
-- [ ] React: auth state, in-memory access token, silent refresh, protected routes, nothing sensitive in localStorage.
-- [ ] Tests: valid login, invalid login, refresh, reuse detection, logout, permission denial, own-resource access, CSRF rejection.
+- [x] Custom user model (`USERNAME_FIELD="email"` per OA-02) + role enum (`STUDENT`, `PROFESSOR`, `ADMIN`, `SUPERADMIN`).
+- [x] Registration per OA-01 (open self-service → always `STUDENT`; privileged roles admin-provisioned).
+- [x] `POST /auth/login/` → access token in body, refresh token in HttpOnly + Secure + SameSite cookie.
+- [x] `POST /auth/refresh/` → rotate the refresh token, detect reuse, revoke the token family on reuse.
+- [x] `POST /auth/logout/` → revoke refresh, clear cookie (idempotent).
+- [x] Permission classes per role; DRF default `IsAuthenticated`; admin scopes enforced server-side.
+- [x] Argon2 hashing (`django-argon2`) — **C-08**.
+- [x] Throttle scopes `auth_ip` / `auth_refresh` with the OA-09 values (env-overridable).
+- [x] React: auth state, in-memory access token, silent refresh, protected routes, nothing sensitive in localStorage.
+- [x] Tests: valid login, invalid login, refresh, reuse detection, logout, permission denial, own-resource access, CSRF rejection. *(57 backend + 23 frontend)*
 
 **Acceptance criteria**
 
-- [ ] Student can authenticate and reach `/students/me/`.
-- [ ] Unauthorized users cannot access protected resources — 401 with `AUTHENTICATION_REQUIRED`.
-- [ ] Admin endpoints reject non-admin users — 403 with `PERMISSION_DENIED`, tested not assumed.
-- [ ] Frontend never stores provider secrets or the refresh token in JS-readable storage.
-- [ ] Refresh reuse invalidates the token family.
-- [ ] Login/refresh are rate-limited and the limit is covered by a test.
+- [x] Student can authenticate and reach `/students/me/` — live `register=201 → refresh=200 → me=200 → logout=204`; UI `/login → /dashboard`.
+- [x] Unauthorized users cannot access protected resources — 401 with `AUTHENTICATION_REQUIRED` (live + tested).
+- [x] Admin endpoints reject non-admin users — 403 with `PERMISSION_DENIED`, tested not assumed (17 admin-permission tests).
+- [x] Frontend never stores provider secrets or the refresh token in JS-readable storage — module-variable token; refresh cookie is HttpOnly; enforced by test (no web storage in the test env).
+- [x] Refresh reuse invalidates the token family — `test_replaying_a_rotated_token_revokes_the_whole_family`.
+- [x] Login/refresh are rate-limited and the limit is covered by a test — `test_login_is_rate_limited_after_the_configured_burst` (429 `RATE_LIMITED`).
 
-**Exit evidence:** auth tests green, OpenAPI updated, ADR-004 consequences
-(CSRF, rotation) resolved in code + tests, rate-limit values recorded in `.env.example`.
+**Exit evidence:** ✅ auth tests green (57 on SQLite *and* PostgreSQL), OpenAPI
+regenerated + `--validate` clean, ADR-004 consequences (CSRF, rotation) resolved
+in code + tests, rate-limit values in `.env.example`, live Docker E2E recorded in
+`docs/phases/phase-03.md`.
 
 ### Phase 04 — Core Academic Data ⏸️
 

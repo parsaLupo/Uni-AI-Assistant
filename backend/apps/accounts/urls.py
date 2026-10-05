@@ -1,0 +1,21 @@
+"""Auth and user-management routes (docs/api/auth.md, docs/api/admin.md)."""
+
+from django.urls import path
+
+from apps.accounts import views
+
+app_name = "accounts"
+
+urlpatterns = [
+    path("auth/register/", views.RegisterView.as_view(), name="auth-register"),
+    path("auth/login/", views.LoginView.as_view(), name="auth-login"),
+    path("auth/refresh/", views.RefreshView.as_view(), name="auth-refresh"),
+    path("auth/logout/", views.LogoutView.as_view(), name="auth-logout"),
+    path("auth/me/", views.MeView.as_view(), name="auth-me"),
+    path("admin/users/", views.AdminUserListCreateView.as_view(), name="admin-users"),
+    path(
+        "admin/users/<int:pk>/",
+        views.AdminUserDetailView.as_view(),
+        name="admin-user-detail",
+    ),
+]
