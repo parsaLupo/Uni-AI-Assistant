@@ -1,0 +1,4098 @@
+{
+  "title": "University course offerings",
+   "academic_year": "1405-1406",
+   "semester": "FIRST",
+  "total_course_groups": 157,
+  "courses": [
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916001_02",
+      "course_name": "كارگاه كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "يدالهي الهه",
+      "schedule_and_exam_info": "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 2,
+      "schedule_details": [
+        "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916003_01",
+      "course_name": "مدارهاي الكتريكي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 3,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        4,
+        5
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916006_01",
+      "course_name": "ساختمانهاي داده",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "نعيمي صديق عليرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 6,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        7,
+        8
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916007_01",
+      "course_name": "مدارهاي منطقي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "مالكي علي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 9,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "حل تمرين(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        10,
+        11,
+        12
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916007_02",
+      "course_name": "مدارهاي منطقي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "سلطاني زاده هادي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 13,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "حل تمرين(ت): يك شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        14,
+        15,
+        16
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 122"
+        },
+        {
+          "content": "حل تمرين(ت): يك شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 122"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916008_01",
+      "course_name": "نظريه زبان ها و ماشين ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 17,
+      "schedule_details": [
+        "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "امتحان(1405.10.30) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        18,
+        19
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916010_01",
+      "course_name": "روش پژوهش و ارائه",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 20,
+      "schedule_details": [
+        "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.30) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        21,
+        22
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916011_01",
+      "course_name": "رياضيات مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "فاتح عليرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 23,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.23) ساعت : 10:00-11:30"
+      ],
+      "continuation_excel_rows": [
+        24,
+        25,
+        26
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-11:30"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916011_02",
+      "course_name": "رياضيات مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "افصحي مجيد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 27,
+      "schedule_details": [
+        "درس(ت): سه شنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "حل تمرين(ت): سه شنبه 18:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.23) ساعت : 10:00-11:30"
+      ],
+      "continuation_excel_rows": [
+        28,
+        29,
+        30
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 18:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-11:30"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916012_01",
+      "course_name": "معماري كامپيوتر",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 31,
+      "schedule_details": [
+        "درس(ت): يك شنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): دوشنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.27) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        32,
+        33
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916013_01",
+      "course_name": "سيستم هاي عامل",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 7,
+      "instructor_name": "امامي سمانه",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 34,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "امتحان(1405.10.29) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        35,
+        36
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 211"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916015_01",
+      "course_name": "طراحي كامپيوتري سيستم هاي ديجيتال",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "كشاورزي پرويز",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 37,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        38,
+        39
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916016_01",
+      "course_name": "سيگنالها و سيستم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "كميليان سعيد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 40,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "امتحان(1405.10.20) ساعت : 16:00-17:30"
+      ],
+      "continuation_excel_rows": [
+        41,
+        42
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-17:30"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916016_02",
+      "course_name": "سيگنالها و سيستم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "عبدوس فرزاد",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 43,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "امتحان(1405.10.20) ساعت : 16:00-17:30"
+      ],
+      "continuation_excel_rows": [
+        44,
+        45
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 123"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-17:30"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916018_01",
+      "course_name": "شبكه هاي كامپيوتري",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "صالحي مارال",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 ف مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 46,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 ف مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+        "درس(ت): چهارشنبه 10:00-12:00 مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+        "امتحان(1405.10.22) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        47,
+        48
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-12:00 مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916021_01",
+      "course_name": "آزمايشگاه سيستم هاي عامل",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 20,
+      "instructor_name": "ارغوان فاطمه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 49,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916021_02",
+      "course_name": "آزمايشگاه سيستم هاي عامل",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 15,
+      "instructor_name": "ارغوان فاطمه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 50,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916023_01",
+      "course_name": "آزمايشگاه ريزپردازنده",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 51,
+      "schedule_details": [
+        "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916024_01",
+      "course_name": "آزمايشگاه شبكه هاي كامپيوتري",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 20,
+      "instructor_name": "كرامتي مرجان",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 52,
+      "schedule_details": [
+        "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916118_01",
+      "course_name": "طراحي مدارهاي واسط",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كرامتي مرجان",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 53,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+        "درس(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.19) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        54,
+        55
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916120_01",
+      "course_name": "سيستم هاي نهفته و بيدرنگ",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 56,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.27) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        57,
+        58
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916121_01",
+      "course_name": "مباني رايانش امن",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "رحماني منش محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 59,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.22) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        60,
+        61
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916122_01",
+      "course_name": "پايگاه داده ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "سهرابي محمدكريم",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 62,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "امتحان(1405.10.19) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        63,
+        64
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916124_01",
+      "course_name": "مهندسي نرم افزار",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "كريميان حسام",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 65,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.23) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        66,
+        67
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916125_01",
+      "course_name": "آزمون نرم افزار",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "دري گيو مرتضي",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 68,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): يك شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "امتحان(1405.10.26) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        69,
+        70
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 114"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916126_01",
+      "course_name": "مباني داده كاوي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "كريميان مينا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 71,
+      "schedule_details": [
+        "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.24) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        72,
+        73
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.24) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916135_01",
+      "course_name": "مهندسي اينترنت",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "عباسي محمدجواد",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 74,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        75,
+        76
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_01",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 77,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_02",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "عرب يارمحمدي نيلوفر",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 78,
+      "schedule_details": [
+        "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_03",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 0,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 79,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_04",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 80,
+      "schedule_details": [
+        "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_05",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 0,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 81,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_06",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "ساساني احمد",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 82,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916143_07",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "توكل همداني فرزاد",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 83,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916144_01",
+      "course_name": "آزمايشگاه مدارهاي الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "جعفري اميد",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز الكترونيك(جعفري)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 84,
+      "schedule_details": [
+        "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز الكترونيك(جعفري)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916146_01",
+      "course_name": "آزمايشگاه ابزارهاي طراحي با كمك كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 85,
+      "schedule_details": [
+        "درس(ع): شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916146_02",
+      "course_name": "آزمايشگاه ابزارهاي طراحي با كمك كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 86,
+      "schedule_details": [
+        "درس(ع): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_01",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "يغمايي فرزين",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 87,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_03",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "دري گيو مرتضي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 88,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_04",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "امامي سمانه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 89,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_05",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 2,
+      "instructor_name": "فدائي اسلام محمدجواد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 90,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_06",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "رحماني منش محمد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 91,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_07",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 4,
+      "instructor_name": "كياني كوروش",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 92,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_08",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "ابوالمعالي شيث",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 93,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_09",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "كرامتي مرجان",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 94,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916147_10",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 3,
+      "instructor_name": "راستگو راضيه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 95,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916148_01",
+      "course_name": "كارآموزي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 5,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 96,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916203_01",
+      "course_name": "كارگاه عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "آزاد بهرام",
+      "schedule_and_exam_info": "درس(ع): شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك كارگاه جوشكاري و ورقكاري",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 97,
+      "schedule_details": [
+        "درس(ع): شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك كارگاه جوشكاري و ورقكاري"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916203_02",
+      "course_name": "كارگاه عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 16,
+      "instructor_name": "آزاد بهرام",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مكانيك كارگاه جوشكاري و ورقكاري",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 98,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مكانيك كارگاه جوشكاري و ورقكاري"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916203_03",
+      "course_name": "كارگاه عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 19,
+      "instructor_name": "توكلي حسين",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كارگاه ربخته گري (مكان سابق دانشكده مهندسي مواد)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 99,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كارگاه ربخته گري (مكان سابق دانشكده مهندسي مواد)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916204_01",
+      "course_name": "مباني برنامه سازي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "قدوسيان علي",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-11:00 مکان: دانشكده مهندسي مكانيك انرژي 106",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 100,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-11:00 مکان: دانشكده مهندسي مكانيك انرژي 106",
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 205",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        101,
+        102
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 205"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916205_02",
+      "course_name": "كارگاه كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "يدالهي الهه",
+      "schedule_and_exam_info": "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 103,
+      "schedule_details": [
+        "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916206_01",
+      "course_name": "ساختمانهاي گسسته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "قدس مسعود",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 104,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+        "درس(ت): يك شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+        "امتحان(1405.10.23) ساعت : 14:00-16:00"
+      ],
+      "continuation_excel_rows": [
+        105,
+        106
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 14:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_01",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 0,
+      "instructor_name": "سهرابي عاطفه",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 107,
+      "schedule_details": [
+        "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_02",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "مالكي علي",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 108,
+      "schedule_details": [
+        "درس(ع): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_03",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 0,
+      "instructor_name": "رئيسيان معصومه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 109,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_04",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 0,
+      "instructor_name": "رئيسيان معصومه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 110,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_05",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 111,
+      "schedule_details": [
+        "درس(ع): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916207_06",
+      "course_name": "آز مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 112,
+      "schedule_details": [
+        "درس(ع): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916208_01",
+      "course_name": "ساختمان داده و الگوريتم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "نعيمي صديق عليرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 113,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        114,
+        115
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916209_01",
+      "course_name": "مباني مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 30,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 116,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        117,
+        118
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916211_01",
+      "course_name": "طراحي سيستم هاي ديجيتال",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 9,
+      "instructor_name": "كشاورزي پرويز",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 119,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        120,
+        121
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916212_01",
+      "course_name": "آز طراحي سيستم هاي ديجيتال",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 14,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 122,
+      "schedule_details": [
+        "درس(ع): شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916212_02",
+      "course_name": "آز طراحي سيستم هاي ديجيتال",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 12,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 123,
+      "schedule_details": [
+        "درس(ع): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز طراحي ديجيتال"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916214_01",
+      "course_name": "هوش مصنوعي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "پهلووري حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 124,
+      "schedule_details": [
+        "درس(ت): دوشنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.11.01) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        125,
+        126
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916215_01",
+      "course_name": "جبر خطي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 14,
+      "instructor_name": "كياني كوروش",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 127,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): سه شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.26) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        128,
+        129
+      ],
+      "continuation_row_details": [
+        {
+          "Q": "راستگو راضيه",
+          "content": "درس(ت): سه شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916215_02",
+      "course_name": "جبر خطي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "كياني كوروش",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 130,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.26) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        131,
+        132
+      ],
+      "continuation_row_details": [
+        {
+          "Q": "راستگو راضيه",
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916216_01",
+      "course_name": "ارائه مطالب علمي و فني",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 4,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 133,
+      "schedule_details": [
+        "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.30) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        134,
+        135
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916217_01",
+      "course_name": "طراحي پايگاه داده ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "سهرابي محمدكريم",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 136,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "امتحان(1405.10.19) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        137,
+        138
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916218_01",
+      "course_name": "تحليل و طراحي سيستم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كريميان مينا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 139,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        140,
+        141
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916219_01",
+      "course_name": "امنيت داده و شبكه",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 59,
+      "instructor_name": "رحماني منش محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 142,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.22) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        143,
+        144
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916220_01",
+      "course_name": "كارآموزي مهندسي كامپيوتر",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 145,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916226_01",
+      "course_name": "طراحي الگوريتم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 12,
+      "instructor_name": "فدائي اسلام محمدجواد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 146,
+      "schedule_details": [
+        "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.10.22) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        147,
+        148
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916228_01",
+      "course_name": "نظريه زبانها و ماشين ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 149,
+      "schedule_details": [
+        "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "امتحان(1405.10.30) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        150,
+        151
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916231_01",
+      "course_name": "سيستم هاي نهفته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 48,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 152,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.30) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        153,
+        154
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916232_01",
+      "course_name": "مهندسي نرم افزار",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 68,
+      "instructor_name": "كريميان حسام",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 155,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.23) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        156,
+        157
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916239_01",
+      "course_name": "برنامه سازي وب",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "عباسي محمدجواد",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 158,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        159,
+        160
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916249_01",
+      "course_name": "فناوري اطلاعات",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 75,
+      "instructor_name": "محمدنژاد محمدرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 161,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "امتحان(1405.10.27) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        162,
+        163
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 211"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916254_01",
+      "course_name": "مباني يادگيري ماشين",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "كريميان مينا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 164,
+      "schedule_details": [
+        "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.24) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        165,
+        166
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.24) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916255_01",
+      "course_name": "آزمون نرم افزار",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 57,
+      "instructor_name": "دري گيو مرتضي",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 167,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): يك شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "امتحان(1405.10.26) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        168,
+        169
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 114"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916260_01",
+      "course_name": "مفاهيم پيشرفته كامپيوتر",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 55,
+      "instructor_name": "كرامتي مرجان",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 170,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+        "درس(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.19) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        171,
+        172
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916341_01",
+      "course_name": "مباني كامپيوتر و برنامه سازي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "قدوسيان علي",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-11:00 مکان: دانشكده مهندسي مكانيك انرژي 106",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 173,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-11:00 مکان: دانشكده مهندسي مكانيك انرژي 106",
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 205",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        174,
+        175
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 205"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916341_02",
+      "course_name": "مباني كامپيوتر و برنامه سازي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "لكزيان الياس",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-18:00 مکان: دانشكده مهندسي مكانيك انرژي 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 176,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-18:00 مکان: دانشكده مهندسي مكانيك انرژي 207",
+        "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مكانيك انرژي 207",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        177,
+        178
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مكانيك انرژي 207"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916342_02",
+      "course_name": "كارگاه كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "يدالهي الهه",
+      "schedule_and_exam_info": "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 179,
+      "schedule_details": [
+        "درس(ع): شنبه 12:00-15:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916343_01",
+      "course_name": "رياضيات گسسته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "قدس مسعود",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 180,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+        "درس(ت): يك شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16",
+        "امتحان(1405.10.23) ساعت : 14:00-16:00"
+      ],
+      "continuation_excel_rows": [
+        181,
+        182
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 10:00-12:00 مکان: پرديس علوم پايه كلاس 16"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 14:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916344_01",
+      "course_name": "مدارهاي منطقي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "مالكي علي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 183,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "حل تمرين(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        184,
+        185,
+        186
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916344_02",
+      "course_name": "مدارهاي منطقي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "سلطاني زاده هادي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 187,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "حل تمرين(ت): يك شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        188,
+        189,
+        190
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 122"
+        },
+        {
+          "content": "حل تمرين(ت): يك شنبه 14:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 122"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_01",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 7,
+      "instructor_name": "سهرابي عاطفه",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 191,
+      "schedule_details": [
+        "درس(ع): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_02",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 3,
+      "instructor_name": "مالكي علي",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 192,
+      "schedule_details": [
+        "درس(ع): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_03",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 5,
+      "instructor_name": "رئيسيان معصومه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 193,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_04",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "رئيسيان معصومه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 194,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_05",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 3,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 195,
+      "schedule_details": [
+        "درس(ع): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_06",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 196,
+      "schedule_details": [
+        "درس(ع): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_07",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 14,
+      "instructor_name": "ابوالمعالي شيث",
+      "schedule_and_exam_info": "درس(ع): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 197,
+      "schedule_details": [
+        "درس(ع): شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_08",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 14,
+      "instructor_name": "ابوالمعالي شيث",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 198,
+      "schedule_details": [
+        "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز سيستم ديجيتال(رييسيان)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_09",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 199,
+      "schedule_details": [
+        "درس(ع): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916345_10",
+      "course_name": "آزمايشگاه مدارهاي منطقي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 200,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916347_01",
+      "course_name": "زبان تخصصي كامپيوتر",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 40,
+      "instructor_name": "راستگو راضيه",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 201,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "امتحان(1405.10.24) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        202
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.24) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916348_01",
+      "course_name": "مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 16,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 203,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        204,
+        205
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_01",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 206,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_02",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "عرب يارمحمدي نيلوفر",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 207,
+      "schedule_details": [
+        "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_03",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 208,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_04",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 2,
+      "instructor_name": "خاني شيوا",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 209,
+      "schedule_details": [
+        "درس(ع): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_05",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 3,
+      "instructor_name": "احمدي نگين",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 210,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_06",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "ساساني احمد",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 211,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916349_07",
+      "course_name": "آزمايشگاه مدارهاي الكتريكي و الكترونيكي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "توكل همداني فرزاد",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 212,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز مدار الكتريكي(شادپور)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916350_01",
+      "course_name": "داده ساختارها والگوريتم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 59,
+      "instructor_name": "نعيمي صديق عليرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 213,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "امتحان(1405.10.29) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        214,
+        215
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 114"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916351_01",
+      "course_name": "معماري كامپيوتر",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 60,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 216,
+      "schedule_details": [
+        "درس(ت): يك شنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): دوشنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.27) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        217,
+        218
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:30 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916352_01",
+      "course_name": "آزمايشگاه معماري كامپيوتر",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 219,
+      "schedule_details": [
+        "درس(ع): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر آز مدار مخابراتي(بهنام)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916353_01",
+      "course_name": "طراحي سيستم هاي ديجيتال",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 11,
+      "instructor_name": "كشاورزي پرويز",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 220,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        221,
+        222
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916354_01",
+      "course_name": "نظريه زبان ها و ماشين ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 223,
+      "schedule_details": [
+        "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "امتحان(1405.10.30) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        224,
+        225
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916355_01",
+      "course_name": "جبر خطي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 60,
+      "instructor_name": "كياني كوروش",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 226,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): سه شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.26) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        227,
+        228
+      ],
+      "continuation_row_details": [
+        {
+          "Q": "راستگو راضيه",
+          "content": "درس(ت): سه شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916355_02",
+      "course_name": "جبر خطي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 30,
+      "instructor_name": "كياني كوروش",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 229,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.26) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        230,
+        231
+      ],
+      "continuation_row_details": [
+        {
+          "Q": "راستگو راضيه",
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916356_01",
+      "course_name": "هوش مصنوعي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 45,
+      "instructor_name": "پهلووري حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 207",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 232,
+      "schedule_details": [
+        "درس(ت): دوشنبه 17:00-19:00 ز مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.11.01) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        233,
+        234
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916357_01",
+      "course_name": "سيستم هاي نهفته و بي درنگ",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 40,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 235,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207",
+        "امتحان(1405.10.27) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        236,
+        237
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 207"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916358_01",
+      "course_name": "سيستم هاي عامل",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 50,
+      "instructor_name": "امامي سمانه",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 238,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "امتحان(1405.10.29) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        239,
+        240
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده برق و كامپيوتر كلاس 211"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916359_01",
+      "course_name": "آزمايشگاه سيستم هاي عامل",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "ارغوان فاطمه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 241,
+      "schedule_details": [
+        "درس(ع): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916359_02",
+      "course_name": "آزمايشگاه سيستم هاي عامل",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "ارغوان فاطمه",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 242,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر آز كامپيوتر(لعله اي)"
+      ],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916360_01",
+      "course_name": "روش پژوهش و ارائه",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 56,
+      "instructor_name": "لؤلؤئيان پيمان",
+      "schedule_and_exam_info": "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 243,
+      "schedule_details": [
+        "درس(ت): چهارشنبه 15:00-17:00 ز مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117",
+        "امتحان(1405.10.30) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        244,
+        245
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 117"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916361_01",
+      "course_name": "تحليل و طراحي نرم افزار",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 40,
+      "instructor_name": "كريميان مينا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 246,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "امتحان(1405.10.23) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        247,
+        248
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 109"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916362_01",
+      "course_name": "شبكه هاي كامپيوتري",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 7,
+      "instructor_name": "صالحي مارال",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 ف مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 249,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 ف مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+        "درس(ت): چهارشنبه 10:00-12:00 مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر",
+        "امتحان(1405.10.22) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        250,
+        251
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-12:00 مکان: رياضي ،آمار و علوم كامپيوتر سايت علوم كامپيوتر"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916365_01",
+      "course_name": "طراحي الگوريتم ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "فدائي اسلام محمدجواد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 252,
+      "schedule_details": [
+        "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.10.22) ساعت : 13:00-15:00"
+      ],
+      "continuation_excel_rows": [
+        253,
+        254
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-15:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916367_01",
+      "course_name": "طراحي پايگاه داده ها",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 40,
+      "instructor_name": "سهرابي محمدكريم",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 255,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 ز مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124",
+        "امتحان(1405.10.19) ساعت : 16:00-18:00"
+      ],
+      "continuation_excel_rows": [
+        256,
+        257
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 124"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916371_01",
+      "course_name": "داده كاوي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 40,
+      "instructor_name": "كريميان مينا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 258,
+      "schedule_details": [
+        "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 122",
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "امتحان(1405.10.24) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        259,
+        260
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 111"
+        },
+        {
+          "content": "امتحان(1405.10.24) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916386_01",
+      "course_name": "برنامه سازي وب",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "عباسي محمدجواد",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 261,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_excel_rows": [
+        262,
+        263
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1916412_01",
+      "course_name": "آشنايي با صنعت كامپيوتر(كاربيني)",
+      "total_credits": 1,
+      "practical_credits": 0.25,
+      "capacity": 70,
+      "instructor_name": "عباسي محمدجواد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-11:30 مکان: دانشكده برق و كامپيوتر كلاس 211",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 264,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-11:30 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "درس(ع): يك شنبه 11:30-12:00 مکان: دانشكده برق و كامپيوتر كلاس 211",
+        "امتحان(1405.10.27) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        265,
+        266
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ع): يك شنبه 11:30-12:00 مکان: دانشكده برق و كامپيوتر كلاس 211"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916199_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 267,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916264_01",
+      "course_name": "سمينار",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 268,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916441_01",
+      "course_name": "مهندسي نرم افزار پيشرفته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "دري گيو مرتضي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 269,
+      "schedule_details": [
+        "درس(ت): يك شنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 114",
+        "درس(ت): دوشنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر اتاق استاد",
+        "امتحان(1405.10.23) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        270,
+        271
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر اتاق استاد"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916452_01",
+      "course_name": "شبكه هاي كامپيوتري پيشرفته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "رحماني منش محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 272,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 111",
+        "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 123",
+        "امتحان(1405.10.21) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        273,
+        274
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 09:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 123"
+        },
+        {
+          "content": "امتحان(1405.10.21) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916486_01",
+      "course_name": "موتور جستجو و وب كاوي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "امامي سمانه",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 275,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119",
+        "امتحان(1405.10.28) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        276,
+        277
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 119"
+        },
+        {
+          "content": "امتحان(1405.10.28) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916491_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 278,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916502_01",
+      "course_name": "سمينار",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 279,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1916506_01",
+      "course_name": "اينترنت اشياء",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كرامتي مرجان",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 280,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+        "درس(ت): دوشنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.10.19) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        281,
+        282
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916306_01",
+      "course_name": "شبكه هاي عصبي و يادگيري عميق",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كياني كوروش",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 283,
+      "schedule_details": [
+        "درس(ت): يك شنبه 17:00-18:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "درس(ت): دوشنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 216",
+        "امتحان(1405.10.26) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        284,
+        285
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-19:00 مکان: دانشكده برق و كامپيوتر كلاس 216"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916307_01",
+      "course_name": "يادگيري ماشين",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "يغمايي فرزين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 286,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده برق و كامپيوتر كلاس 109",
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+        "امتحان(1405.10.20) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        287,
+        288
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 121"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916309_01",
+      "course_name": "شناسايي الگو",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "فدائي اسلام محمدجواد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 289,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 125",
+        "امتحان(1405.10.22) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        290,
+        291
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 125"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916311_01",
+      "course_name": "هوش مصنوعي پيشرفته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "راستگو راضيه",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 126",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 292,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 126",
+        "درس(ت): دوشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+        "امتحان(1405.10.24) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        293,
+        294
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 11:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 214"
+        },
+        {
+          "content": "امتحان(1405.10.24) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916331_01",
+      "course_name": "يادگيري عميق پيشرفته",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "راستگو راضيه",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 295,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+        "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 214",
+        "امتحان(1405.10.24) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        296,
+        297
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 10:00-11:00 مکان: دانشكده برق و كامپيوتر كلاس 214"
+        },
+        {
+          "content": "امتحان(1405.10.24) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916336_01",
+      "course_name": "مباحث ويژه در هوش مصنوعي و رباتيك 1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "فدائي اسلام محمدجواد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر اتاق استاد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 298,
+      "schedule_details": [
+        "درس(ت): يك شنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر اتاق استاد",
+        "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر اتاق استاد",
+        "امتحان(1405.10.22) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        299,
+        300
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده برق و كامپيوتر اتاق استاد"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916338_01",
+      "course_name": "پايان نامه",
+      "total_credits": 21,
+      "practical_credits": 0,
+      "capacity": 20,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 301,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_01",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "يغمايي فرزين",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 302,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_02",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "رحماني منش محمد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 303,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_03",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "كياني كوروش",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 304,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_04",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "ابوالمعالي شيث",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 305,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_05",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "دري گيو مرتضي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 306,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_06",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "امامي سمانه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 307,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916339_07",
+      "course_name": "دفاع از پيشنهاد پژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "راستگو راضيه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 308,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_01",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "يغمايي فرزين",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 309,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_02",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "كياني كوروش",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 310,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_03",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "رحماني منش محمد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 311,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_04",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "ابوالمعالي شيث",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 312,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_05",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "دري گيو مرتضي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 313,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_06",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "امامي سمانه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 314,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916340_07",
+      "course_name": "آزمون جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "راستگو راضيه",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 315,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916492_01",
+      "course_name": "پايان نامه",
+      "total_credits": 24,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 316,
+      "schedule_details": [],
+      "continuation_excel_rows": []
+    },
+    {
+      "faculty_name": "مهندسي برق و كامپيوتر",
+      "department_code": 16,
+      "department_name": "مهندسي كامپيوتر",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1916507_01",
+      "course_name": "اينترنت اشياء",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "كرامتي مرجان",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 317,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده برق و كامپيوتر كلاس 121",
+        "درس(ت): دوشنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 112",
+        "امتحان(1405.10.19) ساعت : 10:00-12:00"
+      ],
+      "continuation_excel_rows": [
+        318,
+        319
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 16:00-17:00 مکان: دانشكده برق و كامپيوتر كلاس 112"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-12:00"
+        }
+      ]
+    }
+  ]
+}

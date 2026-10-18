@@ -44,6 +44,10 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
+      # Read-only seed dataset (Phase 04): `manage.py seed` defaults to
+      # <repo root>/data, which is outside the backend mount, so it is mapped
+      # separately — read-only so dev data can never be edited from inside.
+      - ./data:/data:ro
     depends_on:
       db:
         condition: service_healthy

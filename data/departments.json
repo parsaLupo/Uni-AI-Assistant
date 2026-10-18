@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "faculty_code": "19",
+  "departments": [
+    {
+      "source_id": 1,
+      "code": "16",
+      "faculty_code": "19",
+      "name": "گروه مهندسی کامپیوتر",
+      "name_en": "Department of Computer Engineering",
+      "description": "گروه آموزشی مهندسی کامپیوتر"
+    },
+    {
+      "source_id": 2,
+      "code": "18",
+      "faculty_code": "11",
+      "name": "گروه مهندسی مواد و متالورژی",
+      "name_en": "Department of Material & Metallurgical Engineering",
+      "description": "گروه آموزشی مهندسی مواد و متالوژی"
+    }
+
+  ]
+}

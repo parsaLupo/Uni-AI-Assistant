@@ -1,0 +1,287 @@
+{
+  "schema_version": "1.0",
+  "professors": [
+    {
+      "source_id": 1,
+      "department_code": "16",
+      "first_name": "سمانه",
+      "last_name": "امامی",
+      "academic_rank": "استادیار",
+      "email": " s_emami@semnan.ac.ir",
+      "phone": "02331532708",
+      "website":"https://semami.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 2,
+      "department_code": "16",
+      "first_name": "کوروش",
+      "last_name": "کیانی",
+      "academic_rank": "دانشیار",
+      "email": "kourosh.kiani@semnan.ac.ir",
+      "phone": " 02331532694",
+      "website":"https://kouroshkiani.com"
+    },
+    {
+      "source_id": 3,
+      "department_code": "16",
+      "first_name": "محمدجواد",
+      "last_name": "فدائی اسلام",
+      "academic_rank": "استادیار",
+      "email": "fadaei@semnan.ac.ir",
+      "phone": " 02331532707",
+      "website":"https://fadaei.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 4,
+      "department_code": "16",
+      "first_name": "شیث",
+      "last_name": "ابوالمعالی",
+      "academic_rank": " استادیار",
+      "email": " shabolmaali@semnan.ac.ir",
+      "phone": "02331532719 ",
+      "website":"https://shabolmaali.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 5,
+      "department_code": "16",
+      "first_name": "مرتضی",
+      "last_name": "دری گیو",
+      "academic_rank": "استادیار",
+      "email": " dorrigiv@semnan.ac.ir",
+      "phone": "02331532708 ",
+      "website":"https://dorrigiv.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 6,
+      "department_code": "16",
+      "first_name": "راضیه ",
+      "last_name": "راستگو",
+      "academic_rank": "استادیار",
+      "email": " rrastgoo@semnan.ac.ir",
+      "phone": "02331532703",
+      "website":"https://rrastgoo.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 7,
+      "department_code": "16",
+      "first_name": "محمد ",
+      "last_name": "رحمانی منش",
+      "academic_rank": "دانشیار",
+      "email": " rahmanimanesh@semnan.ac.ir",
+      "phone": "02331532692 ",
+      "website":"https://rahmanimanesh.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 8,
+      "department_code": "16",
+      "first_name": "مرجان ",
+      "last_name": "کرامتی",
+      "academic_rank": " استادیار",
+      "email": "keramati_marjan@semnan.ac.ir",
+      "phone": " 023315332660",
+      "website":"https://keramatimarjan.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 9,
+      "department_code": "16",
+      "first_name": "پرویز ",
+      "last_name": "کشاورزی",
+      "academic_rank": " دانشیار",
+      "email": "pkeshavarzi@semnan.ac.ir",
+      "phone": "02331532696 ",
+      "website":"https://pkeshavarzi.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 10,
+      "department_code": "16",
+      "first_name": "فرزین ",
+      "last_name": "یغمائی",
+      "academic_rank": " دانشیار",
+      "email": " f_yaghmaee@semnan.ac.ir",
+      "phone": " 02331532730",
+      "website":"https://fyaghmaee.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 11,
+      "department_code": "18",
+      "first_name": "محبوبه ",
+      "last_name": "آزادی",
+      "academic_rank": " دانشیار",
+      "email": "m.azadai@semnan.ac.ir",
+      "phone": " 02331533426",
+      "website":"https://mazadi.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 12,
+      "department_code": "18",
+      "first_name": "رضا",
+      "last_name": "ایران خواه",
+      "academic_rank": " استادیار",
+      "email": "r.irankhah@semnan.ac.ir",
+      "phone": " 02331530000",
+      "website":"https://rirankhah.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 13,
+      "department_code": "18",
+      "first_name": "سهیلا ",
+      "last_name": "بزازبنابی",
+      "academic_rank": "مربی بازنشسته",
+      "email": "sbazzaz@semnan.ac.ir",
+      "phone": " 02331533376",
+      "website":" https://sbazzaz.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 14,
+      "department_code": "18",
+      "first_name": "محمد  ",
+      "last_name": "تجلی",
+      "academic_rank": "استاد",
+      "email": "m_tajally@semnan.ac.ir",
+      "phone": " 02331533409",
+      "website":"http://mtajally.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 15,
+      "department_code": "18",
+      "first_name": "حسین",
+      "last_name": "توکلی",
+      "academic_rank": " دانشیار",
+      "email": "h.tavakoli@semnan.ac.ir",
+      "phone": " 02331530000",
+      "website":" https://htavakoli.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 16,
+      "department_code": "18",
+      "first_name": "علی ",
+      "last_name": "حبیب الله زاده",
+      "academic_rank": "استاد(بازنشسته)",
+      "email": "ahabibolahzade@semnan.ac.ir",
+      "phone": " 02331533383",
+      "website":"https://ahabibolahzadeh.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 17,
+      "department_code": "18",
+      "first_name": "محمد مهدی ",
+      "last_name": "خرمی راد",
+      "academic_rank": " استادیار",
+      "email": "mm.khorramirad@semnan.ac.ir",
+      "phone": "02331532369",
+      "website":" https://mmkhorramirad.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 18,
+      "department_code": "18",
+      "first_name": "منوچهر",
+      "last_name": "سبحانی",
+      "academic_rank": " دانشیار",
+      "email": "m.sobhani@semnan.ac.ir",
+      "phone": "02331533380",
+      "website":"https://msobhani.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 19,
+      "department_code": "18",
+      "first_name": "حسن",
+      "last_name": "عبداله پور",
+      "academic_rank": " دانشیار",
+      "email": "habd@semnan.ac.ir",
+      "phone": "02331533414",
+      "website":"https://habd.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 20,
+      "department_code": "18",
+      "first_name": "اسماعیل",
+      "last_name": "عمادالدین",
+      "academic_rank": " دانشیار",
+      "email": "emadoddin@semnan.ac.ir",
+      "phone": "02331532367",
+      "website":" https://emadoddin.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 21,
+      "department_code": "18",
+      "first_name": "بهروز ",
+      "last_name": "قاسمی",
+      "academic_rank": "استاد",
+      "email": "bghasemi@semnan.ac.ir",
+      "phone": "02333653371",
+      "website":"https://bghasemi.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 22,
+      "department_code": "18",
+      "first_name": "فتح الله",
+      "last_name": "قدس",
+      "academic_rank": "استاد",
+      "email": "qods@semnan.ac.ir",
+      "phone": "02331533401",
+      "website":"https://qods.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 23,
+      "department_code": "18",
+      "first_name": "حمیدرضا",
+      "last_name": "محمدیان سمنانی",
+      "academic_rank": "استاد",
+      "email": "hmohammadian@semnan.ac.ir",
+      "phone": "02331533880",
+      "website":" https://hmohammadian.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 24,
+      "department_code": "18",
+      "first_name": "امید ",
+      "last_name": "میرزائی",
+      "academic_rank": "استاد",
+      "email": "o_mirzaee@semnan.ac.ir",
+      "phone": "02331532336",
+      "website":"https://omirzaee.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 25,
+      "department_code": "18",
+      "first_name": "عباس",
+      "last_name": "هنربخش رئوف",
+      "academic_rank": "استاد(بازنشسته)",
+      "email": "ahonarbakhsh@semnan.ac.ir",
+      "phone": "02333654119",
+      "website":"https://ahonarbakhsh.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 26,
+      "department_code": "18",
+      "first_name": "حسن ",
+      "last_name": "کوهستانی",
+      "academic_rank":" دانشیار",
+      "email": "h.koohestani@semnan.ac.ir",
+      "phone": "02331530000",
+      "website":"https://hkoohestani.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 27,
+      "department_code": "18",
+      "first_name": "مرد علی",
+      "last_name": "یوسف پور",
+      "academic_rank":"استاد",
+      "email": "myousefpor@semnan.ac.ir",
+      "phone": "02331532385",
+      "website":"https://myousefpor.profile.semnan.ac.ir"
+    },
+    {
+      "source_id": 28,
+      "department_code": "18",
+      "first_name": "محمد ",
+      "last_name": "یوسفیه",
+      "academic_rank":" استادیار",
+      "email": "m.yousefie@semnan.ac.ir",
+      "phone": "02331533407",
+      "website":"https://myousefieh.profile.semnan.ac.ir"
+    }
+
+
+  ]
+}

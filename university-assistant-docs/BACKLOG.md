@@ -22,15 +22,15 @@
 
 ## EPIC 3 — Academic Core
 
-- [ ] Faculty/department
-- [ ] Courses
-- [ ] Prerequisites
-- [ ] Professors
-- [ ] Academic terms
-- [ ] Course offerings
-- [ ] Class schedules
-- [ ] Exams
-- [ ] Student profile/enrollments
+- [x] Faculty/department
+- [x] Courses
+- [x] Prerequisites
+- [x] Professors
+- [x] Academic terms
+- [x] Course offerings
+- [x] Class schedules
+- [x] Exams
+- [x] Student profile/enrollments
 
 ## EPIC 4 — Student Experience
 

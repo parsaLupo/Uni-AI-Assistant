@@ -96,7 +96,14 @@ def _code_for_status(status_code: int) -> str:
 
 
 def _message_from_detail(detail: Any, fallback: str) -> str:
-    return detail if isinstance(detail, str) else fallback
+    # Only a *Persian* detail may reach the client as `message`: DRF generates
+    # English strings for framework-raised errors ("No Course matches the
+    # given query.", "You do not have permission to perform this action.").
+    # Persian messages set deliberately by views pass through unchanged
+    # (AGENTS.md "Language & Localization"; ADR-010).
+    if isinstance(detail, str) and any("\u0600" <= ch <= "\u06ff" for ch in detail):
+        return detail
+    return fallback
 
 
 def _details_from_detail(detail: Any) -> dict[str, Any]:
@@ -112,6 +119,17 @@ def _details_from_detail(detail: Any) -> dict[str, Any]:
 def _translate(exc: APIException, handled: Response) -> tuple[str, str, dict[str, Any], int]:
     """Map a DRF-handled exception onto (code, message, details, status)."""
     status_code = handled.status_code
+
+    # DRF's default exception_handler converts Django's Http404 and
+    # PermissionDenied into DRF equivalents only while building its Response,
+    # then hands *us* the original object — which carries no `.detail`.
+    # Normalize here the same way DRF does so every branch below can rely on
+    # APIException (regression: a view-level 404 used to crash this handler
+    # and surface as a 500; caught by live DELETE /admin/courses/<missing>/).
+    if isinstance(exc, Http404):
+        exc = NotFound(*exc.args)
+    elif isinstance(exc, DjangoPermissionDenied):
+        exc = PermissionDenied(*exc.args)
 
     if isinstance(exc, ApiError):
         return exc.code, exc.message, exc.details, exc.status_code

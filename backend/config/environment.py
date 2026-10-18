@@ -11,6 +11,7 @@ A third-party dotenv package is deliberately not used; see ADR-008.
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
@@ -22,6 +23,11 @@ def load_env_file(path: Path | None = None) -> None:
     env_path = path or BASE_DIR / ".env"
     if not env_path.is_file():
         return
+    # Under pytest the database decision belongs to the test harness
+    # (backend/conftest.py), not to a local .env: pytest-django imports these
+    # settings *before* the root conftest runs, so a .env DATABASE_URL would be
+    # frozen into DATABASES and point the suite at a (possibly down) server.
+    _under_pytest = "pytest" in sys.modules
     for raw_line in env_path.read_text(encoding="utf-8").splitlines():
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
@@ -30,10 +36,20 @@ def load_env_file(path: Path | None = None) -> None:
         key = key.strip()
         if not key:
             continue
+        if _under_pytest and key == "DATABASE_URL" and key not in os.environ:
+            # Absent: the promotion block below decides (SQLite or TEST_DATABASE_URL).
+            continue
         os.environ.setdefault(key, value.strip().strip('"').strip("'"))
 
 
 load_env_file()
+
+if "pytest" in sys.modules and not os.environ.get("DATABASE_URL"):
+    # Order-independent twin of conftest.py: if settings were imported before
+    # the conftest could promote TEST_DATABASE_URL, do it here so CI's
+    # PostgreSQL runs keep exercising the real engine (pipeline.md P-06).
+    _test_url = os.environ.pop("TEST_DATABASE_URL", None)
+    os.environ["DATABASE_URL"] = _test_url or ""
 
 SUPPORTED_DB_SCHEMES = {"postgres", "postgresql"}
 

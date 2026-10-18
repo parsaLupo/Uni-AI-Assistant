@@ -15,16 +15,12 @@
 
 ## Current phase
 
-`PHASE_04` — Core Academic Data (next).
+`PHASE_05` — React Foundation (Persian/RTL shell) (next).
 
 Completed: `PHASE_00` (baseline), `PHASE_01` (architecture & API contract),
-`PHASE_02` (environment verification), `PHASE_03` (authentication & authorization)
-— each `DONE` with a verification record in `docs/phases/phase-00.md`,
-`phase-01.md`, `phase-02.md`, `phase-03.md`.
-
-The Phase 03 blockers were answered in `ADR-014` (registration policy, email as
-login identifier, rate limits, double-submit CSRF) and recorded in
-`docs/21-open-assumptions.md` as `ACCEPTED`.
+`PHASE_02` (environment verification), `PHASE_03` (authentication &
+authorization), `PHASE_04` (core academic data) — each `DONE` with a
+verification record in `docs/phases/phase-00.md` … `phase-04.md`.
 
 ## First objective
 

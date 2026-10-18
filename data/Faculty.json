@@ -1,0 +1,22 @@
+{
+"faculty":[
+  {
+    "id":19,
+    "name": "دانشکده مهندسی برق و کامپیوتر",
+    "name_en": "Faculty of Electrical and Computer Engineering",
+    "university": "دانشگاه سمنان",
+    "university_en": "Semnan University",
+    "website": "https://ece.semnan.ac.ir",
+    "description": "دانشکده مهندسی برق و کامپیوتر دانشگاه سمنان"
+  },
+  {
+    "id":11,
+    "name": "دانشکده مهندسی مواد و متالورژی",
+    "name_en": "Faculty of faculty of Material & Metallurgical",
+    "university": "دانشگاه سمنان",
+    "university_en": "Semnan University",
+    "website": "https://metal.semnan.ac.ir",
+    "description": "دانشکده مهندسی مواد و متالورژی دانشگاه سمنان"
+  }
+]
+}

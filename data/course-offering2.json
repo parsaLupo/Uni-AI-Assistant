@@ -1,0 +1,2897 @@
+{
+  "title": "University course offerings",
+  "academic_year": "1405-1406",
+  "semester": "FIRST",
+  "total_course_groups": 121,
+  "courses": [
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118061_01",
+      "course_name": "رياضي مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 2,
+      "schedule_details": [
+        "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): دوشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.20) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): دوشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118061_02",
+      "course_name": "رياضي مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 6,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): دوشنبه 18:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.20) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): دوشنبه 18:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118425_01",
+      "course_name": "آزمايشگاه شيمي عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "پروري نژاد سكينه",
+      "schedule_and_exam_info": "درس(ع): شنبه 08:00-10:00 مکان: شيمي آزمايشگاه شيمي عمومي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 10,
+      "schedule_details": [
+        "درس(ع): شنبه 08:00-10:00 مکان: شيمي آزمايشگاه شيمي عمومي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118425_02",
+      "course_name": "آزمايشگاه شيمي عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "پروري نژاد سكينه",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 10:00-12:00 مکان: شيمي آزمايشگاه شيمي عمومي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 11,
+      "schedule_details": [
+        "درس(ع): دوشنبه 10:00-12:00 مکان: شيمي آزمايشگاه شيمي عمومي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118425_03",
+      "course_name": "آزمايشگاه شيمي عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 6,
+      "instructor_name": "پروري نژاد سكينه",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 08:00-10:00 مکان: شيمي آزمايشگاه شيمي عمومي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 12,
+      "schedule_details": [
+        "درس(ع): دوشنبه 08:00-10:00 مکان: شيمي آزمايشگاه شيمي عمومي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118426_01",
+      "course_name": "نقشه كشي صنعتي",
+      "total_credits": 2,
+      "practical_credits": 1,
+      "capacity": 5,
+      "instructor_name": "خرمي راد محمدمهدي",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 13,
+      "schedule_details": [
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "درس(ع): سه شنبه 16:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ع): سه شنبه 16:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118427_03",
+      "course_name": "كارگاه عمومي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 3,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي كارگاه ربخته گري (مكان سابق دانشكده مهندسي مواد)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 15,
+      "schedule_details": [
+        "درس(ع): سه شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي كارگاه ربخته گري (مكان سابق دانشكده مهندسي مواد)"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118430_01",
+      "course_name": "مكانيك مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 16,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "حل تمرين(ت): سه شنبه 16:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.26) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 16:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118430_02",
+      "course_name": "مكانيك مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 20,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "حل تمرين(ت): چهارشنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.26) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118431_01",
+      "course_name": "مباني مهندسي برق",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "خالصي محمدحسين",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده مهندسي مكانيك انرژي 206",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 24,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-16:00 مکان: دانشكده مهندسي مكانيك انرژي 206",
+        "درس(ت): سه شنبه 15:00-17:00 مکان: دانشكده مهندسي مكانيك انرژي 201",
+        "امتحان(1405.10.20) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-17:00 مکان: دانشكده مهندسي مكانيك انرژي 201"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118431_02",
+      "course_name": "مباني مهندسي برق",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 2,
+      "instructor_name": "دوست محمديان محمدرضا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 14:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 206",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 27,
+      "schedule_details": [
+        "درس(ت): يك شنبه 14:00-15:00 مکان: دانشكده مهندسي مكانيك انرژي 206",
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مكانيك انرژي 106",
+        "امتحان(1405.10.20) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مكانيك انرژي 106"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118432_02",
+      "course_name": "آزمايشگاه مباني مهندسي برق",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "مرادي ميثم",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مكانيك آزمايشگاه مباني برق",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 30,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مكانيك آزمايشگاه مباني برق"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118434_01",
+      "course_name": "پديده هاي انتقال",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "توكلي حسين",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 31,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): سه شنبه 07:00-08:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.29) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 07:00-08:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118436_01",
+      "course_name": "خواص مكانيكي مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 6,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 34,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.23) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118437_01",
+      "course_name": "ترموديناميك مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "ميرزائي اميد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 38,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): چهارشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): چهارشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118438_01",
+      "course_name": "آزمايشگاه خواص مكانيكي مواد1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 7,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 42,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118438_02",
+      "course_name": "آزمايشگاه خواص مكانيكي مواد1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 6,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 43,
+      "schedule_details": [
+        "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118439_01",
+      "course_name": "متالوژي فيزيكي مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 6,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 44,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "حل تمرين(ت): سه شنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.29) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118440_02",
+      "course_name": "آزمايشگاه متالوگرافي و ريزساختار مواد1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 5,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 48,
+      "schedule_details": [
+        "درس(ع): يك شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118442_01",
+      "course_name": "اصول انجماد و ريخته گري مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 49,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118443_01",
+      "course_name": "آزمايشگاه انجماد و ريخته گري مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ع): شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه انجماد (مكان سابق دانشكده مهندسي مواد)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 52,
+      "schedule_details": [
+        "درس(ع): شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه انجماد (مكان سابق دانشكده مهندسي مواد)"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118443_02",
+      "course_name": "آزمايشگاه انجماد و ريخته گري مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه انجماد (مكان سابق دانشكده مهندسي مواد)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 53,
+      "schedule_details": [
+        "درس(ع): دوشنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه انجماد (مكان سابق دانشكده مهندسي مواد)"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118444_01",
+      "course_name": "خواص مكانيكي مواد2",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 54,
+      "schedule_details": [
+        "درس(ت): شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.11.01) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.11.01) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118446_01",
+      "course_name": "مواد مركب",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 56,
+      "schedule_details": [
+        "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118448_01",
+      "course_name": "روشهاي شناسايي و آناليز مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 58,
+      "schedule_details": [
+        "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.20) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.20) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118449_01",
+      "course_name": "اصول مهندسي سراميك",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 60,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.27) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118451_01",
+      "course_name": "طراحي و انتخاب مواد مهندسي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 64,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.24) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.24) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118453_01",
+      "course_name": "خوردگي و حفاظت مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "يوسف پور مردعلي",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 66,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118455_01",
+      "course_name": "نانو مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 68,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.29) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.29) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118456_01",
+      "course_name": "بايو مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "ناظمي زهرا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 70,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.24) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.24) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118458_01",
+      "course_name": "انتقال مطالب علمي و فني",
+      "total_credits": 1,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 72,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118459_01",
+      "course_name": "زبان تخصصي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "آزادي محبوبه",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 74,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.20) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.20) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_01",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "كوهستاني حسن",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 76,
+      "schedule_details": [],
+      "notes": "دانشجو سپهر داداشي اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_02",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "تجلي محمد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 77,
+      "schedule_details": [],
+      "notes": "دانشجو حنانه قرباني اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_03",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "ميرزائي اميد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 78,
+      "schedule_details": [],
+      "notes": "دانشجو دانيال مرادي اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_04",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "سبحاني منوچهر",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 79,
+      "schedule_details": [],
+      "notes": "دانشجو مرضيه كريمي اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_05",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "ايران خواه رضا",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 80,
+      "schedule_details": [],
+      "notes": "دانشجو يوكابد بغدادي اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_06",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "قدس فتح اله",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 81,
+      "schedule_details": [],
+      "notes": "دانشجو صديقي اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_07",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "توكلي حسين",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 82,
+      "schedule_details": [],
+      "notes": "دانشجو محمد مصطفي صابريان اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118460_08",
+      "course_name": "پروژه",
+      "total_credits": 3,
+      "practical_credits": 3,
+      "capacity": 1,
+      "instructor_name": "عمادالدين اسماعيل",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 83,
+      "schedule_details": [],
+      "notes": "دانشجو كيميا سلطان اخذ نمايد."
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118462_01",
+      "course_name": "عمليات حرارتي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "آزادي محبوبه",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 84,
+      "schedule_details": [
+        "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.23) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118464_01",
+      "course_name": "آزمايشگاه عمليات حرارتي",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 1,
+      "instructor_name": "يوسف پور مردعلي",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 86,
+      "schedule_details": [
+        "درس(ع): سه شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118465_01",
+      "course_name": "آلياژهاي غير آهني",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "امتحان(1405.10.20) ساعت : 16:00-18:00",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 87,
+      "schedule_details": [
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "notes": "غيرحضوري"
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118473_01",
+      "course_name": "اصول شكل دهي مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 88,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.19) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118488_01",
+      "course_name": "اصول پيرومتالوژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 92,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.27) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.27) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118489_01",
+      "course_name": "اصول هيدرومتالورژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 20,
+      "instructor_name": "قاسمي بهروز",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 94,
+      "schedule_details": [
+        "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.22) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118490_01",
+      "course_name": "آزمايشگاه توليد فلزات1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه استخراج فلزات - تغليظ -انجماد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 96,
+      "schedule_details": [
+        "درس(ع): دوشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه استخراج فلزات - تغليظ -انجماد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118490_02",
+      "course_name": "آزمايشگاه توليد فلزات1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "قاسمي بهروز",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه استخراج فلزات - تغليظ -انجماد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 97,
+      "schedule_details": [
+        "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه استخراج فلزات - تغليظ -انجماد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118491_01",
+      "course_name": "توليد آهن و فولاد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 98,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.22) ساعت : 10:00-12:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.22) ساعت : 10:00-12:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118493_01",
+      "course_name": "جوشكاري و اتصال مواد",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 100,
+      "schedule_details": [
+        "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "درس(ت): يك شنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): يك شنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118514_01",
+      "course_name": "ريخته گري چدن و فولاد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 103,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.30) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118515_01",
+      "course_name": "ريخته گري فلزات غير آهني",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 105,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.26) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118520_03",
+      "course_name": "آزمايشگاه جوشكاري و اتصال مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ع): دوشنبه 15:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه جوشكاري (مكان سابق دانشكده مهندسي مواد)",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 107,
+      "schedule_details": [
+        "درس(ع): دوشنبه 15:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه جوشكاري (مكان سابق دانشكده مهندسي مواد)"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118524_01",
+      "course_name": "آزمايشگاه شكل دهي مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ع): شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه شكل دادن فلزات",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 108,
+      "schedule_details": [
+        "درس(ع): شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه شكل دادن فلزات"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118524_02",
+      "course_name": "آزمايشگاه شكل دهي مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 11,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ع): شنبه 15:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه شكل دادن فلزات",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 109,
+      "schedule_details": [
+        "درس(ع): شنبه 15:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه شكل دادن فلزات"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118528_01",
+      "course_name": "مهندسي سطح و پوشش",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "خرمي راد محمدمهدي",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 110,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.30) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118532_01",
+      "course_name": "آزمايشگاه خوردگي و پوشش",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 8,
+      "instructor_name": "آزادي محبوبه",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه خوردگي و اكسيداسيون",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 113,
+      "schedule_details": [
+        "درس(ع): يك شنبه 10:00-13:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه خوردگي و اكسيداسيون"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118537_01",
+      "course_name": "مباني و برنامه سازي كامپيوتر",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 114,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.22) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118706_01",
+      "course_name": "مهندسي پودر",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 116,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.27) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.27) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118779_01",
+      "course_name": "متالورژي فيزيكي 1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 39,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 118,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "حل تمرين(ت): سه شنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.29) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118780_01",
+      "course_name": "متالورژي فيزيكي 2",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 122,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.22) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.22) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118781_01",
+      "course_name": "آزمايشگاه متالوگرافي و ريزساختار مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 5,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ع): يك شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 124,
+      "schedule_details": [
+        "درس(ع): يك شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118781_04",
+      "course_name": "آزمايشگاه متالوگرافي و ريزساختار مواد",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 10,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 07:30-09:30 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 125,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 07:30-09:30 مکان: دانشكده مهندسي مواد و متالورژي آرمايشگاه متالوگرافي"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118782_01",
+      "course_name": "ايستايي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 126,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.26) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118783_01",
+      "course_name": "مكانيك مواد",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 128,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "حل تمرين(ت): سه شنبه 16:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.26) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 16:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118783_02",
+      "course_name": "مكانيك مواد",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "قدس فتح اله",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 132,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "حل تمرين(ت): چهارشنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.26) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118784_01",
+      "course_name": "خواص مكانيكي مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 37,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 136,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.23) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.23) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118785_01",
+      "course_name": "آزمايشگاه خواص مكانيكي 1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 140,
+      "schedule_details": [
+        "درس(ع): سه شنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118785_02",
+      "course_name": "آزمايشگاه خواص مكانيكي 1",
+      "total_credits": 1,
+      "practical_credits": 1,
+      "capacity": 4,
+      "instructor_name": "محمديان سمناني حميدرضا",
+      "schedule_and_exam_info": "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 141,
+      "schedule_details": [
+        "درس(ع): چهارشنبه 07:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي آزمايشگاه خواص مكانيكي مواد"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118786_01",
+      "course_name": "شيمي فيزيك مواد",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 45,
+      "instructor_name": "قاسمي بهروز",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 142,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.20) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 11:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118787_01",
+      "course_name": "ترموديناميك مواد1",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 41,
+      "instructor_name": "ميرزائي اميد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 146,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): چهارشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): چهارشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): چهارشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): چهارشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118789_01",
+      "course_name": "پديده هاي انتقال",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 30,
+      "instructor_name": "توكلي حسين",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 150,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): سه شنبه 07:00-08:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.29) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 07:00-08:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.29) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118790_01",
+      "course_name": "اصول انجماد وريخته گري",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 45,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 153,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 15:00-16:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118793_01",
+      "course_name": "اصول الكتروشيمي وخوردگي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "يوسف پور مردعلي",
+      "schedule_and_exam_info": "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 156,
+      "schedule_details": [
+        "درس(ت): شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.20) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 10:00-11:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118796_01",
+      "course_name": "عمليات حرارتي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "آزادي محبوبه",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 159,
+      "schedule_details": [
+        "درس(ت): دوشنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.23) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118799_01",
+      "course_name": "اصول مهندسي سراميك",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 29,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 161,
+      "schedule_details": [
+        "درس(ت): شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.27) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 13:00-14:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "حل تمرين(ت): سه شنبه 14:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6"
+        },
+        {
+          "content": "امتحان(1405.10.27) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118800_01",
+      "course_name": "نقشه كشي صنعتي",
+      "total_credits": 2,
+      "practical_credits": 2,
+      "capacity": 16,
+      "instructor_name": "خرمي راد محمدمهدي",
+      "schedule_and_exam_info": "درس(ع): سه شنبه 15:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي اتاق رسم",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 165,
+      "schedule_details": [
+        "درس(ع): سه شنبه 15:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي اتاق رسم"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118801_01",
+      "course_name": "خواص الكتروني مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 35,
+      "instructor_name": "توكلي حسين",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 166,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.27) ساعت : 16:00-18:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.27) ساعت : 16:00-18:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118802_01",
+      "course_name": "اصول پيرومتالورژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 25,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 168,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.27) ساعت : 08:00-10:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.27) ساعت : 08:00-10:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118803_01",
+      "course_name": "اصول هيدرومتالورژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "قاسمي بهروز",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 170,
+      "schedule_details": [
+        "درس(ت): سه شنبه 17:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.22) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118806_01",
+      "course_name": "تاريخچه مهندسي مواد و متالورژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 20,
+      "instructor_name": "خرمي راد محمدمهدي",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 172,
+      "schedule_details": [
+        "درس(ت): سه شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "امتحان(1405.10.30) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118807_01",
+      "course_name": "رياضي مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 32,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 174,
+      "schedule_details": [
+        "درس(ت): شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): دوشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.20) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): دوشنبه 09:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118807_02",
+      "course_name": "رياضي مهندسي",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 20,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 178,
+      "schedule_details": [
+        "درس(ت): شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "حل تمرين(ت): دوشنبه 18:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4",
+        "امتحان(1405.10.20) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 17:00-18:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "حل تمرين(ت): دوشنبه 18:00-19:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 4"
+        },
+        {
+          "content": "امتحان(1405.10.20) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 4,
+      "degree_level": "كارشناسي",
+      "course_group_code": "1118959_01",
+      "course_name": "برنامه سازي كامپيوتر",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 36,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 182,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 6",
+        "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7",
+        "امتحان(1405.10.22) ساعت : 13:00-16:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): سه شنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 7"
+        },
+        {
+          "content": "امتحان(1405.10.22) ساعت : 13:00-16:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118397_01",
+      "course_name": "سمينار",
+      "total_credits": 2,
+      "practical_credits": 2,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 185,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118549_01",
+      "course_name": "سمينار",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 186,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118566_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 6,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 187,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118567_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 6,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 188,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118568_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 6,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 189,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118596_01",
+      "course_name": "مشخصه يابي پيشرفته مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 3,
+      "instructor_name": "هنربخش رئوف عباس",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 190,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118626_01",
+      "course_name": "اصول آناليز حرارتي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 192,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118702_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 6,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 194,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118751_01",
+      "course_name": "سراميك هاي مهندسي پيشرفته(سراميك هاي سازه اي)",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 1,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 195,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118759_01",
+      "course_name": "سمينار",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 197,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118777_01",
+      "course_name": "پايان نامه",
+      "total_credits": 6,
+      "practical_credits": 6,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 198,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118858_01",
+      "course_name": "سمينار",
+      "total_credits": 1,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 199,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118904_01",
+      "course_name": "انجماد پيشرفته و مباني ترموديناميكي آن",
+      "total_credits": 3,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "تجلي محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 200,
+      "schedule_details": [
+        "درس(ت): يك شنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "درس(ت): دوشنبه 08:00-09:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2"
+        },
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118907_01",
+      "course_name": "روش هاي پيشرفته مطالعه و آناليز مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "هنربخش رئوف عباس",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 203,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118909_01",
+      "course_name": "انتخاب مواد و فرايند در طراحي وتوليد محصولات جديد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 205,
+      "schedule_details": [
+        "درس(ت): يك شنبه 08:00-10:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118911_01",
+      "course_name": "مواد و فرايندهاي ساخت پيشرفته",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 207,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118913_01",
+      "course_name": "كامپوزيت ها",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 5,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 209,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118915_01",
+      "course_name": "متاورژي پودر پيشرفته",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "سبحاني منوچهر",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 211,
+      "schedule_details": [
+        "درس(ت): يك شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.28) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.28) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118921_01",
+      "course_name": "مهندسي سطح پيشرفته",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "خرمي راد محمدمهدي",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 213,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 5",
+        "امتحان(1405.10.21) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.21) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 6,
+      "degree_level": "ارشد",
+      "course_group_code": "1118936_01",
+      "course_name": "مباحث ويژه",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 215,
+      "schedule_details": [
+        "درس(ت): يك شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118133_01",
+      "course_name": "پايان نامه",
+      "total_credits": 24,
+      "practical_credits": 24,
+      "capacity": 3,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 217,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118296_01",
+      "course_name": "ارزيابي جامع",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 30,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "schedule_and_exam_info": "امتحان(1405.10.22) ساعت : 10:00-13:00",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 218,
+      "schedule_details": [
+        "امتحان(1405.10.22) ساعت : 10:00-13:00"
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118417_01",
+      "course_name": "دفاع از پيشنهادپژوهشي",
+      "total_credits": 0,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 219,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118570_01",
+      "course_name": "پايان نامه",
+      "total_credits": 18,
+      "practical_credits": 18,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 220,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118576_01",
+      "course_name": "پايان نامه",
+      "total_credits": 24,
+      "practical_credits": 24,
+      "capacity": 15,
+      "instructor_name": "اساتيد گروه آموزشي",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 221,
+      "schedule_details": []
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118874_01",
+      "course_name": "مباحث ويژه در ترموديناميك و سينتيك مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "قاسمي بهروز",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 222,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118875_01",
+      "course_name": "مباحث ويژه در خواص فيزيكي مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "عمادالدين اسماعيل",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 224,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118876_01",
+      "course_name": "مباحث ويژه در آناليز و شناسايي مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "ميرزائي اميد",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 226,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118880_01",
+      "course_name": "روش هاي نوين توليد و فرآوري مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "كوهستاني حسن",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 228,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 3",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118881_01",
+      "course_name": "كامپوزيت ها",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 230,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118883_01",
+      "course_name": "مكانيزم هاي مقاوم شدن",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "ميرزائي اميد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 232,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118884_01",
+      "course_name": "مباحث ويژه در سراميك ها",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "ايران خواه رضا",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 234,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118886_01",
+      "course_name": "مباحث ويژه در مهندسي جوش",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "يوسفيه محمد",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 236,
+      "schedule_details": [
+        "درس(ت): سه شنبه 13:00-15:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.19) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.19) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118887_01",
+      "course_name": "آناليز حرارتي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "عبداله پور حسن",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 238,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118889_01",
+      "course_name": "مهندسي سطح پيشرفته",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "توكلي حسين",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 240,
+      "schedule_details": [
+        "درس(ت): دوشنبه 15:00-17:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري 1",
+        "امتحان(1405.10.23) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.23) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118890_01",
+      "course_name": "مباحث ويژه در خوردگي و حفاظت مواد",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 15,
+      "instructor_name": "يوسف پور مردعلي",
+      "schedule_and_exam_info": "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 242,
+      "schedule_details": [
+        "درس(ت): دوشنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي سمعي و بصري2",
+        "امتحان(1405.10.26) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.26) ساعت : 10:00-13:00"
+        }
+      ]
+    },
+    {
+      "faculty_name": "مهندسي مواد و متالورژي",
+      "department_code": 18,
+      "department_name": "مهندسي مواد",
+      "degree_level_code": 8,
+      "degree_level": "دكتري",
+      "course_group_code": "1118894_01",
+      "course_name": "تريبولوژي",
+      "total_credits": 2,
+      "practical_credits": 0,
+      "capacity": 10,
+      "instructor_name": "آزادي محبوبه",
+      "schedule_and_exam_info": "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+      "emergency_withdrawal_allowed": "امكان دارد",
+      "source_excel_row": 244,
+      "schedule_details": [
+        "درس(ت): سه شنبه 10:00-12:00 مکان: دانشكده مهندسي مواد و متالورژي كلاس 1",
+        "امتحان(1405.10.30) ساعت : 10:00-13:00"
+      ],
+      "continuation_row_details": [
+        {
+          "content": "امتحان(1405.10.30) ساعت : 10:00-13:00"
+        }
+      ]
+    }
+  ]
+}

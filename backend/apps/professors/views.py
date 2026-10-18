@@ -1,0 +1,45 @@
+"""Professor endpoints: /admin/professors/ + public /professors/."""
+
+from __future__ import annotations
+
+from rest_framework import viewsets
+
+from apps.accounts.permissions import IsAdmin
+from apps.analytics.audit import AuditableViewSetMixin
+from apps.common.metrics import ListObservabilityMixin
+from apps.common.mixins import ConflictOnIntegrityMixin
+from apps.common.persian import normalized_search
+from apps.professors.models import Professor
+from apps.professors.serializers import ProfessorSerializer
+
+
+def _filter_professors(qs, params):
+    department = params.get("department")
+    if department and department.isdigit():
+        qs = qs.filter(department_id=int(department))
+    is_active = params.get("is_active")
+    if is_active is not None:
+        qs = qs.filter(is_active=is_active.lower() in {"1", "true", "yes"})
+    return normalized_search(qs, params.get("search"), "normalized_name")
+
+
+class AdminProfessorViewSet(
+    ListObservabilityMixin, ConflictOnIntegrityMixin, AuditableViewSetMixin, viewsets.ModelViewSet
+):
+    queryset = Professor.objects.select_related("department")
+    serializer_class = ProfessorSerializer
+    permission_classes = [IsAdmin]
+    filterset_fields = ["department", "is_active"]
+
+    def get_queryset(self):
+        return _filter_professors(super().get_queryset(), self.request.query_params)
+
+
+class ProfessorViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
+    """Public professor catalog (docs/04 section 6)."""
+
+    queryset = Professor.objects.filter(is_active=True).select_related("department")
+    serializer_class = ProfessorSerializer
+
+    def get_queryset(self):
+        return _filter_professors(super().get_queryset(), self.request.query_params)

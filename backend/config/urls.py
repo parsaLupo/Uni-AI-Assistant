@@ -26,6 +26,14 @@ class ApiSchemaView(SpectacularAPIView):
 urlpatterns = [
     path("api/v1/", include("apps.common.urls")),
     path("api/v1/", include("apps.accounts.urls")),
+    # Phase 04 — core academic data (docs/02 section 4.1, docs/api/admin.md).
+    path("api/v1/", include("apps.academics.urls")),
+    path("api/v1/", include("apps.professors.urls")),
+    path("api/v1/", include("apps.courses.urls")),
+    path("api/v1/", include("apps.students.urls")),
+    path("api/v1/", include("apps.calendar.urls")),
+    path("api/v1/", include("apps.exams.urls")),
+    path("api/v1/", include("apps.announcements.urls")),
     # Machine-readable contract (ADR-012): generated with drf-spectacular,
     # committed as openapi.yaml at the repository root, drift-checked in CI.
     # Registered before the catch-all so it is never shadowed.

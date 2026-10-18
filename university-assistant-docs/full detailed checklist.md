@@ -204,36 +204,43 @@ regenerated + `--validate` clean, ADR-004 consequences (CSRF, rotation) resolved
 in code + tests, rate-limit values in `.env.example`, live Docker E2E recorded in
 `docs/phases/phase-03.md`.
 
-### Phase 04 — Core Academic Data ⏸️
+### Phase 04 — Core Academic Data ✅ (DONE 2026-10-17)
 
 **Objective.** Build the normalized, term-aware university data foundation.
 
 **Models:** Faculty, Department, Course, CoursePrerequisite, Professor,
 AcademicTerm, CourseOffering, ClassSchedule, Exam, StudentProfile, Enrollment,
-Announcement (V-15).
+Announcement (V-15) + AcademicEvent (ERD), AuditLog (docs/02 §4.1 ownership;
+aggregation stays Phase 13).
 
 **Tasks**
 
-- [ ] Models + migrations per ERD; history preserved, past terms never overwritten.
-- [ ] **Constraints (V-14)** — partial unique index for one `is_current` term; unique `(course, term, section_code)`; unique `(student, course_offering)`; one `Exam` per `CourseOffering`; unique `Course.code`, `(faculty, code)`, `(department, code)`; `CHECK` on time ranges (`starts_at < ends_at`).
-- [ ] **Indexes**, each justified by a query: `Course.code`, `CourseOffering(term, course)`, `CourseOffering(term, professor)`, `Exam.course_offering`, `AcademicEvent(term, starts_at)`, `Announcement(is_published, expires_at)`, `Enrollment(student, status)`.
-- [ ] **Persian search**: `pg_trgm` + stored normalized column (`architecture.md` C-05) so `?search=` handles ی/ي, ک/ك and نیم‌فاصله.
-- [ ] Admin CRUD APIs (catalog from Phase 01) + read APIs with documented filters, ordering, pagination.
-- [ ] Serializers as the public contract; never return models directly.
-- [ ] **`seed` management command** with realistic Persian data (V-13) for local/staging.
-- [ ] Observability: query count and latency logged for list endpoints (V-06).
-- [ ] Tests: constraints, prerequisite relation, term filtering, per-endpoint permissions, historical isolation.
+- [x] Models + migrations per ERD; history preserved, past terms never overwritten.
+- [x] **Constraints (V-14)** — all seven in Meta.constraints; each proven by a test that attempts the violation (partial unique `is_current`, `(course, term, section_code)`, `(student, course_offering)`, exam `OneToOne`, stable codes, `CHECK` time ranges, no self-prerequisite).
+- [x] **Indexes** — every index from §4 present (`course_code_idx`, `offering_term_course_idx`, `offering_term_prof_idx`, `event_term_starts_idx`, `announcement_active_idx`, `enrollment_student_status_idx`; `exam.course_offering` is the OneToOne itself). To be re-checked with `EXPLAIN` on seeded data (recorded as known limitation).
+- [x] **Persian search**: `normalize_persian` (ی/ي, ک/ك, ه/ۀ, tatweel, digits, ZWNJ+spacing, combining marks) + stored `normalized_*` columns + vendor-guarded `pg_trgm` GIN indexes; `?search=` normalizes the input and matches the stored form — variant tests green on SQLite and PostgreSQL.
+- [x] Admin CRUD APIs (full docs/api/admin.md catalog incl. nested prerequisites/schedules/exam) + public reads (`/courses/`, `/course-offerings/`, `/professors/`, `/terms/`, `/calendar/events/`, `/exams/`, `/announcements/`) with documented filters, ordering, pagination.
+- [x] Serializers as the public contract; never return models directly.
+- [x] **`seed` management command** (V-13) importing the real MVP dataset from `data/` (1131 courses, 421 prerequisite edges, 28 professors, 278 offerings, 350 weekly rows, 155 exams parsed from Persian strings + demo accounts) — idempotent, refuses outside development.
+- [x] Observability: query count and latency logged per list request on `app.metrics` (V-06), asserted by test.
+- [x] Tests: constraints, prerequisite relation, term filtering, per-endpoint permissions, historical isolation, onboarding/planner, audit rows, search normalization, seed idempotency.
 
 **Acceptance criteria**
 
-- [ ] Models reflect the ERD (including Announcement) and every constraint is enforced — proven by tests that attempt violations.
-- [ ] Historical term data is preserved; current-term operations never mutate past offerings/exams.
-- [ ] APIs documented in OpenAPI, with contract tests for pagination/filter/ordering.
-- [ ] Prerequisite relation works in both directions and is queryable.
-- [ ] `seed` produces a complete demo term on a clean database.
+- [x] Models reflect the ERD (incl. Announcement + AcademicEvent) and every constraint is enforced — proven by tests that attempt violations.
+- [x] Historical term data is preserved; past offerings/schedules/exams/terms reject writes with 409 (`test_historical_offering_is_immutable`, `test_past_term_is_immutable`, `test_historical_exam_is_frozen`); grade correction on past terms stays allowed (audited carve-out).
+- [x] APIs documented in OpenAPI (50 paths, 97 operations, `--validate` 0 warnings/0 errors) with contract tests for pagination/filter/ordering.
+- [x] Prerequisite relation works in both directions (`prerequisite_edges` / `dependent_edges`) and via the nested admin endpoints.
+- [x] `seed` produces a complete demo term on a clean database (ran twice → idempotent).
 
-**Exit evidence:** migrations applied, constraint tests green, OpenAPI updated,
-seed output, index list with the query each index serves.
+**Exit evidence:** see the verification record in `docs/phases/phase-04.md`.
+
+**User decisions incorporated (this session):** onboarding collects name/last
+name (at register) + university code + major (`/students/me/` PATCH, faculty
+derived); the *planner* is a student-owned term timetable — `Enrollment` with
+status `PLANNED`, managed through `/students/planner/` (add/swap/remove) and
+rendered from each offering's `ClassSchedule` rows; seed imports the real MVP
+dataset from `data/`.
 
 ### Phase 05 — React Foundation (Persian/RTL shell) ⏸️
 

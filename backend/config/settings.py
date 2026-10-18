@@ -70,6 +70,15 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "apps.common",
     "apps.accounts",
+    # Phase 04 — core academic data (docs/02 section 4.1 entity→app map).
+    "apps.analytics",
+    "apps.academics",
+    "apps.professors",
+    "apps.courses",
+    "apps.students",
+    "apps.calendar",
+    "apps.exams",
+    "apps.announcements",
 ]
 
 # Custom user model (ADR-014). Set while no other feature model exists — Phase 03
@@ -188,6 +197,15 @@ SPECTACULAR_SETTINGS = {
     ),
     "SERVE_PUBLIC": True,
     "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
+    # Several models expose a `status` field (offerings, enrollments, exams) —
+    # name the enums explicitly so the contract gets stable, readable names
+    # instead of generated hashes (drf-spectacular warning, Phase 04).
+    "ENUM_NAME_OVERRIDES": {
+        "OfferingStatusEnum": "apps.courses.models.OfferingStatus",
+        "EnrollmentStatusEnum": "apps.students.models.EnrollmentStatus",
+        "ExamStatusEnum": "apps.exams.models.ExamStatus",
+        "AuditActionEnum": "apps.analytics.models.AuditAction",
+    },
 }
 
 # Authentication (docs/05, ADR-014) ------------------------------------------
