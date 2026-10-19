@@ -1,5 +1,5 @@
 export { AuthProvider, useAuth, type AuthStatus } from './AuthProvider'
-export { RequireAuth, RedirectIfAuthenticated } from './ProtectedRoute'
+export { GateLoading, RequireAuth, RequireRole, RedirectIfAuthenticated } from './ProtectedRoute'
 export { LoginPage } from './LoginPage'
 export { RegisterPage } from './RegisterPage'
 export { getAccessToken, setAccessToken } from './session'

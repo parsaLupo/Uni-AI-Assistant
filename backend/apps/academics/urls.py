@@ -12,6 +12,7 @@ admin_router.register("terms", views.AdminTermViewSet, basename="admin-terms")
 
 public_router = DefaultRouter()
 public_router.register("terms", views.TermViewSet, basename="terms")
+public_router.register("departments", views.DepartmentViewSet, basename="departments")
 
 urlpatterns = [
     path("admin/", include(admin_router.urls)),

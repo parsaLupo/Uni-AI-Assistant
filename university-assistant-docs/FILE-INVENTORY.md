@@ -1,6 +1,6 @@
 # Documentation Inventory
 
-Total files: 72
+Total files: 73
 
 - `AGENTS.md`
 - `BACKLOG.md`
@@ -57,6 +57,7 @@ Total files: 72
 - `docs/decisions/ADR-013-frontend-data-layer.md`
 - `docs/decisions/ADR-014-authentication-policy.md`
 - `docs/decisions/ADR-015-react-router.md`
+- `docs/decisions/ADR-016-tailwind-styling.md` (DESIGN.md tokens via Tailwind v4, Phase 05)
 - `docs/phases/phase-00.md`
 - `docs/phases/phase-01.md`
 - `docs/phases/phase-02.md`

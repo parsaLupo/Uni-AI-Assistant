@@ -74,6 +74,7 @@ announcements, enrollments and users is catalogued in `docs/api/admin.md`
 | Professors | GET | `/professors/` | Professor list |
 | Professors | GET | `/professors/{id}/` | Professor detail |
 | Terms | GET | `/terms/` | Academic terms |
+| Departments | GET | `/departments/` | Active departments (student onboarding options) |
 | Calendar | GET | `/calendar/events/` | Academic events |
 | Exams | GET | `/exams/` | Exam schedule |
 | Announcements | GET | `/announcements/` | Published announcements |

@@ -2289,6 +2289,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/Course'
           description: ''
+  /api/v1/departments/:
+    get:
+      operationId: departments_list
+      description: |-
+        Public active-department list (docs/04 section 6).
+
+        Students need it to pick a major during onboarding (FR-STU-002 /
+        PATCH /students/me/): the admin catalog is role-gated, so without this read
+        the documented onboarding flow has no way to load its options.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      tags:
+      - departments
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDepartmentList'
+          description: ''
+  /api/v1/departments/{id}/:
+    get:
+      operationId: departments_retrieve
+      description: |-
+        Public active-department list (docs/04 section 6).
+
+        Students need it to pick a major during onboarding (FR-STU-002 /
+        PATCH /students/me/): the admin catalog is role-gated, so without this read
+        the documented onboarding flow has no way to load its options.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این department را شناسایی میکند.
+        required: true
+      tags:
+      - departments
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
   /api/v1/exams/:
     get:
       operationId: exams_list

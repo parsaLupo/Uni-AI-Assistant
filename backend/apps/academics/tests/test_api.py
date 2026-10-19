@@ -88,3 +88,22 @@ def test_department_delete_blocked_when_it_has_courses(authed_client, admin, aca
         f"/api/v1/admin/departments/{academic_graph['department'].pk}/"
     )
     assert response.status_code == 409
+
+
+def test_public_departments_read_for_onboarding(api_client, authed_client, student, academic_graph):
+    """FR-STU-002: students must be able to load major options for PATCH /students/me/."""
+    assert api_client.get("/api/v1/departments/").status_code == 401
+
+    client = authed_client(student)
+    response = client.get("/api/v1/departments/")
+    assert response.status_code == 200
+    body = response.json()
+    assert set(body) == {"count", "next", "previous", "results"}
+    names = [row["name"] for row in body["results"]]
+    assert academic_graph["department"].name in names
+    # Each row carries the nested faculty a student needs to see the scope.
+    assert all("faculty" in row for row in body["results"])
+    # Students still cannot write the catalog.
+    assert client.post(
+        "/api/v1/departments/", {"name": "x", "code": "x", "faculty_id": 1}, format="json"
+    ).status_code == 405

@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
@@ -12,7 +13,7 @@ import { defineConfig } from 'vitest/config'
 const apiProxyTarget = process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8000'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   server: {
     host: true,
     port: 5173,
@@ -25,6 +26,8 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
-    include: ['src/**/*.test.ts'],
+    // Component tests opt into jsdom per file with a `@vitest-environment jsdom`
+    // docblock; pure logic tests stay on the faster node environment.
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 })

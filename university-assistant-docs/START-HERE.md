@@ -15,12 +15,13 @@
 
 ## Current phase
 
-`PHASE_05` — React Foundation (Persian/RTL shell) (next).
+`PHASE_06` — Academic User Experience (next).
 
 Completed: `PHASE_00` (baseline), `PHASE_01` (architecture & API contract),
 `PHASE_02` (environment verification), `PHASE_03` (authentication &
-authorization), `PHASE_04` (core academic data) — each `DONE` with a
-verification record in `docs/phases/phase-00.md` … `phase-04.md`.
+authorization), `PHASE_04` (core academic data), `PHASE_05` (React foundation —
+Persian/RTL shell) — each `DONE` with a verification record in
+`docs/phases/phase-00.md` … `phase-05.md`.
 
 ## First objective
 

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary":"#ffffff","on-primary-fixed-variant":"#264191","primary-fixed-dim":"#b6c4ff","on-primary-fixed":"#00164e","background":"#faf8ff","on-secondary-container":"#006f66","error":"#ba1a1a","secondary-fixed-dim":"#6bd8cb","on-background":"#131b2e","inverse-on-surface":"#eef0ff","primary-fixed":"#dce1ff","primary-container":"#1e3a8a","on-tertiary-fixed":"#2f1500","secondary-fixed":"#89f5e7","primary":"#00236f","tertiary-fixed-dim":"#ffb77d","surface-container-low":"#f2f3ff","surface-variant":"#dae2fd","outline":"#757682","on-surface-variant":"#444651","secondary-container":"#86f2e4","outline-variant":"#c5c5d3","surface-container-highest":"#dae2fd","on-secondary-fixed-variant":"#005049","surface":"#faf8ff","on-tertiary-fixed-variant":"#6e3900","on-error":"#ffffff","surface-container-high":"#e2e7ff","on-tertiary-container":"#fc922b","on-surface":"#131b2e","surface-container-lowest":"#ffffff","surface-tint":"#4059aa","surface-dim":"#d2d9f4","on-secondary":"#ffffff","surface-bright":"#faf8ff","surface-container":"#eaedff","tertiary-container":"#653400","on-tertiary":"#ffffff","on-error-container":"#93000a","secondary":"#006a61","tertiary-fixed":"#ffdcc3","error-container":"#ffdad6","on-primary-container":"#90a8ff","inverse-surface":"#283044","on-secondary-fixed":"#00201d","inverse-primary":"#b6c4ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","gutter-tablet":"1.5rem","space-xs":"0.25rem","margin-desktop":"3rem","gutter-desktop":"2rem","gutter":"1.25rem","margin":"1rem","space-md":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","margin-tablet":"2rem"},"fontFamily":{"display-lg-mobile":["Vazirmatn"],"display-lg":["Vazirmatn"],"body-sm":["Vazirmatn"],"headline-xl-mobile":["Vazirmatn"],"headline-xl":["Vazirmatn"],"headline-sm":["Vazirmatn"],"label-lg":["Vazirmatn"],"body-lg":["Vazirmatn"],"body-md":["Vazirmatn"],"headline-lg":["Vazirmatn"],"label-sm":["Vazirmatn"],"headline-md":["Vazirmatn"],"label-md":["Vazirmatn"]},"fontSize":{"display-lg-mobile":["2.25rem",{"lineHeight":"3.25rem","fontWeight":"800"}],"display-lg":["3rem",{"lineHeight":"4rem","fontWeight":"800"}],"body-sm":["0.875rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"headline-xl-mobile":["1.75rem",{"lineHeight":"2.625rem","fontWeight":"700"}],"headline-xl":["2rem",{"lineHeight":"3rem","fontWeight":"700"}],"headline-sm":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"600"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"2rem","fontWeight":"400"}],"body-md":["1rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"headline-lg":["1.5rem",{"lineHeight":"2.25rem","fontWeight":"700"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","fontWeight":"500"}],"headline-md":["1.25rem",{"lineHeight":"2rem","fontWeight":"600"}],"label-md":["0.75rem",{"lineHeight":"1rem","fontWeight":"500"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed right-0 top-0 h-full w-72 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low"><div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">school</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">سامانه جامع دانشگاهی</span><span class="font-label-sm text-label-sm text-on-surface-variant">دستیار هوشمند و آموزش</span></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container px-space-md py-space-xs rounded-lg flex items-center justify-between"><span class="font-label-sm text-label-sm text-on-surface-variant">وضعیت ترم:</span><span class="font-label-sm text-label-sm text-secondary font-semibold">نیم‌سال اول ۱۴۰۳-۱۴۰۴</span></div></div><nav class="flex flex-col gap-space-xs px-space-md py-space-sm" data-active-classes="bg-primary-container text-on-primary font-label-lg rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.06)]"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-all bg-primary-container text-on-primary font-label-lg rounded-xl shadow-[0_1px_3px_rgba(15,23,42,0.06)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>داشبورد دانشجو</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ai-assistant" href="#"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span>دستیار هوشمند و آیین‌نامه‌ها</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="courses" href="#"><span class="material-symbols-outlined text-[20px]">account_tree</span><span>راهنمای دروس و پیش‌نیازها</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="schedule-and-exams" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span>برنامه هفتگی و امتحانات</span></a><a class="flex items-center gap-space-sm px-space-md py-family text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="announcements" href="#"><span class="material-symbols-outlined text-[20px]">campaign</span><span>اطلاعیه‌ها و تقویم آموزشی</span></a><div class="my-space-xs bg-outline-variant/30 h-[1px]"></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="document-management" href="#"><span class="material-symbols-outlined text-[20px]">dataset</span><span>مدیریت مدارک و اسناد RAG</span></a></nav></div><div class="p-space-md bg-surface-container/60 m-space-md rounded-xl flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-on-surface font-semibold">هسته تحلیلی متصل</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">پایگاه داده اسناد آموزشی پاییز ۱۴۰۳ به‌روزرسانی شد.</span></div></aside><div class="pr-72"><header class="fixed top-0 right-72 left-0 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex-1 max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute right-space-md text-outline text-[20px]">search</span><input class="w-full h-10 pr-10 pl-space-md bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all text-right" placeholder="جستجوی دروس، اساتید، قوانین... (Ctrl+K)" type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden lg:flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-xl"><span class="material-symbols-outlined text-outline text-[18px]">event</span><span class="font-label-sm text-label-sm text-on-surface-variant">سه‌شنبه ۱۵ آبان ۱۴۰۳</span></div><div class="relative flex items-center"><button class="w-10 h-10 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-error text-on-error font-label-sm text-[10px] flex items-center justify-center font-bold">۳</span></div><div class="h-8 w-[1px] bg-surface-variant"></div><div class="flex items-center gap-space-sm"><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-semibold">علی رضایی</span><span class="font-label-sm text-label-sm text-on-surface-variant">مهندسی کامپیوتر - ورودی ۱۴۰۱</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VFm5KQEndCIPtCHo8Q61RE4slPSbs6COtl75lrdCOAlptrxBbOoZ0RrOlFFhEGjh7AhsoLD0tdOoZNHTRXDQhWN8UItAQCNLkSPanx2pzZtStPsO1Nzq2EpBtJ64Wcur7ct9FcIlmThS_zEjGfqET3aCkuw_5SxBoE-Jg8OA2MPVuWjVF1B8Zat4SRehtQY0krN1WdkwIzL7D6OSad5yUNfUAc0WFUHnjhRXoc5wJH"/></div></div></div></header><main class="relative pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="flex flex-col w-full pb-space-xl">
+<!-- Top Welcome & Academic Standing Mosaic Banner -->
+<div class="px-gutter-desktop pt-space-lg pb-space-sm">
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-l from-primary-container via-primary to-primary text-on-primary shadow-xl">
+<!-- Decorative ambient gradient circles -->
+<div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-secondary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-20 right-1/3 w-80 h-80 rounded-full bg-surface-tint/20 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 p-space-lg lg:p-space-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              ترم جاری فعال
+            </span>
+<span class="text-on-primary-container font-label-md text-label-md">
+              نیم‌سال اول ۱۴۰۳-۱۴۰۴
+            </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-primary font-bold mt-space-xs">
+            خوش آمدید، علی رضایی
+          </h1>
+<p class="font-body-md text-body-md text-on-primary-container leading-relaxed">
+            شماره دانشجویی: <span class="font-semibold text-on-primary tracking-wide">۴۰۱۲۳۴۵۶</span> • دانشکده مهندسی کامپیوتر • مقطع کارشناسی پیوسته
+          </p>
+<!-- Quick Action Bar under Welcome -->
+<div class="flex flex-wrap items-center gap-space-xs mt-space-sm pt-space-xs">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest/15 hover:bg-surface-container-lowest/25 text-on-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+              دریافت کارنامه رسمی
+            </button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest/15 hover:bg-surface-container-lowest/25 text-on-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+              درخواست گواهی اشتغال
+            </button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-lowest/15 hover:bg-surface-container-lowest/25 text-on-primary font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">schema</span>
+              چک‌لیست چارت پیش‌نیازها
+            </button>
+</div>
+</div>
+<!-- Academic GPA & Credit Progression Tile -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-md p-space-md rounded-xl flex items-center gap-space-md w-full lg:w-auto shadow-sm">
+<!-- Mini Progress Radial Chart SVG -->
+<div class="relative flex items-center justify-center shrink-0">
+<svg class="w-20 h-20 -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-on-primary/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary-fixed" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="51.4, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">۵۱٪</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">تکمیل</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 pr-space-xs">
+<div class="flex items-baseline gap-1.5">
+<span class="font-label-sm text-label-sm text-on-primary-container">معدل کل:</span>
+<span class="font-headline-md text-headline-md font-bold text-secondary-fixed">۱۷.۸۴</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">(الف)</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-label-sm text-label-sm text-on-primary-container">واحدهای گذرانده:</span>
+<span class="font-label-lg text-label-lg font-bold text-on-primary">۷۲</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">از ۱۴۰ واحد</span>
+</div>
+<div class="w-32 bg-on-primary/20 rounded-full h-1.5 mt-1 overflow-hidden">
+<div class="bg-secondary-fixed h-full rounded-full" style="width: 51.4%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Academic Metrics: 4 Bento Cards -->
+<div class="px-gutter-desktop py-space-sm">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1: Registered Units -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-all group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">واحدهای اخذ شده</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">۱۸</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">واحد مصوب</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-label-sm text-label-sm bg-surface-container-low px-space-sm py-1 rounded-lg">
+<span class="text-on-surface-variant">سقف مجاز: ۲۰ واحد</span>
+<span class="text-secondary font-medium">سهمیه استاندارد</span>
+</div>
+</div>
+<!-- Metric 2: Today Classes -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-all group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">کلاس‌های امروز</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">۲</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">جلسه حضوری</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-secondary-container/40 text-on-secondary-container flex items-center justify-center shrink-0 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[22px]">meeting_room</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-1.5 font-label-sm text-label-sm bg-surface-container-low px-space-sm py-1 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span class="text-on-surface truncate">ساختمان مهندسی، کلاس ۳۰۴</span>
+</div>
+</div>
+<!-- Metric 3: Upcoming Exams -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-all group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">امتحانات پیش‌رو</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">۳</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">آزمون پایان‌ترم</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-label-sm text-label-sm bg-surface-container-low px-space-sm py-1 rounded-lg">
+<span class="text-on-surface-variant">اولین آزمون:</span>
+<span class="text-error font-medium">۲۵ روز دیگر</span>
+</div>
+</div>
+<!-- Metric 4: Registration & Good Standing Status -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-all group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">وضعیت تحصیلی</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-md text-headline-md text-secondary font-bold">عادی</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">/ بدون مشروطی</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-xl bg-secondary-container/50 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-label-sm text-label-sm bg-secondary-container/20 text-on-secondary-container px-space-sm py-1 rounded-lg">
+<span class="font-medium">مجاز به انتخاب واحد و فراغت</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive AI Knowledge Assistant Banner (RAG groundness callout) -->
+<div class="px-gutter-desktop py-space-sm">
+<div class="bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high p-space-md lg:p-space-lg rounded-xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="flex items-center gap-space-md z-10">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">psychology</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">دستیار هوشمند آیین‌نامه‌های آموزشی</span>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">متصل به RAG ۱۴۰۳</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            سوال یا ابهامی درباره سقف مجاز انتخاب واحد، حذف اضطراری، یا تطبیق واحدها دارید؟
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto shrink-0 z-10">
+<button class="w-full md:w-auto px-space-lg py-space-sm rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs transition-all shadow-sm active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>پرسش از دستیار هوشمند</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Two-Column Primary Workspace: Schedule vs Exams & Announcements -->
+<div class="px-gutter-desktop py-space-sm">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Center Main Section: Today Schedule & Course Status (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Today's Schedule Card Container -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">calendar_today</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">برنامه کلاسی امروز</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-sm py-1 rounded-md">
+              سه‌شنبه ۱۵ آبان ۱۴۰۳
+            </span>
+</div>
+<!-- Schedule List -->
+<div class="flex flex-col gap-space-sm">
+<!-- Lecture 1 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-md">
+<div class="flex flex-col items-center justify-center bg-primary text-on-primary px-space-sm py-space-xs rounded-lg min-w-[70px]">
+<span class="font-label-lg text-label-lg font-bold">۰۸:۰۰</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">۱۰:۰۰</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">سیستم‌های عامل</span>
+<span class="font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2 py-0.5 rounded-full font-medium">۳ واحد نظری</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">مدرس: دکتر محمدرضا محمدی</span>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>کلاس ۲۰۲ دانشکده کامپیوتر</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto justify-end pt-space-xs sm:pt-0">
+<span class="px-space-sm py-1 rounded-md bg-surface-container-high text-secondary font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  حاضر
+                </span>
+<button class="p-2 rounded-lg bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all shadow-sm" title="منابع درس" type="button">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+</button>
+</div>
+</div>
+<!-- Lecture 2 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-md">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary px-space-sm py-space-xs rounded-lg min-w-[70px]">
+<span class="font-label-lg text-label-lg font-bold">۱۰:۳۰</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">۱۲:۳۰</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">طراحی الگوریتم‌ها</span>
+<span class="font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2 py-0.5 rounded-full font-medium">۳ واحد نظری</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">مدرس: دکتر سارا حسینی</span>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>آمفی‌تئاتر خوارزمی (طبقه همکف)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto justify-end pt-space-xs sm:pt-0">
+<span class="px-space-sm py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                  شروع تا ۱ ساعت
+                </span>
+<button class="p-2 rounded-lg bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary transition-all shadow-sm" title="منابع درس" type="button">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Enrolled Courses & Attendance Snapshot Table -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">دروس انتخابی ترم و حضور و غیاب</h2>
+<a class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1" href="#">
+<span>مشاهده جزییات کامل ترم</span>
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-primary font-label-md text-label-md">
+<th class="py-space-sm px-space-md rounded-r-lg">کد و نام درس</th>
+<th class="py-space-sm px-space-md">واحد</th>
+<th class="py-space-sm px-space-md">استاد</th>
+<th class="py-space-sm px-space-md">غیبت‌ها</th>
+<th class="py-space-sm px-space-md rounded-l-lg text-left">عملیات</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-sm px-space-md font-semibold text-on-surface">
+                    سیستم‌های عامل (۲۴-۱۰-۱۰۱)
+                  </td>
+<td class="py-space-sm px-space-md">۳</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">دکتر محمدی</td>
+<td class="py-space-sm px-space-md">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full">۰ از ۳ مجاز</span>
+</td>
+<td class="py-space-sm px-space-md text-left">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm">سامانه LMS</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-space-sm px-space-md font-semibold text-on-surface">
+                    طراحی الگوریتم‌ها (۲۴-۱۰-۱۰۲)
+                  </td>
+<td class="py-space-sm px-space-md">۳</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">دکتر حسینی</td>
+<td class="py-space-sm px-space-md">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full">۱ از ۳ مجاز</span>
+</td>
+<td class="py-space-sm px-space-md text-left">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm">سامانه LMS</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-sm px-space-md font-semibold text-on-surface">
+                    هوش مصنوعی (۲۴-۱۰-۱۰۵)
+                  </td>
+<td class="py-space-sm px-space-md">۳</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">دکتر رستمی</td>
+<td class="py-space-sm px-space-md">
+<span class="font-label-sm text-label-sm text-error bg-error-container/40 text-on-error-container px-2 py-0.5 rounded-full">۲ از ۳ (هشدار)</span>
+</td>
+<td class="py-space-sm px-space-md text-left">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm">سامانه LMS</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-space-sm px-space-md font-semibold text-on-surface">
+                    شبکه‌های کامپیوتری (۲۴-۱۰-۱۰۶)
+                  </td>
+<td class="py-space-sm px-space-md">۳</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">دکتر کاظمی</td>
+<td class="py-space-sm px-space-md">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full">۰ از ۳ مجاز</span>
+</td>
+<td class="py-space-sm px-space-md text-left">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm">سامانه LMS</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Left Section: Exams Countdown, Campus Life & Verified Announcements (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Final Exams Countdown Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">event_upcoming</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">امتحانات پایان‌ترم</h2>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold">
+              دی‌ماه ۱۴۰۳
+            </span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Exam 1 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between gap-space-sm hover:shadow-sm transition-all">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-error-container/60 text-on-error-container flex flex-col items-center justify-center font-bold shrink-0">
+<span class="font-label-sm text-label-sm leading-none">۲۰</span>
+<span class="text-[10px] leading-tight">دی</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">هوش مصنوعی</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">پنج‌شنبه ساعت ۰۹:۰۰ | سالن آزمون ۱</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-error font-bold">۲۵ روز مانده</span>
+<span class="text-[11px] text-outline">ضریب ۳</span>
+</div>
+</div>
+<!-- Exam 2 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between gap-space-sm hover:shadow-sm transition-all">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex flex-col items-center justify-center font-bold shrink-0">
+<span class="font-label-sm text-label-sm leading-none">۲۳</span>
+<span class="text-[10px] leading-tight">دی</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">شبکه‌های کامپیوتری</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">یکشنبه ساعت ۱۳:۳۰ | طبقه دوم</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary font-bold">۲۸ روز مانده</span>
+<span class="text-[11px] text-outline">ضریب ۳</span>
+</div>
+</div>
+<!-- Exam 3 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between gap-space-sm hover:shadow-sm transition-all">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex flex-col items-center justify-center font-bold shrink-0">
+<span class="font-label-sm text-label-sm leading-none">۲۸</span>
+<span class="text-[10px] leading-tight">دی</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">سیستم‌های عامل</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">جمعه ساعت ۰۹:۰۰ | سالن اصلی</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">۳۳ روز مانده</span>
+<span class="text-[11px] text-outline">ضریب ۳</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Verified Educational Announcements -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">campaign</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">اطلاعیه‌های رسمی</h2>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">آرشیو همه</a>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Important Announcement 1 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+                  مهم و فوری
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">۱۴ آبان ۱۴۰۳</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">
+                تمدید مهلت پرداخت شهریه و تثبیت انتخاب واحد
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                طبق مصوبه معاونت آموزشی دانشگاه، مهلت تسویه شهریه متغیر تا پایان روز شنبه ۱۹ آبان تمدید گردید. پس از این تاریخ دسترسی سامانه آموزشی مسدود خواهد شد.
+              </p>
+</div>
+<!-- Important Announcement 2 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">
+                  آموزش کل
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">۱۰ آبان ۱۴۰۳</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">
+                دستورالعمل حذف اضطراری تک‌درس نیم‌سال اول
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                دانشجویان می‌توانند تا حداکثر دو هفته قبل از شروع امتحانات نهایی نسبت به حذف اضطراری یک درس اقدام نمایند (مشروط به عدم افت واحدها به زیر حد نصاب ۱۲ واحد).
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Campus Context & Research Hub Preview Section -->
+<div class="px-gutter-desktop py-space-sm">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Media Card 1: Main University Library -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col group">
+<div class="relative h-44 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A grand modern university library interior in Tehran, filled with rows of academic computer stations, calm students reading books, deep navy and warm wood tones, high ceiling, architectural symmetry, shot with 35mm lens, natural daylight pouring through high glass windows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjHeyRs0_-aQNgM2TqUw9o_BcD2fIGY2kMEwQuqNp0cWuPWg8LO5xSJR2uHAzgtBC4WogohMB0DE_lzwyccbNIUdzNBCim7XozxagGhh7vXrhMUgDa9DJgtYBpL9RZKo2-t3AX30W6qa2pJ_ceW_jdUl-ezs3-O9BA6WWMhQirLEZ82_Yv16v76TALwt6JVxpkmeOD8XomVltbTHLEzxr2atE2xOhGVZYLSNZmka8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-3 right-3 text-on-primary">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/20 backdrop-blur px-2 py-0.5 rounded text-on-primary">کتابخانه مرکزی</span>
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-primary mt-1">سالن مطالعه دیجیتال و پایگاه IEEE</h4>
+</div>
+</div>
+<div class="p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ظرفیت فعال: ۴۲ صندلی خالی</span>
+<button class="font-label-sm text-label-sm text-primary font-bold hover:underline">رزرو صندلی</button>
+</div>
+</div>
+<!-- Media Card 2: Faculty of Computer Engineering -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col group">
+<div class="relative h-44 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="University computer science laboratory with students and professor collaborating around monitors showing Persian artificial intelligence data dashboards, clean academic environment, cool navy and teal accents, modern collegiate ambiance, authentic photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtgoo2JMIdZUXN_Q4ylaywQZS6eMYtns3_dK4aIHtAysuNyBlZ77z7m8VdppwNPdhRLGjFurA1arRheDMXi2ZbFjrP11epUizahoLKNZTxKSQrUBzKoU-G0A1Qi_-ytu38GPtyFd6l3QjciwwMJMKTYvwcfVu3AzTJSGv_Ux9ddtcfp91Bpxl1lkKoUIkHZMwNoSRhytKIhocPyUhQKBaR5Cj9Rn4Aad6gcBDFj7U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-3 right-3 text-on-primary">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/20 backdrop-blur px-2 py-0.5 rounded text-on-primary">آزمایشگاه پژوهشی</span>
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-primary mt-1">لابراتوار هوش مصنوعی و داده‌کاوی</h4>
+</div>
+</div>
+<div class="p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ساعت کار: ۰۸:۰۰ الی ۱۸:۰۰</span>
+<button class="font-label-sm text-label-sm text-primary font-bold hover:underline">درخواست مجوز ورود</button>
+</div>
+</div>
+<!-- Campus Location Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="w-full h-44 bg-cover bg-center rounded-t-xl relative" data-location="University of Tehran, Faculty of Engineering, Tehran, Iran" style="">
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur px-2 py-1 rounded font-label-sm text-label-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">explore</span>
+<span>مسیریابی پردیس</span>
+</div>
+</div>
+<div class="p-space-md flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">دانشکده مهندسی کامپیوتر</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ساختمان شماره ۲، تقاطع ابوریحان</span>
+</div>
+<button class="p-2 rounded-lg bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-md"><div class="w-full px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>متصل به سرور مرکزی دانشگاه | پایگاه دانش RAG به‌روز</span></div><div class="flex items-center gap-space-md"><span>نگارش ۳.۲.۰</span><span>•</span><a class="hover:text-primary transition-colors" href="#">مستندات آیین‌نامه‌ها</a><span>•</span><a class="hover:text-primary transition-colors" href="#">پشتیبانی فنی سامانه</a></div></div></footer></div></body></html>

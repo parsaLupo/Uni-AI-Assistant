@@ -102,3 +102,24 @@ class TermViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
 
     queryset = AcademicTerm.objects.all()
     serializer_class = AcademicTermSerializer
+
+
+class DepartmentViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
+    """Public active-department list (docs/04 section 6).
+
+    Students need it to pick a major during onboarding (FR-STU-002 /
+    PATCH /students/me/): the admin catalog is role-gated, so without this read
+    the documented onboarding flow has no way to load its options.
+    """
+
+    queryset = Department.objects.filter(is_active=True).select_related("faculty")
+    serializer_class = DepartmentSerializer
+    ordering = ["name"]
+    ordering_fields = ["name", "code"]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        search = self.request.query_params.get("search")
+        if search:
+            qs = qs.filter(name__icontains=search)
+        return qs

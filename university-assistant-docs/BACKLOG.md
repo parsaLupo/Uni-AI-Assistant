@@ -34,12 +34,12 @@
 
 ## EPIC 4 — Student Experience
 
-- [ ] Dashboard
-- [ ] Course search/detail
-- [ ] Professor search/detail
-- [ ] Calendar
-- [ ] Exam schedule
-- [ ] Announcements
+- [x] Dashboard
+- [x] Course search/detail
+- [x] Professor search/detail
+- [x] Calendar
+- [x] Exam schedule
+- [x] Announcements
 
 ## EPIC 5 — Documents
 

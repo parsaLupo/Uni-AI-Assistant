@@ -95,8 +95,12 @@ export async function toApiError(response: Response): Promise<ApiError> {
   return new ApiError('INTERNAL_ERROR', fallbackErrorMessage, response.status, {}, requestId)
 }
 
-export async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(buildApiUrl(path), {
+export async function requestJson<T>(
+  path: string,
+  init?: RequestInit,
+  query?: Record<string, string | number | undefined>,
+): Promise<T> {
+  const response = await fetch(buildApiUrl(path, query), {
     credentials: 'include',
     ...init,
     headers: {

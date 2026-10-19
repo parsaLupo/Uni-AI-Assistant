@@ -1,5 +1,5 @@
 /*
- * Baseline stylesheet for the Persian-first, RTL application shell.
+ * Base stylesheet — runs after the Tailwind import (src/theme.css).
  *
  * Direction comes from the `dir="rtl"` attribute on <html> in index.html, so it is
  * deliberately not repeated here. Every rule below uses logical properties
@@ -8,19 +8,14 @@
  * direction-sensitive behaviour stay correct in RTL and AGENTS.md rule 12 forbids
  * LTR-only UI patterns.
  *
- * Vazirmatn is used when the font is available locally and otherwise falls back to
- * Tahoma/Segoe UI, which render Persian correctly. No webfont is downloaded yet:
- * that is a Phase 05 typography decision (docs/21-open-assumptions.md, OA-20).
+ * Component styling is done with Tailwind utilities copied from the UI mockups
+ * (ADR-016); this file only owns document-level defaults and a few cross-cutting
+ * rules that would be noise as utilities (scrollbar, form control inheritance,
+ * Material Symbols sizing).
  */
 
 :root {
-  --color-text: #16181d;
-  --color-muted: #5b6472;
-  --color-background: #f5f6f8;
-  --font-ui: 'Vazirmatn', 'Segoe UI', Tahoma, system-ui, sans-serif;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 2rem;
+  --font-ui: "Vazirmatn", "Tahoma", "Segoe UI", system-ui, sans-serif;
 }
 
 *,
@@ -29,10 +24,15 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  background: var(--color-background);
-  color: var(--color-text);
+  padding: 0;
+}
+
+body {
+  background: var(--color-background, #faf8ff);
+  color: var(--color-on-surface, #131b2e);
   font-family: var(--font-ui);
   /* Persian text needs more leading than Latin to stay readable. */
   line-height: 1.75;
@@ -43,73 +43,38 @@ body {
   min-height: 100vh;
 }
 
-.app-shell {
-  margin-inline: auto;
-  max-width: 56rem;
-  padding: var(--space-lg) var(--space-md);
+/* Material Symbols glyph defaults (icon font from index.html). */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
 }
 
-.app-shell__title {
-  font-size: 1.75rem;
-  margin-block-start: 0;
-  margin-block-end: var(--space-md);
-}
-
-.app-shell__note {
-  margin: 0;
-  color: var(--color-muted);
-}
-
-/* Phase 03 auth forms — Persian labels, RTL by inheritance from <html dir="rtl">. */
-.auth-form form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.auth-form__field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.auth-form__field input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #c9ced8;
-  border-radius: 0.375rem;
+/* Forms inherit the app font instead of the browser default. */
+input,
+button,
+textarea,
+select {
   font: inherit;
-  background: #fff;
 }
 
-.auth-form__field input:focus {
-  outline: 2px solid #2f6fdb;
-  outline-offset: 1px;
+/* Persian-friendly focus ring per DESIGN.md (cobalt, offset). */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
-.auth-form__error {
-  margin: 0;
-  color: #b42318;
-}
-
-.auth-form__submit {
-  padding: 0.55rem 1rem;
-  border: 0;
-  border-radius: 0.375rem;
-  background: #2f6fdb;
-  color: #fff;
-  font: inherit;
-  cursor: pointer;
-}
-
-.auth-form__submit:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.auth-form__switch {
-  margin-block-start: var(--space-md);
-}
-
-.auth-form__switch a {
-  color: #2f6fdb;
+/* Numeric columns keep tabular figures so Persian digits align (DESIGN.md tables). */
+.tnum {
+  font-variant-numeric: tabular-nums;
 }

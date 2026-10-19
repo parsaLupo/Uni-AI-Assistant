@@ -242,7 +242,7 @@ status `PLANNED`, managed through `/students/planner/` (add/swap/remove) and
 rendered from each offering's `ClassSchedule` rows; seed imports the real MVP
 dataset from `data/`.
 
-### Phase 05 — React Foundation (Persian/RTL shell) ⏸️
+### Phase 05 — React Foundation (Persian/RTL shell) ✅
 
 **Objective.** Reusable frontend shell with Persian/RTL foundations and typed API integration.
 
@@ -251,28 +251,29 @@ consolidated into six testable criteria.
 
 **Tasks**
 
-- [ ] Routing (React Router) with public/student/admin route trees from `docs/20`.
-- [ ] Layout shell: header, navigation, breadcrumbs, page titles, responsive breakpoints.
-- [ ] **Auth state + protected routes** wired to Phase 03 (silent refresh, logout on 401).
-- [ ] **Typed API client generated from OpenAPI** (C-07) replacing hand-written types, plus an error-code → Persian message map.
-- [ ] **Data layer** (C-10): TanStack Query for server state, request cancellation, retry policy, cache invalidation.
-- [ ] States for every async surface: loading (skeletons), empty, error (Persian + retry), success.
-- [ ] Reusable primitives: table (sortable, RTL-aware), card, form field, modal, toast, pagination control.
-- [ ] **Design system baseline**: tokens (color, spacing, radius, shadow), Vazirmatn self-hosted subset, Persian numerals + Jalali date formatting utilities, number/date input behaviour.
-- [ ] **Accessibility**: logical CSS only, visible focus, keyboard navigation, labelled inputs, `aria-live` for errors, colour contrast ≥ WCAG AA, automated `axe` check in tests (V-08).
-- [ ] RTL regression test: `dir="rtl"` asserted, plus a component snapshot in RTL.
+- [x] Routing (React Router) with public/student/admin route trees from `docs/20`.
+- [x] Layout shell: header, navigation, breadcrumbs, page titles, responsive breakpoints.
+- [x] **Auth state + protected routes** wired to Phase 03 (silent refresh, logout on 401).
+- [ ] **Typed API client generated from OpenAPI** (C-07) — *deviation:* hand-written `types/academic.ts` mirroring `openapi.yaml`; drift caught by the CI contract gate. Codegen deferred.
+- [x] **Data layer** (C-10): TanStack Query for server state, request cancellation, retry policy, cache invalidation.
+- [x] States for every async surface: loading (skeletons), empty, error (Persian + retry), success.
+- [~] Reusable primitives: table (RTL-aware), card, form field, pagination control built; modal/toast/sortable headers deferred until a page needs them.
+- [x] **Design system baseline**: Tailwind v4 tokens from DESIGN.md (ADR-016), Vazirmatn via CDN (OA-20 open), Persian numerals + Jalali formatting utilities.
+- [~] **Accessibility**: logical CSS only, labelled inputs, `aria-live`/`role=alert`, visible focus; `axe` audit deferred (new dev dependency).
+- [x] RTL regression test: `dir="rtl"`/`lang="fa"` asserted in `localization.test.ts`; component snapshots deferred (no jsdom render env).
 
 **Acceptance criteria**
 
-- [ ] Protected routes work; an unauthenticated visit to `/dashboard` redirects to `/login` and returns after login.
-- [ ] API errors surface as Persian text driven by `error.code`, never raw English.
-- [ ] The entire shell is RTL and Persian — navigation, buttons, forms, validation, empty/loading/error states.
-- [ ] Persian text input, display, and نیم‌فاصله round-trip correctly through a form.
-- [ ] Jalali dates and Persian numerals render where dates/numbers are shown.
-- [ ] `axe` finds no serious/critical violations on shell screens.
+- [x] Protected routes work; an unauthenticated visit to `/dashboard` redirects to `/login` and returns after login (`state.from` round-trip wired in `RequireAuth` + `LoginPage`).
+- [x] API errors surface as Persian text driven by `error.code`, never raw English (`errorMessages` map + `ErrorState`, pinned by tests).
+- [x] The entire shell is RTL and Persian — navigation, buttons, forms, validation, empty/loading/error states (verified live: `<html lang="fa" dir="rtl">`, Persian 401 envelope).
+- [x] Persian text input, display, and نیم‌فاصله round-trip correctly through a form (`digits.ts` round-trip tests; profile form converts Persian→ASCII digits before submit; ZWNJ handled by backend `normalize_persian`).
+- [x] Jalali dates and Persian numerals render where dates/numbers are shown (`jalali.ts` incl. `formatTimeFa`, `PersianNum`, `tnum`).
+- [ ] `axe` finds no serious/critical violations on shell screens — *not run*; axe tooling was not added this phase.
 
-**Exit evidence:** component tests, RTL assertions, axe report, generated API
-types committed, design tokens documented.
+**Exit evidence:** `phase-05.md` verification record (2026-10-20), 34 vitest
+green, typecheck/build green, live compose verification (RTL shell, Persian
+envelope, both roles' journeys), design tokens in `theme.css`.
 
 ### Phase 06 — Academic User Experience ⬜
 

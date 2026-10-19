@@ -1,54 +1,107 @@
 /**
  * Application routes (ADR-015: react-router-dom v7).
  *
- * Phase 03 ships the public auth routes plus one guarded placeholder to prove
- * the redirect flow; the route *groups* of docs/20-ui-navigation.md (student,
- * admin) and the real layout shell arrive in Phase 05/06. Protected routes are
- * a convenience only — DRF remains the security boundary (ADR-015).
+ * Route inventory follows docs/20-ui-navigation.md exactly: public auth,
+ * the student group behind `RequireAuth`, and the admin group behind
+ * `RequireRole`. The authenticated group renders inside the persistent
+ * `AppShell` (docs/20 "Layout"). Guards are a convenience only — DRF remains
+ * the security boundary (ADR-015).
  */
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { AuthProvider, LoginPage, RegisterPage, RequireAuth, useAuth } from './features/auth'
-import { auth, appShell } from './i18n/fa'
+import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { AppShell } from './components/AppShell'
+import {
+  AuthProvider,
+  LoginPage,
+  RegisterPage,
+  RequireAuth,
+  RequireRole,
+} from './features/auth'
+import { ADMIN_LINKS, AdminOverviewPage, AdminStubPage } from './features/admin'
+import { AssistantPage } from './features/assistant'
+import { AnnouncementsPage } from './features/announcements'
+import { CalendarPage } from './features/calendar'
+import { CourseDetailPage, CoursesPage } from './features/courses'
+import { DashboardPage } from './features/dashboard'
+import { ExamsPage } from './features/exams'
+import { ProfessorDetailPage, ProfessorsPage } from './features/professors'
+import { ProfilePage } from './features/profile'
+import { common, nav as navText } from './i18n/fa'
 
-/**
- * Temporary authenticated landing page. Phase 06 replaces its content with the
- * dashboard; keeping it here lets Phase 03 prove the guard end to end.
- */
-function DashboardPlaceholder() {
-  const { user, logout } = useAuth()
-
+function ShellLayout() {
   return (
-    <main className="app-shell">
-      <h1 className="app-shell__title">{appShell.title}</h1>
-      <p className="app-shell__note">
-        {auth.welcome}
-        {user?.first_name ? ` ${user.first_name}` : ''} — {user?.email}
-      </p>
-      <p className="app-shell__note">{auth.dashboardNote}</p>
-      <button type="button" className="auth-form__submit" onClick={() => void logout()}>
-        {auth.logout}
-      </button>
-    </main>
+    <RequireAuth>
+      <AppShell>
+        <Outlet />
+      </AppShell>
+    </RequireAuth>
   )
 }
 
+/** Persian catch-all — docs/20 defines no other unknown-URL behaviour. */
+function NotFoundRoute() {
+  return (
+    <div className="mx-auto flex max-w-md flex-col items-center gap-space-md px-gutter py-space-xl text-center">
+      <span className="material-symbols-outlined text-[48px] text-outline">explore_off</span>
+      <h1 className="m-0 text-headline-lg font-bold text-on-surface">{common.notFoundTitle}</h1>
+      <p className="m-0 text-body-md text-on-surface-variant">{common.notFoundBody}</p>
+      <Link
+        to="/dashboard"
+        className="inline-flex items-center gap-space-xs rounded bg-primary-container px-space-lg py-space-sm text-label-lg font-semibold text-on-primary transition-colors hover:bg-[#2563EB]"
+      >
+        {navText.dashboard}
+      </Link>
+    </div>
+  )
+}
+
+/** Admin sub-routes come from `features/admin` so the overview's quick links
+ *  and the router can never drift apart. */
 export function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route
-          path="/dashboard"
-          element={
-            <RequireAuth>
-              <DashboardPlaceholder />
-            </RequireAuth>
-          }
-        />
-        {/* Anything else lands on the guarded home; the guard then decides
-            between the dashboard and /login. */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
+        <Route element={<ShellLayout />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/assistant" element={<AssistantPage />} />
+          <Route path="/conversations/:id" element={<AssistantPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+          <Route path="/courses/:id" element={<CourseDetailPage />} />
+          <Route path="/professors" element={<ProfessorsPage />} />
+          <Route path="/professors/:id" element={<ProfessorDetailPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/exams" element={<ExamsPage />} />
+          <Route path="/announcements" element={<AnnouncementsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
+          <Route
+            path="/admin"
+            element={
+              <RequireRole roles={['ADMIN', 'SUPERADMIN']}>
+                <AdminOverviewPage />
+              </RequireRole>
+            }
+          />
+          {ADMIN_LINKS.map(({ path, title }) => (
+            <Route
+              key={path}
+              path={`/admin/${path}`}
+              element={
+                <RequireRole roles={['ADMIN', 'SUPERADMIN']}>
+                  <AdminStubPage title={title} />
+                </RequireRole>
+              }
+            />
+          ))}
+
+          {/* Anything else lands on the guarded home; the guard then decides
+              between the dashboard and /login. */}
+          <Route path="*" element={<NotFoundRoute />} />
+        </Route>
+
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </AuthProvider>
   )
