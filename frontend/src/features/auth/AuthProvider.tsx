@@ -47,7 +47,10 @@ function userFromSession(session: AuthSession): AuthUser {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<AuthStatus>('loading')
   const [user, setUser] = useState<AuthUser | null>(null)
-  // Guards React StrictMode's double-invoked effect in development.
+  // Runs the silent refresh exactly once. The ref guards React StrictMode's
+  // double-invoked effect: a second POST /auth/refresh with the same rotating
+  // cookie would race the first rotation and trip reuse detection (ADR-014),
+  // revoking the session family the boot is trying to restore.
   const booted = useRef(false)
 
   useEffect(() => {
@@ -56,31 +59,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     booted.current = true
 
-    let cancelled = false
+    // No `cancelled` flag here deliberately: StrictMode runs effect 1, cleans
+    // it up, then runs effect 2 (which the ref above skips) — so gating the
+    // state update on "not cleaned up" deadlocks the gate at 'loading' forever
+    // ("در حال بازیابی نشست…"). The boot promise must always settle the status.
+    // AuthProvider is the app root and never unmounts in practice, and React
+    // ignores setState after unmount, so there is nothing for the flag to guard.
     void (async () => {
       try {
         const session = await authApi.refreshSession()
         const profile = await authApi.fetchMe()
-        if (!cancelled) {
-          setUser(profile)
-          setStatus('authenticated')
-        }
+        setUser(profile)
+        setStatus('authenticated')
         void session
       } catch {
         // No cookie, expired session, replayed token or offline: all of these
         // simply mean "not signed in" for a page load. The server stays the
         // authority on every real request (ADR-015).
         setAccessToken(null)
-        if (!cancelled) {
-          setUser(null)
-          setStatus('anonymous')
-        }
+        setUser(null)
+        setStatus('anonymous')
       }
     })()
-
-    return () => {
-      cancelled = true
-    }
   }, [])
 
   const login = useCallback(async (email: string, password: string) => {
