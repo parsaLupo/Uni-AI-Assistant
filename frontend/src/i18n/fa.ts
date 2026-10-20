@@ -26,7 +26,10 @@ export const appShell = {
 export const auth = {
   loginTitle: 'ورود به حساب',
   registerTitle: 'ساخت حساب دانشجویی',
+  loginSubtitle: 'برای دسترسی به کارتابل دانشجویی خود وارد شوید.',
+  registerSubtitle: 'حساب بسازید و بلافاصله وارد داشبورد شوید.',
   email: 'ایمیل دانشگاهی',
+  emailPlaceholder: 'student@semnan.local',
   password: 'گذرواژه',
   firstName: 'نام',
   lastName: 'نام خانوادگی',
@@ -34,10 +37,27 @@ export const auth = {
   submitRegister: 'ثبت‌نام و ورود',
   toRegister: 'حساب ندارید؟ ثبت‌نام کنید',
   toLogin: 'قبلاً ثبت‌نام کرده‌اید؟ وارد شوید',
+  togglePassword: 'نمایش یا پنهان کردن گذرواژه',
   logout: 'خروج از حساب',
   welcome: 'خوش آمدید',
   dashboardNote: 'محتوای داشبورد در فاز ۰۶ پیاده‌سازی می‌شود.',
   sessionRestoring: 'در حال بازیابی نشست…',
+  /* Decorative column beside the auth card (UI/Login.html), honest copy only:
+     no CAS/SSO/TLS claims, because this system does not implement them. */
+  heroBadge: 'زیرساخت داخلی دانشگاه | نگارش ۰٫۵٫۰',
+  heroTitle: 'درگاه هوشمند اسناد و دانش دانشگاه',
+  heroBody:
+    'ورود امن دانشجویان و اساتید به کارتابل دروس، تقویم آموزشی، امتحانات و اطلاعیه‌های دانشگاه.',
+  heroVisualTitle: 'کارتابل دانشگاهی یکپارچه',
+  heroVisualBody: 'دروس، امتحانات و اطلاعیه‌ها در یک صفحه.',
+  /* Real Phase 03 security properties — each one verifiable in ADR-014. */
+  secTitle: 'الزامات امنیتی (فاز ۰۳)',
+  secHashTitle: 'هشینگ رمزنگاری',
+  secHashBody: 'Argon2id با نمک منحصر‌به‌فرد',
+  secRateTitle: 'محدودساز تقاضا',
+  secRateBody: 'حداکثر ۱۰ درخواست ورود در دقیقه',
+  secSessionTitle: 'نشست مقاوم HttpOnly',
+  secSessionBody: 'چرخش توکن refresh و ابطال خانوادهٔ نشست',
 } as const
 
 /**
