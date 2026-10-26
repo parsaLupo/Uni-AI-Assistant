@@ -73,3 +73,32 @@ def test_student_cannot_write_professors(authed_client, student, academic_graph)
         format="json",
     )
     assert response.status_code == 403
+def test_student_sees_professors_from_own_and_cross_department_teachers(
+    authed_client, student_profile, academic_graph
+):
+    from apps.academics.models import Department
+    from apps.courses.models import CourseOffering
+    from apps.professors.models import Professor
+
+    other_dept = Department.objects.create(
+        faculty=academic_graph["faculty"], name="گروه ریاضی", code="99"
+    )
+    own_prof = Professor.objects.create(
+        department=academic_graph["department"], first_name="علی", last_name="رضایی", is_active=True
+    )
+    cross_prof = Professor.objects.create(
+        department=other_dept, first_name="مریم", last_name="احمدی", is_active=True
+    )
+    unrelated_prof = Professor.objects.create(
+        department=other_dept, first_name="پنهان", last_name="شده", is_active=True
+    )
+    CourseOffering.objects.create(
+        course=academic_graph["course"], term=academic_graph["term"], professor=cross_prof, section_code="02"
+    )
+
+    client = authed_client(student_profile.user)
+    ids = [p["id"] for p in client.get("/api/v1/professors/").json()["results"]]
+    assert own_prof.pk in ids
+    assert cross_prof.pk in ids
+    assert unrelated_prof.pk not in ids
+

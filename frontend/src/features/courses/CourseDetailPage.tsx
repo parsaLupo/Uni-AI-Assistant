@@ -1,9 +1,11 @@
 /**
- * /courses/:id — course facts, its prerequisite chain, and every offering
+ * /courses/:id — course facts, its prerequisite chain, and its offerings
  * (GET /courses/{id}/ + GET /course-offerings/?course=<id>).
  *
- * Schedule/exam cells render the nested detail payload of the offering, so
- * nothing here is fabricated — statuses map through i18n/labels.
+ * Offerings are term-scoped, so the table always carries the term name and the
+ * term can be filtered (`?term=current|<id>` per docs/api/courses.md).
+ * Schedule/exam cells render the nested detail payload, so nothing here is
+ * fabricated — statuses map through i18n/labels.
  */
 
 import { useQuery } from '@tanstack/react-query'
@@ -14,19 +16,24 @@ import {
   Chip,
   EmptyState,
   ErrorState,
+  FilterSelect,
   LoadingState,
   PageHeader,
+  PaginationBar,
   cardCls,
   tableCls,
   tdCls,
   thCls,
   trCls,
 } from '../../components/ui'
+import { useUrlState } from '../../hooks/useUrlState'
 import { common, coursesPage } from '../../i18n/fa'
 import { toPersianDigits } from '../../i18n/digits'
 import { formatJalaliDate, formatTimeFa } from '../../i18n/jalali'
 import { offeringStatusLabels } from '../../i18n/labels'
-import type { CourseOffering } from '../../types/academic'
+import type { CourseOffering, ListQuery } from '../../types/academic'
+
+const PAGE_SIZE = 10
 
 function ScheduleCell({ offering }: { offering: CourseOffering }) {
   const schedules = offering.schedules ?? []
@@ -37,7 +44,7 @@ function ScheduleCell({ offering }: { offering: CourseOffering }) {
     <div className="flex flex-col gap-0.5 text-body-sm">
       {schedules.map((slot) => (
         <span key={slot.id} className="tnum">
-          {slot.weekday_display} {slot.start_time.slice(0, 5)}–{slot.end_time.slice(0, 5)}
+          {slot.weekday_display} {formatTimeFa(slot.start_time)}–{formatTimeFa(slot.end_time)}
           {slot.classroom ? ` | ${slot.classroom}` : ''}
         </span>
       ))}
@@ -63,16 +70,29 @@ function ExamCell({ offering }: { offering: CourseOffering }) {
 export function CourseDetailPage() {
   const { id } = useParams<{ id: string }>()
   const courseId = Number(id)
+  const [page, setPage] = useUrlState<number>('page', 1)
+  const [term, setTerm] = useUrlState<string>('term', '')
 
   const course = useQuery({
     queryKey: queryKeys.course(courseId),
     queryFn: () => academicApi.course(courseId),
     enabled: Number.isFinite(courseId),
   })
+  const terms = useQuery({
+    queryKey: queryKeys.terms(),
+    queryFn: () => academicApi.terms({ page_size: 50 }),
+  })
+  const offeringsQuery: ListQuery = {
+    course: courseId,
+    term: term || undefined,
+    page,
+    page_size: PAGE_SIZE,
+  }
   const offerings = useQuery({
-    queryKey: queryKeys.offerings({ course: courseId }),
-    queryFn: () => academicApi.offerings({ course: courseId, page_size: 50 }),
+    queryKey: queryKeys.offerings(offeringsQuery),
+    queryFn: () => academicApi.offerings(offeringsQuery),
     enabled: Number.isFinite(courseId),
+    placeholderData: (previous) => previous,
   })
 
   if (course.isPending) {
@@ -159,7 +179,12 @@ export function CourseDetailPage() {
                     <span className="material-symbols-outlined text-[18px] text-secondary">
                       check_circle
                     </span>
-                    <span className="tnum">{prereq.code}</span>
+                    <Link
+                      to={`/courses/${prereq.id}`}
+                      className="font-semibold text-primary hover:underline tnum"
+                    >
+                      {prereq.code}
+                    </Link>
                     <span className="text-on-surface-variant">{prereq.title}</span>
                     <span className="text-outline tnum">({toPersianDigits(prereq.credits)})</span>
                   </li>
@@ -170,65 +195,107 @@ export function CourseDetailPage() {
         </section>
 
         <section className={`${cardCls} flex flex-col gap-space-md p-space-lg lg:col-span-8`}>
-          <h2 className="m-0 text-headline-md font-bold text-on-surface">
-            {coursesPage.offerings}
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-space-sm">
+            <h2 className="m-0 text-headline-md font-bold text-on-surface">
+              {coursesPage.offerings}
+            </h2>
+            <FilterSelect
+              icon="event"
+              label={common.filterTerm}
+              value={term}
+              onChange={(value) => {
+                setTerm(value)
+                setPage(1)
+              }}
+              className="w-52"
+            >
+              <option value="">{coursesPage.termAll}</option>
+              <option value="current">{common.filterCurrent}</option>
+              {(terms.data?.results ?? [])
+                .filter((row) => !row.is_current)
+                .map((row) => (
+                  <option key={row.id} value={row.id}>
+                    {row.name}
+                  </option>
+                ))}
+            </FilterSelect>
+          </div>
+
           {offerings.isPending ? (
             <LoadingState />
           ) : offerings.isError ? (
             <ErrorState error={offerings.error} onRetry={() => void offerings.refetch()} />
           ) : rows.length === 0 ? (
-            <EmptyState message={coursesPage.noOfferings} />
+            <EmptyState message={coursesPage.noOfferings} hint={coursesPage.noOfferingsHint} />
           ) : (
-            <div className="overflow-x-auto">
-              <table className={tableCls}>
-                <thead>
-                  <tr>
-                    <th className={`${thCls} rounded-r-lg`}>{common.filterTerm}</th>
-                    <th className={thCls}>{coursesPage.section}</th>
-                    <th className={thCls}>{coursesPage.professor}</th>
-                    <th className={thCls}>{coursesPage.schedule}</th>
-                    <th className={thCls}>{coursesPage.exam}</th>
-                    <th className={thCls}>{coursesPage.capacity}</th>
-                    <th className={`${thCls} rounded-l-lg`}>{common.statusLabel}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map((offering, index) => (
-                    <tr key={offering.id} className={trCls(index)}>
-                      <td className={`${tdCls} text-on-surface-variant`}>{offering.term.name}</td>
-                      <td className={`${tdCls} tnum`}>{toPersianDigits(offering.section_code)}</td>
-                      <td className={tdCls}>
-                        {offering.professor?.full_name ?? coursesPage.noProfessor}
-                      </td>
-                      <td className={tdCls}>
-                        <ScheduleCell offering={offering} />
-                      </td>
-                      <td className={tdCls}>
-                        <ExamCell offering={offering} />
-                      </td>
-                      <td className={`${tdCls} tnum`}>
-                        {toPersianDigits(offering.enrolled_count)} /{' '}
-                        {toPersianDigits(offering.capacity)}
-                      </td>
-                      <td className={tdCls}>
-                        <Chip
-                          tone={
-                            offering.status === 'OPEN'
-                              ? 'success'
-                              : offering.status === 'CANCELLED'
-                                ? 'danger'
-                                : 'neutral'
-                          }
-                        >
-                          {offeringStatusLabels[offering.status]}
-                        </Chip>
-                      </td>
+            <>
+              <div className="overflow-x-auto">
+                <table className={tableCls}>
+                  <thead>
+                    <tr>
+                      <th className={`${thCls} rounded-r-lg`}>{common.filterTerm}</th>
+                      <th className={thCls}>{coursesPage.section}</th>
+                      <th className={thCls}>{coursesPage.professor}</th>
+                      <th className={thCls}>{coursesPage.schedule}</th>
+                      <th className={thCls}>{coursesPage.exam}</th>
+                      <th className={thCls}>{coursesPage.capacity}</th>
+                      <th className={`${thCls} rounded-l-lg`}>{common.statusLabel}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {rows.map((offering, index) => (
+                      <tr key={offering.id} className={trCls(index)}>
+                        <td className={`${tdCls} text-on-surface-variant`}>{offering.term.name}</td>
+                        <td className={`${tdCls} tnum`}>
+                          {toPersianDigits(offering.section_code)}
+                        </td>
+                        <td className={tdCls}>
+                          {offering.professor ? (
+                            <Link
+                              to={`/professors/${offering.professor.id}`}
+                              className="text-primary hover:underline"
+                            >
+                              {offering.professor.full_name}
+                            </Link>
+                          ) : (
+                            coursesPage.noProfessor
+                          )}
+                        </td>
+                        <td className={tdCls}>
+                          <ScheduleCell offering={offering} />
+                        </td>
+                        <td className={tdCls}>
+                          <ExamCell offering={offering} />
+                        </td>
+                        <td className={`${tdCls} tnum`}>
+                          {toPersianDigits(offering.enrolled_count)} /{' '}
+                          {toPersianDigits(offering.capacity)}
+                        </td>
+                        <td className={tdCls}>
+                          <Chip
+                            tone={
+                              offering.status === 'OPEN'
+                                ? 'success'
+                                : offering.status === 'CANCELLED'
+                                  ? 'danger'
+                                  : 'neutral'
+                            }
+                          >
+                            {offeringStatusLabels[offering.status]}
+                          </Chip>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <PaginationBar
+                count={offerings.data?.count ?? 0}
+                page={page}
+                pageSize={PAGE_SIZE}
+                onPage={setPage}
+              />
+            </>
           )}
         </section>
       </div>

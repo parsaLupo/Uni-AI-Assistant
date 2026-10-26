@@ -5,9 +5,12 @@
  * history*, which has no student-facing endpoint in Phase 04 (admin-managed),
  * so prerequisites render as factual chips instead of fabricated pass/fail
  * states — data comes from GET /courses/ only (docs/06 §8: no mock data).
+ *
+ * Filters map one-to-one to the documented query parameters
+ * (docs/api/courses.md): `?search=`, `?department=`, `?credits=` and
+ * `?course_type=`; page/filter state lives in the URL.
  */
 
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { queryKeys } from '../../api/keys'
@@ -16,37 +19,54 @@ import {
   Chip,
   EmptyState,
   ErrorState,
-  LoadingState,
+  FilterRow,
+  FilterSelect,
   PageHeader,
   PaginationBar,
+  SearchInput,
+  SkeletonCards,
+  btnSecondaryCls,
   cardCls,
-  inputCls,
 } from '../../components/ui'
+import { useUrlState } from '../../hooks/useUrlState'
 import { common, coursesPage } from '../../i18n/fa'
 import { toPersianDigits } from '../../i18n/digits'
 import type { ListQuery } from '../../types/academic'
 
 const PAGE_SIZE = 12
 
+const COURSE_TYPES = ['پایه', 'اصطلاحی', 'تخصصی الزامی', 'پروژه'] as const
+
 export function CoursesPage() {
-  const [search, setSearch] = useState('')
-  const [debounced, setDebounced] = useState('')
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useUrlState<number>('page', 1)
+  const [search, setSearch] = useUrlState<string>('search', '', { debounce: 300 })
+  const [credits, setCredits] = useUrlState<string>('credits', '')
+  const [courseType, setCourseType] = useUrlState<string>('course_type', '')
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebounced(search.trim())
-      setPage(1)
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [search])
-
-  const query: ListQuery = { page, page_size: PAGE_SIZE, search: debounced || undefined }
+  const query: ListQuery = {
+    page,
+    page_size: PAGE_SIZE,
+    search: search.trim() || undefined,
+    credits: credits ? Number(credits) : undefined,
+    course_type: courseType || undefined,
+  }
   const courses = useQuery({
     queryKey: queryKeys.courses(query),
     queryFn: () => academicApi.courses(query),
     placeholderData: (previous) => previous,
   })
+
+  const hasFilters = Boolean(search.trim() || credits || courseType)
+  const changeFilter = (setter: (value: string) => void) => (value: string) => {
+    setter(value)
+    setPage(1)
+  }
+  const clearFilters = () => {
+    setSearch('')
+    setCredits('')
+    setCourseType('')
+    setPage(1)
+  }
 
   return (
     <div className="flex flex-col gap-space-md px-gutter-desktop pt-space-lg">
@@ -54,28 +74,75 @@ export function CoursesPage() {
         title={coursesPage.title}
         subtitle={coursesPage.subtitle}
         actions={
-          <div className="relative w-full max-w-sm">
-            <span className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[20px] text-outline">
-              search
-            </span>
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder={coursesPage.searchPlaceholder}
-              aria-label={common.search}
-              className={`${inputCls} pr-10`}
-            />
-          </div>
+          <SearchInput
+            value={search}
+            onChange={changeFilter(setSearch)}
+            placeholder={coursesPage.searchPlaceholder}
+            label={common.search}
+          />
         }
       />
 
+      <FilterRow>
+        <FilterSelect
+          icon="tag"
+          label={coursesPage.credits}
+          value={credits}
+          onChange={changeFilter(setCredits)}
+          className="w-40"
+        >
+          <option value="">{coursesPage.creditsAll}</option>
+          {[1, 2, 3, 4].map((value) => (
+            <option key={value} value={value}>
+              {toPersianDigits(value)} {common.credits}
+            </option>
+          ))}
+        </FilterSelect>
+
+        <FilterSelect
+          icon="label_important"
+          label={coursesPage.courseType}
+          value={courseType}
+          onChange={changeFilter(setCourseType)}
+          className="w-48"
+        >
+          <option value="">{coursesPage.courseTypeAll}</option>
+          {COURSE_TYPES.map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </FilterSelect>
+
+        {hasFilters ? (
+          <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+            {common.clearFilters}
+          </button>
+        ) : null}
+
+        {courses.data ? (
+          <span className="ms-auto text-label-sm text-on-surface-variant tnum">
+            {toPersianDigits(courses.data.count)} {coursesPage.resultsSummary}
+          </span>
+        ) : null}
+      </FilterRow>
+
       {courses.isPending ? (
-        <LoadingState />
+        <SkeletonCards />
       ) : courses.isError ? (
         <ErrorState error={courses.error} onRetry={() => void courses.refetch()} />
       ) : courses.data.results.length === 0 ? (
-        <EmptyState message={coursesPage.empty} />
+        <EmptyState
+          message={coursesPage.empty}
+          hint={coursesPage.emptyHint}
+          action={
+            hasFilters ? (
+              <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+                {common.clearFilters}
+              </button>
+            ) : undefined
+          }
+        />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-space-md md:grid-cols-2 xl:grid-cols-3">
@@ -114,7 +181,9 @@ export function CoursesPage() {
                     {coursesPage.prerequisites}
                   </span>
                   {course.prerequisites.length === 0 ? (
-                    <span className="text-body-sm text-outline">{coursesPage.noPrerequisites}</span>
+                    <span className="text-body-sm text-outline">
+                      {coursesPage.noPrerequisites}
+                    </span>
                   ) : (
                     <div className="flex flex-wrap gap-1">
                       {course.prerequisites.map((prereq) => (

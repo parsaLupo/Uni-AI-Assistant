@@ -1,7 +1,10 @@
 /**
- * /announcements — the published feed (GET /announcements/). Expiry and
- * audience filtering are already enforced server-side, so what renders here is
- * exactly what the caller is allowed to see (docs/api/admin.md list rules).
+ * /announcements — the published feed (GET /announcements/).
+ *
+ * Expiry and audience filtering are enforced server-side, so what renders here
+ * is exactly what the caller is allowed to see (docs/api/admin.md list rules).
+ * `?term=` narrows the feed to one term; pagination is URL state so a deep
+ * page survives a reload.
  */
 
 import { useQuery } from '@tanstack/react-query'
@@ -11,38 +14,114 @@ import {
   Chip,
   EmptyState,
   ErrorState,
-  LoadingState,
+  FilterRow,
+  FilterSelect,
   PageHeader,
   PaginationBar,
+  SkeletonRows,
+  btnSecondaryCls,
   cardCls,
 } from '../../components/ui'
+import { useUrlState } from '../../hooks/useUrlState'
 import { announcementsPage, common } from '../../i18n/fa'
+import { toPersianDigits } from '../../i18n/digits'
 import { formatJalaliDate } from '../../i18n/jalali'
 import { priorityLabels } from '../../i18n/labels'
-import { useState } from 'react'
+import type { ListQuery } from '../../types/academic'
 
 const PAGE_SIZE = 10
 
 export function AnnouncementsPage() {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useUrlState<number>('page', 1)
+  const [term, setTerm] = useUrlState<string>('term', '')
+
+  const terms = useQuery({
+    queryKey: queryKeys.terms(),
+    queryFn: () => academicApi.terms({ page_size: 50 }),
+  })
+  const currentTerm = terms.data?.results.find((row) => row.is_current) ?? null
+
+  const query: ListQuery = {
+    term: term || undefined,
+    page,
+    page_size: PAGE_SIZE,
+  }
   const announcements = useQuery({
-    queryKey: queryKeys.announcements({ page, page_size: PAGE_SIZE }),
-    queryFn: () => academicApi.announcements({ page, page_size: PAGE_SIZE }),
+    queryKey: queryKeys.announcements(query),
+    queryFn: () => academicApi.announcements(query),
     placeholderData: (previous) => previous,
   })
+
+  const hasFilters = Boolean(term)
+  const clearFilters = () => {
+    setTerm('')
+    setPage(1)
+  }
 
   const rows = announcements.data?.results ?? []
 
   return (
     <div className="flex flex-col gap-space-md px-gutter-desktop pt-space-lg">
-      <PageHeader title={announcementsPage.title} subtitle={announcementsPage.subtitle} />
+      <PageHeader
+        title={announcementsPage.title}
+        subtitle={
+          currentTerm && !term
+            ? `${announcementsPage.subtitle} — ${currentTerm.name}`
+            : announcementsPage.subtitle
+        }
+      />
+
+      <FilterRow>
+        <FilterSelect
+          icon="campaign"
+          label={common.filterTerm}
+          value={term}
+          onChange={(value) => {
+            setTerm(value)
+            setPage(1)
+          }}
+          className="w-52"
+        >
+          <option value="">{common.filterAll}</option>
+          <option value="current">{common.filterCurrent}</option>
+          {(terms.data?.results ?? [])
+            .filter((row) => !row.is_current)
+            .map((row) => (
+              <option key={row.id} value={row.id}>
+                {row.name}
+              </option>
+            ))}
+        </FilterSelect>
+
+        {hasFilters ? (
+          <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+            {common.clearFilters}
+          </button>
+        ) : null}
+
+        {announcements.data ? (
+          <span className="ms-auto text-label-sm text-on-surface-variant tnum">
+            {common.resultsCount}: {toPersianDigits(announcements.data.count)}
+          </span>
+        ) : null}
+      </FilterRow>
 
       {announcements.isPending ? (
-        <LoadingState />
+        <SkeletonRows count={4} />
       ) : announcements.isError ? (
         <ErrorState error={announcements.error} onRetry={() => void announcements.refetch()} />
       ) : rows.length === 0 ? (
-        <EmptyState message={announcementsPage.empty} />
+        <EmptyState
+          message={announcementsPage.empty}
+          hint={announcementsPage.emptyHint}
+          action={
+            hasFilters ? (
+              <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+                {common.clearFilters}
+              </button>
+            ) : undefined
+          }
+        />
       ) : (
         <>
           <div className="flex flex-col gap-space-md">
@@ -85,9 +164,7 @@ export function AnnouncementsPage() {
                     </span>
                     <span className="tnum">
                       {announcementsPage.expiresAt}:{' '}
-                      {row.expires_at
-                        ? formatJalaliDate(row.expires_at)
-                        : announcementsPage.noExpiry}
+                      {row.expires_at ? formatJalaliDate(row.expires_at) : announcementsPage.noExpiry}
                     </span>
                     {row.term ? <span className="tnum">{row.term.name}</span> : null}
                   </div>

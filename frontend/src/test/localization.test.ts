@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { toApiError } from '../api/client'
 import { appShell, errorMessages, isPersianText, persianErrorText } from '../i18n/fa'
@@ -25,6 +25,22 @@ describe('document shell', () => {
 
     expect(html).toContain('lang="fa"')
     expect(html).toContain('dir="rtl"')
+  })
+
+  it('declares a favicon whose file actually exists in public/', () => {
+    // The browser requests /favicon.ico on every page load. Without the file
+    // it answers 404 and the console shows a red error on each navigation, so
+    // every icon the document declares must be present under public/.
+    const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8')
+    const hrefs = [...html.matchAll(/<link[^>]+rel="(?:icon|apple-touch-icon)"[^>]*>/g)]
+      .map((match) => match[0].match(/href="([^"]+)"/)?.[1])
+      .filter((href): href is string => Boolean(href))
+
+    expect(hrefs.length).toBeGreaterThan(0)
+    for (const href of hrefs) {
+      const asset = new URL(`../../public${href}`, import.meta.url)
+      expect(existsSync(asset), `${href} is declared but missing from public/`).toBe(true)
+    }
   })
 })
 

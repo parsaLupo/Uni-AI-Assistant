@@ -46,4 +46,9 @@ class AcademicEventViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet
     ordering = ["starts_at"]
 
     def get_queryset(self):
-        return _filter_events(super().get_queryset(), self.request.query_params)
+        qs = _filter_events(super().get_queryset(), self.request.query_params)
+        from apps.common.scoping import student_department_id
+        dept_id = student_department_id(self.request.user)
+        if dept_id is not None:
+            qs = qs.filter(term__offerings__course__department_id=dept_id).distinct()
+        return qs

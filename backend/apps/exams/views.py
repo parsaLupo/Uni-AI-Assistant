@@ -22,7 +22,7 @@ from apps.exams.models import Exam
 from apps.exams.serializers import ExamSerializer
 
 
-def _filter_exams(qs, params):
+def _filter_exams(qs, params, user):
     term = params.get("term")
     if term == "current":
         qs = qs.filter(course_offering__term__is_current=True)
@@ -34,6 +34,23 @@ def _filter_exams(qs, params):
             qs = qs.filter(course_offering__course_id=int(course))
         else:
             qs = qs.filter(course_offering__course__code=course)
+    student = params.get("student")
+    if student == "me" and user.is_authenticated:
+        # `related_name="enrollments"` on Enrollment.course_offering. A caller
+        # without a student profile (admin/professor) has no "my exams", so the
+        # documented filter yields an empty page instead of a 500.
+        profile = getattr(user, "student_profile", None)
+        qs = (
+            qs.filter(course_offering__enrollments__student=profile).distinct()
+            if profile is not None
+            else qs.none()
+        )
+    # Automatic department scoping for students (no manual filter required).
+    from apps.common.scoping import student_department_id
+
+    dept_id = student_department_id(user)
+    if dept_id is not None:
+        qs = qs.filter(course_offering__course__department_id=dept_id)
     return qs
 
 
@@ -48,7 +65,7 @@ class ExamViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
     ordering = ["starts_at"]
 
     def get_queryset(self):
-        return _filter_exams(super().get_queryset(), self.request.query_params)
+        return _filter_exams(super().get_queryset(), self.request.query_params, self.request.user)
 
 
 class AdminOfferingExamView(APIView):

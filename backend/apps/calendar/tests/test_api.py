@@ -8,11 +8,21 @@ import pytest
 from django.utils import timezone
 
 from apps.calendar.models import AcademicEvent, EventType
+from apps.courses.models import CourseOffering
 
 pytestmark = pytest.mark.django_db
 
 
-def test_public_feed_shows_only_published_events(authed_client, student, academic_graph):
+@pytest.fixture
+def term_offering(academic_graph):
+    return CourseOffering.objects.create(
+        course=academic_graph["course"],
+        term=academic_graph["term"],
+        section_code="01",
+    )
+
+
+def test_public_feed_shows_only_published_events(authed_client, student, student_profile, term_offering, academic_graph):
     AcademicEvent.objects.create(
         term=academic_graph["term"], title="عمومی",
         starts_at=timezone.now(), ends_at=timezone.now() + timedelta(days=1),

@@ -19,6 +19,7 @@ export const queryKeys = {
   offerings: (query: ListQuery = {}) => ['offerings', query] as const,
   professors: (query: ListQuery = {}) => ['professors', 'list', query] as const,
   professor: (id: number | string) => ['professors', 'detail', id] as const,
+  departments: (query?: ListQuery) => ['departments', query] as const,
   events: (query: ListQuery = {}) => ['events', query] as const,
   exams: (query: ListQuery = {}) => ['exams', query] as const,
   announcements: (query: ListQuery = {}) => ['announcements', query] as const,

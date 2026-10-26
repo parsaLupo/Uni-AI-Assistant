@@ -1,4 +1,10 @@
-/** /professors/:id — profile card + current-term offerings (?professor=<id>). */
+/**
+ * /professors/:id — profile card + the professor's offerings for a term
+ * (GET /professors/{id}/ + GET /course-offerings/?professor=<id>&term=…).
+ *
+ * Offerings are term-scoped, so the term is a visible filter (default: the
+ * current term) and every row repeats the term name and weekly schedule.
+ */
 
 import { useQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
@@ -8,27 +14,42 @@ import {
   Chip,
   EmptyState,
   ErrorState,
+  FilterSelect,
   LoadingState,
   PageHeader,
   cardCls,
 } from '../../components/ui'
+import { useUrlState } from '../../hooks/useUrlState'
 import { common, coursesPage, professorsPage } from '../../i18n/fa'
 import { toPersianDigits } from '../../i18n/digits'
+import { formatTimeFa } from '../../i18n/jalali'
+import type { ListQuery } from '../../types/academic'
 
 export function ProfessorDetailPage() {
   const { id } = useParams<{ id: string }>()
   const professorId = Number(id)
+  const [term, setTerm] = useUrlState<string>('term', 'current')
 
   const professor = useQuery({
     queryKey: queryKeys.professor(professorId),
     queryFn: () => academicApi.professor(professorId),
     enabled: Number.isFinite(professorId),
   })
+  const terms = useQuery({
+    queryKey: queryKeys.terms(),
+    queryFn: () => academicApi.terms({ page_size: 50 }),
+  })
+
+  const offeringsQuery: ListQuery = {
+    professor: professorId,
+    term: term === 'all' ? undefined : term,
+    page_size: 50,
+  }
   const offerings = useQuery({
-    queryKey: queryKeys.offerings({ professor: professorId, term: 'current' }),
-    queryFn: () =>
-      academicApi.offerings({ professor: professorId, term: 'current', page_size: 50 }),
+    queryKey: queryKeys.offerings(offeringsQuery),
+    queryFn: () => academicApi.offerings(offeringsQuery),
     enabled: Number.isFinite(professorId),
+    placeholderData: (previous) => previous,
   })
 
   if (professor.isPending) {
@@ -116,15 +137,40 @@ export function ProfessorDetailPage() {
         </section>
 
         <section className={`${cardCls} flex flex-col gap-space-md p-space-lg lg:col-span-8`}>
-          <h2 className="m-0 text-headline-md font-bold text-on-surface">
-            {professorsPage.currentOfferings}
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-space-sm">
+            <h2 className="m-0 text-headline-md font-bold text-on-surface">
+              {professorsPage.offerings}
+            </h2>
+            <FilterSelect
+              icon="event"
+              label={professorsPage.term}
+              value={term}
+              onChange={setTerm}
+              className="w-52"
+            >
+              <option value="current">{common.filterCurrent}</option>
+              <option value="all">{professorsPage.termAll}</option>
+              {(terms.data?.results ?? [])
+                .filter((row) => !row.is_current)
+                .map((row) => (
+                  <option key={row.id} value={row.id}>
+                    {row.name}
+                  </option>
+                ))}
+            </FilterSelect>
+          </div>
+
           {offerings.isPending ? (
             <LoadingState />
           ) : offerings.isError ? (
             <ErrorState error={offerings.error} onRetry={() => void offerings.refetch()} />
           ) : rows.length === 0 ? (
-            <EmptyState message={professorsPage.noCurrentOfferings} />
+            <EmptyState
+              message={
+                term === 'current' ? professorsPage.noCurrentOfferings : professorsPage.noOfferings
+              }
+              hint={coursesPage.noOfferingsHint}
+            />
           ) : (
             <ul className="m-0 flex list-none flex-col gap-space-sm p-0">
               {rows.map((offering) => (
@@ -132,7 +178,7 @@ export function ProfessorDetailPage() {
                   key={offering.id}
                   className="flex flex-wrap items-center justify-between gap-space-sm rounded-xl bg-surface-container-low p-space-md"
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-col gap-0.5">
                     <Link
                       to={`/courses/${offering.course.id}`}
                       className="text-headline-sm font-bold text-on-surface hover:text-primary"
@@ -142,6 +188,17 @@ export function ProfessorDetailPage() {
                     <span className="text-label-sm text-on-surface-variant tnum">
                       {offering.term.name} — {coursesPage.section}{' '}
                       {toPersianDigits(offering.section_code)}
+                    </span>
+                    <span className="text-label-sm text-on-surface-variant tnum">
+                      {professorsPage.schedule}:{' '}
+                      {(offering.schedules ?? []).length > 0
+                        ? (offering.schedules ?? [])
+                            .map(
+                              (slot) =>
+                                `${slot.weekday_display} ${formatTimeFa(slot.start_time)}–${formatTimeFa(slot.end_time)}`,
+                            )
+                            .join(' | ')
+                        : coursesPage.noSchedule}
                     </span>
                   </div>
                   <Chip tone="success">

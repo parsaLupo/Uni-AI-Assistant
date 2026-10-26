@@ -53,11 +53,22 @@ export function LoadingState({ label = common.loading }: { label?: string }) {
   )
 }
 
-export function EmptyState({ message = common.empty }: { message?: string }) {
+export function EmptyState({
+  message = common.empty,
+  hint,
+  action,
+}: {
+  message?: string
+  /** One sentence that tells the user what to do next, not just "no data". */
+  hint?: string
+  action?: ReactNode
+}) {
   return (
     <div className="flex flex-col items-center gap-space-sm rounded-xl border border-dashed border-outline-variant bg-surface-container-low/50 px-space-lg py-space-xl text-center">
       <span className="material-symbols-outlined text-[32px] text-outline">inbox</span>
       <p className="m-0 text-body-md text-on-surface-variant">{message}</p>
+      {hint ? <p className="m-0 max-w-md text-label-md text-outline">{hint}</p> : null}
+      {action ? <div className="pt-space-xs">{action}</div> : null}
     </div>
   )
 }
@@ -89,6 +100,112 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () =>
 }
 
 /* ── Page furniture ───────────────────────────────────────────────────── */
+
+/** One row of list filters; pages own the controls inside it. */
+export function FilterRow({ children }: { children: ReactNode }) {
+  return <div className="flex flex-wrap items-center gap-space-sm">{children}</div>
+}
+
+/** Search box with the design-system input and an inline search icon. */
+export function SearchInput({
+  value,
+  onChange,
+  placeholder,
+  label,
+  className = 'w-full max-w-sm',
+}: {
+  value: string
+  onChange: (next: string) => void
+  placeholder: string
+  label: string
+  className?: string
+}) {
+  return (
+    <div className={`relative ${className}`}>
+      <span
+        aria-hidden="true"
+        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[20px] text-outline"
+      >
+        search
+      </span>
+      <input
+        type="search"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        aria-label={label}
+        className={`${inputCls} pr-10`}
+      />
+    </div>
+  )
+}
+
+/** Labelled select used by the list filters (term, department, type …). */
+export function FilterSelect({
+  icon,
+  label,
+  value,
+  onChange,
+  children,
+  className = 'w-44',
+}: {
+  icon: string
+  label: string
+  value: string
+  onChange: (next: string) => void
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <div className={`relative ${className}`}>
+      <span
+        aria-hidden="true"
+        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[18px] text-outline"
+      >
+        {icon}
+      </span>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        aria-label={label}
+        className={`${inputCls} pr-10`}
+      >
+        {children}
+      </select>
+    </div>
+  )
+}
+
+/** Skeleton card grid for list pages (no layout shift when data lands). */
+export function SkeletonCards({ count = 6 }: { count?: number }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="grid grid-cols-1 gap-space-md md:grid-cols-2 xl:grid-cols-3"
+    >
+      {Array.from({ length: count }, (_, index) => (
+        <div
+          key={index}
+          className="h-40 animate-pulse rounded-xl border border-outline-variant bg-surface-container-low motion-reduce:animate-none"
+        />
+      ))}
+    </div>
+  )
+}
+
+/** Skeleton rows for table/list pages. */
+export function SkeletonRows({ count = 5 }: { count?: number }) {
+  return (
+    <div aria-hidden="true" className="flex flex-col gap-space-sm">
+      {Array.from({ length: count }, (_, index) => (
+        <div
+          key={index}
+          className="h-16 animate-pulse rounded-xl border border-outline-variant bg-surface-container-low motion-reduce:animate-none"
+        />
+      ))}
+    </div>
+  )
+}
 
 export function PageHeader({
   title,

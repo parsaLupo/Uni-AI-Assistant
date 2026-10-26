@@ -14,10 +14,10 @@ Expose academic data through usable student-facing pages.
 - announcements
 
 ## Acceptance criteria
-- [ ] Pages use REST APIs.
-- [ ] Filters/search work where documented.
-- [ ] Exam and course data show term context.
-- [ ] No mock data remains in production paths.
+- [x] Pages use REST APIs.
+- [x] Filters/search work where documented.
+- [x] Exam and course data show term context.
+- [x] No mock data remains in production paths.
 
 ## Agent execution contract
 

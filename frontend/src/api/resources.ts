@@ -53,7 +53,7 @@ function countOf(resource: string, query?: ListQuery): Promise<number> {
 
 export const academicApi = {
   // ── Academic structure ────────────────────────────────────────────────
-  terms: () => get<Paginated<AcademicTerm>>('terms'),
+  terms: (query?: ListQuery) => get<Paginated<AcademicTerm>>('terms', query),
   /** Public active-department read (onboarding options + filters). */
   departments: (query?: ListQuery) => get<Paginated<Department>>('departments', query),
   adminDepartments: (query?: ListQuery) =>

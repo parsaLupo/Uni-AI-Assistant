@@ -50,7 +50,7 @@ const PAGE_SIZE = 50
 function useDashboardData(enabled: boolean) {
   const terms = useQuery({
     queryKey: queryKeys.terms(),
-    queryFn: academicApi.terms,
+    queryFn: () => academicApi.terms(),
   })
   const profile = useQuery({
     queryKey: queryKeys.studentProfile(),
@@ -380,10 +380,10 @@ export function DashboardPage() {
                     <div className="flex items-center gap-space-sm">
                       <div className="flex min-w-[70px] flex-col items-center justify-center rounded-lg bg-primary-container px-space-sm py-space-xs text-on-primary">
                         <span className="text-label-lg font-bold tnum">
-                          {schedule.start_time.slice(0, 5)}
+                          {formatTimeFa(schedule.start_time)}
                         </span>
                         <span className="text-label-sm text-on-primary-container tnum">
-                          {schedule.end_time.slice(0, 5)}
+                          {formatTimeFa(schedule.end_time)}
                         </span>
                       </div>
                       <div className="flex flex-col gap-0.5">
@@ -541,6 +541,9 @@ function ExamRow({ exam }: { exam: Exam }) {
           </span>
           <span className="text-label-sm text-on-surface-variant tnum">
             {formatJalaliDate(exam.starts_at)} — {formatTimeFa(new Date(exam.starts_at))}
+          </span>
+          <span className="text-label-sm text-on-surface-variant tnum">
+            {exam.course_offering.term.name}
           </span>
         </div>
       </div>

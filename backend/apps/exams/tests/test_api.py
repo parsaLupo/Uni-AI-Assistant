@@ -82,3 +82,81 @@ def test_public_exam_list_filters_by_term(authed_client, student, offering_row, 
     other = client.get("/api/v1/exams/", {"term": "999"}).json()["results"]
     assert other == []
     assert all_exams[0]["course_offering"]["course_code"] == academic_graph["course"].code
+
+
+def test_exam_payload_carries_term_context(authed_client, student, offering_row, academic_graph):
+    """Phase 06: every exam row shows its term, so the payload must nest it."""
+    Exam.objects.create(
+        course_offering=offering_row,
+        starts_at=timezone.now() + timezone.timedelta(days=20),
+        ends_at=timezone.now() + timezone.timedelta(days=20, hours=2),
+    )
+    body = authed_client(student).get("/api/v1/exams/").json()["results"][0]
+    term = body["course_offering"]["term"]
+    assert term["id"] == academic_graph["term"].pk
+    assert term["name"] == academic_graph["term"].name
+
+
+def test_student_me_filter_only_returns_own_enrolled_exams(
+    authed_client, admin, student_profile, offering_row
+):
+    """The documented `?student=me` filter joins `enrollments`, not `enrollment`."""
+    from apps.students.models import Enrollment
+
+    exam = Exam.objects.create(
+        course_offering=offering_row,
+        starts_at=timezone.now() + timezone.timedelta(days=20),
+        ends_at=timezone.now() + timezone.timedelta(days=20, hours=2),
+    )
+    client = authed_client(student_profile.user)
+
+    # Not enrolled yet: the exam is visible in the full list, absent from "mine".
+    assert len(client.get("/api/v1/exams/").json()["results"]) == 1
+    assert client.get("/api/v1/exams/", {"student": "me"}).json()["results"] == []
+
+    Enrollment.objects.create(student=student_profile, course_offering=offering_row)
+    mine = client.get("/api/v1/exams/", {"student": "me"}).json()["results"]
+    assert [row["id"] for row in mine] == [exam.pk]
+
+    # A staff account has no student profile: documented filter yields 200 + [],
+    # never an AttributeError-driven 500.
+    staff = authed_client(admin).get("/api/v1/exams/", {"student": "me"})
+    assert staff.status_code == 200
+    assert staff.json()["results"] == []
+def test_student_does_not_see_exams_from_other_programs(
+    authed_client, student_profile, academic_graph
+):
+    from apps.academics.models import Department
+    from apps.courses.models import Course, CourseOffering
+    from apps.exams.models import Exam
+    from django.utils import timezone
+
+    other_dept = Department.objects.create(
+        faculty=academic_graph["faculty"], name="گروه ریاضی", code="99"
+    )
+    other_course = Course.objects.create(
+        department=other_dept, code="MATH101", title="ریاضی", credits=3
+    )
+    other_offering = CourseOffering.objects.create(
+        course=other_course, term=academic_graph["term"], section_code="01"
+    )
+    other_exam = Exam.objects.create(
+        course_offering=other_offering,
+        starts_at=timezone.now() + timezone.timedelta(days=20),
+        ends_at=timezone.now() + timezone.timedelta(days=20, hours=2),
+    )
+
+    own_offering = CourseOffering.objects.create(
+        course=academic_graph["course"], term=academic_graph["term"], section_code="02"
+    )
+    own_exam = Exam.objects.create(
+        course_offering=own_offering,
+        starts_at=timezone.now() + timezone.timedelta(days=21),
+        ends_at=timezone.now() + timezone.timedelta(days=21, hours=2),
+    )
+
+    client = authed_client(student_profile.user)
+    ids = [row["id"] for row in client.get("/api/v1/exams/").json()["results"]]
+    assert own_exam.pk in ids
+    assert other_exam.pk not in ids
+

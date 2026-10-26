@@ -82,6 +82,7 @@ export interface ExamOfferingBrief {
   course_code: string
   course_title: string
   section_code: string
+  term: AcademicTerm
 }
 
 export interface Exam {
@@ -194,6 +195,11 @@ export interface ListQuery {
   course?: string | number
   professor?: number
   department?: number
+  /** Phase 06: documented filters on GET /api/v1/courses/ (docs/api/courses.md). */
+  credits?: number
+  course_type?: string
   event_type?: string
+  /** GET /api/v1/exams/?student=me — the caller's own enrolled offerings. */
+  student?: string
   ordering?: string
 }

@@ -1,6 +1,12 @@
-/** /professors — catalog cards from GET /professors/ (search: normalized Persian). */
+/**
+ * /professors — faculty catalog from GET /professors/.
+ *
+ * Filters mirror the documented query parameters (docs/api/professors.md):
+ * `?search=` (Persian-normalised server-side), `?department=` and `?term=`.
+ * Paging and every filter live in the URL (useUrlState), so a filtered view
+ * survives a reload and can be shared.
+ */
 
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { queryKeys } from '../../api/keys'
@@ -9,36 +15,54 @@ import {
   Chip,
   EmptyState,
   ErrorState,
-  LoadingState,
+  FilterRow,
+  FilterSelect,
   PageHeader,
   PaginationBar,
+  SearchInput,
+  SkeletonCards,
+  btnSecondaryCls,
   cardCls,
-  inputCls,
 } from '../../components/ui'
+import { useUrlState } from '../../hooks/useUrlState'
 import { common, professorsPage } from '../../i18n/fa'
+import { toPersianDigits } from '../../i18n/digits'
 import type { ListQuery } from '../../types/academic'
 
 const PAGE_SIZE = 12
 
 export function ProfessorsPage() {
-  const [search, setSearch] = useState('')
-  const [debounced, setDebounced] = useState('')
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useUrlState<number>('page', 1)
+  const [search, setSearch] = useUrlState<string>('search', '', { debounce: 300 })
+  const [term, setTerm] = useUrlState<string>('term', '')
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebounced(search.trim())
-      setPage(1)
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [search])
+  const terms = useQuery({
+    queryKey: queryKeys.terms(),
+    queryFn: () => academicApi.terms({ page_size: 50 }),
+  })
 
-  const query: ListQuery = { page, page_size: PAGE_SIZE, search: debounced || undefined }
+  const query: ListQuery = {
+    page,
+    page_size: PAGE_SIZE,
+    search: search.trim() || undefined,
+    term: term || undefined,
+  }
   const professors = useQuery({
     queryKey: queryKeys.professors(query),
     queryFn: () => academicApi.professors(query),
     placeholderData: (previous) => previous,
   })
+
+  const hasFilters = Boolean(search.trim() || term)
+  const changeFilter = (setter: (value: string) => void) => (value: string) => {
+    setter(value)
+    setPage(1)
+  }
+  const clearFilters = () => {
+    setSearch('')
+    setTerm('')
+    setPage(1)
+  }
 
   return (
     <div className="flex flex-col gap-space-md px-gutter-desktop pt-space-lg">
@@ -46,28 +70,60 @@ export function ProfessorsPage() {
         title={professorsPage.title}
         subtitle={professorsPage.subtitle}
         actions={
-          <div className="relative w-full max-w-sm">
-            <span className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[20px] text-outline">
-              search
-            </span>
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder={professorsPage.searchPlaceholder}
-              aria-label={common.search}
-              className={`${inputCls} pr-10`}
-            />
-          </div>
+          <SearchInput
+            value={search}
+            onChange={changeFilter(setSearch)}
+            placeholder={professorsPage.searchPlaceholder}
+            label={common.search}
+          />
         }
       />
 
+      <FilterRow>
+        <FilterSelect
+          icon="event"
+          label={professorsPage.term}
+          value={term}
+          onChange={changeFilter(setTerm)}
+          className="w-52"
+        >
+          <option value="">{professorsPage.termAll}</option>
+          {(terms.data?.results ?? []).map((row) => (
+            <option key={row.id} value={row.id}>
+              {row.name}
+              {row.is_current ? ` (${common.filterCurrent})` : ''}
+            </option>
+          ))}
+        </FilterSelect>
+        {hasFilters ? (
+          <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+            {common.clearFilters}
+          </button>
+        ) : null}
+
+        {professors.data ? (
+          <span className="ms-auto text-label-sm text-on-surface-variant tnum">
+            {common.resultsCount}: {toPersianDigits(professors.data.count)}
+          </span>
+        ) : null}
+      </FilterRow>
+
       {professors.isPending ? (
-        <LoadingState />
+        <SkeletonCards />
       ) : professors.isError ? (
         <ErrorState error={professors.error} onRetry={() => void professors.refetch()} />
       ) : professors.data.results.length === 0 ? (
-        <EmptyState message={professorsPage.empty} />
+        <EmptyState
+          message={professorsPage.empty}
+          hint={professorsPage.emptyHint}
+          action={
+            hasFilters ? (
+              <button type="button" className={btnSecondaryCls} onClick={clearFilters}>
+                {common.clearFilters}
+              </button>
+            ) : undefined
+          }
+        />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-space-md md:grid-cols-2 xl:grid-cols-3">
@@ -97,7 +153,9 @@ export function ProfessorsPage() {
                       {professor.office}
                     </Chip>
                   ) : null}
-                  <Chip tone="primary">{professor.email}</Chip>
+                  <Chip tone="primary">
+                    <span dir="ltr">{professor.email}</span>
+                  </Chip>
                 </div>
               </Link>
             ))}

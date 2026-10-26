@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from rest_framework import serializers
 
+from apps.academics.serializers import AcademicTermSerializer
 from apps.common.serializers import ConflictModelSerializer
 from apps.courses.models import CourseOffering
 from apps.exams.models import Exam
@@ -18,10 +19,13 @@ class ExamOfferingBriefSerializer(serializers.ModelSerializer):
     course_code = serializers.CharField(source="course.code", read_only=True)
     course_title = serializers.CharField(source="course.title", read_only=True)
     section_code = serializers.CharField(read_only=True)
+    # Nested like every other `<fk>` read in the contract (docs/04 §2), so the
+    # UI can render the term name *and* treat the value as an AcademicTerm.
+    term = AcademicTermSerializer(read_only=True)
 
     class Meta:
         model = CourseOffering
-        fields = ["id", "course_code", "course_title", "section_code"]
+        fields = ["id", "course_code", "course_title", "section_code", "term"]
 
 
 class ExamSerializer(ConflictModelSerializer):

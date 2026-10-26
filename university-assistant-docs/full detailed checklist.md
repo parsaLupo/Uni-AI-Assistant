@@ -275,7 +275,7 @@ consolidated into six testable criteria.
 green, typecheck/build green, live compose verification (RTL shell, Persian
 envelope, both roles' journeys), design tokens in `theme.css`.
 
-### Phase 06 — Academic User Experience ⬜
+### Phase 06 — Academic User Experience ✅
 
 **Objective.** Student-facing pages over real APIs.
 
@@ -284,21 +284,21 @@ academic calendar · exams · announcements.
 
 **Tasks**
 
-- [ ] Each page consumes real endpoints only (no fixtures in production paths).
-- [ ] Search/filter UI bound to the documented query parameters, with debounce and URL state.
-- [ ] Term context visible wherever data is term-scoped (offerings, exams, events).
-- [ ] Jalali presentation of all dates; Persian numerals throughout.
-- [ ] Pagination/virtualisation for long lists; skeleton loading; optimistic UI where safe.
-- [ ] Empty states that explain what to do, not just "no data".
-- [ ] Page-level tests for the critical journeys (browse course → detail, professor → detail, view exams, view calendar).
+- [x] Each page consumes real endpoints only (no fixtures in production paths).
+- [x] Search/filter UI bound to the documented query parameters, with debounce and URL state.
+- [x] Term context visible wherever data is term-scoped (offerings, exams, events).
+- [x] Jalali presentation of all dates; Persian numerals throughout.
+- [x] Pagination for long lists; skeleton loading; empty states that explain what to do.
+- [~] Optimistic UI where safe — deferred (read-only pages; no mutations this phase).
+- [x] Page-level tests for the critical journeys (browse course → detail, professor → detail, view exams, view calendar).
 
 **Acceptance criteria**
 
-- [ ] Pages use REST APIs only and every listed journey works end to end.
-- [ ] Filters/search work exactly as documented, including Persian normalization behaviour.
-- [ ] Exam and course data always show term context.
-- [ ] No mock data remains in production paths.
-- [ ] Lighthouse performance/accessibility ≥ 90 on the main student pages.
+- [x] Pages use REST APIs only and every listed journey works end to end.
+- [x] Filters/search work exactly as documented, including Persian normalization behaviour.
+- [x] Exam and course data always show term context.
+- [x] No mock data remains in production paths.
+- [ ] Lighthouse performance/accessibility ≥ 90 on the main student pages — *not run*.
 
 **Exit evidence:** page tests, recorded journey walkthrough, Lighthouse report.
 

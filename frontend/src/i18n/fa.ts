@@ -40,7 +40,6 @@ export const auth = {
   togglePassword: 'نمایش یا پنهان کردن گذرواژه',
   logout: 'خروج از حساب',
   welcome: 'خوش آمدید',
-  dashboardNote: 'محتوای داشبورد در فاز ۰۶ پیاده‌سازی می‌شود.',
   sessionRestoring: 'در حال بازیابی نشست…',
   /* Decorative column beside the auth card (UI/Login.html), honest copy only:
      no CAS/SSO/TLS claims, because this system does not implement them. */
@@ -163,6 +162,7 @@ export const common = {
   filterTerm: 'ترم',
   filterAll: 'همه',
   filterCurrent: 'ترم جاری',
+  clearFilters: 'پاک کردن فیلترها',
   statusLabel: 'وضعیت',
   notSetFallback: '—',
 } as const
@@ -220,6 +220,9 @@ export const coursesPage = {
   courseInfo: 'اطلاعات درس',
   courseCode: 'کد درس',
   courseType: 'نوع درس',
+  credits: 'واحد',
+  creditsAll: 'همه واحدها',
+  courseTypeAll: 'همه انواع',
   department: 'گروه آموزشی',
   active: 'فعال',
   inactive: 'غیرفعال',
@@ -241,6 +244,12 @@ export const coursesPage = {
   colCredits: 'واحد',
   colType: 'نوع',
   colActions: 'عملیات',
+  departmentAll: 'همه گروه‌ها',
+  emptyHint: 'عبارت جستجو را کوتاه‌تر کنید یا فیلترهای واحد/نوع درس را بردارید.',
+  noOfferingsHint: 'ترم دیگری را انتخاب کنید یا بعداً دوباره سر بزنید.',
+  offeringsHint: 'زمان کلاس و امتحان هر ارائه در همین جدول آمده است.',
+  resultsSummary: 'درس یافت شد',
+  termAll: 'همه ترم‌ها',
 } as const
 
 export const professorsPage = {
@@ -255,6 +264,14 @@ export const professorsPage = {
   currentOfferings: 'ارائه‌های جاری',
   noCurrentOfferings: 'ارائه جاری برای این استاد ثبت نشده است.',
   backToList: 'بازگشت به فهرست اساتید',
+  term: 'ترم',
+  termAll: 'همه‌الترم‌ها',
+  department: 'گروه آموزشی',
+  departmentAll: 'همه‌گروه‌ها',
+  emptyHint: 'نام استاد را کوتاه‌تر کنید یا فیلتر ترم/گروه را بردارید.',
+  offerings: 'ارائه‌های استاد',
+  noOfferings: 'برای این استاد در ترم انتخاب‌شده ارائه‌ای ثبت نشده است.',
+  schedule: 'زمان',
 } as const
 
 export const calendarPage = {
@@ -265,6 +282,7 @@ export const calendarPage = {
   from: 'از',
   to: 'تا',
   allTypes: 'همه انواع',
+  emptyHint: 'ترم یا نوع رویداد دیگری را انتخاب کنید.',
 } as const
 
 export const examsPage = {
@@ -279,9 +297,16 @@ export const examsPage = {
   daysLeft: 'روز مانده',
   today: 'امروز',
   past: 'برگزار شده',
-  statusScheduled: 'زمان‌بندی‌شده',
-  statusHeld: 'برگزارشده',
-  statusCancelled: 'لغوشده',
+  term: 'ترم',
+  termCurrent: 'ترم جاری',
+  termAll: 'همه‌الترم‌ها',
+  course: 'درس',
+  section: 'گروه',
+  courseCode: 'کد درس',
+  courseCodePlaceholder: 'مثلاً ۱۹۱۶۰۰۱',
+  onlyMine: 'فقط امتحانات دروس من',
+  studentNote: 'نمایش فقط امتحانات دروس شما',
+  emptyHint: 'ترم دیگری را انتخاب کنید، کد درس را بردارید یا «فقط دروس من» را خاموش کنید.',
 } as const
 
 export const announcementsPage = {
@@ -295,6 +320,7 @@ export const announcementsPage = {
   noExpiry: 'بدون تاریخ انقضا',
   audience: 'مخاطب',
   audienceAll: 'همه دانشجویان',
+  emptyHint: 'ترم دیگری را انتخاب کنید یا چند دقیقه بعد دوباره سر بزنید.',
 } as const
 
 export const profilePage = {

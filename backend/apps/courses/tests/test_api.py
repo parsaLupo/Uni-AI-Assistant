@@ -95,6 +95,28 @@ def test_search_survives_arabic_variant_input(authed_client, student, academic_g
     assert "1916999" in codes
 
 
+def test_catalog_filters_credits_and_course_type(
+    authed_client, student, academic_graph
+):
+    """Phase 06 exposes these documented filters in the courses UI."""
+    Course.objects.create(
+        department=academic_graph["department"],
+        code="1916003",
+        title="ساختمان داده",
+        credits=3,
+        course_type="تخصصی الزامی",
+    )
+    client = authed_client(student)
+    by_credits = client.get("/api/v1/courses/", {"credits": "3"}).json()["results"]
+    assert "1916003" in [c["code"] for c in by_credits]
+    assert "1916001" not in [c["code"] for c in by_credits]  # 1 credit
+
+    by_type = client.get(
+        "/api/v1/courses/", {"course_type": "تخصصی"}
+    ).json()["results"]
+    assert [c["code"] for c in by_type] == ["1916003"]
+
+
 def test_offering_filters_term_current_and_course(
     authed_client, student, offerings, academic_graph
 ):
@@ -234,4 +256,39 @@ def test_missing_object_detail_returns_404_envelope_not_500(authed_client, admin
     # DRF's internal English detail ("No Course matches...") must not leak:
     # only Persian text may reach the client as `message` (ADR-010).
     assert any("\u0600" <= ch <= "\u06ff" for ch in error["message"])
+
+def test_student_only_sees_courses_from_own_department(
+    authed_client, student_profile, academic_graph
+):
+    from apps.academics.models import Department
+    from apps.courses.models import Course
+
+    other_dept = Department.objects.create(
+        faculty=academic_graph["faculty"], name="گروه ریاضی", code="99"
+    )
+    Course.objects.create(
+        department=other_dept, code="MATH101", title="ریاضی عمومی", credits=3, active=True
+    )
+
+    client = authed_client(student_profile.user)
+    codes = [c["code"] for c in client.get("/api/v1/courses/").json()["results"]]
+    assert academic_graph["course"].code in codes
+    assert "MATH101" not in codes
+
+
+def test_student_course_search_stays_within_own_department(
+    authed_client, student_profile, academic_graph
+):
+    from apps.academics.models import Department
+    from apps.courses.models import Course
+
+    other_dept = Department.objects.create(
+        faculty=academic_graph["faculty"], name="گروه فیزیک", code="98"
+    )
+    Course.objects.create(
+        department=other_dept, code="PHYS201", title="فیزیک پایه", credits=3, active=True
+    )
+    client = authed_client(student_profile.user)
+    codes = [c["code"] for c in client.get("/api/v1/courses/", {"search": "فیزیک"}).json()["results"]]
+    assert "PHYS201" not in codes
 
