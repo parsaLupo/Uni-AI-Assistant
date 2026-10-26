@@ -13,10 +13,10 @@ Create the admin-controlled document lifecycle that feeds RAG.
 - Document detail and audit information.
 
 ## Acceptance criteria
-- [ ] Admin can upload an allowed PDF.
-- [ ] Invalid/oversized files are rejected.
-- [ ] Document metadata is persisted.
-- [ ] Active/inactive/version state is visible.
+- [x] Admin can upload an allowed PDF.
+- [x] Invalid/oversized files are rejected.
+- [x] Document metadata is persisted.
+- [x] Active/inactive/version state is visible.
 
 ## Agent execution contract
 

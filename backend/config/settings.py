@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "apps.calendar",
     "apps.exams",
     "apps.announcements",
+    "apps.documents",
 ]
 
 # Custom user model (ADR-014). Set while no other feature model exists — Phase 03

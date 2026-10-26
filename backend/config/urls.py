@@ -34,6 +34,8 @@ urlpatterns = [
     path("api/v1/", include("apps.calendar.urls")),
     path("api/v1/", include("apps.exams.urls")),
     path("api/v1/", include("apps.announcements.urls")),
+    path("api/v1/", include("apps.documents.urls")),
+
     # Machine-readable contract (ADR-012): generated with drf-spectacular,
     # committed as openapi.yaml at the repository root, drift-checked in CI.
     # Registered before the catch-all so it is never shadowed.

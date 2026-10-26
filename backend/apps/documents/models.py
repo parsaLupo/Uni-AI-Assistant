@@ -1,0 +1,56 @@
+"""Document management (docs/03, 14: lifecycle Uploaded -> ... -> Archived)."""
+
+from __future__ import annotations
+
+from django.db import models
+
+from apps.accounts.models import User
+
+
+class DocumentStatus(models.TextChoices):
+    UPLOADED = "UPLOADED", "آپلود شده"
+    VALIDATING = "VALIDATING", "در حال اعتبارسنجی"
+    PROCESSING = "PROCESSING", "در حال پردازش"
+    INDEXED = "INDEXED", "ایندکس شده"
+    ACTIVE = "ACTIVE", "فعال"
+    SUPERSEDED = "SUPERSEDED", "جایگزین شده"
+    INACTIVE = "INACTIVE", "غیرفعال"
+    ARCHIVED = "ARCHIVED", "آرشیو شده"
+    FAILED = "FAILED", "ناموفق"
+
+
+class Document(models.Model):
+    title = models.CharField(max_length=200)
+    document_type = models.CharField(max_length=64, blank=True, default="")
+    file = models.FileField(upload_to="documents/%Y/%m/", blank=True)
+    academic_year = models.CharField(max_length=32, blank=True, default="")
+    effective_from = models.DateField(null=True, blank=True)
+    effective_to = models.DateField(null=True, blank=True)
+    version = models.PositiveIntegerField(default=1)
+    status = models.CharField(
+        max_length=16, choices=DocumentStatus.choices, default=DocumentStatus.UPLOADED
+    )
+    checksum = models.CharField(max_length=64, blank=True, default="")
+    storage_key = models.CharField(max_length=512, blank=True, default="")
+    processing_error = models.TextField(blank=True, default="")
+    failure_stage = models.CharField(max_length=64, blank=True, default="")
+    attempt_count = models.PositiveIntegerField(default=0)
+    uploaded_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="documents"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["status", "academic_year"], name="document_status_year_idx"),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.title} v{self.version}"
+
+    def save(self, *args, **kwargs):
+        if self.file and not self.storage_key:
+            self.storage_key = self.file.name
+        super().save(*args, **kwargs)
