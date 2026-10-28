@@ -302,7 +302,7 @@ academic calendar · exams · announcements.
 
 **Exit evidence:** page tests, recorded journey walkthrough, Lighthouse report.
 
-### Phase 07 — Document Management + Ingestion Queue 🟡
+### Phase 07 — Document Management + Ingestion Queue ✅ (DONE 2026-10-28)
 
 **Objective.** Admin-controlled document lifecycle that feeds RAG, with ingestion
 off the request path (V-10).
@@ -310,10 +310,10 @@ off the request path (V-10).
 **Tasks**
 
 - [x] `Document` model: title, type, academic year, effective from/to, version, status, checksum, uploaded_by, storage key.
-- [ ] Upload endpoint `POST /api/v1/admin/documents/` — multipart, admin-only, **enqueues** processing and returns `202` with a status URL.
+- [x] Upload endpoint `POST /api/v1/admin/documents/` — multipart, admin-only, **enqueues** processing and returns `202` with a status URL. (views.py create + enqueue_document_processing; tests test_queue.py)
 - [x] Validation: extension **and** MIME independently, size cap, PDF magic bytes, filename sanitisation, reject encrypted/corrupt files with a clear Persian error.
-- [ ] **Object storage** for files (C-04) with the local-filesystem adapter kept for tests.
-- [ ] Status machine: `Uploaded → Validating → Processing → Indexed → Active → Superseded/Inactive → Archived`, exposed to admins.
+- [x] **Object storage** for files (C-04) with the local-filesystem adapter kept for tests. (apps/documents/storage.py; tests/test_storage.py)
+- [x] Status machine: `Uploaded → Validating → Processing → Indexed → Active → Superseded/Inactive → Archived`, exposed to admins. (models.ALLOWED_STATUS_TRANSITIONS; serializer validation; tests)
 - [x] Versioning + supersede: activating a new version marks the previous one `Superseded` and excludes it from retrieval.
 - [x] Processing state, error reason and retry action visible in the admin API.
 - [x] Audit entries for upload/activate/deactivate/delete (append-only).

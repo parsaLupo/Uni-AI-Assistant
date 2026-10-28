@@ -16,6 +16,7 @@ class AuditAction(models.TextChoices):
     CREATE = "CREATE", "Create"
     UPDATE = "UPDATE", "Update"
     DELETE = "DELETE", "Delete"
+    RETRY = "RETRY", "Retry"
 
 
 class AuditLog(models.Model):

@@ -393,8 +393,8 @@ paths:
   /api/v1/admin/courses/{course_id}/prerequisites/:
     get:
       operationId: admin_courses_prerequisites_list
-      description: GET/POST /admin/courses/{id}/prerequisites/ — read/add edges of
-        a course.
+      description: GET/POST /admin/courses/{id}/prerequisites/ â€” read/add edges
+        of a course.
       parameters:
       - in: path
         name: course_id
@@ -417,8 +417,8 @@ paths:
           description: ''
     post:
       operationId: admin_courses_prerequisites_create
-      description: GET/POST /admin/courses/{id}/prerequisites/ — read/add edges of
-        a course.
+      description: GET/POST /admin/courses/{id}/prerequisites/ â€” read/add edges
+        of a course.
       parameters:
       - in: path
         name: course_id
@@ -721,6 +721,240 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/admin/documents/:
+    get:
+      operationId: admin_documents_list
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentList'
+          description: ''
+    post:
+      operationId: admin_documents_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/admin/documents/{id}/:
+    get:
+      operationId: admin_documents_retrieve
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    put:
+      operationId: admin_documents_update
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    patch:
+      operationId: admin_documents_partial_update
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    delete:
+      operationId: admin_documents_destroy
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/admin/documents/{id}/activate/:
+    post:
+      operationId: admin_documents_activate_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/admin/documents/{id}/retry/:
+    post:
+      operationId: admin_documents_retry_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
   /api/v1/admin/enrollments/:
     get:
       operationId: admin_enrollments_list
@@ -1222,7 +1456,7 @@ paths:
   /api/v1/admin/offerings/{offering_id}/schedules/:
     get:
       operationId: admin_offerings_schedules_list
-      description: GET/POST /admin/offerings/{id}/schedules/ — weekly meeting rows.
+      description: GET/POST /admin/offerings/{id}/schedules/ â€” weekly meeting rows.
       parameters:
       - in: path
         name: offering_id
@@ -1245,7 +1479,7 @@ paths:
           description: ''
     post:
       operationId: admin_offerings_schedules_create
-      description: GET/POST /admin/offerings/{id}/schedules/ — weekly meeting rows.
+      description: GET/POST /admin/offerings/{id}/schedules/ â€” weekly meeting rows.
       parameters:
       - in: path
         name: offering_id
@@ -1387,7 +1621,7 @@ paths:
   /api/v1/admin/prerequisites/{id}/:
     delete:
       operationId: admin_prerequisites_destroy
-      description: DELETE /admin/prerequisites/{id}/ — remove one edge.
+      description: DELETE /admin/prerequisites/{id}/ â€” remove one edge.
       parameters:
       - in: path
         name: id
@@ -1569,7 +1803,7 @@ paths:
   /api/v1/admin/schedules/{id}/:
     patch:
       operationId: admin_schedules_partial_update
-      description: PATCH/DELETE /admin/schedules/{id}/ — edit or remove one row.
+      description: PATCH/DELETE /admin/schedules/{id}/ â€” edit or remove one row.
       parameters:
       - in: path
         name: id
@@ -1601,7 +1835,7 @@ paths:
           description: ''
     delete:
       operationId: admin_schedules_destroy
-      description: PATCH/DELETE /admin/schedules/{id}/ — edit or remove one row.
+      description: PATCH/DELETE /admin/schedules/{id}/ â€” edit or remove one row.
       parameters:
       - in: path
         name: id
@@ -3295,6 +3529,115 @@ components:
       - id
       - name
       - updated_at
+    Document:
+      type: object
+      description: |-
+        ModelSerializer with generated UniqueValidators removed (→ 409 path).
+
+        `docs/api/admin.md` requires uniqueness conflicts to return
+        `409 CONFLICT`, but ModelSerializer injects `UniqueValidator`, which
+        field-level errors or machine-readable metadata (the Phase 03 duplicate-email
+        bug — accounts silenced it per field; Phase 04 generalizes). The database
+        constraint becomes the single source of truth; views convert its
+        `IntegrityError` with `common.mixins.ConflictOnIntegrityMixin`. Composite
+        uniques bring a `UniqueTogetherValidator`, which additionally breaks PATCH
+        (it demands every key field on partial updates) — stripped for the same
+        reason.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        document_type:
+          type: string
+          maxLength: 64
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+        status_url:
+          type: string
+          readOnly: true
+        academic_year:
+          type: string
+          maxLength: 32
+        effective_from:
+          type: string
+          format: date
+          nullable: true
+        effective_to:
+          type: string
+          format: date
+          nullable: true
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        checksum:
+          type: string
+          readOnly: true
+        storage_key:
+          type: string
+          readOnly: true
+        processing_error:
+          type: string
+          readOnly: true
+        failure_stage:
+          type: string
+          readOnly: true
+        attempt_count:
+          type: integer
+          readOnly: true
+        uploaded_by:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - attempt_count
+      - checksum
+      - created_at
+      - failure_stage
+      - file
+      - id
+      - processing_error
+      - status_url
+      - storage_key
+      - title
+      - updated_at
+      - uploaded_by
+    DocumentStatusEnum:
+      enum:
+      - UPLOADED
+      - VALIDATING
+      - PROCESSING
+      - INDEXED
+      - ACTIVE
+      - SUPERSEDED
+      - INACTIVE
+      - ARCHIVED
+      - FAILED
+      type: string
+      description: |-
+        * `UPLOADED` - آپلود شده
+        * `VALIDATING` - در حال اعتبارسنجی
+        * `PROCESSING` - در حال پردازش
+        * `INDEXED` - ایندکس شده
+        * `ACTIVE` - فعال
+        * `SUPERSEDED` - جایگزین شده
+        * `INACTIVE` - غیرفعال
+        * `ARCHIVED` - آرشیو شده
+        * `FAILED` - ناموفق
     Enrollment:
       type: object
       description: |-
@@ -3473,11 +3816,16 @@ components:
         section_code:
           type: string
           readOnly: true
+        term:
+          allOf:
+          - $ref: '#/components/schemas/AcademicTerm'
+          readOnly: true
       required:
       - course_code
       - course_title
       - id
       - section_code
+      - term
     ExamStatusEnum:
       enum:
       - SCHEDULED
@@ -3787,6 +4135,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Department'
+    PaginatedDocumentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
     PaginatedEnrollmentList:
       type: object
       required:
@@ -4288,6 +4659,80 @@ components:
           type: string
         is_active:
           type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDocument:
+      type: object
+      description: |-
+        ModelSerializer with generated UniqueValidators removed (→ 409 path).
+
+        `docs/api/admin.md` requires uniqueness conflicts to return
+        `409 CONFLICT`, but ModelSerializer injects `UniqueValidator`, which
+        field-level errors or machine-readable metadata (the Phase 03 duplicate-email
+        bug — accounts silenced it per field; Phase 04 generalizes). The database
+        constraint becomes the single source of truth; views convert its
+        `IntegrityError` with `common.mixins.ConflictOnIntegrityMixin`. Composite
+        uniques bring a `UniqueTogetherValidator`, which additionally breaks PATCH
+        (it demands every key field on partial updates) — stripped for the same
+        reason.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        document_type:
+          type: string
+          maxLength: 64
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+        status_url:
+          type: string
+          readOnly: true
+        academic_year:
+          type: string
+          maxLength: 32
+        effective_from:
+          type: string
+          format: date
+          nullable: true
+        effective_to:
+          type: string
+          format: date
+          nullable: true
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        checksum:
+          type: string
+          readOnly: true
+        storage_key:
+          type: string
+          readOnly: true
+        processing_error:
+          type: string
+          readOnly: true
+        failure_stage:
+          type: string
+          readOnly: true
+        attempt_count:
+          type: integer
+          readOnly: true
+        uploaded_by:
+          type: integer
+          readOnly: true
         created_at:
           type: string
           format: date-time

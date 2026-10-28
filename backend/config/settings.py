@@ -306,4 +306,15 @@ LOGGING = {
     },
 }
 
+# Celery / Redis (ADR-011) ---------------------------------------------------
+CELERY_BROKER_URL = env_str("CELERY_BROKER_URL", "redis://127.0.0.1:6379/0")
+CELERY_RESULT_BACKEND = env_str("CELERY_RESULT_BACKEND", CELERY_BROKER_URL)
+CELERY_TASK_ALWAYS_EAGER = env_bool("CELERY_TASK_ALWAYS_EAGER", "pytest" in sys.modules)
+CELERY_TASK_EAGER_PROPAGATES = True
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TIMEZONE = "UTC"
+DOCUMENT_STORAGE_ROOT = env_str("DOCUMENT_STORAGE_ROOT", str(BASE_DIR / "media"))
+
 

@@ -12,6 +12,7 @@ from rest_framework import serializers
 from apps.accounts.models import User
 from apps.common.serializers import ConflictModelSerializer
 from apps.documents.models import Document, DocumentStatus
+from apps.documents.storage import compute_checksum, generate_storage_key, get_storage_adapter
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 10 MB
 ALLOWED_EXTENSIONS = {".pdf"}
@@ -29,7 +30,7 @@ def _sanitize_filename(name: str) -> str:
 class DocumentSerializer(ConflictModelSerializer):
     uploaded_by = serializers.PrimaryKeyRelatedField(read_only=True)
     file = serializers.FileField(write_only=True, required=True)
-    file_url = serializers.FileField(source="file", read_only=True)
+    status_url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Document
@@ -38,7 +39,7 @@ class DocumentSerializer(ConflictModelSerializer):
             "title",
             "document_type",
             "file",
-            "file_url",
+            "status_url",
             "academic_year",
             "effective_from",
             "effective_to",
@@ -55,7 +56,7 @@ class DocumentSerializer(ConflictModelSerializer):
         ]
         read_only_fields = [
             "id",
-            "file_url",
+            "status_url",
             "checksum",
             "storage_key",
             "processing_error",
@@ -96,15 +97,19 @@ class DocumentSerializer(ConflictModelSerializer):
         if value not in allowed:
             raise serializers.ValidationError("وضعیت نامعتبر است.")
         return value
+    def get_status_url(self, obj) -> str:
+        request = self.context.get("request")
+        url = f"/api/v1/admin/documents/{obj.id}/"
+        return url
+
+
 
     def create(self, validated_data):
         f = validated_data.pop("file")
-        # checksum
-        f.seek(0)
-        sha = hashlib.sha256()
-        for chunk in f.chunks():
-            sha.update(chunk)
-        f.seek(0)
+        checksum = compute_checksum(f)
+        key = generate_storage_key(f.name)
+        adapter = get_storage_adapter()
+        adapter.save(key, f)
 
         title = validated_data.get("title", "")
         dtype = validated_data.get("document_type", "")
@@ -114,11 +119,9 @@ class DocumentSerializer(ConflictModelSerializer):
             agg = Document.objects.filter(title=title, document_type=dtype).aggregate(Max("version"))
             validated_data["version"] = (agg.get("version__max") or 0) + 1
 
-        f.name = _sanitize_filename(f.name)
         doc = Document.objects.create(
-            file=f,
-            checksum=sha.hexdigest(),
-            storage_key=f.name,
+            checksum=checksum,
+            storage_key=key,
             uploaded_by=self.context["request"].user,
             status=validated_data.pop("status", DocumentStatus.UPLOADED),
             **validated_data,
@@ -126,8 +129,10 @@ class DocumentSerializer(ConflictModelSerializer):
         return doc
 
     def update(self, instance, validated_data):
-        # handle supersede on activation
         new_status = validated_data.get("status")
+        if new_status is not None and new_status != instance.status:
+            if not instance.can_transition_to(new_status):
+                raise serializers.ValidationError({"status": "انتقال وضعیت نامعتبر است."})
         instance = super().update(instance, validated_data)
         if new_status == DocumentStatus.ACTIVE:
             Document.objects.filter(

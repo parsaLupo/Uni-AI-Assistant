@@ -18,11 +18,52 @@ class DocumentStatus(models.TextChoices):
     ARCHIVED = "ARCHIVED", "آرشیو شده"
     FAILED = "FAILED", "ناموفق"
 
+ALLOWED_STATUS_TRANSITIONS = {
+    DocumentStatus.UPLOADED: {
+        DocumentStatus.VALIDATING,
+        DocumentStatus.PROCESSING,
+        DocumentStatus.INACTIVE,
+        DocumentStatus.FAILED,
+        DocumentStatus.ARCHIVED,
+        DocumentStatus.ACTIVE,
+    },
+    DocumentStatus.VALIDATING: {
+        DocumentStatus.PROCESSING,
+        DocumentStatus.FAILED,
+        DocumentStatus.INACTIVE,
+        DocumentStatus.ACTIVE,
+    },
+    DocumentStatus.PROCESSING: {
+        DocumentStatus.INDEXED,
+        DocumentStatus.FAILED,
+        DocumentStatus.INACTIVE,
+        DocumentStatus.ACTIVE,
+    },
+    DocumentStatus.INDEXED: {
+        DocumentStatus.ACTIVE,
+        DocumentStatus.INACTIVE,
+        DocumentStatus.FAILED,
+        DocumentStatus.ARCHIVED,
+    },
+    DocumentStatus.ACTIVE: {
+        DocumentStatus.INACTIVE,
+        DocumentStatus.SUPERSEDED,
+        DocumentStatus.ARCHIVED,
+    },
+    DocumentStatus.SUPERSEDED: {DocumentStatus.ARCHIVED, DocumentStatus.INACTIVE},
+    DocumentStatus.INACTIVE: {
+        DocumentStatus.ACTIVE,
+        DocumentStatus.ARCHIVED,
+        DocumentStatus.UPLOADED,
+    },
+    DocumentStatus.FAILED: {DocumentStatus.UPLOADED},
+    DocumentStatus.ARCHIVED: set(),
+}
+
 
 class Document(models.Model):
     title = models.CharField(max_length=200)
     document_type = models.CharField(max_length=64, blank=True, default="")
-    file = models.FileField(upload_to="documents/%Y/%m/", blank=True)
     academic_year = models.CharField(max_length=32, blank=True, default="")
     effective_from = models.DateField(null=True, blank=True)
     effective_to = models.DateField(null=True, blank=True)
@@ -50,7 +91,5 @@ class Document(models.Model):
     def __str__(self) -> str:
         return f"{self.title} v{self.version}"
 
-    def save(self, *args, **kwargs):
-        if self.file and not self.storage_key:
-            self.storage_key = self.file.name
-        super().save(*args, **kwargs)
+    def can_transition_to(self, new_status: str) -> bool:
+        return new_status in ALLOWED_STATUS_TRANSITIONS.get(self.status, set())
