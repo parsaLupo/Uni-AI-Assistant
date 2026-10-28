@@ -118,4 +118,6 @@ def database_config() -> dict:
         "PASSWORD": unquote(parsed.password or ""),
         "HOST": parsed.hostname or "",
         "PORT": str(parsed.port or ""),
+        # Fail fast instead of hanging for minutes when PostgreSQL is unreachable.
+        "OPTIONS": {"connect_timeout": 10},
     }
