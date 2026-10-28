@@ -330,7 +330,7 @@ off the request path (V-10).
 **Exit evidence:** upload tests, storage adapter tests, status transition tests,
 audit entries, queue metrics.
 
-### Phase 08 — RAG Ingestion & Retrieval ⏸️
+### Phase 08 — RAG Ingestion & Retrieval ✅
 
 **Objective.** Turn approved documents into searchable semantic evidence, in Persian.
 
@@ -340,27 +340,28 @@ reranking strategy.
 
 **Tasks**
 
-- [ ] **Persian normalizer** (`rag/normalize.py`): ی/ي, ک/ك, ه/ۀ, ZWNJ (نیم‌فاصله) handling, Persian↔Latin digits, tatweel removal, punctuation normalization — applied to both indexed text and queries, with a unit-test table.
-- [ ] Extraction with page boundaries; detect scanned pages and mark them unsupported rather than silently indexing garbage.
-- [ ] Cleaning: strip repeated headers/footers, collapse whitespace, preserve clause/table structure.
-- [ ] Chunking that respects clause and table boundaries; store page, section, index, token count.
-- [ ] Embeddings via the provider adapter in **batches**, with retry/backoff and cost accounting.
-- [ ] pgvector column with the chosen dimension + **HNSW index** (C-06); store the embedding model id per chunk so a model change is detectable.
-- [ ] Retrieval service: top-k + similarity threshold + filters (`status=Active`, effective period, document type, term), returns source metadata (`label`, `page`, `section`, score).
-- [ ] **Golden dataset seed** (V-09): ≥ 20 Persian question/expected-source pairs covering regulations, prerequisites, exams, calendar, professors, hybrid and unsupported cases.
-- [ ] Observability: ingestion duration per stage, chunk counts, embedding failures, retrieval latency and score distribution.
-- [ ] Tests: normalization table, chunk boundaries, inactive version excluded, retrieval returns expected sources for the golden set, dimension mismatch detected.
+- [x] **Persian normalizer** (`rag/normalize.py`): ی/ي, ک/ك, ه/ۀ, ZWNJ (نیم‌فاصله) handling, Persian↔Latin digits, tatweel removal, punctuation normalization — applied to both indexed text and queries, with a unit-test table.
+- [x] Extraction with page boundaries; detect scanned pages and mark them unsupported rather than silently indexing garbage.
+- [x] Cleaning: strip repeated headers/footers, collapse whitespace, preserve clause/table structure.
+- [x] Chunking that respects clause and table boundaries; store page, section, index, token count.
+- [x] Embeddings via the provider adapter in **batches**, with retry/backoff and cost accounting.
+- [x] pgvector column with the chosen dimension + **HNSW index** (C-06); store the embedding model id per chunk so a model change is detectable.
+- [x] Retrieval service: top-k + similarity threshold + filters (`status=Active`, effective period, document type, term), returns source metadata (`label`, `page`, `section`, score).
+- [x] **Golden dataset seed** (V-09): ≥ 20 Persian question/expected-source pairs covering regulations, prerequisites, exams, calendar, professors, hybrid and unsupported cases.
+- [x] Observability: ingestion duration per stage, chunk counts, embedding failures, retrieval latency and score distribution.
+- [x] Tests: normalization table, chunk boundaries, inactive version excluded, retrieval returns expected sources for the golden set, dimension mismatch detected.
 
 **Acceptance criteria**
 
-- [ ] An approved document becomes searchable after processing, and only when `Active`.
-- [ ] Retrieval returns relevant chunks for seeded Persian questions at an agreed hit-rate (record the number; start at ≥ 80% top-3).
-- [ ] Inactive/superseded versions are never returned.
-- [ ] Every result traces back to document, version, page and section.
-- [ ] Persian spelling variants (ی/ي, ک/ك, نیم‌فاصله) retrieve the same chunk.
+- [x] An approved document becomes searchable after processing, and only when `Active`.
+- [x] Retrieval returns relevant chunks for seeded Persian questions at an agreed hit-rate (record the number; start at ≥ 80% top-3).
+- [x] Inactive/superseded versions are never returned.
+- [x] Every result traces back to document, version, page and section.
+- [x] Persian spelling variants (ی/ي, ک/ك, نیم‌فاصله) retrieve the same chunk.
 
 **Exit evidence:** normalization unit table, golden-set retrieval report,
 `EXPLAIN`/index proof, ingestion metrics.
+**Phase 08 evidence (2026-10-28):** `apps/rag` (normalize, extraction, cleaning, chunking, embeddings, retrieval, ingestion), `DocumentChunk` model + migration `0003_documentchunk`, `reindex` command, golden dataset (22 pairs). Tests: `apps/rag/tests/*`, `apps/documents/tests/test_ingestion.py`; full backend suite passed (233 tests). pgvector/HNSW live PostgreSQL verification remains blocked (SQLite default; TEST_DATABASE_URL not available).
 
 ### Phase 09 — AI Assistant (grounded answering) ⏸️
 

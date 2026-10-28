@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
 import os
 import re
 
 from django.core.files.uploadedfile import UploadedFile
 from rest_framework import serializers
 
-from apps.accounts.models import User
 from apps.common.serializers import ConflictModelSerializer
 from apps.documents.models import Document, DocumentStatus
 from apps.documents.storage import compute_checksum, generate_storage_key, get_storage_adapter
@@ -98,7 +96,6 @@ class DocumentSerializer(ConflictModelSerializer):
             raise serializers.ValidationError("وضعیت نامعتبر است.")
         return value
     def get_status_url(self, obj) -> str:
-        request = self.context.get("request")
         url = f"/api/v1/admin/documents/{obj.id}/"
         return url
 
@@ -116,7 +113,9 @@ class DocumentSerializer(ConflictModelSerializer):
         if not validated_data.get("version"):
             from django.db.models import Max
 
-            agg = Document.objects.filter(title=title, document_type=dtype).aggregate(Max("version"))
+            agg = Document.objects.filter(title=title, document_type=dtype).aggregate(
+            Max("version")
+        )
             validated_data["version"] = (agg.get("version__max") or 0) + 1
 
         doc = Document.objects.create(

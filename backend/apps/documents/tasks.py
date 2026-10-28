@@ -4,14 +4,17 @@ from __future__ import annotations
 
 import logging
 
-from celery import shared_task
 from django.utils import timezone
 
 from apps.documents.models import Document, DocumentStatus
 from apps.documents.storage import get_storage_adapter
+from apps.rag.ingestion import ingest_document
+from celery import shared_task
 
 logger = logging.getLogger("app.ingestion")
 metrics_logger = logging.getLogger("app.metrics")
+
+
 def _transition(document: Document, status: str, **fields) -> None:
     document.status = status
     for key, value in fields.items():
@@ -56,13 +59,33 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
             raise ValueError("checksum mismatch")
 
         logger.info("ingestion_stage stage=processing document_id=%s", document_id)
-        _transition(document, DocumentStatus.PROCESSING, processing_error="", failure_stage="")
+        result = ingest_document(document_id)
+        duration_ms = int((timezone.now() - started).total_seconds() * 1000)
+        metrics_logger.info(
+            "ingestion_metric",
+            extra={
+                "event": "ingestion_completed",
+                "document_id": document_id,
+                "stage": "active",
+                "attempt": attempt,
+                "duration_ms": duration_ms,
+                "chunk_count": result.get("chunk_count", 0),
+            },
+        )
+        return {"document_id": document_id, "status": result.get("status", DocumentStatus.ACTIVE)}
     except Exception as exc:  # noqa: BLE001
-        failure_stage = str(document.status).lower() if document.status else "validating"
-        document.status = DocumentStatus.FAILED
-        document.processing_error = str(exc)
-        document.failure_stage = failure_stage
-        document.save(update_fields=["status", "processing_error", "failure_stage", "updated_at"])
+        try:
+            document = Document.objects.get(pk=document_id)
+        except Document.DoesNotExist:
+            document = None
+        failure_stage = "processing"
+        if document is not None:
+            document.status = DocumentStatus.FAILED
+            document.processing_error = str(exc)
+            document.failure_stage = failure_stage
+            document.save(
+                update_fields=["status", "processing_error", "failure_stage", "updated_at"]
+            )
         logger.exception("ingestion_failed document_id=%s stage=%s", document_id, failure_stage)
         metrics_logger.info(
             "ingestion_metric",
@@ -73,21 +96,7 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
                 "attempt": attempt,
             },
         )
-        if attempt < 3:
-            raise self.retry(exc=exc, countdown=min(60, 2 ** attempt))
+        if attempt < 3 and not isinstance(exc, ValueError):
+            raise self.retry(exc=exc, countdown=min(60, 2 ** attempt)) from exc
         return {"document_id": document_id, "status": DocumentStatus.FAILED}
-
-    duration_ms = int((timezone.now() - started).total_seconds() * 1000)
-    logger.info("ingestion_stage stage=processed document_id=%s", document_id)
-    metrics_logger.info(
-        "ingestion_metric",
-        extra={
-            "event": "ingestion_validated",
-            "document_id": document_id,
-            "stage": "processing",
-            "attempt": attempt,
-            "duration_ms": duration_ms,
-        },
-    )
-    return {"document_id": document_id, "status": document.status}
 

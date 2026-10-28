@@ -2,17 +2,16 @@
 
 from __future__ import annotations
 
-import io
-
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from rest_framework.test import APIClient
 
 from apps.accounts.models import User
 from apps.documents.models import Document, DocumentStatus
+
 TEST_PASSWORD = "Str0ng-Passw0rd!"
 
-PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<<>>\nendobj\ntrailer\n<<>>\n%%EOF"
+PDF_BYTES = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj\n4 0 obj\n<< /Length 60 >>\nstream\nBT /F1 12 Tf 100 700 Td (Hello Persian world) Tj ET\nendstream\nendobj\n5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\nxref\n0 6\n0000000000 65535 f \n0000000009 65535 f \n0000000058 65535 f \n0000000115 65535 f \n0000000241 65535 f \n0000000355 65535 f \ntrailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n426\n%%EOF"
 
 
 def _user(role="ADMIN"):

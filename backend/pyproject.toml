@@ -19,3 +19,5 @@ select = ["E", "F", "W", "I", "UP", "C4", "B"]
 # Django's migration generator writes long deconstruction lines; re-wrapping them
 # by hand risks diverging from what `makemigrations` would emit.
 "**/migrations/*.py" = ["E501"]
+"**/tests/*.py" = ["E501", "W291"]
+"apps/rag/golden_dataset.py" = ["E501"]

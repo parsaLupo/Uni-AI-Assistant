@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-from django.db.models import Q
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from apps.accounts.permissions import IsAdmin
 from apps.analytics.audit import record_audit
-from apps.common.errors import ApiError, VALIDATION_ERROR
+from apps.common.errors import VALIDATION_ERROR, ApiError
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
 from apps.documents.models import Document, DocumentStatus
@@ -67,12 +66,24 @@ class AdminDocumentViewSet(
     def retry(self, request, pk=None):
         doc = self.get_object()
         if doc.status != DocumentStatus.FAILED:
-            raise ApiError(VALIDATION_ERROR, "فقط اسناد ناموفق قابل تلاش مجدد هستند.", http_status=400)
+            raise ApiError(
+                VALIDATION_ERROR,
+                "فقط اسناد ناموفق قابل تلاش مجدد هستند.",
+                http_status=400,
+            )
         doc.status = DocumentStatus.UPLOADED
         doc.processing_error = ""
         doc.failure_stage = ""
         doc.attempt_count = (doc.attempt_count or 0) + 1
-        doc.save(update_fields=["status", "processing_error", "failure_stage", "attempt_count", "updated_at"])
+        doc.save(
+            update_fields=[
+                "status",
+                "processing_error",
+                "failure_stage",
+                "attempt_count",
+                "updated_at",
+            ]
+        )
         enqueue_document_processing(doc)
         record_audit(request.user, "RETRY", doc)
         return Response(self.get_serializer(doc).data)
