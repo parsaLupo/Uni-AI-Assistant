@@ -8,7 +8,6 @@ from django.test import TestCase
 
 from apps.accounts.models import User
 from apps.documents.models import Document, DocumentStatus
-from apps.documents.services import enqueue_document_processing
 
 TEST_PASSWORD = "Str0ng-Passw0rd!"
 

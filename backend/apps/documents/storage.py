@@ -13,7 +13,7 @@ import re
 import shutil
 import uuid
 from pathlib import Path
-from typing import BinaryIO, Protocol, runtime_checkable
+from typing import Protocol, runtime_checkable
 
 from django.conf import settings
 

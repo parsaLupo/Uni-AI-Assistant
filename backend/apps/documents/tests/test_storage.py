@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-import tempfile
-from pathlib import Path
-
 import pytest
 
-from apps.documents.storage import LocalStorageAdapter
+from apps.documents.storage import LocalStorageAdapter, StorageError
 
 
 @pytest.mark.django_db
@@ -25,5 +22,5 @@ def test_local_storage_save_read_delete(tmp_path):
 
 def test_path_traversal_rejected(tmp_path):
     adapter = LocalStorageAdapter(tmp_path / "store")
-    with pytest.raises(Exception):
+    with pytest.raises(StorageError):
         adapter.save("../evil.pdf", b"x")
