@@ -21,5 +21,8 @@ drf-spectacular==0.30.0
 # rotation, reuse detection and cookies are project code in apps/accounts.
 djangorestframework-simplejwt==5.5.1
 
+# Task queue (ADR-011): Celery + Redis client for the document processing worker.
+celery==5.6.3
+redis==8.1.0
 # Argon2id password hashing (docs/07 section 2, ADR-014 decision 6).
 argon2-cffi==25.1.0

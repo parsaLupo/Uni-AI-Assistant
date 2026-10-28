@@ -40,6 +40,8 @@ services:
       # Persian is the user-facing language (ADR-010); API identifiers stay English.
       DJANGO_LANGUAGE_CODE: ${DJANGO_LANGUAGE_CODE:-fa}
       DATABASE_URL: postgresql://${POSTGRES_USER:-usa_user}:${POSTGRES_PASSWORD:-change-me}@db:5432/${POSTGRES_DB:-usa_db}
+      # Run document-processing tasks inline in dev so no Redis/worker is required.
+      CELERY_TASK_ALWAYS_EAGER: "true"
     ports:
       - "8000:8000"
     volumes:
