@@ -302,30 +302,30 @@ academic calendar · exams · announcements.
 
 **Exit evidence:** page tests, recorded journey walkthrough, Lighthouse report.
 
-### Phase 07 — Document Management + Ingestion Queue ⏸️
+### Phase 07 — Document Management + Ingestion Queue 🟡
 
 **Objective.** Admin-controlled document lifecycle that feeds RAG, with ingestion
 off the request path (V-10).
 
 **Tasks**
 
-- [ ] `Document` model: title, type, academic year, effective from/to, version, status, checksum, uploaded_by, storage key.
+- [x] `Document` model: title, type, academic year, effective from/to, version, status, checksum, uploaded_by, storage key.
 - [ ] Upload endpoint `POST /api/v1/admin/documents/` — multipart, admin-only, **enqueues** processing and returns `202` with a status URL.
-- [ ] Validation: extension **and** MIME independently, size cap, PDF magic bytes, filename sanitisation, reject encrypted/corrupt files with a clear Persian error.
+- [x] Validation: extension **and** MIME independently, size cap, PDF magic bytes, filename sanitisation, reject encrypted/corrupt files with a clear Persian error.
 - [ ] **Object storage** for files (C-04) with the local-filesystem adapter kept for tests.
 - [ ] Status machine: `Uploaded → Validating → Processing → Indexed → Active → Superseded/Inactive → Archived`, exposed to admins.
-- [ ] Versioning + supersede: activating a new version marks the previous one `Superseded` and excludes it from retrieval.
-- [ ] Processing state, error reason and retry action visible in the admin API.
-- [ ] Audit entries for upload/activate/deactivate/delete (append-only).
-- [ ] Tests: allowed PDF accepted, oversized rejected, wrong MIME rejected, fake extension rejected, version supersede, retry after failure, non-admin denied.
+- [x] Versioning + supersede: activating a new version marks the previous one `Superseded` and excludes it from retrieval.
+- [x] Processing state, error reason and retry action visible in the admin API.
+- [x] Audit entries for upload/activate/deactivate/delete (append-only).
+- [x] Tests: allowed PDF accepted, oversized rejected, wrong MIME rejected, fake extension rejected, version supersede, retry after failure, non-admin denied.
 
 **Acceptance criteria**
 
-- [ ] Admin can upload an allowed PDF and the request returns quickly (enqueue only, no in-request extraction).
-- [ ] Invalid/oversized/wrong-type files are rejected with a machine-readable reason.
-- [ ] Document metadata is persisted and visible through the API.
-- [ ] Active/inactive/superseded/version state is visible and correct after a supersede.
-- [ ] A failed ingestion is retryable without re-uploading.
+- [x] Admin can upload an allowed PDF and the request returns quickly (enqueue only, no in-request extraction).
+- [x] Invalid/oversized/wrong-type files are rejected with a machine-readable reason.
+- [x] Document metadata is persisted and visible through the API.
+- [x] Active/inactive/superseded/version state is visible and correct after a supersede.
+- [x] A failed ingestion is retryable without re-uploading.
 
 **Exit evidence:** upload tests, storage adapter tests, status transition tests,
 audit entries, queue metrics.
