@@ -88,21 +88,15 @@ def env_list(name: str, default: tuple[str, ...] = ()) -> list[str]:
 def database_config() -> dict:
     """Build Django DATABASES entry from ``DATABASE_URL``.
 
-    ``DATABASE_URL`` is optional only for local/offline convenience: when it is
-    absent the project falls back to a SQLite file so the baseline can be
-    verified without Docker. PostgreSQL + pgvector remains the target engine
-    (ADR-002) and is always used when ``DATABASE_URL`` is provided.
+    PostgreSQL + pgvector is the only supported database engine (ADR-002).
+    ``DATABASE_URL`` must always be set; there is no SQLite fallback.
     """
     url = env_str("DATABASE_URL")
     if not url:
-        return {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": str(BASE_DIR / "dev.sqlite3"),
-            "USER": "",
-            "PASSWORD": "",
-            "HOST": "",
-            "PORT": "",
-        }
+        raise ValueError(
+            "DATABASE_URL is required. PostgreSQL + pgvector is the only "
+            "supported database engine; SQLite fallback has been removed."
+        )
 
     parsed = urlparse(url)
     if parsed.scheme not in SUPPORTED_DB_SCHEMES:

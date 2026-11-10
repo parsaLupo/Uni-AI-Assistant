@@ -15,6 +15,7 @@ import type {
   OfferingStatus,
   SemesterType,
 } from '../types/academic'
+import type { NotificationType } from '../api/notifications'
 import type { UserRole } from '../types/api'
 
 export const eventTypeLabels: Record<EventType, string> = {
@@ -62,4 +63,46 @@ export const roleLabels: Record<UserRole, string> = {
   PROFESSOR: 'استاد',
   ADMIN: 'مدیر',
   SUPERADMIN: 'مدیر ارشد',
+}
+
+export const notificationTypeLabels: Record<NotificationType, string> = {
+  ANNOUNCEMENT: 'اطلاعیه',
+  DEADLINE: 'مهلت',
+  EXAM: 'امتحان',
+  SYSTEM: 'سیستمی',
+}
+
+/** Execution modes (docs/08 §2) — the routed mode persisted on answers. */
+export const executionModeLabels: Record<string, string> = {
+  STRUCTURED: 'پاسخ از داده ساختاریافته',
+  RAG: 'پاسخ از اسناد',
+  HYBRID: 'پاسخ ترکیبی',
+  GENERAL: 'توضیح عمومی',
+  OUT_OF_SCOPE: 'خارج از دامنه',
+}
+
+/** Document lifecycle (Phase 07 model choices) — Persian presentation. */
+export const documentStatusLabels: Record<string, string> = {
+  UPLOADED: 'آپلود شده',
+  VALIDATING: 'در حال اعتبارسنجی',
+  PROCESSING: 'در حال پردازش',
+  INDEXED: 'ایندکس شده',
+  ACTIVE: 'فعال',
+  SUPERSEDED: 'جایگزین شده',
+  INACTIVE: 'غیرفعال',
+  ARCHIVED: 'آرشیو شده',
+  FAILED: 'ناموفق',
+}
+
+/** Persian chip tone per document status for the admin table. */
+export const documentStatusTone: Record<string, 'success' | 'warning' | 'primary' | 'neutral' | 'danger'> = {
+  UPLOADED: 'neutral',
+  VALIDATING: 'primary',
+  PROCESSING: 'primary',
+  INDEXED: 'primary',
+  ACTIVE: 'success',
+  SUPERSEDED: 'neutral',
+  INACTIVE: 'neutral',
+  ARCHIVED: 'neutral',
+  FAILED: 'danger',
 }

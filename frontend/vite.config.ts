@@ -17,6 +17,15 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    // Editing source on the host while the server runs inside a container on a
+    // bind mount (docs/09 §1 = docker-compose dev) is not reliably reported by
+    // inotify through Docker Desktop's Windows file share — Vite then keeps
+    // serving a stale transform (seen live: an edited page never HMR'd).
+    // Polling fixes change detection on that mount; cost is negligible here.
+    watch: {
+      usePolling: true,
+      interval: 300,
+    },
     proxy: {
       '/api': {
         target: apiProxyTarget,

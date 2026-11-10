@@ -20,4 +20,9 @@ urlpatterns = [
         views.PlannerDetailView.as_view(),
         name="students-planner-detail",
     ),
+    path(
+        "students/me/course-selection/",
+        views.CourseSelectionView.as_view(),
+        name="students-course-selection",
+    ),
 ]

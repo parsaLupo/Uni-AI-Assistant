@@ -34,7 +34,12 @@ urlpatterns = [
     path("api/v1/", include("apps.calendar.urls")),
     path("api/v1/", include("apps.exams.urls")),
     path("api/v1/", include("apps.announcements.urls")),
+    path("api/v1/", include("apps.notifications.urls")),
     path("api/v1/", include("apps.documents.urls")),
+    path("api/v1/", include("apps.ai.urls")),
+    path("api/v1/", include("apps.conversations.urls")),
+    # Phase 13 — analytics + audit-log viewer (admin-only).
+    path("api/v1/", include("apps.analytics.urls")),
 
     # Machine-readable contract (ADR-012): generated with drf-spectacular,
     # committed as openapi.yaml at the repository root, drift-checked in CI.

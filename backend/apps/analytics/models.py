@@ -1,4 +1,4 @@
-"""Audit domain (docs/07 section 7; entity ownership per docs/02 section 4.1).
+"""Analytics domain (docs/02 §4.1 ownership; Phase 13 dashboard aggregations).
 
 `docs/api/admin.md` makes every admin write auditable, while the analytics app
 itself (aggregation, `/admin/analytics/`) is Phase 13. Phase 04 therefore ships
@@ -41,3 +41,39 @@ class AuditLog(models.Model):
 
     def __str__(self) -> str:
         return f"{self.action} {self.entity_type}#{self.entity_id}"
+
+
+class AIRequestEvent(models.Model):
+    """One row per AI attempt (success or error), Phase 13 telemetry.
+
+    Privacy: no question or answer text is stored — only the routed mode, the
+    outcome code and the latency. Aggregations over this table feed the admin
+    dashboard ("AI usage/error counts, average latency") without any path to
+    raw conversation content.
+    """
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["outcome", "created_at"], name="ai_outcome_idx"),
+            models.Index(fields=["mode", "created_at"], name="ai_mode_idx"),
+        ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="ai_request_events",
+    )
+    # ExecutionMode value (STRUCTURED/RAG/HYBRID/…); "" when the pipeline
+    # failed before routing.
+    mode = models.CharField(max_length=32, blank=True, default="")
+    # "OK" or the error-envelope code (AI_PROVIDER_ERROR, RETRIEVAL_ERROR, …).
+    outcome = models.CharField(max_length=32, default="OK")
+    # Null for failed attempts (no meaningful latency).
+    latency_ms = models.PositiveIntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    def __str__(self) -> str:
+        return f"{self.mode or '-'} → {self.outcome} ({self.latency_ms or '—'}ms)"

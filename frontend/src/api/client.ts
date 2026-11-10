@@ -105,7 +105,9 @@ export async function requestJson<T>(
     ...init,
     headers: {
       Accept: 'application/json',
-      ...(init?.body ? { 'Content-Type': 'application/json' } : {}),
+      // Only string bodies are JSON — a FormData body (multipart upload,
+      // Phase 13 documents) must keep the browser-set multipart boundary.
+      ...(typeof init?.body === 'string' ? { 'Content-Type': 'application/json' } : {}),
       ...init?.headers,
     },
   })

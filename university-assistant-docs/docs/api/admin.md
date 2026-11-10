@@ -71,10 +71,48 @@ error envelope, and server-side authorization.
 | GET/POST | `/admin/announcements/` | List/create announcements |
 | GET/PATCH/DELETE | `/admin/announcements/{id}/` | Manage one announcement | expiry honoured by list endpoints |
 
+Announcement publication (Phase 12): creating with `is_published: true`, or
+updating to published, fans out one user-scoped notification per recipient
+(feed audience semantics, idempotent on republish). See
+`docs/api/notifications.md`.
+
 ## Documents and analytics (already in `docs/04` §6)
 
 - `POST/GET /admin/documents/`, `GET/PATCH/DELETE /admin/documents/{id}/` — see `docs/api/documents.md`.
-- `GET /admin/analytics/summary/` — admin metrics (Phase 13).
+
+### Analytics (Phase 13)
+
+Both endpoints are `ADMIN`/`SUPERADMIN`-only and **aggregate-only**: the query
+layer never selects raw message content, so no payload can leak student chats
+(`docs/13` Phase 13 privacy rule, enforced in the services layer — not in the UI).
+
+| Method | Endpoint | Purpose | Details |
+|---|---|---|---|
+| GET | `/admin/analytics/dashboard/` | Admin metrics from real application data | see payload below |
+| GET | `/admin/analytics/audit-log/` | Read-only viewer over the append-only `AuditLog` | filters `?entity_type=` (full label or bare model), `?action=CREATE/UPDATE/DELETE/RETRY`, `?actor=<user id>`; paginated |
+
+`GET /admin/analytics/dashboard/` payload (all values computed on demand, per
+A-10 — no materialisation):
+
+- `users`: `active_users` (active accounts), `recently_active_users` (last login
+  within 7 days), `by_role[]` (`role`, `count`).
+- `questions`: `total` (student questions), `last_7_days`, `answers`,
+  `insufficient_evidence` (answers that reported missing evidence).
+- `topic_distribution[]`: routed execution-mode counts (`STRUCTURED`/`RAG`/
+  `HYBRID`/`GENERAL`/`OUT_OF_SCOPE`) — the documented `docs/08` modes are the
+  only durable "topic" signal the application stores.
+- `top_documents[]`: top 10 documents by answer citations (`id`, `title`,
+  `document_type`, `academic_year`, `citation_count`).
+- `ai`: AI usage telemetry (`total_requests`, `error_count`,
+  `avg_latency_ms`, `null` when no successful attempt exists yet). One row per
+  attempt is recorded at the AI entry points (`/ai/ask/`, `/ai/ask/stream/`,
+  conversation messages) with mode, outcome code and latency — never question
+  or answer text.
+- `documents_total`, `generated_at` (ISO-8601).
+
+AI telemetry lives in the `AIRequestEvent` table (`apps.analytics`). It is
+telemetry, not an audit record; the audit log remains write-only for the API —
+the viewer above is its only read surface.
 
 ## Explicitly out of scope for this catalog
 

@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "apps.common",
     "apps.accounts",
+    "apps.conversations",
     # Phase 04 — core academic data (docs/02 section 4.1 entity→app map).
     "apps.analytics",
     "apps.academics",
@@ -79,8 +80,10 @@ INSTALLED_APPS = [
     "apps.calendar",
     "apps.exams",
     "apps.announcements",
+    "apps.notifications",
     "apps.documents",
     "apps.rag",
+    "apps.ai",
 ]
 
 # Custom user model (ADR-014). Set while no other feature model exists — Phase 03
@@ -122,8 +125,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Database ------------------------------------------------------------------
-# PostgreSQL + pgvector is the target engine (ADR-002). SQLite is used only
-# when DATABASE_URL is absent, so the baseline is verifiable without Docker.
+# PostgreSQL + pgvector is the only supported database engine (ADR-002).
+# DATABASE_URL must always be set; there is no SQLite fallback.
 DATABASES = {"default": database_config()}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

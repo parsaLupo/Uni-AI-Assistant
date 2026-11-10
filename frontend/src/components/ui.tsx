@@ -9,6 +9,7 @@
  */
 
 import type { ReactNode } from 'react'
+import { useEffect } from 'react'
 import { ApiError } from '../api/client'
 import { common, persianErrorText } from '../i18n/fa'
 import { toPersianDigits } from '../i18n/digits'
@@ -257,6 +258,136 @@ export function PersianNum({ value, suffix }: { value: string | number; suffix?:
       {toPersianDigits(value)}
       {suffix ? ` ${suffix}` : ''}
     </span>
+  )
+}
+
+/** Inline validation message under a form field (Persian, ADR-010 style). */
+export function FieldError({ message }: { message?: string }) {
+  if (!message) return null
+  return (
+    <span role="alert" className="text-label-sm font-medium text-error">
+      {message}
+    </span>
+  )
+}
+
+/* ── Dialogs ──────────────────────────────────────────────────────────── */
+
+/**
+ * Accessible modal for admin forms (Phase 13). Owns dismissal: backdrop
+ * click and Escape both resolve to the caller's `onClose`; the dialog role
+ * plus `aria-modal` and a labelled heading keep it readable for RTL screen
+ * readers. Focus falls back to the dialog surface so Escape works without a
+ * focusable child.
+ */
+export function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  wide,
+}: {
+  open: boolean
+  onClose: () => void
+  title: string
+  children: ReactNode
+  /** Two-column forms pick the wider shell. */
+  wide?: boolean
+}) {
+  useEffect(() => {
+    if (!open) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, onClose])
+
+  if (!open) return null
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      className="fixed inset-0 z-50 flex items-center justify-center p-space-md"
+    >
+      <button
+        type="button"
+        aria-label={common.closeDialog}
+        onClick={onClose}
+        className="absolute inset-0 cursor-default bg-[#0F172A]/45"
+      />
+      <div
+        tabIndex={-1}
+        className={`relative z-10 max-h-[90vh] w-full overflow-y-auto rounded-xl border border-outline-variant bg-surface-container-lowest shadow-lg focus:outline-none ${
+          wide ? 'max-w-3xl' : 'max-w-xl'
+        }`}
+      >
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-space-sm border-b border-outline-variant bg-surface-container-lowest px-space-lg py-space-md">
+          <h2 className="m-0 text-headline-md font-bold text-on-surface">{title}</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={common.closeDialog}
+            className="flex h-8 w-8 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-high"
+          >
+            <span aria-hidden="true" className="material-symbols-outlined text-[20px]">
+              close
+            </span>
+          </button>
+        </div>
+        <div className="p-space-lg">{children}</div>
+      </div>
+    </div>
+  )
+}
+
+/** Destructive-action confirmation — never a bare button click. */
+export function ConfirmDialog({
+  open,
+  title,
+  message,
+  confirmLabel = common.confirmDelete,
+  busy = false,
+  error,
+  onCancel,
+  onConfirm,
+}: {
+  open: boolean
+  title: string
+  message: string
+  confirmLabel?: string
+  busy?: boolean
+  error?: unknown
+  onCancel: () => void
+  onConfirm: () => void
+}) {
+  return (
+    <Modal open={open} onClose={busy ? () => undefined : onCancel} title={title}>
+      <div className="flex flex-col gap-space-md">
+        <div className="flex items-start gap-space-sm">
+          <span aria-hidden="true" className="material-symbols-outlined text-[24px] text-error">
+            warning
+          </span>
+          <p className="m-0 text-body-md leading-relaxed text-on-surface">{message}</p>
+        </div>
+        {error ? <ErrorState error={error} /> : null}
+        <div className="flex items-center justify-end gap-space-sm pt-space-xs">
+          <button type="button" className={btnSecondaryCls} disabled={busy} onClick={onCancel}>
+            {common.cancel}
+          </button>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-space-xs rounded bg-error px-space-lg py-space-sm text-on-error-container text-label-lg font-semibold shadow-sm transition-all hover:opacity-90 active:scale-[0.99] disabled:opacity-75"
+            disabled={busy}
+            onClick={onConfirm}
+          >
+            {busy ? <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-on-error-container border-t-transparent motion-reduce:animate-none" /> : null}
+            {confirmLabel}
+          </button>
+        </div>
+      </div>
+    </Modal>
   )
 }
 

@@ -16,7 +16,18 @@ import {
   RequireAuth,
   RequireRole,
 } from './features/auth'
-import { ADMIN_LINKS, AdminOverviewPage, AdminStubPage } from './features/admin'
+import {
+  ADMIN_LINKS,
+  AdminAnalyticsPage,
+  AdminAnnouncementsPage,
+  AdminCoursesPage,
+  AdminDocumentsPage,
+  AdminExamsPage,
+  AdminOverviewPage,
+  AdminProfessorsPage,
+  AdminTermsPage,
+  AdminUsersPage,
+} from './features/admin'
 import { AssistantPage } from './features/assistant'
 import { AnnouncementsPage } from './features/announcements'
 import { CalendarPage } from './features/calendar'
@@ -25,6 +36,8 @@ import { DashboardPage } from './features/dashboard'
 import { ExamsPage } from './features/exams'
 import { ProfessorDetailPage, ProfessorsPage } from './features/professors'
 import { ProfilePage } from './features/profile'
+import { CourseSelectionPage } from './features/selection'
+import { NotificationsPage } from './features/notifications'
 import { common, nav as navText } from './i18n/fa'
 
 function ShellLayout() {
@@ -74,6 +87,8 @@ export function App() {
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/exams" element={<ExamsPage />} />
           <Route path="/announcements" element={<AnnouncementsPage />} />
+          <Route path="/selection" element={<CourseSelectionPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
 
           <Route
@@ -84,17 +99,31 @@ export function App() {
               </RequireRole>
             }
           />
-          {ADMIN_LINKS.map(({ path, title }) => (
-            <Route
-              key={path}
-              path={`/admin/${path}`}
-              element={
-                <RequireRole roles={['ADMIN', 'SUPERADMIN']}>
-                  <AdminStubPage title={title} />
-                </RequireRole>
-              }
-            />
-          ))}
+          {ADMIN_LINKS.map(({ path }) => {
+            // Phase 13: every management section is a real CRUD screen over
+            // its documented admin endpoint (`api/admin.ts`).
+            const pages: Record<string, React.ReactElement> = {
+              users: <AdminUsersPage />,
+              courses: <AdminCoursesPage />,
+              professors: <AdminProfessorsPage />,
+              terms: <AdminTermsPage />,
+              exams: <AdminExamsPage />,
+              documents: <AdminDocumentsPage />,
+              announcements: <AdminAnnouncementsPage />,
+              analytics: <AdminAnalyticsPage />,
+            }
+            return (
+              <Route
+                key={path}
+                path={`/admin/${path}`}
+                element={
+                  <RequireRole roles={['ADMIN', 'SUPERADMIN']}>
+                    {pages[path] ?? <AdminOverviewPage />}
+                  </RequireRole>
+                }
+              />
+            )
+          })}
 
           {/* Anything else lands on the guarded home; the guard then decides
               between the dashboard and /login. */}

@@ -13,6 +13,7 @@ from apps.announcements.serializers import AnnouncementSerializer
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
 from apps.common.persian import normalized_search
+from apps.notifications.services import dispatch_announcement
 
 
 def _filter_announcements(qs, params):
@@ -45,6 +46,16 @@ class AdminAnnouncementViewSet(
         return normalized_search(
             qs, self.request.query_params.get("search"), "normalized_title"
         )
+
+    def perform_create(self, serializer):
+        announcement = serializer.save()
+        dispatch_announcement(announcement)
+
+    def perform_update(self, serializer):
+        was_published = serializer.instance.is_published
+        announcement = serializer.save()
+        if announcement.is_published and not was_published:
+            dispatch_announcement(announcement)
 
 
 class AnnouncementViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):

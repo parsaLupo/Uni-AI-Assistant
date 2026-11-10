@@ -80,18 +80,18 @@
 
 ## EPIC 9 — Selection Assistant
 
-- [ ] Eligibility engine
-- [ ] Prerequisite validation
-- [ ] Credit limit
-- [ ] Schedule conflict
-- [ ] Explanation layer
+- [x] Eligibility engine
+- [x] Prerequisite validation
+- [x] Credit limit
+- [x] Schedule conflict
+- [x] Explanation layer
 
 ## EPIC 10 — Notifications and Analytics
 
-- [ ] Notification center
-- [ ] Read/unread
-- [ ] Admin dashboard
-- [ ] Usage metrics
+- [x] Notification center
+- [x] Read/unread
+- [x] Admin dashboard
+- [x] Usage metrics
 
 ## EPIC 11 — Hardening
 

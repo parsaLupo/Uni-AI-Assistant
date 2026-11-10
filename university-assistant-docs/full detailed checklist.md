@@ -369,53 +369,53 @@ reranking strategy.
 
 **Tasks**
 
-- [ ] `QuestionRouter`: classify into `STRUCTURED` / `RAG` / `HYBRID` / `GENERAL` / `OUT_OF_SCOPE`; persist the mode on the message; combine deterministic rules with the model and log both, so routing is testable rather than a black box.
-- [ ] `StructuredQueryService`: term-aware queries only; never silently mixes historical and current data (`docs/17`).
-- [ ] `RetrievalService` integration from Phase 08 with the similarity threshold.
-- [ ] `PromptService`: versioned prompts; evidence separated from instructions; retrieved text marked untrusted; Persian response requirement in the system rules.
-- [ ] `LLMProvider` adapter: timeouts, retries, circuit breaker, token/cost accounting; provider failure → `AI_PROVIDER_ERROR`, never a 500 leaking internals.
-- [ ] `AnswerFormatter`: Persian output, structured sources, uncertainty sentence when evidence is weak.
-- [ ] `CitationService`: only real retrieved sources, plus a **post-generation check** that cited ids exist in the evidence set.
-- [ ] Insufficient-evidence behaviour: threshold + explicit Persian message; never fabricate a regulation, date or number.
-- [ ] Prompt-injection defences: instruction hierarchy, delimiters, ignore embedded commands, output sanitisation.
-- [ ] Optional SSE streaming for perceived latency, with graceful fallback.
-- [ ] Observability per request: retrieval mode, retrieved count, top score, provider latency, token usage, model id (V-06).
-- [ ] Tests: routing table, structured-only answers, RAG-only answers, hybrid merge, refusal on empty evidence, citation integrity, provider timeout, injection attempts from a malicious document.
+- [x] `QuestionRouter`: classify into `STRUCTURED` / `RAG` / `HYBRID` / `GENERAL` / `OUT_OF_SCOPE`; persist the mode on the message; combine deterministic rules with the model and log both, so routing is testable rather than a black box.
+- [x] `StructuredQueryService`: term-aware queries only; never silently mixes historical and current data (`docs/17`).
+- [x] `RetrievalService` integration from Phase 08 with the similarity threshold.
+- [x] `PromptService`: versioned prompts; evidence separated from instructions; retrieved text marked untrusted; Persian response requirement in the system rules.
+- [x] `LLMProvider` adapter: timeouts, retries, circuit breaker, token/cost accounting; provider failure → `AI_PROVIDER_ERROR`, never a 500 leaking internals.
+- [x] `AnswerFormatter`: Persian output, structured sources, uncertainty sentence when evidence is weak.
+- [x] `CitationService`: only real retrieved sources, plus a **post-generation check** that cited ids exist in the evidence set.
+- [x] Insufficient-evidence behaviour: threshold + explicit Persian message; never fabricate a regulation, date or number.
+- [x] Prompt-injection defences: instruction hierarchy, delimiters, ignore embedded commands, output sanitisation.
+- [x] Optional SSE streaming for perceived latency, with graceful fallback.
+- [x] Observability per request: retrieval mode, retrieved count, top score, provider latency, token usage, model id (V-06).
+- [x] Tests: routing table, structured-only answers, RAG-only answers, hybrid merge, refusal on empty evidence, citation integrity, provider timeout, injection attempts from a malicious document.
 
 **Acceptance criteria**
 
-- [ ] Structured questions are answered from structured data (no RAG detour).
-- [ ] Regulation questions are answered from RAG with sources.
-- [ ] Hybrid questions combine both and the answer distinguishes which claim came from where.
-- [ ] With no evidence the system refuses in Persian instead of inventing a university-specific fact.
-- [ ] Every citation maps to a chunk that was actually in the prompt.
-- [ ] A provider outage yields `AI_PROVIDER_ERROR` while the rest of the app stays healthy.
+- [x] Structured questions are answered from structured data (no RAG detour).
+- [x] Regulation questions are answered from RAG with sources.
+- [x] Hybrid questions combine both and the answer distinguishes which claim came from where.
+- [x] With no evidence the system refuses in Persian instead of inventing a university-specific fact.
+- [x] Every citation maps to a chunk that was actually in the prompt.
+- [x] A provider outage yields `AI_PROVIDER_ERROR` while the rest of the app stays healthy.
 
 **Exit evidence:** routing test table, golden-set answer report (retrieval +
 generation), injection test results, provider-failure simulation.
 
-### Phase 10 — Conversations ⬜
+### Phase 10 — Conversations ✅
 
 **Objective.** Persistent conversation experience with sources.
 
 **Tasks**
 
-- [ ] `POST/GET /conversations/`, `GET /conversations/{id}/`, `DELETE` (archive semantics per OA-07), rename via `PATCH`.
-- [ ] `POST /conversations/{id}/messages/` — persists the user message, runs the Phase 09 pipeline, persists the assistant message + `MessageSource` rows.
-- [ ] Ownership enforced by queryset scoping, not a frontend check; another user's conversation returns 404 (not 403) to avoid id enumeration.
-- [ ] Message ordering + pagination for long histories; index on `(conversation, created_at)`.
-- [ ] React chat UI: composer, message list, streaming/typing state, **source cards** (label, page, section), copy, retry last question, error and insufficient-evidence states.
-- [ ] Conversation list with rename/delete, empty state, keyboard-friendly navigation.
-- [ ] Persian UX: RTL bubbles, correct mixed-direction rendering for Latin terms and numbers.
-- [ ] Tests: create, persist, reload history, owner-only read/delete, source cards from API data only, long-history pagination.
+- [x] `POST/GET /conversations/`, `GET /conversations/{id}/`, `DELETE` (archive semantics per OA-07), rename via `PATCH`.
+- [x] `POST /conversations/{id}/messages/` — persists the user message, runs the Phase 09 pipeline, persists the assistant message + `MessageSource` rows.
+- [x] Ownership enforced by queryset scoping, not a frontend check; another user's conversation returns 404 (not 403) to avoid id enumeration.
+- [x] Message ordering + pagination for long histories; index on `(conversation, created_at)`.
+- [x] React chat UI: composer, message list, streaming/typing state, **source cards** (label, page, section), copy, retry last question, error and insufficient-evidence states.
+- [x] Conversation list with rename/delete, empty state, keyboard-friendly navigation.
+- [x] Persian UX: RTL bubbles, correct mixed-direction rendering for Latin terms and numbers.
+- [x] Tests: create, persist, reload history, owner-only read/delete, source cards from API data only, long-history pagination.
 
 **Acceptance criteria**
 
-- [ ] Student can create a conversation and history survives a reload.
-- [ ] Messages persist with role, retrieval mode and timestamps.
-- [ ] Only the owner can read or delete a conversation — verified with two users.
-- [ ] Assistant answers show sources when available and the UI never invents citation content.
-- [ ] Insufficient-evidence answers are visually distinct from grounded answers.
+- [x] Student can create a conversation and history survives a reload.
+- [x] Messages persist with role, retrieval mode and timestamps.
+- [x] Only the owner can read or delete a conversation — verified with two users.
+- [x] Assistant answers show sources when available and the UI never invents citation content.
+- [x] Insufficient-evidence answers are visually distinct from grounded answers.
 
 **Exit evidence:** API tests, ownership tests, UI walkthrough, E2E journey
 "ask → answer → reload history".
@@ -426,16 +426,16 @@ generation), injection test results, provider-failure simulation.
 
 **Tasks**
 
-- [ ] Pure rules engine: passed prerequisite check, availability in the current term, credit limit, duplicate/passed-course check, schedule conflict, other documented rules.
-- [ ] Machine-readable rejection reasons (`code` + Persian message + parameters).
-- [ ] Explanation layer: the LLM may only verbalise the engine's result.
-- [ ] UI: eligibility per course, reason list, what-if credit totals.
+- [x] Pure rules engine: passed prerequisite check, availability in the current term, credit limit, duplicate/passed-course check, schedule conflict, other documented rules.
+- [x] Machine-readable rejection reasons (`code` + Persian message + parameters).
+- [x] Explanation layer: the LLM may only verbalise the engine's result.
+- [x] UI: eligibility per course, reason list, what-if credit totals.
 
 **Acceptance criteria**
 
-- [ ] Eligibility results are reproducible and unit-tested per rule.
-- [ ] Each rejection carries a machine-readable reason.
-- [ ] AI explanation never contradicts or overrides the engine — proven by a test that feeds a contradicting prompt.
+- [x] Eligibility results are reproducible and unit-tested per rule.
+- [x] Each rejection carries a machine-readable reason.
+- [x] AI explanation never contradicts or overrides the engine — proven by a test that feeds a contradicting prompt.
 
 **Gate:** may not start until the MVP release is accepted (V-05).
 
@@ -445,18 +445,18 @@ generation), injection test results, provider-failure simulation.
 
 **Tasks**
 
-- [ ] Notification model (type, title, body, link, is_read, created_at, expires_at) + API.
-- [ ] Read/unread state, mark-all-read, badge count.
-- [ ] Admin-created announcements surfaced as notifications.
-- [ ] Expiry: expired items never appear as active.
-- [ ] Deadline-trigger design documented for later automation.
+- [x] Notification model (type, title, body, link, is_read, created_at, expires_at) + API.
+- [x] Read/unread state, mark-all-read, badge count.
+- [x] Admin-created announcements surfaced as notifications.
+- [x] Expiry: expired items never appear as active.
+- [x] Deadline-trigger design documented for later automation.
 
 **Acceptance criteria**
 
-- [ ] Notifications are user-scoped when applicable.
-- [ ] Read state persists across sessions.
-- [ ] Expired items do not appear as active.
-- [ ] A student can never read another user's notifications (tested).
+- [x] Notifications are user-scoped when applicable.
+- [x] Read state persists across sessions.
+- [x] Expired items do not appear as active.
+- [x] A student can never read another user's notifications (tested).
 
 **Gate:** post-MVP.
 
@@ -466,17 +466,17 @@ generation), injection test results, provider-failure simulation.
 
 **Tasks**
 
-- [ ] Admin-only dashboard: active users, question count, topic distribution, most-used documents, AI usage/error counts, average latency.
-- [ ] Aggregated queries only (no raw message content by default); the privacy rule is enforced in the query layer, not the UI.
-- [ ] Admin management screens: users, roles, courses, professors, terms, exams, announcements, documents.
-- [ ] Read-only audit-log viewer over the append-only source.
+- [x] Admin-only dashboard: active users, question count, topic distribution, most-used documents, AI usage/error counts, average latency.
+- [x] Aggregated queries only (no raw message content by default); the privacy rule is enforced in the query layer, not the UI.
+- [x] Admin management screens: users, roles, courses, professors, terms, exams, announcements, documents.
+- [x] Read-only audit-log viewer over the append-only source.
 
 **Acceptance criteria**
 
-- [ ] Dashboard is admin-only and rejects students.
-- [ ] Metrics are computed from real application data.
-- [ ] Sensitive raw message content is not exposed by default.
-- [ ] Every high-impact admin action appears in the audit log.
+- [x] Dashboard is admin-only and rejects students.
+- [x] Metrics are computed from real application data.
+- [x] Sensitive raw message content is not exposed by default.
+- [x] Every high-impact admin action appears in the audit log.
 
 **Gate:** post-MVP.
 

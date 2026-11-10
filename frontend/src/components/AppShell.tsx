@@ -11,6 +11,7 @@
 import { useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth'
+import { NotificationBell } from '../features/notifications'
 import { auth as authText, nav as navText, shell } from '../i18n/fa'
 import { roleLabels } from '../i18n/labels'
 
@@ -29,6 +30,8 @@ const STUDENT_ITEMS: NavItem[] = [
   { to: '/calendar', label: navText.calendar, icon: 'event' },
   { to: '/exams', label: navText.exams, icon: 'assignment' },
   { to: '/announcements', label: navText.announcements, icon: 'campaign' },
+  { to: '/selection', label: navText.selection, icon: 'fact_check' },
+  { to: '/notifications', label: navText.notifications, icon: 'notifications' },
   { to: '/profile', label: navText.profile, icon: 'account_circle' },
 ]
 
@@ -130,6 +133,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="text-headline-sm font-bold text-primary">{navText.brand}</span>
             </NavLink>
           </div>
+          <NotificationBell />
           <UserChip />
         </div>
       </header>

@@ -34,6 +34,7 @@ low cost. `DECISION NEEDED` = must be answered before the listed phase starts.
 | OA-21 | Is the UI Persian-only, or must a user be able to switch language? (`docs/11` says Persian; no bilingual requirement is written) | Persian-only: no language switcher, no runtime i18n dependency; strings centralized in `frontend/src/i18n/fa.ts` so a switcher can be added later (ADR-010) | Before production | ACCEPTED |
 | OA-22 | Who translates framework-generated messages (DRF validation/auth): DRF's bundled `fa` catalog or project-owned gettext catalogs | DRF/Django `fa` catalogs via `LANGUAGE_CODE="fa"`, pinned by `test_framework_validation_details_are_persian` (ADR-010); project sentences are Persian literals | — | ACCEPTED |
 | OA-23 | CSRF strategy for the cookie-based refresh/logout endpoints (ADR-004 said CSRF "must be tested") | **Decided (ADR-014):** double-submit cookie — login sets a readable `csrftoken`, the client echoes it in `X-CSRFToken`, and `csrf_protect` guards refresh + logout; failure returns `403 PERMISSION_DENIED` | Phase 03 | ACCEPTED |
+| OA-24 | Per-term credit limit for the Phase 11 selection engine (no documented number anywhere) | Working default **20 credits/term** (`COURSE_SELECTION_MAX_TERM_CREDITS`, `apps/students/course_selection.py:credit_limit()`); "exactly at the limit" is allowed, anything above rejected as `CREDIT_LIMIT_EXCEEDED` | Registrar to confirm the official value | ACCEPTED |
 
 ## Rule for closing an item
 

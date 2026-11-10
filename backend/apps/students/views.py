@@ -21,11 +21,13 @@ from rest_framework.views import APIView
 from apps.academics.models import AcademicTerm
 from apps.accounts.models import Role
 from apps.accounts.permissions import IsAdmin
+from apps.ai.selection_explanation import SelectionExplanationService
 from apps.analytics.audit import AuditableViewSetMixin
-from apps.common.errors import CONFLICT, ApiError
+from apps.common.errors import CONFLICT, VALIDATION_ERROR, ApiError
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
-from apps.courses.models import CourseOffering
+from apps.courses.models import Course, CourseOffering
+from apps.students.course_selection import CourseSelectionEngine
 from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 from apps.students.serializers import (
     EnrollmentSerializer,
@@ -271,4 +273,63 @@ class AdminEnrollmentViewSet(
                 http_status=409,
             )
         super().perform_destroy(instance)
+
+
+class CourseSelectionView(APIView):
+    """POST /students/me/course-selection/ — Phase 11 eligibility check.
+
+    Pure rules engine (``apps.students.course_selection``): the decision and
+    every machine-readable rejection reason come from PostgreSQL records only.
+    The response embeds a deterministic composed explanation (AGENTS.md section
+    8 — the LLM may explain, never decide; the assistant pipeline reuses
+    ``SelectionExplanationService`` for its verdict-safe verbalisation).
+    """
+
+    @extend_schema(responses=dict)  # engine decision dict (phase11-rules-v1)
+    def post(self, request):
+        _get_profile(request.user, create=True)
+        course_code = str(request.data.get("course_code") or "").strip()
+        if not course_code:
+            raise ApiError(
+                VALIDATION_ERROR, "کد درس نمی‌تواند خالی باشد.", http_status=400
+            )
+        extra_codes = request.data.get("extra_course_codes") or []
+        if not isinstance(extra_codes, list) or not all(
+            isinstance(code, str) for code in extra_codes
+        ):
+            raise ApiError(
+                VALIDATION_ERROR,
+                "لیست درس‌های فرضی (extra_course_codes) نامعتبر است.",
+                http_status=400,
+            )
+        for code in extra_codes:
+            # Strict what-if lookup: the student gets an honest 400 instead of
+            # a silently ignored unknown extra in the credit math.
+            if not Course.objects.filter(code__iexact=str(code).strip()).exists():
+                raise ApiError(
+                    VALIDATION_ERROR,
+                    f"درس فرضی با کد «{code}» یافت نشد.",
+                    http_status=400,
+                )
+        course = Course.objects.filter(code__iexact=course_code).first()
+        if course is None:
+            # Keep the course code in the message but not as an internal trace.
+            raise NotFound("درسی با این کد در پایگاه داده یافت نشد.")
+
+        decision = CourseSelectionEngine().evaluate(
+            request.user, course_code, extra_course_codes=[
+                str(code).strip() for code in extra_codes
+            ]
+        )
+        result = decision.to_dict()
+        # Deterministic, always-available explanation; the engine verdict is
+        # embedded so a client cannot contrast it with an LLM rewrite.
+        explanation = SelectionExplanationService().explain(decision)
+        result["explanation"] = {
+            "text": explanation["text"],
+            "source": explanation["source"],
+            "engine_eligible": explanation["engine_eligible"],
+        }
+        return Response(result)
+
 
