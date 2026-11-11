@@ -262,6 +262,11 @@ class AnswerService:
         formatted_sources = [
             {
                 "source_type": "document",
+                # chunk_id is what the conversation layer keys MessageSource
+                # rows on (Phase 10); dropping it silently emptied the
+                # per-message citation list the UI renders (found by Phase 14
+                # critical-journey 5).
+                "chunk_id": source.get("chunk_id"),
                 "document_id": source.get("document_id"),
                 "label": source.get("label"),
                 "page": source.get("page_number"),
@@ -451,6 +456,11 @@ class AnswerService:
         formatted_sources = [
             {
                 "source_type": "document",
+                # chunk_id is what the conversation layer keys MessageSource
+                # rows on (Phase 10); dropping it silently emptied the
+                # per-message citation list the UI renders (found by Phase 14
+                # critical-journey 5).
+                "chunk_id": source.get("chunk_id"),
                 "document_id": source.get("document_id"),
                 "label": source.get("label"),
                 "page": source.get("page_number"),

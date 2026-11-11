@@ -1,0 +1,14 @@
+# E2E override (Phase 14, docs/08-testing-strategy.md §5).
+#
+# The critical-journeys suite must be deterministic and hermetic: it may not
+# depend on an external, rate-limited, paid LLM endpoint. Combined run:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.e2e.yml up -d backend
+#
+# The mock provider answers offline from retrieved evidence; everything else
+# (PostgreSQL, ingestion, retrieval, auth) is the real stack.
+services:
+  backend:
+    environment:
+      AI_PROVIDER: mock
+      AI_PROVIDER_API_KEY: ""

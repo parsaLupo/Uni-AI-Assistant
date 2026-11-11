@@ -1,0 +1,61 @@
+{
+  "base": "http://localhost:8000",
+  "users": 20,
+  "seconds_per_route": 15,
+  "budget_non_ai_ms": 500,
+  "budget_ai_ms": 2000,
+  "results": [
+    {
+      "route": "GET /courses/",
+      "method": "GET",
+      "requests": 118,
+      "errors": 0,
+      "status_counts": {
+        "200": 118
+      },
+      "p50_ms": 2568.3,
+      "p95_ms": 3612.6,
+      "p99_ms": 3918.9,
+      "mean_ms": 2674.5,
+      "max_ms": 4396.8,
+      "rps": 7.87,
+      "budget_ms": 500,
+      "within_budget": false
+    },
+    {
+      "route": "GET /course-offerings/",
+      "method": "GET",
+      "requests": 169,
+      "errors": 0,
+      "status_counts": {
+        "200": 169
+      },
+      "p50_ms": 1808.3,
+      "p95_ms": 2540.2,
+      "p99_ms": 2725.0,
+      "mean_ms": 1848.0,
+      "max_ms": 3389.3,
+      "rps": 11.27,
+      "budget_ms": 500,
+      "within_budget": false
+    },
+    {
+      "route": "POST /ai/ask/",
+      "method": "POST",
+      "requests": 190,
+      "errors": 0,
+      "status_counts": {
+        "200": 190
+      },
+      "p50_ms": 1615.2,
+      "p95_ms": 2508.1,
+      "p99_ms": 2656.4,
+      "mean_ms": 1670.4,
+      "max_ms": 2715.2,
+      "rps": 12.67,
+      "budget_ms": 2000,
+      "within_budget": false
+    }
+  ],
+  "passed": false
+}
