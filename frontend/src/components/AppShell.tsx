@@ -11,6 +11,8 @@
 import { useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth'
+import { homeForRole } from '../features/auth/ProtectedRoute'
+import { ADMIN_LINKS } from '../features/admin/links'
 import { NotificationBell } from '../features/notifications'
 import { auth as authText, nav as navText, shell } from '../i18n/fa'
 import { roleLabels } from '../i18n/labels'
@@ -35,13 +37,34 @@ const STUDENT_ITEMS: NavItem[] = [
   { to: '/profile', label: navText.profile, icon: 'account_circle' },
 ]
 
-/** Admin navigation (UI refinement): the overview plus the shared AI
- *  assistant. Management screens stay reachable from the overview's
- *  quick-links; the student rail is untouched. */
+/** Admin navigation (UI refinement): the overview, the shared AI assistant,
+ *  and every implemented management screen. Paths/labels come from
+ *  `ADMIN_LINKS` so the rail, the router and the overview's quick-links can
+ *  never drift apart. The student rail is untouched. */
 const ADMIN_ITEMS: NavItem[] = [
-  { to: '/admin', label: navText.adminOverview, icon: 'settings' },
+  { to: '/admin', label: navText.adminOverview, icon: 'space_dashboard', end: true },
   { to: '/assistant', label: navText.assistant, icon: 'smart_toy' },
 ]
+
+/** Persian icon per management section (same set as the overview cards). */
+const ADMIN_SECTION_ICONS: Record<string, string> = {
+  users: 'group',
+  courses: 'menu_book',
+  professors: 'co_present',
+  terms: 'calendar_month',
+  exams: 'event_available',
+  documents: 'description',
+  announcements: 'campaign',
+  analytics: 'monitoring',
+}
+
+/** The management group under the «مدیریت» divider: the eight guarded admin
+ *  sub-routes, all real CRUD screens over their documented endpoints. */
+const ADMIN_SECTION_ITEMS: NavItem[] = ADMIN_LINKS.map((link) => ({
+  to: `/admin/${link.path}`,
+  label: link.title,
+  icon: ADMIN_SECTION_ICONS[link.path] ?? 'settings',
+}))
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const { user } = useAuth()
@@ -65,11 +88,33 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label={navText.menu} className="flex flex-col gap-1">
       {isAdmin ? (
-        ADMIN_ITEMS.map(render)
+        <>
+          {ADMIN_ITEMS.map(render)}
+          <div className="mt-space-sm border-t border-outline-variant pt-space-sm">
+            <span className="px-space-md text-label-sm font-bold text-outline">{navText.admin}</span>
+          </div>
+          {ADMIN_SECTION_ITEMS.map(render)}
+        </>
       ) : (
         STUDENT_ITEMS.map(render)
       )}
     </nav>
+  )
+}
+
+function BrandLink({ onClick }: { onClick?: () => void }) {
+  const { user } = useAuth()
+  return (
+    <NavLink
+      to={homeForRole(user)}
+      className="flex items-center gap-space-sm"
+      onClick={onClick}
+    >
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-on-primary">
+        <span className="material-symbols-outlined text-[22px]">school</span>
+      </span>
+      <span className="text-headline-sm font-bold text-primary">{navText.brand}</span>
+    </NavLink>
   )
 }
 
@@ -124,16 +169,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {drawerOpen ? 'close' : 'menu'}
               </span>
             </button>
-            <NavLink
-              to="/dashboard"
-              className="flex items-center gap-space-sm"
-              onClick={closeDrawer}
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-on-primary">
-                <span className="material-symbols-outlined text-[22px]">school</span>
-              </span>
-              <span className="text-headline-sm font-bold text-primary">{navText.brand}</span>
-            </NavLink>
+            <BrandLink onClick={closeDrawer} />
           </div>
           <NotificationBell />
           <UserChip />

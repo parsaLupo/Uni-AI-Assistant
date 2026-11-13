@@ -26,7 +26,8 @@ export type AuthStatus = 'loading' | 'authenticated' | 'anonymous'
 interface AuthContextValue {
   status: AuthStatus
   user: AuthUser | null
-  login: (email: string, password: string) => Promise<void>
+  /** Resolves with the signed-in profile so callers can route by role. */
+  login: (email: string, password: string) => Promise<AuthUser>
   register: (input: authApi.RegisterInput) => Promise<void>
   logout: () => Promise<void>
 }
@@ -86,12 +87,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(async (email: string, password: string) => {
     const session = await authApi.login(email, password)
     // Prefer the full profile, but the session summary is enough to proceed.
+    let profile: AuthUser
     try {
-      setUser(await authApi.fetchMe())
+      profile = await authApi.fetchMe()
     } catch {
-      setUser(userFromSession(session))
+      profile = userFromSession(session)
     }
+    setUser(profile)
     setStatus('authenticated')
+    return profile
   }, [])
 
   const register = useCallback(async (input: authApi.RegisterInput) => {

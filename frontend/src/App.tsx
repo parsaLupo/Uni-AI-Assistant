@@ -15,6 +15,7 @@ import {
   RegisterPage,
   RequireAuth,
   RequireRole,
+  StudentOnly,
 } from './features/auth'
 import {
   ADMIN_LINKS,
@@ -77,7 +78,16 @@ export function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route element={<ShellLayout />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+          {/* Student home — admins are bounced to the admin overview, so a
+              refresh or direct URL can never land them on this screen. */}
+          <Route
+            path="/dashboard"
+            element={
+              <StudentOnly>
+                <DashboardPage />
+              </StudentOnly>
+            }
+          />
           <Route path="/assistant" element={<AssistantPage />} />
           <Route path="/conversations/:id" element={<AssistantPage />} />
           <Route path="/courses" element={<CoursesPage />} />

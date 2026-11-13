@@ -13,7 +13,7 @@ import { ApiError } from '../../api/client'
 import { auth, persianErrorText } from '../../i18n/fa'
 import { useAuth } from './AuthProvider'
 import { AuthLayout } from './AuthLayout'
-import { RedirectIfAuthenticated } from './ProtectedRoute'
+import { homeForRole, RedirectIfAuthenticated } from './ProtectedRoute'
 
 export function LoginPage() {
   const { login } = useAuth()
@@ -30,9 +30,9 @@ export function LoginPage() {
     setSubmitting(true)
     setError(null)
     try {
-      await login(email, password)
+      const user = await login(email, password)
       const from = (location.state as { from?: string } | null)?.from
-      navigate(from && from !== '/login' ? from : '/dashboard', { replace: true })
+      navigate(from && from !== '/login' ? from : homeForRole(user), { replace: true })
     } catch (caught) {
       setError(
         caught instanceof ApiError

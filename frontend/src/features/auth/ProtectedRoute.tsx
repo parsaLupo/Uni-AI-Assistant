@@ -8,8 +8,14 @@
 import type { ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { auth as authText } from '../../i18n/fa'
-import type { UserRole } from '../../types/api'
+import type { AuthUser, UserRole } from '../../types/api'
 import { useAuth } from './AuthProvider'
+
+/** Role-aware landing route: admins open the admin overview, students the
+ *  student dashboard (docs/20 home routing). */
+export function homeForRole(user: Pick<AuthUser, 'role'> | null): string {
+  return user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') ? '/admin' : '/dashboard'
+}
 
 /** Full-screen Persian loading state shown while the session is restored. */
 export function GateLoading() {
@@ -43,7 +49,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 
 /** Keeps signed-in visitors off /login and /register. */
 export function RedirectIfAuthenticated({ children }: { children: ReactNode }) {
-  const { status } = useAuth()
+  const { status, user } = useAuth()
   const location = useLocation()
 
   if (status === 'loading') {
@@ -52,7 +58,7 @@ export function RedirectIfAuthenticated({ children }: { children: ReactNode }) {
 
   if (status === 'authenticated') {
     const from = (location.state as { from?: string } | null)?.from
-    return <Navigate to={from && from !== '/login' ? from : '/dashboard'} replace />
+    return <Navigate to={from && from !== '/login' ? from : homeForRole(user)} replace />
   }
 
   return <>{children}</>
@@ -77,6 +83,25 @@ export function RequireRole({ roles, children }: { roles: UserRole[]; children: 
 
   if (user && !roles.includes(user.role)) {
     return <Navigate to="/dashboard" replace />
+  }
+
+  return <>{children}</>
+}
+
+/**
+ * Keeps administrator accounts off the student-only screens (UI refinement:
+ * the student dashboard is never shown to admins). Admins are redirected to
+ * the admin overview; students pass through untouched.
+ */
+export function StudentOnly({ children }: { children: ReactNode }) {
+  const { status, user } = useAuth()
+
+  if (status === 'loading') {
+    return <GateLoading />
+  }
+
+  if (user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN')) {
+    return <Navigate to="/admin" replace />
   }
 
   return <>{children}</>
