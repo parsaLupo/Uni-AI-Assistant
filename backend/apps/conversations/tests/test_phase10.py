@@ -1,11 +1,10 @@
 from __future__ import annotations
 
+from apps.conversations.models import Conversation, Message, MessageSource
+from apps.documents.models import Document, DocumentChunk, DocumentStatus
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from rest_framework.test import APIClient
-
-from apps.conversations.models import Conversation, Message, MessageSource
-from apps.documents.models import Document, DocumentChunk, DocumentStatus
 
 
 class Phase10ConversationTests(TestCase):
@@ -73,7 +72,7 @@ class Phase10ConversationTests(TestCase):
             storage_key="k",
             checksum="c",
         )
-        chunk = DocumentChunk.objects.create(
+        DocumentChunk.objects.create(
             document=document,
             chunk_index=0,
             content="شرایط مشروطی ...",

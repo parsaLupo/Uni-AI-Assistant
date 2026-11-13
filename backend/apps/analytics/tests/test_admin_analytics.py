@@ -11,7 +11,7 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from apps.analytics.models import AIRequestEvent, AuditLog
+from apps.analytics.models import AIRequestEvent
 from apps.analytics.services import record_ai_request
 from apps.conversations.models import Conversation, Message, MessageSource
 from apps.documents.models import Document, DocumentChunk

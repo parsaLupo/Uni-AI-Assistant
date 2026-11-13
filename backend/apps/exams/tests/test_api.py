@@ -126,10 +126,11 @@ def test_student_me_filter_only_returns_own_enrolled_exams(
 def test_student_does_not_see_exams_from_other_programs(
     authed_client, student_profile, academic_graph
 ):
+    from django.utils import timezone
+
     from apps.academics.models import Department
     from apps.courses.models import Course, CourseOffering
     from apps.exams.models import Exam
-    from django.utils import timezone
 
     other_dept = Department.objects.create(
         faculty=academic_graph["faculty"], name="گروه ریاضی", code="99"

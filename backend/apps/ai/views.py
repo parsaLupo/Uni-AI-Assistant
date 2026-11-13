@@ -14,6 +14,7 @@ from apps.ai.answer import AnswerService
 from apps.ai.providers import build_llm_provider_from_env
 from apps.analytics.services import record_ai_request
 from apps.common.errors import VALIDATION_ERROR, ApiError
+from apps.common.throttles import AiAskRateThrottle
 
 
 def _service() -> AnswerService:
@@ -22,6 +23,9 @@ def _service() -> AnswerService:
 
 class AskView(APIView):
     permission_classes = [IsAuthenticated]
+    # Abuse control (docs/07-security.md section 4, Phase 15): a per-user
+    # budget on every AI attempt, applied before the provider is called.
+    throttle_classes = [AiAskRateThrottle]
 
     def post(self, request):
         question = (request.data.get("question") or "").strip()
@@ -52,6 +56,7 @@ class AskView(APIView):
 
 class AskStreamView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [AiAskRateThrottle]
 
     def post(self, request):
         question = (request.data.get("question") or "").strip()

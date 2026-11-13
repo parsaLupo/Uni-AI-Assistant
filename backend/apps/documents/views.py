@@ -11,6 +11,7 @@ from apps.analytics.audit import record_audit
 from apps.common.errors import VALIDATION_ERROR, ApiError
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
+from apps.common.throttles import UploadRateThrottle
 from apps.documents.models import Document, DocumentStatus
 from apps.documents.serializers import DocumentSerializer
 from apps.documents.services import enqueue_document_processing
@@ -23,6 +24,14 @@ class AdminDocumentViewSet(
     serializer_class = DocumentSerializer
     permission_classes = [IsAdmin]
     ordering = ["-created_at"]
+
+    def get_throttles(self):
+        # Phase 15 abuse control: the upload budget applies to `create` (and
+        # the `retry` action, which re-enqueues processing) only — listing,
+        # updating metadata and status changes stay unthrottled.
+        if self.action in {"create", "retry"}:
+            return [UploadRateThrottle()]
+        return []
 
     def get_queryset(self):
         qs = super().get_queryset()

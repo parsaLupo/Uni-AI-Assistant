@@ -25,8 +25,8 @@ import pytest
 
 ALLOWED = -1  # sentinel: any status except 401/403
 DENIED_ROLES = {"anonymous": 401, "student": 403, "professor": 403, "admin": ALLOWED}
-PUBLIC_ALLOWED = {role: ALLOWED for role in DENIED_ROLES}
-AUTH_REQUIRED = {role: 401 for role in DENIED_ROLES}
+PUBLIC_ALLOWED = dict.fromkeys(DENIED_ROLES, ALLOWED)
+AUTH_REQUIRED = dict.fromkeys(DENIED_ROLES, 401)
 AUTH_ALLOWED = {"anonymous": 401, "student": ALLOWED, "professor": ALLOWED, "admin": ALLOWED}
 # Academic reads are authenticated (global DRF default; docs promise no
 # anonymous access anywhere) — students/professors/admins all read.
@@ -34,9 +34,9 @@ READS_AUTH = {"anonymous": 401, "student": 200, "professor": 200, "admin": 200}
 READS_ALLOWED = {"anonymous": 401, "student": ALLOWED, "professor": ALLOWED, "admin": ALLOWED}
 # Double-submit CSRF (ADR-014): without a cookie+header pair these 403 before
 # doing anything, regardless of authentication state.
-CSRF_GATE = {role: 403 for role in DENIED_ROLES}
+CSRF_GATE = dict.fromkeys(DENIED_ROLES, 403)
 # Liveness is genuinely anonymous.
-PUBLIC_HEALTH = {role: 200 for role in DENIED_ROLES}
+PUBLIC_HEALTH = dict.fromkeys(DENIED_ROLES, 200)
 # Student self-service: `_get_profile` raises PermissionDenied for other roles.
 STUDENT_ONLY = {"anonymous": 401, "student": ALLOWED, "professor": 403, "admin": 403}
 # Owner-scoped resources hide foreign ids (Phase 10 anti-enumeration).

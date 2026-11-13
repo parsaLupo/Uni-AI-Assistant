@@ -14,8 +14,9 @@ from apps.professors.serializers import ProfessorSerializer
 
 
 def _filter_professors(qs, params, user=None):
-    from apps.common.scoping import student_department_id
     from django.db.models import Q
+
+    from apps.common.scoping import student_department_id
 
     department = params.get("department")
     if department and department.isdigit():
@@ -48,7 +49,9 @@ class AdminProfessorViewSet(
     filterset_fields = ["department", "is_active"]
 
     def get_queryset(self):
-        return _filter_professors(super().get_queryset(), self.request.query_params, self.request.user)
+        return _filter_professors(
+            super().get_queryset(), self.request.query_params, self.request.user
+        )
 
 
 class ProfessorViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
@@ -58,4 +61,6 @@ class ProfessorViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSet):
     serializer_class = ProfessorSerializer
 
     def get_queryset(self):
-        return _filter_professors(super().get_queryset(), self.request.query_params, self.request.user)
+        return _filter_professors(
+            super().get_queryset(), self.request.query_params, self.request.user
+        )

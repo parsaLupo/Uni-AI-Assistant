@@ -116,7 +116,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 11
+      "duration_ms": 21
     },
     {
       "question": "نحوه انصراف از تحصیل چگونه است؟",
@@ -135,7 +135,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 8
+      "duration_ms": 6
     },
     {
       "question": "حداقل واحد برای ترم مشروط چقدر است؟",
@@ -154,7 +154,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 5
     },
     {
       "question": "چه کسانی می‌توانند مرخصی تحصیلی بگیرند؟",
@@ -172,7 +172,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 4
     },
     {
       "question": "سقف واحد برای دانشجویان ترم اول چقدر است؟",
@@ -192,7 +192,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 5
     },
     {
       "question": "شرایط اخذ درس بدون پیش‌نیاز چیست؟",
@@ -211,7 +211,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 5
     },
     {
       "question": "نحوه محاسبه معدل ترم چگونه است؟",
@@ -230,7 +230,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 9
+      "duration_ms": 5
     },
     {
       "question": "شرایط انتقالی چیست؟",
@@ -249,7 +249,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 5
     },
     {
       "question": "حداقل نمره قبولی درس چند است؟",
@@ -268,7 +268,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 4
     },
     {
       "question": "نحوه اعتراض به نمره چگونه است؟",
@@ -323,7 +323,7 @@
       "spell_variant": "شرایط مشروطی چیست؟",
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "پیش‌نیاز درس کارگاه کامپیوتر چیست؟",
@@ -341,7 +341,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "درس پایه پیش‌نیاز کدام درس‌ها است؟",
@@ -359,7 +359,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 8
+      "duration_ms": 5
     },
     {
       "question": "برای اخذ مبانی برنامه‌نویسی چه پیش‌نیازی لازم است؟",
@@ -377,7 +377,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 4
     },
     {
       "question": "امتحان میان‌ترم چه تاریخی برگزار می‌شود؟",
@@ -395,7 +395,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 4
     },
     {
       "question": "امتحان پایان‌ترم کدام درس‌ها است؟",
@@ -413,7 +413,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 5
     },
     {
       "question": "سالن برگزاری امتحان کجاست؟",
@@ -431,7 +431,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "مهلت حذف و اضافه چه زمانی است؟",
@@ -449,7 +449,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "کلاس‌های جبرانی چه زمانی برگزار می‌شود؟",
@@ -467,7 +467,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "شروع کلاس‌ها چه تاریخی است؟",
@@ -503,7 +503,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 7
+      "duration_ms": 4
     },
     {
       "question": "استاد درس پایه کیست؟",
@@ -521,7 +521,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "اعضای هیئت علمی گروه کامپیوتر چه کسانی هستند؟",
@@ -539,7 +539,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "پاسخ ترکیبی: با توجه به آیین‌نامه و دروس پاس‌شده چه درس‌هایی را می‌توانم بردارم؟",
@@ -559,7 +559,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "با توجه به پیش‌نیازها و آیین‌نامه سقف واحد، آیا می‌توانم مبانی برنامه‌نویسی را بردارم؟",
@@ -596,7 +596,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "نحوه ثبت‌نام در کارگاه‌ها چگونه است؟",
@@ -614,7 +614,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "امکان تغییر گروه درسی وجود دارد؟",
@@ -632,7 +632,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "شرایط بورسیه تحصیلی چیست؟",
@@ -650,7 +650,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 5
+      "duration_ms": 4
     },
     {
       "question": "مدارک لازم برای دفاع پایان‌نامه چیست؟",
@@ -668,7 +668,7 @@
       "spell_variant": null,
       "hit": true,
       "refused": null,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "هواشناسی چیست؟",
@@ -684,7 +684,7 @@
       "spell_variant": null,
       "hit": false,
       "refused": false,
-      "duration_ms": 4
+      "duration_ms": 3
     },
     {
       "question": "قیمت بلیط هواپیما به استانبول چقدر است؟",
@@ -700,7 +700,7 @@
       "spell_variant": null,
       "hit": false,
       "refused": false,
-      "duration_ms": 6
+      "duration_ms": 4
     },
     {
       "question": "فوتبال چه روزی بازی است؟",
@@ -716,7 +716,7 @@
       "spell_variant": null,
       "hit": false,
       "refused": false,
-      "duration_ms": 5
+      "duration_ms": 4
     }
   ]
 }

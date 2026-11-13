@@ -29,7 +29,7 @@ from rest_framework_simplejwt.tokens import AccessToken
 
 from apps.ai.providers import MockLLMProvider, ProviderError
 from apps.courses.models import CourseOffering
-from apps.documents.models import Document, DocumentStatus
+from apps.documents.models import DocumentStatus
 from apps.documents.serializers import DocumentSerializer
 from apps.students.models import Enrollment
 

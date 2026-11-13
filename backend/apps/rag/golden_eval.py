@@ -34,10 +34,9 @@ from statistics import mean
 
 from apps.documents.models import Document, DocumentChunk, DocumentStatus
 from apps.rag.embeddings import LocalHashEmbeddingProvider
+from apps.rag.golden_dataset import GOLDEN_DATASET
 from apps.rag.normalize import normalize_persian
 from apps.rag.retrieval import RetrievalService
-
-from apps.rag.golden_dataset import GOLDEN_DATASET
 
 CORPUS_DOCUMENT_TYPE = "golden-sample"
 CHECKSUM_PREFIX = "golden-sample-"
@@ -132,7 +131,7 @@ def evaluate_golden_dataset(
 ) -> dict:
     """Run every golden item; return the full evaluation report (docs/15 §2)."""
     provider = LocalHashEmbeddingProvider(dimension=EMBEDDING_DIMENSION)
-    created = build_golden_corpus(provider)
+    build_golden_corpus(provider)
     try:
         service = RetrievalService(provider=provider, top_k=top_k, threshold=threshold)
         rows: list[dict] = []
@@ -290,7 +289,8 @@ def save_report(report: dict) -> tuple[Path, Path]:
         f"({report['grounded']['hits']}/{report['grounded']['total']}; "
         f"required ≥ {report['required_hit_rate']:.0%}) — "
         f"{'PASS' if report['passed'] else 'FAIL'}",
-        f"* unsupported refusal: {report['unsupported']['refused']}/{report['unsupported']['total']} "
+        f"* unsupported refusal: "
+        f"{report['unsupported']['refused']}/{report['unsupported']['total']} "
         f"refused outright; false-positive top scores above threshold: "
         f"{report['unsupported']['false_positive_scores'] or 'none'}",
         "",

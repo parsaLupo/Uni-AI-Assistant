@@ -2,23 +2,32 @@
 
 from __future__ import annotations
 
-import pytest
 import urllib.error
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from apps.academics.models import AcademicTerm, Department, Faculty
 from apps.ai.answer import AnswerService
+from apps.ai.citations import CitationService
 from apps.ai.modes import ExecutionMode
 from apps.ai.prompt import PromptService
-from apps.ai.citations import CitationService
-from apps.ai.providers import MockLLMProvider, build_llm_provider_from_env, GroqLLMProvider, ProviderError
+from apps.ai.providers import (
+    GroqLLMProvider,
+    MockLLMProvider,
+    build_llm_provider_from_env,
+)
 from apps.ai.router import QuestionRouter
 from apps.common.errors import AI_PROVIDER_ERROR, VALIDATION_ERROR, ApiError
+from apps.conversations.models import Conversation, Message
+from apps.courses.models import Course, CourseOffering, CoursePrerequisite
 from apps.documents.models import Document, DocumentChunk, DocumentStatus
+from apps.professors.models import Professor
 from apps.rag.embeddings import LocalHashEmbeddingProvider
 from apps.rag.normalize import normalize_persian
 from apps.rag.retrieval import RetrievalService
-
+from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 
 TEST_PASSWORD = "Str0ng-Passw0rd!"
 
@@ -437,18 +446,6 @@ class Phase09InjectionTests(TestCase):
         self.assertEqual(CitationService().sanitize("a\x00b\rc"), "abc")
 
 
-from django.contrib.auth import get_user_model
-
-from apps.academics.models import AcademicTerm, Department, Faculty
-from apps.courses.models import Course, CourseOffering, CoursePrerequisite
-from apps.documents.models import Document, DocumentChunk, DocumentStatus
-from apps.professors.models import Professor
-from apps.rag.embeddings import LocalHashEmbeddingProvider
-from apps.rag.normalize import normalize_persian
-from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
-from apps.conversations.models import Conversation, Message
-
-
 class Phase09PersistenceTests(TestCase):
     def test_routing_mode_persisted_on_message(self):
         User = get_user_model()
@@ -481,8 +478,7 @@ class Phase09PersistenceTests(TestCase):
 
 class Phase10StructuredPrerequisiteTests(TestCase):
     def setUp(self):
-        from apps.academics.models import AcademicTerm, Department, Faculty
-        from apps.courses.models import Course, CoursePrerequisite
+        from apps.courses.models import Course
         self.faculty = Faculty.objects.create(name="دانشکده مهندسی کامپیوتر", code="F-CE")
         self.department = Department.objects.create(
             faculty=self.faculty, name="گروه مهندسی کامپیوتر", code="16"
@@ -554,13 +550,8 @@ class Phase10StructuredPrerequisiteTests(TestCase):
 class Phase10StudentEligibilityTests(TestCase):
     def setUp(self):
         from django.contrib.auth import get_user_model
-        from apps.academics.models import AcademicTerm, Department, Faculty
-        from apps.courses.models import Course, CourseOffering, CoursePrerequisite
-        from apps.students.models import (
-            StudentProfile,
-            Enrollment,
-            EnrollmentStatus,
-        )
+
+        from apps.courses.models import Course
         from apps.professors.models import Professor
 
         User = get_user_model()
@@ -650,14 +641,14 @@ class Phase10HybridQuestionTests(TestCase):
         )
 
     def test_hybrid_combines_structured_and_rag(self):
-        from apps.academics.models import AcademicTerm, Department, Faculty
-        from apps.courses.models import Course, CourseOffering, CoursePrerequisite
-        from apps.students.models import StudentProfile, Enrollment, EnrollmentStatus
-        from apps.professors.models import Professor
         from django.contrib.auth import get_user_model
+
+        from apps.courses.models import Course
         from apps.documents.models import Document, DocumentChunk, DocumentStatus
+        from apps.professors.models import Professor
         from apps.rag.embeddings import LocalHashEmbeddingProvider
         from apps.rag.normalize import normalize_persian
+        from apps.students.models import Enrollment, EnrollmentStatus
 
         User = get_user_model()
         user = User.objects.create_user(
@@ -762,7 +753,6 @@ class Phase10AmbiguousCourseTests(TestCase):
     """Tests for ambiguous course-name matching with ambiguity detection."""
 
     def setUp(self):
-        from apps.academics.models import Faculty, Department, AcademicTerm
 
         self.faculty = Faculty.objects.create(
             name="فناوری اطلاعات", code="IT", is_active=True
@@ -784,7 +774,6 @@ class Phase10AmbiguousCourseTests(TestCase):
 
     def test_exact_code_match_returns_single_course(self):
         from apps.ai.structured import _find_course
-        from apps.courses.models import Course
         Course.objects.create(
             department=self.dept1, code="CS101", title="معماری کامپیوتر", credits=3
         )
@@ -798,7 +787,6 @@ class Phase10AmbiguousCourseTests(TestCase):
 
     def test_ambiguous_returns_multiple_matches(self):
         from apps.ai.structured import _find_course
-        from apps.courses.models import Course
         Course.objects.create(
             department=self.dept1, code="CS101", title="معماری کامپیوتر", credits=3
         )
@@ -822,9 +810,7 @@ class Phase10ScheduleTests(TestCase):
     """Tests for class schedule structured retrieval."""
 
     def setUp(self):
-        from apps.academics.models import Faculty, Department, AcademicTerm
-        from apps.courses.models import Course, CourseOffering
-        from apps.professors.models import Professor
+        from apps.courses.models import Course
 
         self.faculty = Faculty.objects.create(
             name="فناوری اطلاعات", code="IT", is_active=True
@@ -906,7 +892,6 @@ class Phase10InsufficientEvidenceScenariosTests(TestCase):
         self.user = User.objects.create_user(
             email="scenario@example.com", password=TEST_PASSWORD
         )
-        from apps.academics.models import AcademicTerm
         self.term = AcademicTerm.objects.create(
             name="نیمسال اول ۱۴۰۵-۱۴۰۶",
             academic_year="1405-1406",
@@ -967,7 +952,6 @@ class Phase10ConflictDetectionTests(TestCase):
 
 class Phase10HybridBothServicesCalledTests(TestCase):
     def test_hybrid_calls_both_structured_and_rag(self):
-        from apps.ai.router import QuestionRouter
 
         structured_called = False
         rag_called = False
@@ -993,7 +977,6 @@ class Phase10HybridBothServicesCalledTests(TestCase):
                     }
                 ]
 
-        router = QuestionRouter()
         provider = __import__(
             "apps.ai.providers", fromlist=["MockLLMProvider"]
         ).MockLLMProvider(response_text="پاسخ [1] تست")

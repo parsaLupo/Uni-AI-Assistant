@@ -181,10 +181,14 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
     "EXCEPTION_HANDLER": "apps.common.errors.handle_exception",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    # Rate limits (OA-09 / ADR-014): login+register per IP, refresh per user.
+    # Rate limits (OA-09 / ADR-014, Phase 15): login+register per IP, refresh
+    # per user, AI ask and document upload per user. Each scope is enforced by
+    # a ScopedRateThrottle on the specific views that need it.
     "DEFAULT_THROTTLE_RATES": {
         "auth_ip": env_str("RATE_AUTH_IP", "10/min"),
         "auth_refresh": env_str("RATE_AUTH_REFRESH", "30/min"),
+        "ai_ask": env_str("RATE_AI_ASK", "20/min"),
+        "upload": env_str("RATE_UPLOAD", "10/min"),
     },
 }
 
@@ -233,6 +237,32 @@ COOKIE_SECURE = env_bool("COOKIE_SECURE", not DEBUG)
 SESSION_COOKIE_SECURE = COOKIE_SECURE
 CSRF_COOKIE_SECURE = COOKIE_SECURE
 CSRF_COOKIE_SAMESITE = "Lax"
+
+# Transport / header hardening (docs/07-security.md section 1, Phase 15) -------
+# Defaults are secure whenever the process is not development: HTTPS redirect,
+# HSTS, no-sniff, a restrictive referrer policy and clickjacking protection.
+# The suite and the sandboxed dev server run with DEBUG=False but no TLS, so
+# IS_TESTS keeps the HTTPS redirect off there (the production-settings test
+# boots a real subprocess with DJANGO_DEBUG=false and asserts these flags).
+SECURE_SSL_REDIRECT = env_bool(
+    "SECURE_SSL_REDIRECT", (not DEBUG) and not IS_TESTS
+)
+SECURE_HSTS_SECONDS = env_int("SECURE_HSTS_SECONDS", 0 if DEBUG else 31536000)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+# TLS usually terminates at the reverse proxy (docs/09-deployment.md); trust
+# its X-Forwarded-Proto so request.is_secure() and CSRF stay correct.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "same-origin"
+X_FRAME_OPTIONS = "DENY"
+
+# Privacy / retention (docs/07-security.md section 6, OA-07 — decided in
+# Phase 15): archived conversations are hard-deleted RETENTION_CONVERSATION_DAYS
+# days after archiving by `manage.py apply_retention --yes`. Documents are
+# official university records and are retained; audit logs are append-only and
+# never deleted by the application.
+RETENTION_CONVERSATION_DAYS = env_int("RETENTION_CONVERSATION_DAYS", 180)
 
 # Argon2id first (docs/07 section 2, ADR-014); older hashers stay registered so
 # any previously stored hash can still be verified during login.

@@ -131,7 +131,9 @@ class QuestionRouter:
             return ExecutionMode.GENERAL, "general question"
         return ExecutionMode.OUT_OF_SCOPE, "no university keyword"
 
-    def _model_classify(self, question: str, deterministic_mode: ExecutionMode) -> ExecutionMode | None:
+    def _model_classify(
+        self, question: str, deterministic_mode: ExecutionMode
+    ) -> ExecutionMode | None:
         if self.provider is None or deterministic_mode == ExecutionMode.OUT_OF_SCOPE:
             return None
         prompt = (

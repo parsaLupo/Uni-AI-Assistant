@@ -5,7 +5,6 @@ carries the docs/08 §4 fields, and the whole set passes the automated
 retrieval + refusal evaluation against the sample corpus.
 """
 
-import pytest
 from django.test import TestCase
 
 from apps.rag.golden_dataset import GOLDEN_DATASET

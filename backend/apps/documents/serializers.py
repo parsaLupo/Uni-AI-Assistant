@@ -88,6 +88,13 @@ class DocumentSerializer(ConflictModelSerializer):
         f.seek(0)
         if b"/Encrypt" in sample:
             raise serializers.ValidationError("فایل PDF رمزگذاری شده پشتیبانی نمی‌شود.")
+        # AV scan hook (docs/07-security.md section 3, Phase 15): this is the
+        # single choke point for every upload, after content validation and
+        # before the file is stored. When a deployment can run a scanner
+        # (ClamAV daemon or similar), invoke it here on the in-memory bytes
+        # and raise ValidationError on detection. Deliberately not wired in
+        # the MVP — no scanner exists in the documented deployment — so the
+        # default is a no-op and the hook is documented instead of half-built.
         return f
 
     def validate_status(self, value):

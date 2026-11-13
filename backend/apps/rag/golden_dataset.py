@@ -25,6 +25,7 @@ contain and claims it must never invent:
 
 from __future__ import annotations
 
+
 def _item(question: str, expected_title: str | None, category: str, **extra) -> dict:
     item = {
         "question": question,

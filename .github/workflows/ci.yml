@@ -14,6 +14,24 @@ on:
   pull_request:
 
 jobs:
+  # Phase 15: fail the build if anything that looks like a live credential is
+  # committed (AGENTS.md section 9, docs/07-security.md section 7). Patterns
+  # cover Groq keys, OpenAI-style keys, AWS access keys and private key blocks.
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan tracked files for credential patterns
+        run: |
+          set -e
+          matches=$(git grep -nIE 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----' -- . || true)
+          if [ -n "$matches" ]; then
+            echo "$matches"
+            echo "::error::Credential-looking string committed — rotate the key and remove it from history."
+            exit 1
+          fi
+          echo "secret-scan clean"
+
   backend:
     runs-on: ubuntu-latest
     defaults:

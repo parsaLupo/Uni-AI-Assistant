@@ -7,7 +7,9 @@
 # LTS release (security support until April 2028) chosen over the newer 6.x
 # major so the baseline does not absorb breaking changes mid-project.
 Django==5.2.17
-djangorestframework==3.18.1
+# 3.18.2 = security fix release (CVE-2026-114136/-114137/-114138, pip-audit
+# Phase 15). 3.18.1 has no remaining advisories.
+djangorestframework==3.18.2
 django-cors-headers==4.9.0
 
 # PostgreSQL driver (ADR-002). Binary wheel: no local compiler needed.
@@ -27,5 +29,7 @@ redis==8.1.0
 # Argon2id password hashing (docs/07 section 2, ADR-014 decision 6).
 argon2-cffi==25.1.0
 
-# PDF text extraction for document ingestion (Phase 08, RAG).
-pypdf==5.3.1
+# PDF text extraction for document ingestion (Phase 08, RAG). PDFs are
+# untrusted input, so this pin tracks the security fix stream: 6.21.4 clears
+# the 2026 pypdf CVE list reported by pip-audit (Phase 15).
+pypdf==6.21.4

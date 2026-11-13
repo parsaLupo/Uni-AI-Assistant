@@ -12,7 +12,8 @@ import os
 import time
 import urllib.error
 import urllib.request
-from typing import Iterator, Protocol, runtime_checkable
+from collections.abc import Iterator
+from typing import Protocol, runtime_checkable
 
 
 @runtime_checkable
@@ -60,10 +61,18 @@ class MockLLMProvider:
         self.call_count += 1
         if self.attempts_before_success and self.call_count <= self.attempts_before_success:
             if self.fail_with is not None:
-                raise self.fail_with if isinstance(self.fail_with, BaseException) else self.fail_with()
+                raise (
+                    self.fail_with
+                    if isinstance(self.fail_with, BaseException)
+                    else self.fail_with()
+                )
             raise TimeoutError("mock provider timeout")
         if self.fail_with is not None and self.attempts_before_success == 0:
-            raise self.fail_with if isinstance(self.fail_with, BaseException) else self.fail_with()
+            raise (
+                self.fail_with
+                if isinstance(self.fail_with, BaseException)
+                else self.fail_with()
+            )
         if self.malformed:
             return "   "  # empty after strip -> treated as malformed by callers
         if self.response_text is not None:
@@ -71,9 +80,15 @@ class MockLLMProvider:
         # Deterministic, clearly-mocked answer derived from the prompt.
         return "پاسخ آزمایشی مدل mock: " + (prompt.splitlines()[-1] if prompt else "")
 
-    def chat_stream(self, prompt: str, *, timeout: float = 30.0, max_retries: int = 1) -> Iterator[str]:
+    def chat_stream(
+        self, prompt: str, *, timeout: float = 30.0, max_retries: int = 1
+    ) -> Iterator[str]:
         if self.fail_with is not None:
-            raise self.fail_with if isinstance(self.fail_with, BaseException) else self.fail_with()
+            raise (
+                self.fail_with
+                if isinstance(self.fail_with, BaseException)
+                else self.fail_with()
+            )
         yield self.chat(prompt, timeout=timeout, max_retries=max_retries)
 
 
@@ -249,7 +264,9 @@ class GroqLLMProvider:
 
         return content, usage, parsed.get("model")
 
-    def chat_stream(self, prompt: str, *, timeout: float = 30.0, max_retries: int = 1) -> Iterator[str]:
+    def chat_stream(
+        self, prompt: str, *, timeout: float = 30.0, max_retries: int = 1
+    ) -> Iterator[str]:
         if self._circuit_open():
             self.last_error_category = "circuit_open"
             raise ProviderError("circuit_open", "Groq provider circuit breaker is open.")

@@ -1,4 +1,4 @@
-﻿"""Course catalog endpoints.
+"""Course catalog endpoints.
 
 Admin CRUD (`/admin/courses/`, `/admin/offerings/`, nested prerequisites and
 schedules per docs/api/admin.md) plus public reads (`/courses/`,
@@ -32,7 +32,7 @@ from apps.courses.serializers import (
     CourseSerializer,
 )
 
-HISTORICAL_MESSAGE = "Ø§ÛŒÙ† Ø±Ø¯ÛŒÙ Ø¨Ù‡ ØªØ±Ù… Ú¯Ø°Ø´ØªÙ‡ ØªØ¹Ù„Ù‚ Ø¯Ø§Ø±Ø¯ Ùˆ Ø³ÙˆØ§Ø¨Ù‚ ØªØ§Ø±ÛŒØ®ÛŒ Ù…ØµÙˆÙ†â€ŒØ§Ù†Ø¯Ø› ØªØºÛŒÛŒØ± Ù…Ø¬Ø§Ø² Ù†ÛŒØ³Øª."
+HISTORICAL_MESSAGE = "این ردیف به ترم گذشته تعلق دارد و سوابق تاریخی مصون‌اند؛ تغییر مجاز نیست."
 
 
 def ensure_not_historical(instance) -> None:
@@ -52,7 +52,6 @@ def with_enrolled_count(qs):
 
 
 def _filter_offerings(qs, params, user=None):
-    from apps.common.scoping import student_department_id
 
     term = params.get("term")
     if term == "current":
@@ -63,7 +62,7 @@ def _filter_offerings(qs, params, user=None):
     if course:
         from django.db.models import Q
 
-        # Course codes are numeric ("1916001") but are NOT ids â€” match both.
+        # Course codes are numeric ("1916001") but are NOT ids — match both.
         code_q = Q(course__code=course)
         if course.isdigit():
             code_q |= Q(course_id=int(course))
@@ -99,7 +98,7 @@ class AdminCourseViewSet(
         if instance.offerings.exists():
             raise ApiError(
                 CONFLICT,
-                "Ø§ÛŒÙ† Ø¯Ø±Ø³ Ø§Ø±Ø§Ø¦Ù‡ Ø´Ø¯Ù‡ Ø§Ø³Øª Ùˆ Ù‚Ø§Ø¨Ù„ Ø­Ø°Ù Ù†ÛŒØ³ØªØ› ØºÛŒØ±ÙØ¹Ø§Ù„â€ŒØ§Ø´ Ú©Ù†ÛŒØ¯.",
+                "این درس ارائه شده است و قابل حذف نیست؛ غیرفعال‌اش کنید.",
                 http_status=409,
             )
         super().perform_destroy(instance)
@@ -135,7 +134,7 @@ class AdminCourseOfferingViewSet(
         except ProtectedError as exc:
             raise ApiError(
                 CONFLICT,
-                "Ø§ÛŒÙ† Ø§Ø±Ø§Ø¦Ù‡ Ø¯Ø§Ø±Ø§ÛŒ Ø«Ø¨Øªâ€ŒÙ†Ø§Ù…/Ø§Ù…ØªØ­Ø§Ù† Ø§Ø³ØªØ› Ø§Ø¨ØªØ¯Ø§ Ø¢Ù†â€ŒÙ‡Ø§ Ø±Ø§ Ø­Ø°Ù ÛŒØ§ Ù„ØºÙˆ Ú©Ù†ÛŒØ¯.",
+                "این ارائه دارای ثبت‌نام/امتحان است؛ ابتدا آن‌ها را حذف یا لغو کنید.",
                 http_status=409,
             ) from exc
 
@@ -183,14 +182,16 @@ class CourseOfferingViewSet(ListObservabilityMixin, viewsets.ReadOnlyModelViewSe
     ordering = ["course__code"]
 
     def get_queryset(self):
-        return _filter_offerings(super().get_queryset(), self.request.query_params, self.request.user)
+        return _filter_offerings(
+            super().get_queryset(), self.request.query_params, self.request.user
+        )
 
 
 # --- Nested admin resources (docs/api/admin.md) ------------------------------
 
 
 class AdminPrerequisiteListCreateView(APIView):
-    """GET/POST /admin/courses/{id}/prerequisites/ â€” read/add edges of a course."""
+    """GET/POST /admin/courses/{id}/prerequisites/ — read/add edges of a course."""
 
     permission_classes = [IsAdmin]
 
@@ -198,7 +199,7 @@ class AdminPrerequisiteListCreateView(APIView):
         try:
             return Course.objects.get(pk=int(pk))
         except Course.DoesNotExist as exc:
-            raise NotFound("Ù…Ù†Ø¨Ø¹ Ù…ÙˆØ±Ø¯Ù†Ø¸Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯.") from exc
+            raise NotFound("منبع موردنظر یافت نشد.") from exc
 
     @extend_schema(responses={200: CoursePrerequisiteSerializer(many=True)})
     def get(self, request, course_id: str):
@@ -219,16 +220,16 @@ class AdminPrerequisiteListCreateView(APIView):
             with transaction.atomic():
                 serializer.save()
         except IntegrityError as exc:
-            # Duplicate edge / self-prerequisite â€” DB decides, contract says 409.
+            # Duplicate edge / self-prerequisite — DB decides, contract says 409.
             raise ApiError(
-                CONFLICT, "Ú†Ù†ÛŒÙ† Ù¾ÛŒØ´â€ŒÙ†ÛŒØ§Ø²ÛŒ Ø¨Ø±Ø§ÛŒ Ø§ÛŒÙ† Ø¯Ø±Ø³ Ø«Ø¨Øª Ø´Ø¯Ù‡ Ø§Ø³Øª.", http_status=409
+                CONFLICT, "چنین پیش‌نیازی برای این درس ثبت شده است.", http_status=409
             ) from exc
         record_audit(request.user, AuditAction.CREATE, serializer.instance)
         return Response(serializer.data, status=201)
 
 
 class AdminPrerequisiteDestroyView(APIView):
-    """DELETE /admin/prerequisites/{id}/ â€” remove one edge."""
+    """DELETE /admin/prerequisites/{id}/ — remove one edge."""
 
     permission_classes = [IsAdmin]
 
@@ -237,14 +238,14 @@ class AdminPrerequisiteDestroyView(APIView):
         try:
             edge = CoursePrerequisite.objects.get(pk=int(pk))
         except CoursePrerequisite.DoesNotExist as exc:
-            raise NotFound("Ù…Ù†Ø¨Ø¹ Ù…ÙˆØ±Ø¯Ù†Ø¸Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯.") from exc
+            raise NotFound("منبع موردنظر یافت نشد.") from exc
         record_audit(request.user, AuditAction.DELETE, edge)
         edge.delete()
         return Response(status=204)
 
 
 class AdminOfferingScheduleListCreateView(APIView):
-    """GET/POST /admin/offerings/{id}/schedules/ â€” weekly meeting rows."""
+    """GET/POST /admin/offerings/{id}/schedules/ — weekly meeting rows."""
 
     permission_classes = [IsAdmin]
 
@@ -252,7 +253,7 @@ class AdminOfferingScheduleListCreateView(APIView):
         try:
             return CourseOffering.objects.get(pk=int(pk))
         except CourseOffering.DoesNotExist as exc:
-            raise NotFound("Ù…Ù†Ø¨Ø¹ Ù…ÙˆØ±Ø¯Ù†Ø¸Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯.") from exc
+            raise NotFound("منبع موردنظر یافت نشد.") from exc
 
     @extend_schema(responses={200: ClassScheduleSerializer(many=True)})
     def get(self, request, offering_id: str):
@@ -272,7 +273,7 @@ class AdminOfferingScheduleListCreateView(APIView):
 
 
 class AdminScheduleDetailView(APIView):
-    """PATCH/DELETE /admin/schedules/{id}/ â€” edit or remove one row."""
+    """PATCH/DELETE /admin/schedules/{id}/ — edit or remove one row."""
 
     permission_classes = [IsAdmin]
 
@@ -281,7 +282,7 @@ class AdminScheduleDetailView(APIView):
         try:
             row = ClassSchedule.objects.get(pk=int(pk))
         except ClassSchedule.DoesNotExist as exc:
-            raise NotFound("Ù…Ù†Ø¨Ø¹ Ù…ÙˆØ±Ø¯Ù†Ø¸Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯.") from exc
+            raise NotFound("منبع موردنظر یافت نشد.") from exc
         ensure_not_historical(row)
         serializer = ClassScheduleSerializer(row, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -294,7 +295,7 @@ class AdminScheduleDetailView(APIView):
         try:
             row = ClassSchedule.objects.get(pk=int(pk))
         except ClassSchedule.DoesNotExist as exc:
-            raise NotFound("Ù…Ù†Ø¨Ø¹ Ù…ÙˆØ±Ø¯Ù†Ø¸Ø± ÛŒØ§ÙØª Ù†Ø´Ø¯.") from exc
+            raise NotFound("منبع موردنظر یافت نشد.") from exc
         ensure_not_historical(row)
         record_audit(request.user, AuditAction.DELETE, row)
         row.delete()

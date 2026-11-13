@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from rest_framework import serializers
-
 from apps.conversations.models import Conversation, Message, MessageSource
+from rest_framework import serializers
 
 
 class MessageSourceSerializer(serializers.ModelSerializer):

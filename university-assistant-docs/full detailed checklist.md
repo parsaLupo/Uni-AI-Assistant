@@ -505,32 +505,38 @@ generation), injection test results, provider-failure simulation.
 load-test report with p95 numbers. *(golden-set + load reports and the E2E
 suite are committed; the all-green CI run itself is pending the next push.)*
 
-### Phase 15 — Security Hardening ⬜
+### Phase 15 — Security Hardening ✅
 
 **Objective.** Security review and hardening before deployment.
 
 **Tasks**
 
-- [ ] Auth hardening: rotation + reuse detection verified, cookie flags, short access TTL, logout revocation.
-- [ ] CORS/host checks per environment; `DEBUG=false` everywhere outside local.
-- [ ] Upload security: type/MIME/size, storage outside executable paths, filename sanitisation, optional AV scan hook.
-- [ ] Rate limits on auth, AI and upload endpoints, with tested behaviour.
-- [ ] Secret management: no secret in image/repo/logs; `.env.example` complete; rotate anything leaked.
-- [ ] Prompt-injection suite from Phase 09 expanded with regulation-style documents.
-- [ ] Logging review: no tokens/passwords/PII; request ids present; retention set.
-- [ ] Privacy review: retention for messages/audit/documents decided and implemented (OA-07).
-- [ ] Dependency review: `pip-audit` + `npm audit`, pinned versions, documented update path.
+- [x] Auth hardening: rotation + reuse detection verified, cookie flags, short access TTL, logout revocation. *(already implemented (ADR-014); audited and confirmed in the Phase 15 record — `HttpOnly`/`Secure`/`SameSite=Lax` refresh cookie, 5-min access TTL, rotation + reuse detection, logout revocation.)*
+- [x] CORS/host checks per environment; `DEBUG=false` everywhere outside local. *(explicit env lists, empty CORS without explicit origins, DEBUG default false + secret refusal — asserted by subprocess boot tests `apps/common/tests/test_production_settings.py`.)*
+- [x] Upload security: type/MIME/size, storage outside executable paths, filename sanitisation, optional AV scan hook. *(validated in `apps/documents/serializers.py`; AV hook point documented in the same validator, deliberately off in the MVP.)*
+- [x] Rate limits on auth, AI and upload endpoints, with tested behaviour. *(new `ai_ask` 20/min per user on ask+stream, `upload` 10/min per admin on create/retry; 429 `RATE_LIMITED` envelope — 7 new throttle tests.)*
+- [x] Secret management: no secret in image/repo/logs; `.env.example` complete; rotate anything leaked. *(new CI `secret-scan` job, local grep clean; `.env.example` completed with the Phase 15 vars; nothing leaked to rotate.)*
+- [x] Prompt-injection suite from Phase 09 expanded with regulation-style documents. *(5 new full-pipeline tests with poisoned regulation chunks, English + Persian payloads — `apps/ai/tests/test_injection_hardening.py`.)*
+- [x] Logging review: no tokens/passwords/PII; request ids present; retention set. *(3 new logging-hygiene tests; access log carries id/method/path/status/latency only.)*
+- [x] Privacy review: retention for messages/audit/documents decided and implemented (OA-07). *(archived conversations hard-deleted 180 d after archiving via `apply_retention --yes`; documents retained as records; audit append-only — OA-07 → ACCEPTED.)*
+- [x] Dependency review: `pip-audit` + `npm audit`, pinned versions, documented update path. *(DRF→3.18.2, pypdf→6.21.4, pip→26.3, vite→8.3.8; both audits now clean; update path in `docs/07-security.md` §8.)*
 
 **Acceptance criteria**
 
-- [ ] `docs/07` §8 security checklist complete with evidence per line.
-- [ ] No secret leakage (scanner clean).
-- [ ] Admin authorization verified by tests, not by UI visibility.
-- [ ] AI endpoints have abuse controls (rate limit + per-user quota).
-- [ ] Dependency scan has no unaddressed high/critical finding.
+- [x] `docs/07` §8 security checklist complete with evidence per line.
+- [x] No secret leakage (scanner clean).
+- [x] Admin authorization verified by tests, not by UI visibility. *(112-row permission matrix + openapi exhaustiveness — `apps/common/tests/test_permission_matrix.py`.)*
+- [x] AI endpoints have abuse controls (rate limit + per-user quota). *(per-user `ai_ask` budget shared by ask + stream, checked before the provider is called.)*
+- [x] Dependency scan has no unaddressed high/critical finding. *(pip-audit + npm audit clean after the Phase 15 upgrades.)*
 
-**Exit evidence:** security checklist, scanner output, rate-limit tests,
-injection results, retention decision recorded.
+**Exit evidence:** security checklist (`docs/07 §8`), scanner outputs
+(pip-audit "No known vulnerabilities found", `npm audit` 0 vulnerabilities,
+CI secret-scan grep clean), rate-limit tests (7), injection results (5
+pipeline tests), retention decision recorded (`docs/14`, OA-07) and
+implemented with 5 tests. *(All 483 backend tests pass against PostgreSQL +
+pgvector; the CI run itself is pending the next push — registry/network was
+intermittent this session, and the docker image rebuild for pypdf 6.21.4 is
+deferred to Phase 16.)*
 
 ### Phase 16 — Deployment, Observability & Release ⬜
 
