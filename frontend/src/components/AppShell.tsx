@@ -35,7 +35,13 @@ const STUDENT_ITEMS: NavItem[] = [
   { to: '/profile', label: navText.profile, icon: 'account_circle' },
 ]
 
-const ADMIN_ITEMS: NavItem[] = [{ to: '/admin', label: navText.adminOverview, icon: 'settings' }]
+/** Admin navigation (UI refinement): the overview plus the shared AI
+ *  assistant. Management screens stay reachable from the overview's
+ *  quick-links; the student rail is untouched. */
+const ADMIN_ITEMS: NavItem[] = [
+  { to: '/admin', label: navText.adminOverview, icon: 'settings' },
+  { to: '/assistant', label: navText.assistant, icon: 'smart_toy' },
+]
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const { user } = useAuth()
@@ -58,15 +64,11 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <nav aria-label={navText.menu} className="flex flex-col gap-1">
-      {STUDENT_ITEMS.map(render)}
       {isAdmin ? (
-        <>
-          <div className="mt-space-sm border-t border-outline-variant pt-space-sm">
-            <span className="px-space-md text-label-sm font-bold text-outline">{navText.admin}</span>
-          </div>
-          {ADMIN_ITEMS.map(render)}
-        </>
-      ) : null}
+        ADMIN_ITEMS.map(render)
+      ) : (
+        STUDENT_ITEMS.map(render)
+      )}
     </nav>
   )
 }

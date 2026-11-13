@@ -48,6 +48,9 @@ export const queryKeys = {
   adminAuditLog: (query: { entity_type?: string; action?: string; page?: number; page_size?: number } = {}) =>
     ['admin', 'audit-log', query] as const,
 
+  // Public health probe (admin overview status card)
+  health: () => ['health'] as const,
+
   // Admin management CRUD (Phase 13 screens) — mutations invalidate per
   // resource so the overview's page_size=1 counts stay fresh too.
   adminUsers: (query: AdminUsersQuery = {}) => ['admin', 'users', query] as const,

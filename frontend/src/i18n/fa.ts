@@ -439,6 +439,7 @@ export const assistantPage = {
 export const adminPage = {
   title: 'نمای کلی مدیریت',
   subtitle: 'آمار زنده سامانه از داده‌های واقعی',
+  welcome: 'خوش آمدید',
   kpiUsers: 'کاربران',
   kpiStudents: 'دانشجویان',
   kpiCourses: 'درس‌ها',
@@ -485,6 +486,26 @@ export const adminPage = {
   auditEmpty: 'رویداد حسابرسی‌ای ثبت نشده است.',
   documentColumn: 'سند',
   routingMode: 'حالت پاسخ',
+  // UI refinement — administrator overview (all values from real endpoints)
+  overviewSubtitle: 'نمای کلی وضعیت سامانه بر پایه داده‌های واقعی',
+  systemStatus: 'وضعیت سامانه',
+  systemActive: 'سامانه فعال',
+  systemIssue: 'اختلال در سامانه',
+  serviceStatusLabel: 'وضعیت سرویس',
+  dbLatencyMs: 'میلی‌ثانیه',
+  databaseLabel: 'پایگاه داده',
+  databaseOk: 'فعال',
+  databaseUnavailable: 'در دسترس نیست',
+  aiProviderLabel: 'سرویس هوش مصنوعی',
+  aiProviderNotConfigured: 'پیکربندی نشده',
+  activeDocuments: 'اسناد فعال',
+  errorsShort: 'خطاها',
+  recentActivities: 'آخرین اقدامات مدیریتی',
+  recentActivitiesHint: 'رویدادهای اخیر گزارش حسابرسی',
+  viewAllAudit: 'مشاهده همه',
+  failedDocsWarningTitle: 'اسناد ناموفق در پردازش',
+  failedDocsWarningBody:
+    'سند در خط پردازش ناموفق بوده است؛ از صفحه اسناد، تلاش مجدد یا بررسی خطا را انجام دهید.',
 } as const
 
 /* ---------------------------------------------------------------------------
