@@ -14,8 +14,9 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, time
+from datetime import date, datetime, time
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -40,7 +41,9 @@ from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 
 User = get_user_model()
 
-# Longest-first so «یکشنبه» never matches inside «شنبه».
+# Canonical Persian weekday labels (presentation; matching uses the flexible
+# `_WEEKDAY_PATTERNS` above, so separator/letterform variants never depend on
+# this list's order).
 WEEKDAYS = [
     ("یکشنبه", Weekday.SUNDAY),
     ("دوشنبه", Weekday.MONDAY),
@@ -50,14 +53,80 @@ WEEKDAYS = [
     ("جمعه", Weekday.FRIDAY),
     ("شنبه", Weekday.SATURDAY),
 ]
-_DAY_PATTERN = "|".join(re.escape(name) for name, _ in WEEKDAYS)
+
+# Source lines mix letterforms and separators: Arabic ي/ك in «يك شنبه»,
+# a plain space instead of ZWNJ in «سه شنبه», and the joined «سه‌شنبه».
+# Each weekday is a flexible pattern (optional space/ZWNJ between the parts)
+# ordered longest-first, so «شنبه» can never win by matching *inside*
+# «يك شنبه»/«سه شنبه» — the seed bug that mapped every compound weekday to
+# Saturday.
+_WEEKDAY_PATTERNS: list[tuple[str, Weekday]] = [
+    (r"چهار[ ‌]?شنبه", Weekday.WEDNESDAY),
+    (r"پنج[ ‌]?شنبه", Weekday.THURSDAY),
+    (r"سه[ ‌]?شنبه", Weekday.TUESDAY),
+    (r"[\u06cc\u064a][\u06a9\u0643][ \u200c]?شنبه", Weekday.SUNDAY),
+    (r"دو[ ‌]?شنبه", Weekday.MONDAY),
+    (r"جمعه", Weekday.FRIDAY),
+    (r"شنبه", Weekday.SATURDAY),
+]
+_DAY_PATTERN = "|".join(f"(?:{pattern})" for pattern, _ in _WEEKDAY_PATTERNS)
 _CLASS_RE = re.compile(rf"({_DAY_PATTERN})\s+(\d{{1,2}}:\d{{2}})-(\d{{1,2}}:\d{{2}})")
 _CLASSROOM_RE = re.compile(r"مکان\s*:\s*(.+)$")
 _EXAM_RE = re.compile(
     r"امتحان\((\d{4})\.(\d{1,2})\.(\d{1,2})\)\s*ساعت\s*:\s*"
     r"(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})"
 )
-_WEEKDAY_MAP = dict(WEEKDAYS)
+# jalali weekday label per Weekday value (presentation only).
+_WEEKDAY_LABELS: dict[Weekday, str] = {
+    weekday: name for name, weekday in WEEKDAYS
+}
+
+def _weekday_of(day_text: str) -> Weekday:
+    """Canonical Weekday for a matched day name (any letterform/separator)."""
+    for pattern, weekday in _WEEKDAY_PATTERNS:
+        if re.fullmatch(pattern, day_text):
+            return weekday
+    raise ValueError(f"unknown weekday: {day_text!r}")
+
+
+def parse_class_session(line: str) -> tuple[Weekday, time, time, str] | None:
+    """Parse «درس(ت): شنبه 12:00-15:00 مکان: ...» → (weekday, start, end, room).
+
+    Returns None for lines that are not weekly class sessions (exam lines,
+    continuation-row references, anything else).
+    """
+    match = _CLASS_RE.search(line)
+    if match is None:
+        return None
+    day, start, end = match.groups()
+    room = _CLASSROOM_RE.search(line)
+    return (
+        _weekday_of(day),
+        time(*map(int, start.split(":"))),
+        time(*map(int, end.split(":"))),
+        room.group(1).strip() if room else "",
+    )
+
+
+def parse_exam_slot(line: str) -> tuple[date, time, time, str] | None:
+    """Parse «امتحان(1405.10.20) ساعت : 16:00-18:00» → (date, start, end, room).
+
+    The Jalali date converts via the project's `jalali_date`; the room stays
+    empty because exam rows in the dataset carry no «مکان». Returns None for
+    non-exam lines (class sessions must never be read as exam dates).
+    """
+    match = _EXAM_RE.search(line)
+    if match is None:
+        return None
+    jy, jm, jd, sh, sm_, eh, em_ = match.groups()
+    room = _CLASSROOM_RE.search(line)
+    return (
+        jalali_date(int(jy), int(jm), int(jd)),
+        time(int(sh), int(sm_)),
+        time(int(eh), int(em_)),
+        room.group(1).strip() if room else "",
+    )
+
 
 SEMESTER_DATES = {
     # Jalali (start, end) month/day envelopes for one academic year.
@@ -65,6 +134,12 @@ SEMESTER_DATES = {
     TermSemester.SECOND: ((10, 1), (12, 31)),
     TermSemester.SUMMER: ((4, 1), (6, 31)),
 }
+
+# The dataset's wall-clock times are Iran local time (Asia/Tehran, +03:30).
+# `timezone.make_aware` with the default (UTC, per settings.TIME_ZONE) would
+# store the announced 10:00 exam as 10:00 UTC — 3:30 hours off for viewers in
+# Tehran — so every parsed exam instant is pinned to the Iran zone instead.
+TEHRAN_TZ = ZoneInfo("Asia/Tehran")
 
 DEMO_PASSWORD = "Demo-Passw0rd!"
 
@@ -202,35 +277,42 @@ class Seeder:
         return {p.normalized_name: p for p in Professor.objects.all()}
 
     def _parse_schedule(self, details: list[str], offering: CourseOffering) -> None:
+        """Import one offering's schedule/exam lines.
+
+        `schedule_details` already carries the merged continuation rows, and
+        every parse goes through `get_or_create`, so re-importing (or the same
+        session listed twice across rows) can never duplicate a fact.
+        """
         for line in details:
-            exam = _EXAM_RE.search(line)
-            if exam:
-                jy, jm, jd, sh, sm_, eh, em_ = exam.groups()
-                exam_date = jalali_date(int(jy), int(jm), int(jd))
+            exam = parse_exam_slot(line)
+            if exam is not None:
+                exam_date, starts, ends, classroom = exam
+                # Source times are Tehran wall-clock; pin the zone (see
+                # TEHRAN_TZ) so the stored instant matches the announced time.
                 _, created = Exam.objects.get_or_create(
                     course_offering=offering,
                     defaults={
                         "starts_at": timezone.make_aware(
-                            datetime.combine(exam_date, time(int(sh), int(sm_)))
+                            datetime.combine(exam_date, starts), TEHRAN_TZ
                         ),
                         "ends_at": timezone.make_aware(
-                            datetime.combine(exam_date, time(int(eh), int(em_)))
+                            datetime.combine(exam_date, ends), TEHRAN_TZ
                         ),
+                        "classroom": classroom,
                     },
                 )
                 if created:
                     self._bump("exams")
                 continue
-            cls = _CLASS_RE.search(line)
-            if cls:
-                day, start, end = cls.groups()
-                room = _CLASSROOM_RE.search(line)
+            session = parse_class_session(line)
+            if session is not None:
+                weekday, start, end, classroom = session
                 _, created = ClassSchedule.objects.get_or_create(
                     course_offering=offering,
-                    weekday=_WEEKDAY_MAP[day],
-                    start_time=time(*map(int, start.split(":"))),
-                    end_time=time(*map(int, end.split(":"))),
-                    defaults={"classroom": (room.group(1).strip() if room else "")},
+                    weekday=weekday,
+                    start_time=start,
+                    end_time=end,
+                    defaults={"classroom": classroom},
                 )
                 if created:
                     self._bump("schedules")

@@ -43,7 +43,8 @@ import {
   weekdayFa,
 } from '../../i18n/jalali'
 import { degreeLevelLabels, priorityLabels, semesterLabels } from '../../i18n/labels'
-import type { Announcement, ClassSchedule, Exam, PlannerItem } from '../../types/academic'
+import type { Announcement, Exam } from '../../types/academic'
+import { examRowsFromPlanner, todaySessions } from './schedule'
 
 const PAGE_SIZE = 50
 
@@ -194,20 +195,6 @@ function MetricCard({
   )
 }
 
-function todaySessions(items: PlannerItem[]) {
-  const weekday = new Date().getDay()
-  const rows: Array<{ item: PlannerItem; schedule: ClassSchedule }> = []
-  for (const item of items) {
-    for (const schedule of item.course_offering.schedules ?? []) {
-      if (schedule.weekday === weekday) {
-        rows.push({ item, schedule })
-        break
-      }
-    }
-  }
-  return rows
-}
-
 export function DashboardPage() {
   const { user } = useAuth()
   const isStudent = user?.role === 'STUDENT'
@@ -229,9 +216,33 @@ export function DashboardPage() {
     : null
 
   const enrolledCredits = plannerItems.reduce((sum, item) => sum + item.total_credits, 0)
-  const sessions = isStudent ? todaySessions(plannerItems) : []
-  const upcomingExams = examRows.filter((exam) => daysUntil(exam.starts_at) >= 0)
-  const nextExam = upcomingExams[0]
+  // Students read both sections from their own current-term planner rows
+  // (today's sessions + announced/missing exams). Non-students keep the
+  // public exam feed.
+  const sessions = isStudent ? todaySessions(plannerItems, new Date()) : []
+  const plannerExamRows = isStudent ? examRowsFromPlanner(plannerItems) : []
+  const examViewRows: ExamViewRow[] = isStudent
+    ? plannerExamRows.map((row) => ({
+        itemKey: row.item.id,
+        exam: row.exam,
+        courseTitle: row.item.course_offering.course.title,
+        section: row.item.course_offering.section_code,
+        termName: row.item.course_offering.term.name,
+      }))
+    : examRows.map((exam) => ({
+        itemKey: exam.id,
+        exam,
+        courseTitle: exam.course_offering.course_title,
+        section: exam.course_offering.section_code,
+        termName: exam.course_offering.term.name,
+      }))
+  const nextExam = examViewRows.find(
+    (row): row is ExamViewRow & { exam: Exam } =>
+      row.exam !== null && daysUntil(row.exam.starts_at) >= 0,
+  )
+  const upcomingExams = examViewRows.filter(
+    (row) => row.exam && daysUntil(row.exam.starts_at) >= 0,
+  )
 
   const loading = terms.isPending || (isStudent && (profile.isPending || planner.isPending))
 
@@ -305,7 +316,7 @@ export function DashboardPage() {
             icon="assignment_turned_in"
             footer={{
               text: nextExam
-                ? `${toPersianDigits(daysUntil(nextExam.starts_at))} ${dashboard.daysLeft}`
+                ? `${toPersianDigits(daysUntil(nextExam.exam.starts_at))} ${dashboard.daysLeft}`
                 : dashboard.noExams,
               tone: nextExam ? 'danger' : 'muted',
             }}
@@ -476,14 +487,16 @@ export function DashboardPage() {
                 <Chip tone="primary">{toPersianDigits(currentTerm.academic_year)}</Chip>
               ) : null}
             </div>
-            {exams.isError ? (
+            {!isStudent && exams.isError ? (
               <ErrorState error={exams.error} onRetry={() => void exams.refetch()} />
-            ) : examRows.length === 0 ? (
+            ) : isStudent && planner.isError ? (
+              <ErrorState error={planner.error} onRetry={() => void planner.refetch()} />
+            ) : examViewRows.length === 0 ? (
               <EmptyState message={dashboard.noExams} />
             ) : (
               <div className="flex flex-col gap-space-sm">
-                {examRows.slice(0, 5).map((exam) => (
-                  <ExamRow key={exam.id} exam={exam} />
+                {examViewRows.map((row) => (
+                  <ExamRow key={row.itemKey} row={row} />
                 ))}
               </div>
             )}
@@ -525,7 +538,35 @@ export function DashboardPage() {
 
 /* ── Row helpers ──────────────────────────────────────────────────────── */
 
-function ExamRow({ exam }: { exam: Exam }) {
+/** One final-exam row: an imported exam or an unannounced-date offering. */
+interface ExamViewRow {
+  itemKey: number
+  exam: Exam | null
+  courseTitle: string
+  section: string
+  termName: string
+}
+
+function ExamRow({ row }: { row: ExamViewRow }) {
+  const exam = row.exam
+  if (!exam) {
+    // Real offering of the student's current term with no imported exam —
+    // state it honestly instead of inventing a date (docs/06 §8).
+    return (
+      <div className="flex items-center justify-between gap-space-sm rounded-xl bg-surface-container-low p-space-md transition-all hover:shadow-sm">
+        <div className="flex items-center gap-space-sm">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-container-high text-on-surface-variant">
+            <span className="material-symbols-outlined text-[20px]">event_busy</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-label-lg font-bold text-on-surface">{row.courseTitle}</span>
+            <span className="text-label-sm text-on-surface-variant">{row.termName}</span>
+          </div>
+        </div>
+        <Chip tone="neutral">{dashboard.examNotAnnounced}</Chip>
+      </div>
+    )
+  }
   const days = daysUntil(exam.starts_at)
   const short = formatJalaliShort(exam.starts_at).split(' ')
   return (
@@ -536,15 +577,18 @@ function ExamRow({ exam }: { exam: Exam }) {
           <span className="text-[10px] leading-tight">{short[1]}</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-label-lg font-bold text-on-surface">
-            {exam.course_offering.course_title}
-          </span>
+          <span className="text-label-lg font-bold text-on-surface">{row.courseTitle}</span>
           <span className="text-label-sm text-on-surface-variant tnum">
-            {formatJalaliDate(exam.starts_at)} — {formatTimeFa(new Date(exam.starts_at))}
+            {formatJalaliDate(exam.starts_at)} — {formatTimeFa(new Date(exam.starts_at))} تا{' '}
+            {formatTimeFa(new Date(exam.ends_at))}
           </span>
-          <span className="text-label-sm text-on-surface-variant tnum">
-            {exam.course_offering.term.name}
-          </span>
+          {exam.classroom ? (
+            <span className="flex items-center gap-1 text-label-sm text-on-surface-variant">
+              <span className="material-symbols-outlined text-[14px]">location_on</span>
+              {exam.classroom}
+            </span>
+          ) : null}
+          <span className="text-label-sm text-on-surface-variant tnum">{row.termName}</span>
         </div>
       </div>
       <span

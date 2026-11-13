@@ -276,6 +276,7 @@ export const dashboard = {
   colSection: 'گروه',
   colActions: 'عملیات',
   examsTitle: 'امتحانات پایان‌ترم',
+  examNotAnnounced: 'تاریخ امتحان اعلام نشده است',
   announcementsTitle: 'آخرین اطلاعیه‌ها',
   assistantBannerTitle: 'دستیار هوشمند آیین‌نامه‌های آموزشی',
   assistantBannerBody:
