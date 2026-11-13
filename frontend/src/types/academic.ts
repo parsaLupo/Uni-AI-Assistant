@@ -57,7 +57,11 @@ export interface Course extends CourseBrief {
 
 export interface ClassSchedule {
   id: number
-  /** 0=یکشنبه … 5=شنبه, 6=جمعه (JS Date#getDay numbering). */
+  /**
+   * Backend `Weekday` choice value: 0=یکشنبه … 4=پنجشنبه, 5=شنبه, 6=جمعه.
+   * This is NOT JS `Date#getDay()` numbering (there جمعه=5, شنبه=6) —
+   * convert with `scheduleWeekdayToJs` before comparing to `getDay()`.
+   */
   weekday: number
   /** Persian label from the server (`get_weekday_display`). */
   weekday_display: string

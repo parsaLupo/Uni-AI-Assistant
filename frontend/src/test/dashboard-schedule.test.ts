@@ -80,9 +80,13 @@ function plannerItem(
   } as unknown as PlannerItem
 }
 
-// 2026-11-08 is a Sunday (getDay() === 0) — the session rows below use the
-// API's Date#getDay() numbering (0 = یکشنبه … 5 = شنبه, 6 = جمعه).
+// 2026-11-08 is a Sunday (getDay() === 0). Fixtures use the API's stored
+// numbering (backend Weekday enum): 0=یکشنبه … 4=پنجشنبه, 5=شنبه, 6=جمعه —
+// which differs from getDay() only for جمعه/شنبه (there 5/6 are swapped).
 const SUNDAY = new Date(2026, 10, 8)
+// 2026-11-13 is a Friday (getDay() === 5) — the Iranian weekend.
+const FRIDAY = new Date(2026, 10, 13)
+const SATURDAY = new Date(2026, 10, 14)
 
 describe('todaySessions', () => {
   it('shows only sessions matching today’s weekday, sorted by start time', () => {
@@ -110,6 +114,23 @@ describe('todaySessions', () => {
   it('returns an empty list for an empty planner or a free day', () => {
     expect(todaySessions([], SUNDAY)).toEqual([])
     expect(todaySessions([plannerItem([schedule(5, '10:00', '12:00')])], SUNDAY)).toEqual([])
+  })
+
+  it('matches جمعه (stored 6) on Friday and شنبه (stored 5) on Saturday', () => {
+    // The stored pair is swapped vs getDay(): جمعه=6/شنبه=5 stored, but
+    // Friday=5/Saturday=6 in JS. (Real data has no جمعه classes — the
+    // Iranian weekend — but the mapping must still be exact.)
+    const items = [
+      plannerItem([schedule(5, '10:00', '12:00')]), // شنبه
+      plannerItem([schedule(6, '09:00', '11:00')]), // جمعه
+    ]
+    const fridayRows = todaySessions(items, FRIDAY)
+    expect(fridayRows).toHaveLength(1)
+    expect(fridayRows[0].schedule.weekday).toBe(6)
+
+    const saturdayRows = todaySessions(items, SATURDAY)
+    expect(saturdayRows).toHaveLength(1)
+    expect(saturdayRows[0].schedule.weekday).toBe(5)
   })
 })
 

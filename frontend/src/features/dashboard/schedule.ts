@@ -16,19 +16,32 @@ export interface TodaySession {
 }
 
 /**
+ * The API's `weekday` uses the backend `Weekday` choice values — a Persian
+ * numbering where شنبه=5 and جمعه=6. JS `Date#getDay()` numbers the same days
+ * جمعه=5 and شنبه=6, so Friday/Saturday must be swapped before comparing to
+ * "today"; every other day already coincides. Centralized here so no caller
+ * compares the stored value to `getDay()` directly.
+ */
+const API_WEEKDAY_TO_JS: Record<number, number> = { 5: 6, 6: 5 }
+
+export function scheduleWeekdayToJs(weekday: number): number {
+  return API_WEEKDAY_TO_JS[weekday] ?? weekday
+}
+
+/**
  * Classes meeting on the given day, sorted by start time.
  *
- * `weekday` uses the API's numbering — identical to JS `Date#getDay()`
- * (0 = یکشنبه … 5 = شنبه, 6 = جمعه; docs/03 section 3). Every weekly session
- * of an enrolled offering is kept (a course can meet twice on one day), and
- * courses that do not meet today are never shown.
+ * `now.getDay()` is the JS numbering (0 = یکشنبه … 5 = جمعه, 6 = شنبه); the
+ * stored `weekday` is converted via `scheduleWeekdayToJs`. Every weekly
+ * session of an enrolled offering is kept (a course can meet twice on one
+ * day), and courses that do not meet today are never shown.
  */
 export function todaySessions(items: PlannerItem[], now: Date): TodaySession[] {
   const weekday = now.getDay()
   const rows: TodaySession[] = []
   for (const item of items) {
     for (const schedule of item.course_offering.schedules ?? []) {
-      if (schedule.weekday === weekday) {
+      if (scheduleWeekdayToJs(schedule.weekday) === weekday) {
         rows.push({ item, schedule })
       }
     }
