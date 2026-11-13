@@ -273,8 +273,79 @@ class Seeder:
             self._bump("terms")
         return term
 
-    def _professor_index(self) -> dict[str, Professor]:
-        return {p.normalized_name: p for p in Professor.objects.all()}
+    def _professor_index(
+        self,
+    ) -> tuple[dict[str, Professor], dict[str, list[Professor]]]:
+        """Roster indexes for matching `instructor_name` strings: by the
+        normalized full name (roster order: given + family) and by the
+        normalized family name (the offering tables write the family name
+        first, the roster's `normalized_name` writes it second)."""
+        by_full: dict[str, Professor] = {}
+        by_family: dict[str, list[Professor]] = {}
+        for professor in Professor.objects.all():
+            by_full[professor.normalized_name] = professor
+            by_family.setdefault(
+                normalize_persian(professor.last_name), []
+            ).append(professor)
+        return by_full, by_family
+
+    def _resolve_professor(
+        self,
+        roster: tuple[dict[str, Professor], dict[str, list[Professor]]],
+        departments: dict[str, Department],
+        department_code: str,
+        instructor_name: str,
+    ) -> Professor | None:
+        """Match «نام خانوادگی نام» from the offering tables to a Professor.
+
+        Matching never trusts a single spelling: both sides go through
+        `normalize_persian` (Arabic ي/ك → Persian ی/ک), the roster is searched
+        by full name and then by family name, and only then does an unknown
+        instructor become their own Professor row in the offering's
+        department. The name convention follows the roster itself: the given
+        name is the LAST token («فدائي اسلام محمدجواد» → first «محمدجواد»,
+        last «فدائی اسلام» per Professors.json). Group placeholders
+        («اساتيد گروه آموزشي») are not people and never become professors.
+        """
+        name = instructor_name.strip()
+        if not name:
+            return None
+        by_full, by_family = roster
+        exact = by_full.get(normalize_persian(name))
+        if exact is not None:
+            return exact
+        family, _, given = name.rpartition(" ")
+        family_n = normalize_persian(family)
+        given_n = normalize_persian(given or family)
+        if "گروه" in family_n or "گروه" in given_n:
+            return None
+        candidates = by_family.get(family_n, [])
+        if len(candidates) == 1:
+            return candidates[0]
+        if len(candidates) > 1:
+            for candidate in candidates:
+                if normalize_persian(candidate.first_name) == given_n:
+                    return candidate
+            department = departments.get(str(department_code))
+            if department is not None:
+                for candidate in candidates:
+                    if candidate.department_id == department.id:
+                        return candidate
+            return None
+        department = departments.get(str(department_code))
+        if department is None:
+            return None
+        professor, _ = Professor.objects.get_or_create(
+            department=department,
+            first_name=(given or family).strip(),
+            last_name=(family or given).strip(),
+        )
+        # Cache so sibling rows of the same instructor reuse this Professor
+        # (and the next seed run matches through the roster indexes).
+        by_full[normalize_persian(name)] = professor
+        by_family.setdefault(family_n, []).append(professor)
+        self._bump("professors")
+        return professor
 
     def _parse_schedule(self, details: list[str], offering: CourseOffering) -> None:
         """Import one offering's schedule/exam lines.
@@ -317,7 +388,11 @@ class Seeder:
                 if created:
                     self._bump("schedules")
 
-    def offerings(self, professors: dict[str, Professor]) -> None:
+    def offerings(
+        self,
+        roster: tuple[dict[str, Professor], dict[str, list[Professor]]],
+        departments: dict[str, Department],
+    ) -> None:
         for filename in ("course-offering.json", "course-offering2.json"):
             path = self.data_dir / filename
             if not path.exists():
@@ -330,19 +405,29 @@ class Seeder:
                 course = Course.objects.filter(code=code).first()
                 if course is None:
                     continue
-                instructor = normalize_persian(str(row.get("instructor_name", "")).strip())
+                professor = self._resolve_professor(
+                    roster,
+                    departments,
+                    str(row.get("department_code", "")),
+                    str(row.get("instructor_name", "")),
+                )
                 offering, created = CourseOffering.objects.get_or_create(
                     course=course,
                     term=term,
                     section_code=section or "01",
                     defaults={
-                        "professor": professors.get(instructor),
+                        "professor": professor,
                         "capacity": int(row.get("capacity", 0)),
                         "status": OfferingStatus.OPEN,
                     },
                 )
                 if created:
                     self._bump("offerings")
+                elif offering.professor_id is None and professor is not None:
+                    # Backfill: offerings seeded before instructor matching
+                    # existed get their professor without a recreate cycle.
+                    offering.professor = professor
+                    offering.save(update_fields=["professor"])
                 self._parse_schedule(row.get("schedule_details", []), offering)
 
     # --- demo content & accounts --------------------------------------------
@@ -455,7 +540,7 @@ class Seeder:
         departments = self.departments(faculties)
         self.courses(departments)
         self.professors(departments)
-        self.offerings(self._professor_index())
+        self.offerings(self._professor_index(), departments)
         self.demo_content()
         self.credentials = self.demo_accounts() if with_demo_accounts else []
         return self.counts

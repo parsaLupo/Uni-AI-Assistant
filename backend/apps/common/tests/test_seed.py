@@ -10,9 +10,11 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import CommandError
 
+from apps.academics.models import Department
 from apps.common.seed_data import Seeder
 from apps.courses.models import ClassSchedule, Course, CourseOffering, CoursePrerequisite, Weekday
 from apps.exams.models import Exam
+from apps.professors.models import Professor
 
 pytestmark = pytest.mark.django_db
 
@@ -123,3 +125,65 @@ def test_offering_without_exam_line_gets_no_exam_row():
     assert [(r.weekday, r.start_time.strftime("%H:%M")) for r in rows] == [
         (Weekday.TUESDAY, "08:00")
     ]
+
+
+def test_seed_attaches_instructor_names_as_professors():
+    call_command("seed", data_dir=str(DATA_DIR))
+    # Roster match: «رحماني منش محمد» is the imported «محمد رحمانی منش» —
+    # the same Professor row keeps its academic rank (no duplicate created).
+    security = _offering_for("1916219_01")
+    assert security.professor is not None
+    assert security.professor.first_name == "محمد"
+    assert security.professor.last_name == "رحمانی منش"
+    assert security.professor.academic_title == "دانشیار"
+    # Unknown instructors become their own Professor row in the offering's
+    # department; «نام خانوادگی نام» → family first, given last.
+    lab = _offering_for("1916021_01")
+    assert lab.professor is not None
+    assert (lab.professor.first_name, lab.professor.last_name) == ("فاطمه", "ارغوان")
+    dept16 = Department.objects.filter(code="16").first()
+    assert dept16 is not None
+    assert lab.professor.department_id == dept16.id
+    # The «اساتيد گروه آموزشي» placeholder is not a person.
+    placeholder = CourseOffering.objects.filter(
+        course__code="1916148", section_code="01"
+    ).first()
+    assert placeholder is not None and placeholder.professor is None
+    # Idempotent: a second run neither adds nor renames professors.
+    professors = Professor.objects.count()
+    call_command("seed", data_dir=str(DATA_DIR))
+    assert Professor.objects.count() == professors
+
+
+def test_resolve_professor_roster_match_and_creation():
+    call_command("seed", data_dir=str(DATA_DIR))
+    seeder = Seeder(DATA_DIR, None)
+    roster = seeder._professor_index()
+    departments = seeder.departments(seeder.faculties())
+    before = Professor.objects.count()
+    # Multi-part family name matches the roster row exactly (given name is
+    # the LAST token of the instructor string).
+    matched = seeder._resolve_professor(
+        roster, departments, "16", "فدائي اسلام محمدجواد"
+    )
+    assert matched is not None
+    assert (matched.first_name, matched.last_name) == ("محمدجواد", "فدائی اسلام")
+    assert Professor.objects.count() == before
+    # An instructor missing from the roster is created once, in dept 16.
+    created = seeder._resolve_professor(
+        roster, departments, "16", "تست زاده تجربي"
+    )
+    assert created is not None
+    assert (created.first_name, created.last_name) == ("تجربي", "تست زاده")
+    assert created.department_id == departments["16"].id
+    assert Professor.objects.count() == before + 1
+    # The same name resolves to the same Professor (no duplicates), and the
+    # placeholder never becomes one.
+    again = seeder._resolve_professor(roster, departments, "16", "تست زاده تجربي")
+    assert again is not None and again.id == created.id
+    assert Professor.objects.count() == before + 1
+    assert (
+        seeder._resolve_professor(roster, departments, "16", "اساتيد گروه آموزشي")
+        is None
+    )
+    assert seeder._resolve_professor(roster, departments, "16", "") is None
