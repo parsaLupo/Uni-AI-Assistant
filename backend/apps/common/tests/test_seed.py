@@ -34,12 +34,32 @@ def test_seed_imports_the_real_dataset_and_is_idempotent():
     assert schedules > 100, "weekly rows parsed from Persian schedule strings"
     assert exams > 50, "exam dates parsed from «امتحان(1405.10.20)» strings"
 
+    # Official entry-term cohort metadata on the prerequisite edges — the
+    # curriculum revisions are part of the source data (e.g. CE course
+    # 1916020 requires 1916008 for cohorts 3941/3951 but 1916228 for
+    # 4011/4021).
+    compiler = Course.objects.get(code="1916020")
+    cohorts = {
+        edge.prerequisite_course.code: set(edge.entry_terms)
+        for edge in compiler.prerequisite_edges.select_related("prerequisite_course")
+    }
+    assert cohorts["1916228"] == {"4021"}, cohorts
+    assert cohorts["1916008"] == {"3941", "3951"}, cohorts
+
     # Second run: nothing created.
     call_command("seed", data_dir=str(DATA_DIR))
     assert Course.objects.count() == courses
     assert CourseOffering.objects.count() == offerings
     assert ClassSchedule.objects.count() == schedules
     assert Exam.objects.count() == exams
+    assert CoursePrerequisite.objects.count() == prerequisites
+    # ...and the cohort metadata survives the re-run unchanged (idempotent).
+    compiler.refresh_from_db()
+    cohorts_again = {
+        edge.prerequisite_course.code: set(edge.entry_terms)
+        for edge in compiler.prerequisite_edges.select_related("prerequisite_course")
+    }
+    assert cohorts_again == cohorts
 
 
 def test_seed_refuses_outside_development(settings):

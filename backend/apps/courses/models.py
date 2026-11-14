@@ -54,12 +54,19 @@ class Course(models.Model):
 
 
 class CoursePrerequisite(models.Model):
-    """Directed edge: `course` requires `prerequisite_course`."""
+    """Directed edge: `course` requires `prerequisite_course`.
+
+    ``entry_terms`` holds the *official* entry-term cohorts the rule applies
+    to (source ``entry_term`` codes like ``3941``/``4021`` — curriculum
+    revisions per cohort). An empty list means "no cohort metadata captured"
+    (rule applies to every cohort, conservative union fallback).
+    """
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="prerequisite_edges")
     prerequisite_course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="dependent_edges"
     )
+    entry_terms = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

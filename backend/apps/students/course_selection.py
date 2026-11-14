@@ -12,10 +12,22 @@ Rules implemented, in evaluation order below:
 
 * ``UNKNOWN_COURSE`` — requested code does not exist in the catalog.
 * ``ALREADY_PASSED`` — docs/17: a passed course is not recommended again.
+  A different catalog code counts as already passed only when the official
+  curriculum-transition equivalency holds (see below).
 * ``ALREADY_PLANNED`` — the course is already in the current-term planner
   (``PLANNED`` or administratively ``ENROLLED``).
 * ``PREREQUISITE_MISSING`` — required ``CoursePrerequisite`` edges whose
-  prerequisite course has no ``PASSED`` enrollment.
+  prerequisite course has no ``PASSED`` enrollment. Edges are
+  **cohort-aware**: the source data records one rule set per entry-term
+  cohort (curriculum revision), so the engine resolves the edges that apply
+  to the student's own entry cohort — exact cohort match, else the latest
+  revision recorded before their entry, else the oldest one. Edges without
+  cohort metadata apply to every cohort (conservative union fallback, as
+  before). A missing prerequisite is also satisfied when a passed course is
+  its **official curriculum-transition equivalent**: same department, same
+  credits, identical normalized title, and the prerequisite rule sets swap
+  one code for the other across cohorts (title similarity alone is never
+  sufficient).
 * ``NOT_OFFERED_CURRENT_TERM`` — docs/17: being in the catalog does not imply
   being offered in the current term.
 * ``OFFERING_CLOSED`` — offerings exist in the current term but none is
@@ -64,6 +76,106 @@ SCHEDULE_CONFLICT = "SCHEDULE_CONFLICT"
 def credit_limit() -> int:
     """Per-term credit ceiling (OA-24 baseline: 20, registrar to confirm)."""
     return int(getattr(settings, "COURSE_SELECTION_MAX_TERM_CREDITS", 20))
+
+
+def student_entry_code(profile: StudentProfile | None) -> str:
+    """The student's official entry-term cohort code (fall entry).
+
+    Cohort codes in the source data are ``<last 3 digits of the Jalali entry
+    year><semester digit>``, fall entry = ``1``: entry year ``1402`` gives
+    ``4021``, ``1394`` gives ``3941``. Empty when the profile has no entry
+    year (cohort cannot be resolved).
+    """
+    year = (getattr(profile, "entry_year", "") or "").strip()
+    digits = "".join(ch for ch in year if ch.isdigit())
+    if len(digits) != 4:
+        return ""
+    return f"{digits[1:]}1"
+
+
+def applicable_prerequisite_edges(
+    course: Course, entry_code: str
+) -> list[CoursePrerequisite]:
+    """Resolve the prerequisite rule set that applies to *entry_code*.
+
+    Each edge carries the official entry-term cohorts it governs
+    (``entry_terms``). Resolution order:
+
+    * no cohort metadata anywhere → every edge (union fallback, pre-metadata
+      behaviour);
+    * the exact cohort has rules → those edges;
+    * otherwise the latest revision recorded **before** the student's entry
+      (curriculums are cumulative: an older cohort keeps the oldest set).
+    """
+    edges = list(course.prerequisite_edges.select_related("prerequisite_course"))
+    cohort_edges = [edge for edge in edges if edge.entry_terms]
+    if not cohort_edges or not entry_code:
+        return edges
+    cohorts = sorted({term for edge in cohort_edges for term in edge.entry_terms})
+    if entry_code in cohorts:
+        chosen = entry_code
+    else:
+        earlier = [cohort for cohort in cohorts if cohort < entry_code]
+        chosen = max(earlier) if earlier else cohorts[0]
+    return [
+        edge for edge in cohort_edges if chosen in edge.entry_terms
+    ] + [edge for edge in edges if not edge.entry_terms]
+
+
+def is_official_equivalent(
+    a: Course, b: Course, cache: dict[tuple[str, str], bool] | None = None
+) -> bool:
+    """Official curriculum-transition equivalency between two catalog codes.
+
+    Two codes are the *same course* under different curriculum versions only
+    when the official records agree on all of:
+
+    1. same department;
+    2. same credits;
+    3. identical normalized title (whitespace/yeh/kaf variants collapse);
+    4. swap evidence — some course's prerequisite rule set requires one code
+       for earlier cohorts and the other for later ones (disjoint cohort
+       lists, i.e. the curriculum replaced one code with the other).
+
+    Title similarity alone is never sufficient (docs/17 "Insufficient
+    evidence"). Results are memoized per evaluation in *cache*.
+    """
+    if a.pk == b.pk:
+        return True
+    key = (min(a.code, b.code), max(a.code, b.code))
+    if cache is not None and key in cache:
+        return cache[key]
+    result = (
+        a.department_id == b.department_id
+        and a.credits == b.credits
+        and normalize_persian(a.title) == normalize_persian(b.title)
+        and _swap_evidence(a, b)
+    )
+    if cache is not None:
+        cache[key] = result
+    return result
+
+
+def _swap_evidence(a: Course, b: Course) -> bool:
+    """Did a curriculum revision replace `a` with `b` in a rule set?"""
+    edges = CoursePrerequisite.objects.filter(
+        prerequisite_course_id__in=[a.pk, b.pk]
+    ).select_related("prerequisite_course")
+    # course -> prerequisite course -> cohort codes requiring it
+    by_course: dict[int, dict[int, set[str]]] = {}
+    for edge in edges:
+        if not edge.entry_terms:
+            continue
+        slots = by_course.setdefault(edge.course_id, {})
+        slots.setdefault(edge.prerequisite_course_id, set()).update(edge.entry_terms)
+    for slots in by_course.values():
+        a_terms = slots.get(a.pk)
+        b_terms = slots.get(b.pk)
+        # Disjoint cohort lists for the same rule slot = one code replaced
+        # the other across a curriculum transition.
+        if a_terms and b_terms and not (a_terms & b_terms):
+            return True
+    return False
 
 
 @dataclass(frozen=True)
@@ -205,11 +317,16 @@ class CourseSelectionEngine:
 
         profile = StudentProfile.objects.filter(user=user).first()
         passed_codes: list[str] = []
+        passed_courses: dict[str, Course] = {}
         if profile is not None:
             passed_qs = Enrollment.objects.filter(
                 student=profile, status=EnrollmentStatus.PASSED
             ).select_related("course_offering__course", "course_offering__term")
-            passed_codes = sorted({e.course_offering.course.code for e in passed_qs})
+            for enrollment in passed_qs:
+                passed_course = enrollment.course_offering.course
+                passed_codes.append(passed_course.code)
+                passed_courses[passed_course.code] = passed_course
+            passed_codes = sorted(passed_codes)
 
         plan_credits = 0
         planned_codes: list[str] = []
@@ -232,8 +349,16 @@ class CourseSelectionEngine:
                     plan_schedules.append((plan_course.title, schedule))
         planned_codes = sorted(set(planned_codes))
 
-        # docs/17 "Passed course": no silent repetition.
-        if course.code in passed_codes:
+        # Equivalency results are memoized per evaluation (the same pair is
+        # checked by both the ALREADY_PASSED and the prerequisite rules).
+        equivalency_cache: dict[tuple[str, str], bool] = {}
+        # docs/17 "Passed course": no silent repetition. A different catalog
+        # code counts as already passed only with an official equivalency.
+        already_passed = course.code in passed_codes or any(
+            is_official_equivalent(course, passed, equivalency_cache)
+            for passed in passed_courses.values()
+        )
+        if already_passed:
             reasons.append(
                 SelectionReason(
                     code=ALREADY_PASSED,
@@ -250,13 +375,24 @@ class CourseSelectionEngine:
                 )
             )
 
-        # Prerequisites must all be passed (docs/17 "Prerequisite").
-        prerequisite_codes = sorted(
-            CoursePrerequisite.objects.filter(course=course)
-            .select_related("prerequisite_course")
-            .values_list("prerequisite_course__code", flat=True)
-        )
-        missing = [code for code in prerequisite_codes if code not in passed_codes]
+        # Prerequisites must all be passed (docs/17 "Prerequisite"), resolved
+        # for the student's own entry cohort and satisfied by an official
+        # curriculum-transition equivalent of a passed course.
+        entry_code = student_entry_code(profile)
+        applicable_edges = applicable_prerequisite_edges(course, entry_code)
+        required_courses = {
+            edge.prerequisite_course.code: edge.prerequisite_course
+            for edge in applicable_edges
+        }
+        missing = [
+            code
+            for code in sorted(required_courses)
+            if code not in passed_codes
+            and not any(
+                is_official_equivalent(required_courses[code], passed, equivalency_cache)
+                for passed in passed_courses.values()
+            )
+        ]
         if missing:
             reasons.append(
                 SelectionReason(

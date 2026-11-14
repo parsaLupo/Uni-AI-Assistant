@@ -193,7 +193,13 @@ class Seeder:
         return result
 
     def courses(self, departments: dict[str, Department]) -> None:
-        pending_edges: list[tuple[str, str]] = []
+        # Official per-cohort prerequisite rules: the sources repeat an edge
+        # once per entry-term cohort (curriculum revision), e.g. 1916020
+        # requires 1916008 for cohorts 3941/3951 but 1916228 for 4011/4021.
+        # The (course, prerequisite) pair stays unique; the cohort codes are
+        # stored on the edge so the selection engine can resolve the student's
+        # applicable rule set (see course_selection.py).
+        pending_edges: dict[tuple[str, str], set[str]] = {}
         for filename in ("courses.json", "course2.json"):
             path = self.data_dir / filename
             if not path.exists():
@@ -220,16 +226,29 @@ class Seeder:
                     self._bump("courses")
                 for rel in row.get("relations", []):
                     if rel.get("type") == "prerequisite" and rel.get("related_course_code"):
-                        pending_edges.append((code, str(rel["related_course_code"])))
-        for course_code, prereq_code in pending_edges:
+                        key = (code, str(rel["related_course_code"]))
+                        entry_term = str(rel.get("entry_term") or "").strip()
+                        pending_edges.setdefault(key, set())
+                        if entry_term:
+                            pending_edges[key].add(entry_term)
+        for (course_code, prereq_code), cohort_terms in sorted(pending_edges.items()):
             course = Course.objects.filter(code=course_code).first()
             prereq = Course.objects.filter(code=prereq_code).first()
             if course and prereq and course.pk != prereq.pk:
-                _, created = CoursePrerequisite.objects.get_or_create(
-                    course=course, prerequisite_course=prereq
+                edge, created = CoursePrerequisite.objects.get_or_create(
+                    course=course,
+                    prerequisite_course=prereq,
+                    defaults={"entry_terms": sorted(cohort_terms)},
                 )
                 if created:
                     self._bump("prerequisites")
+                else:
+                    # Backfill cohorts on edges seeded before this metadata
+                    # existed; merge, never overwrite valid history.
+                    merged = sorted({*edge.entry_terms, *cohort_terms})
+                    if merged != edge.entry_terms:
+                        edge.entry_terms = merged
+                        edge.save(update_fields=["entry_terms"])
 
     def professors(self, departments: dict[str, Department]) -> None:
         path = self.data_dir / "Professors.json"

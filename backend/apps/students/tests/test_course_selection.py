@@ -15,6 +15,7 @@ import datetime as dt
 import pytest
 from django.test import override_settings
 
+from apps.accounts.models import User
 from apps.courses.models import (
     ClassSchedule,
     Course,
@@ -33,7 +34,7 @@ from apps.students.course_selection import (
     UNKNOWN_COURSE,
     CourseSelectionEngine,
 )
-from apps.students.models import Enrollment, EnrollmentStatus
+from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 
 pytestmark = pytest.mark.django_db
 
@@ -166,6 +167,259 @@ def test_failed_course_is_not_treated_as_passed(graph, student, student_profile)
     decision = graph["engine"].evaluate(student, graph["course"].code)
     decision_codes = [reason.code for reason in decision.reasons]
     assert ALREADY_PASSED not in decision_codes
+
+
+# ── Cohort-aware prerequisite rules & official equivalency ──────────────────
+# The source data records one prerequisite rule set per entry-term cohort
+# (curriculum revisions), and the same course can be re-coded between
+# revisions — e.g. CE course 1916008 «نظریه زبان ها و ماشین ها» becomes
+# 1916228 «نظریه زبانها و ماشین ها» for cohorts entering from 4011. The
+# engine must resolve the student's own cohort rules and accept an official
+# curriculum-transition equivalent as passed; title similarity alone never
+# suffices (docs/17 "Insufficient evidence").
+
+
+def _with_entry_year(student_profile, year: str) -> None:
+    student_profile.entry_year = year
+    student_profile.save(update_fields=["entry_year"])
+
+
+def _pass_course(student_profile, course, term) -> Enrollment:
+    offering, _ = CourseOffering.objects.get_or_create(
+        course=course, term=term, section_code="01"
+    )
+    return Enrollment.objects.create(
+        student=student_profile,
+        course_offering=offering,
+        status=EnrollmentStatus.PASSED,
+        grade=20.00,
+    )
+
+
+@pytest.fixture
+def curriculum_graph(academic_graph):
+    """The real CE recoding shape as cohort-annotated prerequisite edges."""
+    department = academic_graph["department"]
+    old = Course.objects.create(
+        department=department, code="1916008",
+        title="نظریه زبان ها و ماشین ها", credits=3, course_type="اصلی",
+    )
+    new = Course.objects.create(
+        department=department, code="1916228",
+        title="نظریه زبانها و ماشین ها", credits=3, course_type="اصلی",
+    )
+    # Requires the new code for cohorts entering from 4011, the old code
+    # before that — the swap that proves the two codes are one course.
+    compiler = Course.objects.create(
+        department=department, code="1916020",
+        title="اصول طراحی کامپایلر", credits=3, course_type="اصلی",
+    )
+    CoursePrerequisite.objects.create(
+        course=compiler, prerequisite_course=old, entry_terms=["3941", "3951"]
+    )
+    CoursePrerequisite.objects.create(
+        course=compiler, prerequisite_course=new, entry_terms=["4011", "4021"]
+    )
+    # A course whose rule set was recorded only before the student's entry:
+    # the latest earlier revision applies (and only an equivalency can map a
+    # passed new-code course onto the old code).
+    target = Course.objects.create(
+        department=department, code="1916064",
+        title="ارزیابی و طراحی سیستم", credits=3, course_type="اصلی",
+    )
+    CoursePrerequisite.objects.create(
+        course=target, prerequisite_course=old, entry_terms=["3941", "3951"]
+    )
+    # Same catalog trick *without* official evidence: identical normalized
+    # title, same department and credits, but no cohort swap anywhere.
+    lookalike_old = Course.objects.create(
+        department=department, code="1916998",
+        title="مبانی شبکه", credits=2, course_type="اصلی",
+    )
+    lookalike_new = Course.objects.create(
+        department=department, code="1916999",
+        title="مبانی  شبکه", credits=2, course_type="اصلی",
+    )
+    needs_lookalike_old = Course.objects.create(
+        department=department, code="1916980",
+        title="شبکه های نسل بعد", credits=2, course_type="اصلی",
+    )
+    CoursePrerequisite.objects.create(
+        course=needs_lookalike_old,
+        prerequisite_course=lookalike_old,
+        entry_terms=["3951"],
+    )
+    return {
+        **academic_graph,
+        "old": old,
+        "new": new,
+        "compiler": compiler,
+        "target": target,
+        "lookalike_old": lookalike_old,
+        "lookalike_new": lookalike_new,
+        "needs_lookalike_old": needs_lookalike_old,
+    }
+
+
+def test_current_term_enrollment_does_not_count_as_passed(
+    curriculum_graph, student, student_profile
+):
+    _with_entry_year(student_profile, "1402")
+    offering = CourseOffering.objects.create(
+        course=curriculum_graph["new"],
+        term=curriculum_graph["term"],  # the *current* term
+        section_code="01",
+    )
+    Enrollment.objects.create(
+        student=student_profile,
+        course_offering=offering,
+        status=EnrollmentStatus.ENROLLED,
+    )
+    decision = CourseSelectionEngine().evaluate(student, "1916020")
+    # The student is taking 1916228 *now* — the 4021 cohort rule requires it
+    # passed, and a current-term enrollment does not satisfy that.
+    assert "1916228" in decision.missing_prerequisite_codes
+
+
+def test_current_term_plan_does_not_count_as_passed(
+    curriculum_graph, student, student_profile
+):
+    _with_entry_year(student_profile, "1402")
+    offering = CourseOffering.objects.create(
+        course=curriculum_graph["new"], term=curriculum_graph["term"], section_code="01"
+    )
+    Enrollment.objects.create(
+        student=student_profile,
+        course_offering=offering,
+        status=EnrollmentStatus.PLANNED,
+    )
+    decision = CourseSelectionEngine().evaluate(student, "1916020")
+    assert "1916228" in decision.missing_prerequisite_codes
+
+
+def test_failed_history_does_not_count_as_passed(
+    curriculum_graph, student, student_profile
+):
+    _with_entry_year(student_profile, "1402")
+    _pass_course(student_profile, curriculum_graph["new"], curriculum_graph["past_term"])
+    Enrollment.objects.filter(student=student_profile).update(
+        status=EnrollmentStatus.FAILED
+    )
+    decision = CourseSelectionEngine().evaluate(student, "1916020")
+    assert "1916228" in decision.missing_prerequisite_codes
+
+
+def test_cohort_rules_use_the_student_entry_cohort(
+    curriculum_graph, student, student_profile
+):
+    """Entry 1402 (cohort 4021) → the 4021 rule set {1916228} for 1916020."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(student_profile, curriculum_graph["new"], curriculum_graph["past_term"])
+    decision = CourseSelectionEngine().evaluate(student, "1916020")
+    assert decision.missing_prerequisite_codes == []
+    # The old code is not part of the 4021 rule set at all — it must not be
+    # demanded from this student.
+    assert "1916008" not in decision.missing_prerequisite_codes
+
+
+def test_cohort_rules_fall_back_to_the_latest_earlier_revision(
+    curriculum_graph, student, student_profile
+):
+    """A cohort without its own revision keeps the latest earlier rule set."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(student_profile, curriculum_graph["old"], curriculum_graph["past_term"])
+    # 1916064 has rules for 3941/3951 only; the 4021 student keeps 1951's.
+    decision = CourseSelectionEngine().evaluate(student, "1916064")
+    assert decision.missing_prerequisite_codes == []
+    # A student who entered *before* every recorded cohort keeps the oldest
+    # rule set (3941 — the same code here).
+    other_user = User.objects.create_user(
+        email="older@example.edu", password="Str0ng-Passw0rd!", role="STUDENT"
+    )
+    older_profile = StudentProfile.objects.create(
+        user=other_user,
+        student_number="39411234",
+        department=curriculum_graph["department"],
+        faculty=curriculum_graph["faculty"],
+        entry_year="1393",
+    )
+    _pass_course(older_profile, curriculum_graph["old"], curriculum_graph["past_term"])
+    decision = CourseSelectionEngine().evaluate(other_user, "1916064")
+    assert decision.missing_prerequisite_codes == []
+
+
+def test_official_curriculum_transition_equivalency_satisfies_prerequisite(
+    curriculum_graph, student, student_profile
+):
+    """The 1916064 shape: rules only reference the old code, the student
+    passed the new code — accepted because the official rule sets swap
+    1916008/1916228 across cohorts (evidence: 1916020's edges)."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(student_profile, curriculum_graph["new"], curriculum_graph["past_term"])
+    decision = CourseSelectionEngine().evaluate(student, "1916064")
+    assert decision.missing_prerequisite_codes == []
+    assert decision.passed_course_codes == ["1916228"]
+
+
+def test_similar_title_without_official_evidence_is_not_accepted(
+    curriculum_graph, student, student_profile
+):
+    """Identical normalized title, department and credits — but no cohort
+    swap anywhere: the lookalike code must NOT satisfy the prerequisite."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(
+        student_profile,
+        curriculum_graph["lookalike_new"],
+        curriculum_graph["past_term"],
+    )
+    decision = CourseSelectionEngine().evaluate(student, "1916980")
+    assert decision.missing_prerequisite_codes == ["1916998"]
+
+
+def test_already_passed_detected_through_official_equivalency(
+    curriculum_graph, student, student_profile
+):
+    """Asking for the old code after passing the official new-code version."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(student_profile, curriculum_graph["new"], curriculum_graph["past_term"])
+    decision = CourseSelectionEngine().evaluate(student, "1916008")
+    assert ALREADY_PASSED in [reason.code for reason in decision.reasons]
+
+
+def test_edges_without_cohort_metadata_keep_the_union_fallback(
+    academic_graph, student, student_profile
+):
+    """Legacy edges (no entry_terms) apply to every cohort, as before."""
+    _with_entry_year(student_profile, "1402")
+    _pass_course(
+        student_profile, academic_graph["prereq"], academic_graph["past_term"]
+    )
+    CoursePrerequisite.objects.create(
+        course=academic_graph["course"], prerequisite_course=academic_graph["prereq"]
+    )
+    decision = CourseSelectionEngine().evaluate(student, "1916001")
+    assert decision.missing_prerequisite_codes == []
+
+
+def test_passed_history_is_isolated_per_student(
+    curriculum_graph, student, student_profile
+):
+    """Another student's passes never satisfy this student's prerequisites."""
+    _with_entry_year(student_profile, "1402")
+    other_user = User.objects.create_user(
+        email="classmate@example.edu", password="Str0ng-Passw0rd!", role="STUDENT"
+    )
+    classmate = StudentProfile.objects.create(
+        user=other_user,
+        student_number="40212126017",
+        department=curriculum_graph["department"],
+        faculty=curriculum_graph["faculty"],
+        entry_year="1402",
+    )
+    _pass_course(classmate, curriculum_graph["new"], curriculum_graph["past_term"])
+    decision = CourseSelectionEngine().evaluate(student, "1916020")
+    assert decision.passed_course_codes == []
+    assert "1916228" in decision.missing_prerequisite_codes
 
 
 # ── Rule: duplicate planner entry ──────────────────────────────────────────
