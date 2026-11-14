@@ -14,8 +14,7 @@ from apps.professors.serializers import ProfessorSerializer
 
 
 def _filter_professors(qs, params, user=None):
-    from django.db.models import Q
-
+    from apps.accounts.models import Role
     from apps.common.scoping import student_department_id
 
     department = params.get("department")
@@ -29,14 +28,14 @@ def _filter_professors(qs, params, user=None):
         # CourseOffering.professor has related_name="offerings"; filtering on a
         # non-existent accessor would raise FieldError and answer 500.
         qs = qs.filter(offerings__term_id=int(term)).distinct()
-    # Automatic department scoping for students: keep professors of the
-    # student's own department plus those who teach a relevant course in
-    # another department (do not drop cross-department teachers).
-    dept_id = student_department_id(user)
-    if dept_id is not None:
-        qs = qs.filter(
-            Q(department_id=dept_id) | Q(offerings__course__department_id=dept_id)
-        ).distinct()
+    # Automatic department scoping for students: exactly the professors of the
+    # student's own department (from their StudentProfile). Neither course
+    # offerings nor the faculty may widen this scope, and a student whose
+    # profile has no department gets an EMPTY catalog — never the unfiltered
+    # list. Admins/professors/anonymous keep the full view.
+    if getattr(user, "role", None) == Role.STUDENT:
+        dept_id = student_department_id(user)
+        qs = qs.none() if dept_id is None else qs.filter(department_id=dept_id)
     return normalized_search(qs, params.get("search"), "normalized_name")
 
 

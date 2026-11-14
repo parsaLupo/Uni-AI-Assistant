@@ -25,13 +25,16 @@ import {
   cardCls,
 } from '../../components/ui'
 import { useUrlState } from '../../hooks/useUrlState'
-import { common, professorsPage } from '../../i18n/fa'
+import { useAuth } from '../auth'
+import { common, dashboard, professorsPage } from '../../i18n/fa'
 import { toPersianDigits } from '../../i18n/digits'
 import type { ListQuery } from '../../types/academic'
 
 const PAGE_SIZE = 12
 
 export function ProfessorsPage() {
+  const { user } = useAuth()
+  const isStudent = user?.role === 'STUDENT'
   const [page, setPage] = useUrlState<number>('page', 1)
   const [search, setSearch] = useUrlState<string>('search', '', { debounce: 300 })
   const [term, setTerm] = useUrlState<string>('term', '')
@@ -40,6 +43,17 @@ export function ProfessorsPage() {
     queryKey: queryKeys.terms(),
     queryFn: () => academicApi.terms({ page_size: 50 }),
   })
+  // The professor catalog is scoped to the student's own department
+  // server-side (GET /professors/ reads the StudentProfile). The profile is
+  // fetched here only to detect the "department not set yet" state — a
+  // student must never see the unfiltered catalog.
+  const profile = useQuery({
+    queryKey: queryKeys.studentProfile(),
+    queryFn: academicApi.studentProfile,
+    enabled: isStudent,
+  })
+  const departmentMissing =
+    isStudent && profile.isSuccess && !profile.data?.department
 
   const query: ListQuery = {
     page,
@@ -50,6 +64,7 @@ export function ProfessorsPage() {
   const professors = useQuery({
     queryKey: queryKeys.professors(query),
     queryFn: () => academicApi.professors(query),
+    enabled: !departmentMissing,
     placeholderData: (previous) => previous,
   })
 
@@ -108,7 +123,17 @@ export function ProfessorsPage() {
         ) : null}
       </FilterRow>
 
-      {professors.isPending ? (
+      {departmentMissing ? (
+        <EmptyState
+          message={professorsPage.departmentRequired}
+          hint={professorsPage.departmentRequiredHint}
+          action={
+            <Link to="/profile" className={btnSecondaryCls}>
+              {dashboard.completeProfile}
+            </Link>
+          }
+        />
+      ) : professors.isPending ? (
         <SkeletonCards />
       ) : professors.isError ? (
         <ErrorState error={professors.error} onRetry={() => void professors.refetch()} />
