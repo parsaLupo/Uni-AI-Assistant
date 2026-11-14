@@ -13,7 +13,7 @@ import { ApiError } from '../../api/client'
 import { auth, persianErrorText } from '../../i18n/fa'
 import { useAuth } from './AuthProvider'
 import { AuthLayout } from './AuthLayout'
-import { homeForRole, RedirectIfAuthenticated } from './ProtectedRoute'
+import { landingFor, RedirectIfAuthenticated } from './ProtectedRoute'
 
 export function LoginPage() {
   const { login } = useAuth()
@@ -32,7 +32,7 @@ export function LoginPage() {
     try {
       const user = await login(email, password)
       const from = (location.state as { from?: string } | null)?.from
-      navigate(from && from !== '/login' ? from : homeForRole(user), { replace: true })
+      navigate(landingFor(user, from), { replace: true })
     } catch (caught) {
       setError(
         caught instanceof ApiError
@@ -54,7 +54,7 @@ export function LoginPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute start-space-md text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 alternate_email
@@ -66,7 +66,7 @@ export function LoginPage() {
                 autoComplete="email"
                 dir="ltr"
                 placeholder={auth.emailPlaceholder}
-                className="w-full h-12 ps-11 pe-space-md bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:bg-surface-container-lowest transition-all text-right shadow-inner"
+                className="w-full h-12 pe-11 ps-space-md bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:bg-surface-container-lowest transition-all text-right shadow-inner"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
@@ -79,12 +79,28 @@ export function LoginPage() {
               {auth.password}
             </label>
             <div className="relative flex items-center">
-              <span
-                className="material-symbols-outlined absolute start-space-md text-outline text-[20px] pointer-events-none"
-                aria-hidden="true"
-              >
-                key
-              </span>
+              {/* One icon at a time in the same slot: the key while the field
+                  is empty, the show/hide toggle once the user starts typing. */}
+              {password ? (
+                <button
+                  type="button"
+                  aria-label={auth.togglePassword}
+                  aria-pressed={reveal}
+                  onClick={() => setReveal((value) => !value)}
+                  className="absolute right-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
+                >
+                  <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+                    {reveal ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
+              ) : (
+                <span
+                  className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
+                  aria-hidden="true"
+                >
+                  key
+                </span>
+              )}
               <input
                 id="login-password"
                 type={reveal ? 'text' : 'password'}
@@ -96,17 +112,6 @@ export function LoginPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 required
               />
-              <button
-                type="button"
-                aria-label={auth.togglePassword}
-                aria-pressed={reveal}
-                onClick={() => setReveal((value) => !value)}
-                className="absolute end-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
-              >
-                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-                  {reveal ? 'visibility_off' : 'visibility'}
-                </span>
-              </button>
             </div>
           </div>
 

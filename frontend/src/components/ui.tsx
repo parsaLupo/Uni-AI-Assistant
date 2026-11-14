@@ -125,7 +125,7 @@ export function SearchInput({
     <div className={`relative ${className}`}>
       <span
         aria-hidden="true"
-        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[20px] text-outline"
+        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 flex items-center text-[20px] text-outline"
       >
         search
       </span>
@@ -161,7 +161,7 @@ export function FilterSelect({
     <div className={`relative ${className}`}>
       <span
         aria-hidden="true"
-        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 my-auto text-[18px] text-outline"
+        className="material-symbols-outlined pointer-events-none absolute inset-y-0 right-3 flex items-center text-[18px] text-outline"
       >
         {icon}
       </span>

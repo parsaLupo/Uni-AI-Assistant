@@ -17,6 +17,20 @@ export function homeForRole(user: Pick<AuthUser, 'role'> | null): string {
   return user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') ? '/admin' : '/dashboard'
 }
 
+/** Post-login landing: administrator accounts always open the admin overview
+ *  (`/admin`), even when an intended redirect URL (`state.from`) points at a
+ *  student or generic page — an admin must never land on one. Other roles keep
+ *  the previous behavior: the remembered URL, else their role home. */
+export function landingFor(
+  user: Pick<AuthUser, 'role'> | null,
+  from?: string,
+): string {
+  if (user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN')) {
+    return '/admin'
+  }
+  return from && from !== '/login' ? from : homeForRole(user)
+}
+
 /** Full-screen Persian loading state shown while the session is restored. */
 export function GateLoading() {
   return (
@@ -58,7 +72,7 @@ export function RedirectIfAuthenticated({ children }: { children: ReactNode }) {
 
   if (status === 'authenticated') {
     const from = (location.state as { from?: string } | null)?.from
-    return <Navigate to={from && from !== '/login' ? from : homeForRole(user)} replace />
+    return <Navigate to={landingFor(user, from)} replace />
   }
 
   return <>{children}</>

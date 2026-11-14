@@ -92,7 +92,7 @@ export function RegisterPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute start-space-md text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 alternate_email
@@ -104,7 +104,7 @@ export function RegisterPage() {
                 autoComplete="email"
                 dir="ltr"
                 placeholder={auth.emailPlaceholder}
-                className="w-full h-12 ps-11 pe-space-md bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:bg-surface-container-lowest transition-all text-right shadow-inner"
+                className="w-full h-12 pe-11 ps-space-md bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:bg-surface-container-lowest transition-all text-right shadow-inner"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
@@ -118,7 +118,7 @@ export function RegisterPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute start-space-md text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 key
@@ -139,7 +139,7 @@ export function RegisterPage() {
                 aria-label={auth.togglePassword}
                 aria-pressed={reveal}
                 onClick={() => setReveal((value) => !value)}
-                className="absolute end-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
+                className="absolute right-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
               >
                 <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                   {reveal ? 'visibility_off' : 'visibility'}

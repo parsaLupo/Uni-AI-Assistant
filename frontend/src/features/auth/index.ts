@@ -2,6 +2,7 @@ export { AuthProvider, useAuth, type AuthStatus } from './AuthProvider'
 export {
   GateLoading,
   homeForRole,
+  landingFor,
   RequireAuth,
   RequireRole,
   RedirectIfAuthenticated,
