@@ -73,6 +73,14 @@ def _filter_offerings(qs, params, user=None):
     status_param = params.get("status")
     if status_param:
         qs = qs.filter(status=status_param)
+    # Department scope for the student-account form: offerings of one major.
+    department = params.get("department")
+    if department and department.isdigit():
+        qs = qs.filter(course__department_id=int(department))
+    # Search across code + normalized title (courses.json keeps Persian titles).
+    search = params.get("search")
+    if search:
+        qs = normalized_search(qs, search, "course__code", "course__normalized_title")
     return qs
 
 

@@ -118,3 +118,11 @@ export async function authedJson<T>(path: string, init?: RequestInit): Promise<T
 export function fetchMe(): Promise<AuthUser> {
   return authedJson<AuthUser>('/auth/me')
 }
+
+/** POST /auth/password-change/ — the only self-service credential change. */
+export function changePassword(oldPassword: string, newPassword: string): Promise<void> {
+  return authedJson<void>('/auth/password-change', {
+    method: 'POST',
+    body: JSON.stringify({ old_password: oldPassword, new_password: newPassword }),
+  })
+}

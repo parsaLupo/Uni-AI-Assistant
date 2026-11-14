@@ -23,7 +23,7 @@ from apps.accounts.models import Role
 from apps.accounts.permissions import IsAdmin
 from apps.ai.selection_explanation import SelectionExplanationService
 from apps.analytics.audit import AuditableViewSetMixin
-from apps.common.errors import CONFLICT, VALIDATION_ERROR, ApiError
+from apps.common.errors import CONFLICT, PERMISSION_DENIED, VALIDATION_ERROR, ApiError
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
 from apps.courses.models import Course, CourseOffering
@@ -81,7 +81,29 @@ def _validate_planner_offering(offering: CourseOffering) -> None:
 
 
 class StudentsMeView(APIView):
-    """GET/PATCH /students/me/ — onboarding profile of the caller."""
+    """GET/PATCH /students/me/ — profile of the caller.
+
+    Academic identity fields (student number, major, faculty, degree level,
+    entry year, term number, GPA) are **registrar-owned**: students may read
+    them but never write them — direct PATCH attempts are rejected with 403.
+    Admins keep full write access via the admin student-profile surface.
+    """
+
+    # Fields a student may never self-edit (Part 1 of the profile spec).
+    SELF_EDIT_PROTECTED_FIELDS = frozenset(
+        {
+            "student_number",
+            "department_id",
+            "faculty_id",
+            "degree_level",
+            "entry_year",
+            "current_term_number",
+            "current_gpa",
+        }
+    )
+    PROTECTED_EDIT_MESSAGE = (
+        "اطلاعات تحصیلی توسط مدیریت آموزشی ثبت می‌شود و از حساب دانشجو قابل تغییر نیست."
+    )
 
     @extend_schema(responses=StudentProfileSerializer)
     def get(self, request):
@@ -91,6 +113,15 @@ class StudentsMeView(APIView):
     @extend_schema(request=StudentProfileSerializer, responses=StudentProfileSerializer)
     def patch(self, request):
         profile = _get_profile(request.user, create=True)
+        attempted = sorted(
+            self.SELF_EDIT_PROTECTED_FIELDS.intersection(request.data or {})
+        )
+        if attempted:
+            raise ApiError(
+                PERMISSION_DENIED,
+                self.PROTECTED_EDIT_MESSAGE,
+                http_status=403,
+            )
         serializer = StudentProfileSerializer(profile, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         try:

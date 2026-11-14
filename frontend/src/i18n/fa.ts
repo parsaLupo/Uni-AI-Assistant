@@ -404,9 +404,10 @@ export const announcementsPage = {
 export const profilePage = {
   title: 'پروفایل دانشجویی',
   subtitle: 'مشخصات تحصیلی شما',
-  edit: 'ویرایش مشخصات',
-  save: 'ذخیره تغییرات',
-  cancel: 'انصراف',
+  readOnlyNotice:
+    'اطلاعات تحصیلی توسط مدیریت آموزشی ثبت می‌شود و برای دانشجو فقط‌خواندنی است.',
+  incompleteNotice:
+    'اطلاعات تحصیلی شما توسط مدیریت آموزشی ثبت می‌شود؛ برای تکمیل پروفایل با مدیریت تماس بگیرید.',
   saved: 'تغییرات با موفقیت ذخیره شد.',
   studentNumber: 'کد دانشجویی',
   department: 'رشته تحصیلی',
@@ -420,6 +421,14 @@ export const profilePage = {
     'برای استفاده از برنامه‌ریزی، ابتدا کد دانشجویی و رشته تحصیلی خود را ثبت کنید.',
   required: 'این فیلد الزامی است.',
   invalidYear: 'سال ورود باید عدد ۴ رقمی باشد.',
+  changePasswordTitle: 'تغییر گذرواژه',
+  changePasswordHint: 'برای امنیت حساب، گذرواژهٔ قوی و یکتا انتخاب کنید.',
+  currentPassword: 'گذرواژهٔ فعلی',
+  newPassword: 'گذرواژه جدید',
+  confirmNewPassword: 'تکرار گذرواژه جدید',
+  passwordChanged: 'گذرواژه با موفقیت تغییر کرد.',
+  passwordMismatch: 'تکرار گذرواژه با گذرواژه جدید یکسان نیست.',
+  passwordShort: 'گذرواژه حداقل ۸ نویسه است.',
 } as const
 
 export const assistantPage = {
@@ -530,6 +539,8 @@ export const adminUsersPage = {
   stateInactive: 'غیرفعال',
   createTitle: 'افزودن کاربر',
   editTitle: 'ویرایش کاربر',
+  selectRole: 'انتخاب نقش…',
+  selectRoleRequired: 'نقش کاربر را انتخاب کنید.',
   password: 'گذرواژه',
   passwordHint: 'حداقل طبق سیاست گذرواژهٔ سامانه؛ پس از ثبت قابل مشاهده نیست.',
   roleHint:
@@ -541,6 +552,33 @@ export const adminUsersPage = {
   deactivateSelf: 'حساب خودتان؛ غیرفعال‌سازی مجاز نیست.',
   empty: 'کاربری با این جستجو یافت نشد.',
   emptyHint: 'فیلتر نقش یا وضعیت را تغییر دهید یا با «افزودن کاربر» حساب بسازید.',
+  studentSection: 'اطلاعات تحصیلی دانشجو',
+  studentNumber: 'کد دانشجویی',
+  studentDepartment: 'رشته تحصیلی / گروه آموزشی',
+  studentDegreeLevel: 'مقطع تحصیلی',
+  studentEntryYear: 'سال ورود',
+  studentEntryYearHint:
+    'سال ورود، نسخهٔ برنامهٔ درسی و قواعد پیش‌نیاز دانشجو را تعیین می‌کند.',
+  passedCourses: 'دروس پاس‌شده',
+  passedCoursesHint:
+    'برای هر درس انتخاب‌شده، یک سابقهٔ تحصیلی تاریخی با وضعیت «پاس‌شده» ثبت می‌شود.',
+  currentCourses: 'دروس اخذ‌شده ترم جاری',
+  currentCoursesHint:
+    'فقط ارائه‌های واقعی ترم جاریِ رشتهٔ انتخاب‌شده نمایش داده می‌شود؛ دروس پاس‌شده حذف می‌شوند.',
+  searchCoursePlaceholder: 'جستجوی کد یا نام درس…',
+  noCourseOptions: 'درسی برای نمایش نیست.',
+  noOfferingOptions: 'ارائه‌ای از این رشته در ترم جاری ثبت نشده است.',
+  selectedCourses: 'انتخاب‌شده‌ها',
+  clearSelection: 'حذف همه',
+  creditsUnit: 'واحد',
+  groupUnit: 'گروه',
+  loadingOptions: 'در حال بارگذاری…',
+  pickDepartmentFirst: 'ابتدا رشته تحصیلی را انتخاب کنید.',
+  studentNumberRequired: 'کد دانشجویی الزامی است.',
+  departmentRequired: 'رشته تحصیلی الزامی است.',
+  degreeLevelRequired: 'مقطع تحصیلی الزامی است.',
+  entryYearRequired: 'سال ورود الزامی است.',
+  invalidEntryYear: 'سال ورود باید عدد ۴ رقمی باشد.',
 } as const
 
 export const adminCoursesPage = {

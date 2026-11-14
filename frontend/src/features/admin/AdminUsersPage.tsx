@@ -10,7 +10,7 @@
  */
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   createAdminUser,
   deleteAdminUser,
@@ -18,6 +18,7 @@ import {
   updateAdminUser,
 } from '../../api/admin'
 import { queryKeys } from '../../api/keys'
+import { academicApi } from '../../api/resources'
 import {
   Chip,
   ConfirmDialog,
@@ -39,16 +40,18 @@ import {
   thCls,
 } from '../../components/ui'
 import { useUrlState } from '../../hooks/useUrlState'
-import { toPersianDigits } from '../../i18n/digits'
+import { toAsciiDigits, toPersianDigits } from '../../i18n/digits'
 import { adminUsersPage as t, auth as authText, common } from '../../i18n/fa'
-import { roleLabels } from '../../i18n/labels'
+import { degreeLevelLabels, roleLabels } from '../../i18n/labels'
 import { useAuth } from '../auth'
+import type { Course, CourseOffering, Department } from '../../types/academic'
 import type { AdminUser, AdminUserUpdatePayload, AdminUsersQuery } from '../../types/admin'
 import type { UserRole } from '../../types/api'
 
 const PAGE_SIZE = 10
 const ROLES: UserRole[] = ['STUDENT', 'PROFESSOR', 'ADMIN', 'SUPERADMIN']
 const PRIVILEGED: UserRole[] = ['ADMIN', 'SUPERADMIN']
+const DEGREE_LEVELS = ['BACHELOR', 'MASTER', 'PHD'] as const
 
 interface UserFormState {
   email: string
@@ -59,17 +62,168 @@ interface UserFormState {
   is_active: boolean
 }
 
+/** Student-only academic section (Part 3) — hidden for every other role. */
+interface StudentFormState {
+  student_number: string
+  department_id: string
+  degree_level: string
+  entry_year: string
+  passed: Array<{ code: string; title: string; credits: number }>
+  current: Array<{
+    id: number
+    code: string
+    title: string
+    credits: number
+    section: string
+  }>
+}
+
 const EMPTY_FORM: UserFormState = {
   email: '',
   password: '',
   first_name: '',
   last_name: '',
-  role: 'STUDENT',
+  role: '' as UserRole,
   is_active: true,
+}
+
+const EMPTY_STUDENT_FORM: StudentFormState = {
+  student_number: '',
+  department_id: '',
+  degree_level: '',
+  entry_year: '',
+  passed: [],
+  current: [],
 }
 
 function validateEmail(value: string): string | undefined {
   return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value.trim()) ? undefined : 'ایمیل معتبر وارد کنید.'
+}
+
+/** Small debounce so course/option searches hit the wire after typing stops. */
+function useDebounced(value: string, ms = 300): string {
+  const [debounced, setDebounced] = useState(value)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), ms)
+    return () => clearTimeout(timer)
+  }, [value, ms])
+  return debounced
+}
+
+interface MultiOption {
+  key: string | number
+  code: string
+  title: string
+  subtitle: string
+}
+
+/**
+ * Searchable multi-select (Part 3.2 E/F). Options are already
+ * filtered/excluded by the parent; the component renders the searchable list
+ * and the selected chips, and reports toggles.
+ */
+function SearchableMultiSelect({
+  label,
+  hint,
+  searchValue,
+  onSearch,
+  searchPlaceholder,
+  options,
+  selectedKeys,
+  onToggle,
+  onClear,
+  loading,
+  emptyLabel,
+  disabled,
+  testId,
+}: {
+  label: string
+  hint?: string
+  searchValue: string
+  onSearch: (value: string) => void
+  searchPlaceholder: string
+  options: MultiOption[]
+  selectedKeys: Set<string | number>
+  onToggle: (option: MultiOption) => void
+  onClear: () => void
+  loading: boolean
+  emptyLabel: string
+  disabled: boolean
+  testId: string
+}) {
+  const selected = options.filter((option) => selectedKeys.has(option.key))
+  return (
+    <div className="flex flex-col gap-space-xs text-body-sm" data-testid={testId}>
+      <span className="font-semibold text-on-surface">{label}</span>
+      {hint ? <span className="text-label-sm text-outline">{hint}</span> : null}
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest">
+        <div className="border-b border-outline-variant p-space-sm">
+          <SearchInput
+            value={searchValue}
+            onChange={onSearch}
+            placeholder={searchPlaceholder}
+            label={common.search}
+          />
+        </div>
+        <div className="max-h-48 overflow-y-auto">
+          {disabled ? (
+            <div className="px-space-md py-space-sm text-label-md text-on-surface-variant">
+              {t.pickDepartmentFirst}
+            </div>
+          ) : loading ? (
+            <div className="px-space-md py-space-sm text-label-md text-on-surface-variant">
+              {t.loadingOptions}
+            </div>
+          ) : options.length === 0 ? (
+            <div className="px-space-md py-space-sm text-label-md text-on-surface-variant">
+              {emptyLabel}
+            </div>
+          ) : (
+            options.map((option) => (
+              <label
+                key={option.key}
+                className="flex cursor-pointer items-center gap-space-sm border-b border-outline-variant/50 px-space-md py-space-sm text-body-sm last:border-b-0 hover:bg-surface-container-high"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedKeys.has(option.key)}
+                  onChange={() => onToggle(option)}
+                />
+                <span className="font-body-sm">
+                  <span dir="ltr" className="tnum">
+                    {option.code}
+                  </span>{' '}
+                  — {option.title}
+                </span>
+                <span className="ms-auto shrink-0 text-label-sm text-on-surface-variant">
+                  {option.subtitle}
+                </span>
+              </label>
+            ))
+          )}
+        </div>
+        {selected.length > 0 ? (
+          <div className="flex flex-wrap items-center gap-space-xs border-t border-outline-variant p-space-sm">
+            <span className="text-label-sm text-on-surface-variant">{t.selectedCourses}:</span>
+            {selected.map((option) => (
+              <Chip key={option.key} tone="primary">
+                <span dir="ltr" className="tnum">
+                  {option.code}
+                </span>
+              </Chip>
+            ))}
+            <button
+              type="button"
+              className={`${btnSecondaryCls} px-space-sm py-1 text-label-sm`}
+              onClick={onClear}
+            >
+              {t.clearSelection}
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  )
 }
 
 function FullName({ row }: { row: AdminUser }) {
@@ -90,9 +244,108 @@ export function AdminUsersPage() {
   const [formOpen, setFormOpen] = useState(false)
   const [editing, setEditing] = useState<AdminUser | null>(null)
   const [form, setForm] = useState<UserFormState>(EMPTY_FORM)
+  const [studentForm, setStudentForm] = useState<StudentFormState>(EMPTY_STUDENT_FORM)
   const [formError, setFormError] = useState<unknown>(null)
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [target, setTarget] = useState<AdminUser | null>(null)
+  const [passedSearch, setPassedSearch] = useState('')
+  const [currentSearch, setCurrentSearch] = useState('')
+
+  const debouncedPassedSearch = useDebounced(passedSearch)
+  const debouncedCurrentSearch = useDebounced(currentSearch)
+  const studentSectionOpen = !editing && form.role === 'STUDENT'
+
+  // Student-section option sources (Part 3.2): department catalog for the
+  // passed-course select, actual active-term offerings for the current one.
+  const departmentsQuery = useQuery({
+    queryKey: ['departments', 'options'] as const,
+    queryFn: () => academicApi.departments({ page_size: 100 }),
+    enabled: studentSectionOpen,
+  })
+  const departmentId = studentForm.department_id
+  const coursesQuery = useQuery({
+    queryKey: queryKeys.courses({
+      department: departmentId ? Number(departmentId) : undefined,
+      page_size: 100,
+      search: debouncedPassedSearch || undefined,
+    }),
+    queryFn: () =>
+      academicApi.courses({
+        department: departmentId ? Number(departmentId) : undefined,
+        page_size: 100,
+        search: debouncedPassedSearch || undefined,
+      }),
+    enabled: studentSectionOpen && Boolean(departmentId),
+  })
+  const offeringsQuery = useQuery({
+    queryKey: queryKeys.offerings({
+      term: 'current',
+      department: departmentId ? Number(departmentId) : undefined,
+      page_size: 100,
+      search: debouncedCurrentSearch || undefined,
+    }),
+    queryFn: () =>
+      academicApi.offerings({
+        term: 'current',
+        department: departmentId ? Number(departmentId) : undefined,
+        page_size: 100,
+        search: debouncedCurrentSearch || undefined,
+      }),
+    enabled: studentSectionOpen && Boolean(departmentId),
+  })
+
+  const passedCourseCodes = new Set(studentForm.passed.map((course) => course.code))
+  const passedOptions: MultiOption[] = (coursesQuery.data?.results ?? []).map((course) => ({
+    key: course.code,
+    code: course.code,
+    title: course.title,
+    subtitle: `${toPersianDigits(course.credits)} ${t.creditsUnit}`,
+  }))
+  const currentOptions: MultiOption[] = (offeringsQuery.data?.results ?? [])
+    // A course cannot be simultaneously passed and currently taken.
+    .filter((offering) => !passedCourseCodes.has(offering.course.code))
+    .map((offering) => ({
+      key: offering.id,
+      code: offering.course.code,
+      title: offering.course.title,
+      subtitle: `${toPersianDigits(offering.course.credits)} ${t.creditsUnit} — ${t.groupUnit} ${toPersianDigits(offering.section_code)}`,
+    }))
+  const currentSelectedKeys = new Set(studentForm.current.map((offering) => offering.id))
+
+  const togglePassed = (course: Course) => {
+    setStudentForm((previous) => {
+      const already = previous.passed.some((row) => row.code === course.code)
+      return {
+        ...previous,
+        // Selecting a pass immediately removes it from the current-term list.
+        passed: already
+          ? previous.passed.filter((row) => row.code !== course.code)
+          : [...previous.passed, { code: course.code, title: course.title, credits: course.credits }],
+        current: previous.current.filter((row) => row.code !== course.code || already),
+      }
+    })
+  }
+
+  const toggleCurrent = (offering: CourseOffering) => {
+    setStudentForm((previous) => {
+      const already = previous.current.some((row) => row.id === offering.id)
+      return {
+        ...previous,
+        current: already
+          ? previous.current.filter((row) => row.id !== offering.id)
+          : [
+              ...previous.current,
+              {
+                id: offering.id,
+                code: offering.course.code,
+                title: offering.course.title,
+                credits: offering.course.credits,
+                section: offering.section_code,
+              },
+            ],
+      }
+    })
+  }
 
   const query: AdminUsersQuery = {
     page,
@@ -136,7 +389,10 @@ export function AdminUsersPage() {
 
   const openCreate = () => {
     setEditing(null)
-    setForm({ ...EMPTY_FORM, role: 'STUDENT' })
+    setForm({ ...EMPTY_FORM })
+    setStudentForm(EMPTY_STUDENT_FORM)
+    setPassedSearch('')
+    setCurrentSearch('')
     setFormError(null)
     setFieldErrors({})
     setFormOpen(true)
@@ -152,6 +408,7 @@ export function AdminUsersPage() {
       role: row.role,
       is_active: row.is_active,
     })
+    setStudentForm(EMPTY_STUDENT_FORM)
     setFormError(null)
     setFieldErrors({})
     setFormOpen(true)
@@ -165,6 +422,16 @@ export function AdminUsersPage() {
       if (emailError) errors.email = emailError
       if (!form.password || form.password.length < 8) {
         errors.password = 'گذرواژه حداقل ۸ نویسه است.'
+      }
+      if (!form.role) {
+        errors.role = t.selectRoleRequired
+      } else if (form.role === 'STUDENT') {
+        if (!studentForm.student_number.trim()) errors.student_number = t.studentNumberRequired
+        if (!studentForm.department_id) errors.department_id = t.departmentRequired
+        if (!studentForm.degree_level) errors.degree_level = t.degreeLevelRequired
+        const entryYear = toAsciiDigits(studentForm.entry_year.trim())
+        if (!entryYear) errors.entry_year = t.entryYearRequired
+        else if (!/^[0-9]{4}$/.test(entryYear)) errors.entry_year = t.invalidEntryYear
       }
     }
     if (Object.keys(errors).length > 0) {
@@ -182,6 +449,16 @@ export function AdminUsersPage() {
     if (!editing) {
       payload.email = form.email.trim().toLowerCase()
       payload.password = form.password
+      if (form.role === 'STUDENT') {
+        // Student academic identity + selections (Part 3); the backend
+        // validates and creates user/profile/enrollments atomically.
+        payload.student_number = toAsciiDigits(studentForm.student_number.trim())
+        payload.department_id = Number(studentForm.department_id)
+        payload.degree_level = studentForm.degree_level
+        payload.entry_year = toAsciiDigits(studentForm.entry_year.trim())
+        payload.passed_course_codes = studentForm.passed.map((course) => course.code)
+        payload.current_offering_ids = studentForm.current.map((offering) => offering.id)
+      }
     }
     save.mutate(payload)
   }
@@ -349,6 +626,7 @@ export function AdminUsersPage() {
         open={formOpen}
         onClose={() => setFormOpen(false)}
         title={editing ? t.editTitle : t.createTitle}
+        wide
       >
         <form
           className="flex flex-col gap-space-md"
@@ -411,8 +689,15 @@ export function AdminUsersPage() {
             <select
               className={inputCls}
               value={form.role}
-              onChange={(event) => setForm({ ...form, role: event.target.value as UserRole })}
+              onChange={(event) => {
+                const role = event.target.value as UserRole
+                setForm({ ...form, role })
+                // Student academic fields exist only for the student role:
+                // switching roles hides the section and clears its state.
+                if (role !== 'STUDENT') setStudentForm(EMPTY_STUDENT_FORM)
+              }}
             >
+              <option value="">{t.selectRole}</option>
               {ROLES.map((role) => (
                 <option key={role} value={role}>
                   {roleLabels[role]}
@@ -423,6 +708,136 @@ export function AdminUsersPage() {
               <span className="text-label-sm text-[#B45309]">{t.roleHint}</span>
             ) : null}
           </label>
+
+          {studentSectionOpen ? (
+            <section
+              className="flex flex-col gap-space-md rounded-xl border border-outline-variant bg-surface-container p-space-md"
+              data-testid="student-academic-section"
+            >
+              <h3 className="m-0 text-title-md font-bold text-on-surface">{t.studentSection}</h3>
+              <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+                <label className="flex flex-col gap-space-xs text-body-sm">
+                  <span className="font-semibold text-on-surface">{t.studentNumber}</span>
+                  <input
+                    className={inputCls}
+                    dir="ltr"
+                    inputMode="numeric"
+                    value={studentForm.student_number}
+                    onChange={(event) =>
+                      setStudentForm({ ...studentForm, student_number: event.target.value })
+                    }
+                  />
+                  <FieldError message={fieldErrors.student_number} />
+                </label>
+                <label className="flex flex-col gap-space-xs text-body-sm">
+                  <span className="font-semibold text-on-surface">{t.studentEntryYear}</span>
+                  <input
+                    className={inputCls}
+                    dir="ltr"
+                    inputMode="numeric"
+                    placeholder="۱۴۰۲"
+                    value={studentForm.entry_year}
+                    onChange={(event) =>
+                      setStudentForm({ ...studentForm, entry_year: event.target.value })
+                    }
+                  />
+                  <span className="text-label-sm text-outline">{t.studentEntryYearHint}</span>
+                  <FieldError message={fieldErrors.entry_year} />
+                </label>
+                <label className="flex flex-col gap-space-xs text-body-sm">
+                  <span className="font-semibold text-on-surface">{t.studentDepartment}</span>
+                  <select
+                    className={inputCls}
+                    value={studentForm.department_id}
+                    onChange={(event) =>
+                      setStudentForm({
+                        ...studentForm,
+                        department_id: event.target.value,
+                        // New major → new catalog scope: selections no longer
+                        // apply, so both course lists reset.
+                        passed: [],
+                        current: [],
+                      })
+                    }
+                  >
+                    <option value="">{t.pickDepartmentFirst}</option>
+                    {(departmentsQuery.data?.results ?? []).map((department: Department) => (
+                      <option key={department.id} value={department.id}>
+                        {department.name}
+                      </option>
+                    ))}
+                  </select>
+                  <FieldError message={fieldErrors.department_id} />
+                </label>
+                <label className="flex flex-col gap-space-xs text-body-sm">
+                  <span className="font-semibold text-on-surface">{t.studentDegreeLevel}</span>
+                  <select
+                    className={inputCls}
+                    value={studentForm.degree_level}
+                    onChange={(event) =>
+                      setStudentForm({ ...studentForm, degree_level: event.target.value })
+                    }
+                  >
+                    <option value="">{common.filterAll}</option>
+                    {DEGREE_LEVELS.map((level) => (
+                      <option key={level} value={level}>
+                        {degreeLevelLabels[level]}
+                      </option>
+                    ))}
+                  </select>
+                  <FieldError message={fieldErrors.degree_level} />
+                </label>
+              </div>
+
+              <SearchableMultiSelect
+                label={t.passedCourses}
+                hint={t.passedCoursesHint}
+                searchValue={passedSearch}
+                onSearch={setPassedSearch}
+                searchPlaceholder={t.searchCoursePlaceholder}
+                options={passedOptions}
+                selectedKeys={passedCourseCodes}
+                onToggle={(option) => {
+                  const course = (coursesQuery.data?.results ?? []).find(
+                    (row) => row.code === option.key,
+                  )
+                  if (course) togglePassed(course)
+                }}
+                onClear={() => setStudentForm({ ...studentForm, passed: [] })}
+                loading={coursesQuery.isFetching}
+                emptyLabel={
+                  departmentId ? t.noCourseOptions : t.pickDepartmentFirst
+                }
+                disabled={!departmentId}
+                testId="passed-courses"
+              />
+
+              <SearchableMultiSelect
+                label={t.currentCourses}
+                hint={t.currentCoursesHint}
+                searchValue={currentSearch}
+                onSearch={setCurrentSearch}
+                searchPlaceholder={t.searchCoursePlaceholder}
+                options={currentOptions}
+                selectedKeys={currentSelectedKeys}
+                onToggle={(option) => {
+                  const offering = (offeringsQuery.data?.results ?? []).find(
+                    (row) => row.id === option.key,
+                  )
+                  if (offering) toggleCurrent(offering)
+                }}
+                onClear={() => setStudentForm({ ...studentForm, current: [] })}
+                loading={offeringsQuery.isFetching}
+                emptyLabel={
+                  departmentId
+                    ? t.noOfferingOptions
+                    : t.pickDepartmentFirst
+                }
+                disabled={!departmentId}
+                testId="current-courses"
+              />
+            </section>
+          ) : null}
 
           {editing ? (
             <label className="flex items-center gap-space-sm text-body-sm">
@@ -438,7 +853,7 @@ export function AdminUsersPage() {
 
           {formError ? <ErrorState error={formError} /> : null}
 
-          <div className="flex items-center justify-end gap-space-sm pt-space-xs">
+          <div className="sticky bottom-0 flex items-center justify-end gap-space-sm border-t border-outline-variant bg-surface-container-lowest pt-space-sm">
             <button type="button" className={btnSecondaryCls} onClick={() => setFormOpen(false)}>
               {common.cancel}
             </button>

@@ -12,6 +12,11 @@ urlpatterns = [
     path("auth/refresh/", views.RefreshView.as_view(), name="auth-refresh"),
     path("auth/logout/", views.LogoutView.as_view(), name="auth-logout"),
     path("auth/me/", views.MeView.as_view(), name="auth-me"),
+    path(
+        "auth/password-change/",
+        views.PasswordChangeView.as_view(),
+        name="auth-password-change",
+    ),
     path("admin/users/", views.AdminUserListCreateView.as_view(), name="admin-users"),
     path(
         "admin/users/<int:pk>/",

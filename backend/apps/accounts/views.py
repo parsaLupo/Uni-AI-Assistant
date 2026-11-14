@@ -19,7 +19,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
@@ -35,10 +35,11 @@ from apps.accounts.serializers import (
     LoginSerializer,
     LoginUserSerializer,
     MeSerializer,
+    PasswordChangeSerializer,
     RegisterSerializer,
 )
 from apps.accounts.throttles import RefreshRateThrottle
-from apps.common.errors import AUTHENTICATION_REQUIRED, CONFLICT, ApiError
+from apps.common.errors import AUTHENTICATION_REQUIRED, CONFLICT, VALIDATION_ERROR, ApiError
 
 logger = logging.getLogger("app.auth")
 
@@ -189,6 +190,37 @@ class MeView(APIView):
     @extend_schema(tags=["auth"], responses=MeSerializer)
     def get(self, request):
         return Response(MeSerializer(request.user).data)
+
+
+PASSWORD_CHANGED_MESSAGE = "گذرواژه با موفقیت تغییر کرد."
+WRONG_CURRENT_PASSWORD_MESSAGE = "گذرواژهٔ فعلی نادرست است."
+
+
+class PasswordChangeView(APIView):
+    """POST /api/v1/auth/password-change/ — self-service password change.
+
+    Available to every signed-in role (the student's only permitted self
+    change). The current password must be re-entered; Django's validators
+    guard the new one. The presented refresh-token family is revoked so a
+    stolen refresh token cannot outlive the credential change — the caller
+    keeps their short-lived access token and re-logs in afterwards.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    @extend_schema(tags=["auth"], request=PasswordChangeSerializer, responses={200: dict})
+    def post(self, request):
+        serializer = PasswordChangeSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = request.user
+        if not user.check_password(serializer.validated_data["old_password"]):
+            raise ApiError(VALIDATION_ERROR, WRONG_CURRENT_PASSWORD_MESSAGE, http_status=400)
+        user.set_password(serializer.validated_data["new_password"])
+        user.save(update_fields=["password"])
+        tokens.revoke_family_for(request.COOKIES.get(tokens.REFRESH_COOKIE_NAME))
+        response = Response({"detail": PASSWORD_CHANGED_MESSAGE})
+        tokens.delete_refresh_cookie(response)
+        return response
 
 
 class AdminUserListCreateView(ListCreateAPIView):

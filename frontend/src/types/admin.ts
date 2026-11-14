@@ -38,7 +38,19 @@ export interface AdminUsersQuery {
   is_active?: 'true' | 'false' | ''
 }
 
-export interface AdminUserCreatePayload {
+/** Optional student academic section sent when role=STUDENT (Part 3). */
+export interface AdminStudentAcademicPayload {
+  student_number?: string
+  department_id?: number
+  degree_level?: string
+  entry_year?: string
+  /** Historical passes — course codes of the selected department. */
+  passed_course_codes?: string[]
+  /** Current-term takes — CourseOffering ids of the active term. */
+  current_offering_ids?: number[]
+}
+
+export interface AdminUserCreatePayload extends AdminStudentAcademicPayload {
   email: string
   password: string
   first_name?: string
@@ -70,6 +82,10 @@ export interface OfferingsQuery {
   course?: string /** id or code */
   professor?: string
   status?: string
+  /** Filter offerings to one department (id). */
+  department?: string
+  /** Search across course code + normalized title. */
+  search?: string
 }
 
 export type { Course, CourseOffering, ClassSchedule, Exam, AcademicTerm, Professor }

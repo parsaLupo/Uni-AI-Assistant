@@ -36,34 +36,68 @@ def test_me_get_creates_an_empty_profile_row(authed_client, student):
     assert StudentProfile.objects.filter(user=student).exists()
 
 
-def test_onboarding_collects_uni_code_and_major(
+def test_student_cannot_edit_academic_fields(
     authed_client, student, student_profile, academic_graph
 ):
+    """Part 1: academic identity is registrar-owned; direct PATCH → 403."""
     client = authed_client(student)
     response = client.patch(
         "/api/v1/students/me/",
         {"student_number": "40498765", "department_id": academic_graph["department"].pk},
         format="json",
     )
-    assert response.status_code == 200
-    body = response.json()
-    assert body["student_number"] == "40498765"
-    # Faculty is derived from the chosen major (onboarding stays short).
-    assert body["faculty"]["code"] == academic_graph["faculty"].code
-    assert body["onboarding_complete"] is True
+    assert response.status_code == 403
+    assert response.json()["error"]["code"] == "PERMISSION_DENIED"
+    profile = StudentProfile.objects.get(user=student)
+    assert profile.student_number != "40498765"
+    assert response.json()["error"]["message"].startswith("اطلاعات تحصیلی")
 
 
-def test_duplicate_student_number_returns_conflict(
+def test_student_protected_fields_are_rejected_individually(
     authed_client, student, student_profile
 ):
-    other_user = User.objects.create_user(email="other@example.edu", password="x")
-    StudentProfile.objects.create(user=other_user, student_number="99988877")
     client = authed_client(student)
+    for payload in (
+        {"degree_level": "MASTER"},
+        {"entry_year": "1399"},
+        {"faculty_id": 1},
+        {"current_term_number": 9},
+        {"current_gpa": "19.50"},
+    ):
+        response = client.patch("/api/v1/students/me/", payload, format="json")
+        assert response.status_code == 403, payload
+    profile = StudentProfile.objects.get(user=student)
+    assert profile.degree_level != "MASTER"
+    assert profile.entry_year != "1399"
+    assert profile.current_gpa is None
+
+
+def test_admin_can_manage_student_academic_information(
+    authed_client, admin, student, student_profile, academic_graph
+):
+    """Admins keep full write access through the admin surface (Part 1)."""
+    other = User.objects.create_user(email="managed@example.edu", password="x")
+    profile = StudentProfile.objects.create(user=other)
+    client = authed_client(admin)
     response = client.patch(
-        "/api/v1/students/me/", {"student_number": "99988877"}, format="json"
+        f"/api/v1/admin/students/{profile.pk}/",
+        {
+            "student_number": "40411111",
+            "department_id": academic_graph["department"].pk,
+            "degree_level": "BACHELOR",
+            "entry_year": "1402",
+        },
+        format="json",
     )
-    assert response.status_code == 409
-    assert response.json()["error"]["code"] == "CONFLICT"
+    assert response.status_code == 200, response.content
+    assert response.json()["student_number"] == "40411111"
+    assert response.json()["onboarding_complete"] is True
+    # The student himself still cannot change what the admin just set.
+    student_client = authed_client(other)
+    response = student_client.patch(
+        "/api/v1/students/me/", {"entry_year": "1399"}, format="json"
+    )
+    assert response.status_code == 403
 
 
 def test_professor_cannot_use_student_surfaces(authed_client, professor_user):

@@ -1,17 +1,15 @@
 /**
- * /profile — student onboarding + permitted profile fields (FR-STU-002).
+ * /profile — student academic profile (FR-STU-002, profile-improvement Part 1).
  *
- * GET/PATCH /students/me/: the form edits student_number, degree_level,
- * entry_year and department (faculty is derived server-side). Department
- * options come from the public GET /departments/ read. Read-only fields
- * (GPA, term number, name, email) are server-managed. Validation messages
- * are Persian (Phase 05 acceptance) and digits are normalised from Persian
- * to ASCII before hitting the contract.
+ * All academic identity fields (student number, major, faculty, degree level,
+ * entry year, term number, GPA) are **registrar-owned**: rendered read-only,
+ * and the backend rejects direct PATCH attempts from students with 403. The
+ * only permitted self change is the password (POST /auth/password-change/),
+ * which re-authenticates with the current password first.
  */
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
 import { queryKeys } from '../../api/keys'
 import { academicApi } from '../../api/resources'
 import {
@@ -22,17 +20,11 @@ import {
   cardCls,
   inputCls,
 } from '../../components/ui'
-import { useAuth } from '../auth'
+import { changePassword, useAuth } from '../auth'
 import { profilePage } from '../../i18n/fa'
-import { toAsciiDigits, toPersianDigits } from '../../i18n/digits'
+import { toPersianDigits } from '../../i18n/digits'
 import { degreeLevelLabels } from '../../i18n/labels'
-
-interface ProfileForm {
-  student_number: string
-  degree_level: 'BACHELOR' | 'MASTER' | 'PHD' | ''
-  entry_year: string
-  department_id: string
-}
+import type { DegreeLevel } from '../../types/academic'
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null
@@ -43,54 +35,46 @@ function FieldError({ message }: { message?: string }) {
   )
 }
 
+function FactRow({ label, value, ltr = false }: { label: string; value: string; ltr?: boolean }) {
+  return (
+    <div className="flex justify-between gap-space-sm border-b border-outline-variant pb-2">
+      <dt className="text-on-surface-variant">{label}</dt>
+      <dd className="m-0 font-semibold text-on-surface" dir={ltr ? 'ltr' : undefined}>
+        {value}
+      </dd>
+    </div>
+  )
+}
+
 export function ProfilePage() {
   const { user } = useAuth()
   const queryClient = useQueryClient()
-  const [saved, setSaved] = useState(false)
 
   const profile = useQuery({
     queryKey: queryKeys.studentProfile(),
     queryFn: academicApi.studentProfile,
     enabled: user?.role === 'STUDENT',
   })
-  const departments = useQuery({
-    queryKey: ['departments', 'options'] as const,
-    queryFn: () => academicApi.departments({ page_size: 100 }),
-    enabled: user?.role === 'STUDENT',
-  })
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ProfileForm>({
-    defaultValues: {
-      student_number: '',
-      degree_level: '',
-      entry_year: '',
-      department_id: '',
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({})
+  const [passwordChanged, setPasswordChanged] = useState(false)
+
+  const change = useMutation({
+    mutationFn: () => changePassword(currentPassword, newPassword),
+    onSuccess: () => {
+      setPasswordChanged(true)
+      setCurrentPassword('')
+      setNewPassword('')
+      setConfirmPassword('')
+      setPasswordErrors({})
+      // The change revokes the refresh family server-side; refresh session
+      // state so the next navigation re-authenticates cleanly.
+      void queryClient.invalidateQueries({ queryKey: queryKeys.me })
     },
-  })
-
-  useEffect(() => {
-    if (profile.data) {
-      reset({
-        student_number: profile.data.student_number ?? '',
-        degree_level: profile.data.degree_level,
-        entry_year: profile.data.entry_year ?? '',
-        department_id: profile.data.department ? String(profile.data.department.id) : '',
-      })
-    }
-  }, [profile.data, reset])
-
-  const mutation = useMutation({
-    mutationFn: (payload: Record<string, unknown>) => academicApi.updateStudentProfile(payload),
-    onSuccess: (updated) => {
-      setSaved(true)
-      queryClient.setQueryData(queryKeys.studentProfile(), updated)
-      void queryClient.invalidateQueries({ queryKey: queryKeys.planner() })
-    },
+    onError: () => setPasswordErrors({}),
   })
 
   if (user?.role !== 'STUDENT') {
@@ -118,16 +102,18 @@ export function ProfilePage() {
 
   const data = profile.data
 
-  const onSubmit = handleSubmit((values) => {
-    setSaved(false)
-    const payload: Record<string, unknown> = {
-      student_number: toAsciiDigits(values.student_number.trim()),
-      degree_level: values.degree_level,
-      entry_year: toAsciiDigits(values.entry_year.trim()),
-      department_id: values.department_id ? Number(values.department_id) : null,
-    }
-    mutation.mutate(payload)
-  })
+  const submitPassword = () => {
+    setPasswordChanged(false)
+    const errors: Record<string, string> = {}
+    if (!currentPassword) errors.currentPassword = profilePage.required
+    if (newPassword.length < 8) errors.newPassword = profilePage.passwordShort
+    if (newPassword !== confirmPassword) errors.confirmPassword = profilePage.passwordMismatch
+    setPasswordErrors(errors)
+    if (Object.keys(errors).length > 0) return
+    change.mutate()
+  }
+
+  const degreeLabel = degreeLevelLabels[data.degree_level as DegreeLevel] ?? profilePage.notAvailable
 
   return (
     <div className="flex flex-col gap-space-md px-gutter-desktop pt-space-lg">
@@ -141,131 +127,131 @@ export function ProfilePage() {
         }
       />
 
+      <div className="flex items-center gap-space-sm rounded-xl border border-outline-variant bg-surface-container p-space-md text-body-sm text-on-surface-variant">
+        <span className="material-symbols-outlined text-[20px]">lock</span>
+        {profilePage.readOnlyNotice}
+      </div>
       {!data.onboarding_complete ? (
         <div className="flex items-center gap-space-sm rounded-xl border border-[#FDE68A] bg-[#FFFBEB] p-space-md text-body-sm text-[#92400E]">
           <span className="material-symbols-outlined text-[20px]">info</span>
-          {profilePage.onboardingNotice}
+          {profilePage.incompleteNotice}
         </div>
-      ) : null}
-      {saved ? (
-        <div
-          role="status"
-          className="flex items-center gap-space-sm rounded-xl border border-[#99F6E4] bg-[#F0FDFA] p-space-md text-body-sm text-[#0D9488]"
-        >
-          <span className="material-symbols-outlined text-[20px]">check_circle</span>
-          {profilePage.saved}
-        </div>
-      ) : null}
-      {mutation.isError ? (
-        <ErrorState error={mutation.error} onRetry={() => mutation.reset()} />
       ) : null}
 
       <div className="grid grid-cols-1 gap-space-md lg:grid-cols-12">
-        {/* Editable fields */}
+        {/* Read-only academic identity (registrar-owned) */}
         <section className={`${cardCls} p-space-lg lg:col-span-7`}>
-          <h2 className="m-0 mb-space-md text-headline-md font-bold text-on-surface">
-            {profilePage.edit}
-          </h2>
-          <form onSubmit={onSubmit} noValidate className="flex flex-col gap-space-md">
-            <label className="flex flex-col gap-space-xs text-body-sm">
-              <span className="font-semibold text-on-surface">{profilePage.studentNumber}</span>
-              <input
-                className={inputCls}
-                dir="ltr"
-                inputMode="numeric"
-                {...register('student_number', {
-                  required: profilePage.required,
-                  pattern: { value: /^[0-9]+$/, message: profilePage.required },
-                })}
-              />
-              <FieldError message={errors.student_number?.message} />
-            </label>
-
-            <label className="flex flex-col gap-space-xs text-body-sm">
-              <span className="font-semibold text-on-surface">{profilePage.department}</span>
-              <select
-                className={inputCls}
-                {...register('department_id', { required: profilePage.required })}
-              >
-                <option value="">{profilePage.notAvailable}</option>
-                {(departments.data?.results ?? []).map((department) => (
-                  <option key={department.id} value={department.id}>
-                    {department.name}
-                  </option>
-                ))}
-              </select>
-              <FieldError message={errors.department_id?.message} />
-            </label>
-
-            <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
-              <label className="flex flex-col gap-space-xs text-body-sm">
-                <span className="font-semibold text-on-surface">{profilePage.degreeLevel}</span>
-                <select className={inputCls} {...register('degree_level')}>
-                  <option value="">{profilePage.notAvailable}</option>
-                  {(['BACHELOR', 'MASTER', 'PHD'] as const).map((level) => (
-                    <option key={level} value={level}>
-                      {degreeLevelLabels[level]}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="flex flex-col gap-space-xs text-body-sm">
-                <span className="font-semibold text-on-surface">{profilePage.entryYear}</span>
-                <input
-                  className={inputCls}
-                  dir="ltr"
-                  inputMode="numeric"
-                  placeholder="۱۴۰۲"
-                  {...register('entry_year', {
-                    pattern: { value: /^[0-9]{4}$/, message: profilePage.invalidYear },
-                  })}
-                />
-                <FieldError message={errors.entry_year?.message} />
-              </label>
-            </div>
-
-            <div className="flex items-center gap-space-sm pt-space-xs">
-              <button type="submit" className="rounded bg-primary-container px-space-lg py-space-sm text-label-lg font-semibold text-on-primary shadow-sm transition-all hover:bg-[#2563EB] active:scale-[0.99] disabled:opacity-75" disabled={isSubmitting || mutation.isPending}>
-                {profilePage.save}
-              </button>
-            </div>
-          </form>
-        </section>
-
-        {/* Read-only facts */}
-        <section className={`${cardCls} p-space-lg lg:col-span-5`}>
           <h2 className="m-0 mb-space-sm text-headline-md font-bold text-on-surface">
             {profilePage.subtitle}
           </h2>
           <dl className="m-0 flex flex-col gap-space-sm text-body-sm">
+            <FactRow
+              label={profilePage.studentNumber}
+              value={data.student_number ? toPersianDigits(data.student_number) : profilePage.notAvailable}
+              ltr
+            />
+            <FactRow label={profilePage.department} value={data.department?.name ?? profilePage.notAvailable} />
+            <FactRow label={profilePage.faculty} value={data.faculty?.name ?? profilePage.notAvailable} />
+            <FactRow label={profilePage.degreeLevel} value={degreeLabel} />
+            <FactRow
+              label={profilePage.entryYear}
+              value={data.entry_year ? toPersianDigits(data.entry_year) : profilePage.notAvailable}
+            />
+            <FactRow
+              label={profilePage.currentTermNumber}
+              value={
+                data.current_term_number
+                  ? toPersianDigits(data.current_term_number)
+                  : profilePage.notAvailable
+              }
+            />
+            <FactRow
+              label={profilePage.currentGpa}
+              value={data.current_gpa ? toPersianDigits(data.current_gpa) : profilePage.notAvailable}
+            />
             <div className="flex justify-between gap-space-sm border-b border-outline-variant pb-2">
-              <dt className="text-on-surface-variant">{profilePage.studentNumber} (حساب)</dt>
+              <dt className="text-on-surface-variant">ایمیل حساب</dt>
               <dd className="m-0 font-semibold text-on-surface" dir="ltr">
                 {data.user.email}
               </dd>
             </div>
-            <div className="flex justify-between gap-space-sm border-b border-outline-variant pb-2">
-              <dt className="text-on-surface-variant">{profilePage.faculty}</dt>
-              <dd className="m-0 font-semibold text-on-surface">
-                {data.faculty?.name ?? profilePage.notAvailable}
-              </dd>
-            </div>
-            <div className="flex justify-between gap-space-sm border-b border-outline-variant pb-2">
-              <dt className="text-on-surface-variant">{profilePage.currentGpa}</dt>
-              <dd className="m-0 font-semibold text-on-surface tnum">
-                {data.current_gpa ? toPersianDigits(data.current_gpa) : profilePage.notAvailable}
-              </dd>
-            </div>
-            <div className="flex justify-between gap-space-sm">
-              <dt className="text-on-surface-variant">{profilePage.currentTermNumber}</dt>
-              <dd className="m-0 font-semibold text-on-surface tnum">
-                {data.current_term_number
-                  ? toPersianDigits(data.current_term_number)
-                  : profilePage.notAvailable}
-              </dd>
-            </div>
           </dl>
+        </section>
+
+        {/* Password change — the student's only self-service edit */}
+        <section className={`${cardCls} p-space-lg lg:col-span-5`}>
+          <h2 className="m-0 mb-space-sm text-headline-md font-bold text-on-surface">
+            {profilePage.changePasswordTitle}
+          </h2>
+          <p className="mt-0 text-label-md text-on-surface-variant">{profilePage.changePasswordHint}</p>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+              submitPassword()
+            }}
+            noValidate
+            className="flex flex-col gap-space-md"
+          >
+            <label className="flex flex-col gap-space-xs text-body-sm">
+              <span className="font-semibold text-on-surface">{profilePage.currentPassword}</span>
+              <input
+                type="password"
+                dir="ltr"
+                className={inputCls}
+                value={currentPassword}
+                onChange={(event) => setCurrentPassword(event.target.value)}
+                autoComplete="current-password"
+              />
+              <FieldError message={passwordErrors.currentPassword} />
+            </label>
+            <label className="flex flex-col gap-space-xs text-body-sm">
+              <span className="font-semibold text-on-surface">{profilePage.newPassword}</span>
+              <input
+                type="password"
+                dir="ltr"
+                className={inputCls}
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+                autoComplete="new-password"
+              />
+              <FieldError message={passwordErrors.newPassword} />
+            </label>
+            <label className="flex flex-col gap-space-xs text-body-sm">
+              <span className="font-semibold text-on-surface">{profilePage.confirmNewPassword}</span>
+              <input
+                type="password"
+                dir="ltr"
+                className={inputCls}
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                autoComplete="new-password"
+              />
+              <FieldError message={passwordErrors.confirmPassword} />
+            </label>
+
+            {passwordChanged ? (
+              <div
+                role="status"
+                className="flex items-center gap-space-sm rounded-xl border border-[#99F6E4] bg-[#F0FDFA] p-space-md text-body-sm text-[#0D9488]"
+              >
+                <span className="material-symbols-outlined text-[20px]">check_circle</span>
+                {profilePage.passwordChanged}
+              </div>
+            ) : null}
+            {change.isError ? (
+              <ErrorState error={change.error} onRetry={() => change.reset()} />
+            ) : null}
+
+            <div className="flex items-center gap-space-sm pt-space-xs">
+              <button
+                type="submit"
+                className="rounded bg-primary-container px-space-lg py-space-sm text-label-lg font-semibold text-on-primary shadow-sm transition-all hover:bg-[#2563EB] active:scale-[0.99] disabled:opacity-75"
+                disabled={change.isPending}
+              >
+                {profilePage.changePasswordTitle}
+              </button>
+            </div>
+          </form>
         </section>
       </div>
     </div>

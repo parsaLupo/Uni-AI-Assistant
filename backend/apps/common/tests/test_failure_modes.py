@@ -121,10 +121,12 @@ class TestConcurrentEdit:
         assert response.json()["error"]["code"] == "CONFLICT"
 
     def test_duplicate_student_number_surfaces_a_409_not_a_500(
-        self, authed_client, student, student_profile, academic_graph
+        self, authed_client, admin, student, student_profile, academic_graph
     ):
         """Another flavour of the same race: the unique student_number decided
-        by the database, not the serializer."""
+        by the database, not the serializer. The write goes through the admin
+        student-profile surface — students themselves may no longer edit this
+        field (registrar-owned, 403 on self-service attempts)."""
         from apps.accounts.models import User
 
         rival = User.objects.create_user(email="rival@example.edu", password="x")
@@ -133,8 +135,8 @@ class TestConcurrentEdit:
         StudentProfile.objects.create(
             user=rival, student_number="40412345", department=academic_graph["department"]
         )
-        response = authed_client(student).patch(
-            "/api/v1/students/me/",
+        response = authed_client(admin).patch(
+            f"/api/v1/admin/students/{student_profile.pk}/",
             {
                 "student_number": "40412345",
                 "department_id": academic_graph["department"].pk,

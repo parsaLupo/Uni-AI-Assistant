@@ -50,7 +50,8 @@ class StudentProfile(models.Model):
     )
     entry_year = models.CharField(max_length=9, blank=True)  # Jalali «سال ورود»
     current_term_number = models.PositiveSmallIntegerField(null=True, blank=True)
-    current_gpa = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    # GPA on the 0–20 scale (max_digits=4 → up to 99.99; "17.66" needs 4).
+    current_gpa = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
