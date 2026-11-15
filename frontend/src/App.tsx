@@ -9,6 +9,7 @@
  */
 import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { AppShell } from './components/AppShell'
+import { btnPrimaryCls } from './components/ui'
 import {
   AuthProvider,
   LoginPage,
@@ -58,10 +59,7 @@ function NotFoundRoute() {
       <span className="material-symbols-outlined text-[48px] text-outline">explore_off</span>
       <h1 className="m-0 text-headline-lg font-bold text-on-surface">{common.notFoundTitle}</h1>
       <p className="m-0 text-body-md text-on-surface-variant">{common.notFoundBody}</p>
-      <Link
-        to="/dashboard"
-        className="inline-flex items-center gap-space-xs rounded bg-primary-container px-space-lg py-space-sm text-label-lg font-semibold text-on-primary transition-colors hover:bg-[#2563EB]"
-      >
+      <Link to="/dashboard" className={btnPrimaryCls}>
         {navText.dashboard}
       </Link>
     </div>

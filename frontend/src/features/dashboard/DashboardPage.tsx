@@ -361,7 +361,7 @@ export function DashboardPage() {
           </div>
           <Link
             to="/assistant"
-            className="flex w-full items-center justify-center gap-space-xs rounded-lg bg-primary px-space-lg py-space-sm text-label-lg font-semibold text-on-primary shadow-sm transition-all hover:bg-primary-container active:scale-95 md:w-auto"
+            className="flex w-full items-center justify-center gap-space-xs rounded bg-primary px-space-lg py-space-sm text-label-lg font-semibold text-on-primary shadow-sm transition-all hover:bg-primary-container active:scale-95 md:w-auto"
           >
             <span className="material-symbols-outlined text-[20px]">smart_toy</span>
             {dashboard.assistantBannerAction}

@@ -7,6 +7,7 @@
 
 import type { ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
+import { LoadingState } from '../../components/ui'
 import { auth as authText } from '../../i18n/fa'
 import type { AuthUser, UserRole } from '../../types/api'
 import { useAuth } from './AuthProvider'
@@ -34,13 +35,8 @@ export function landingFor(
 /** Full-screen Persian loading state shown while the session is restored. */
 export function GateLoading() {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="flex min-h-screen flex-col items-center justify-center gap-space-sm bg-background text-body-md text-on-surface-variant"
-    >
-      <span className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-outline-variant border-t-primary motion-reduce:animate-none" />
-      <p className="m-0">{authText.sessionRestoring}</p>
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <LoadingState label={authText.sessionRestoring} />
     </div>
   )
 }

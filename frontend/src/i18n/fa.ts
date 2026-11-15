@@ -442,6 +442,13 @@ export const assistantPage = {
     'درباره دروس، پیش‌نیازها، آیین‌نامه‌ها و مقررات آموزشی بپرسید؛ پاسخ‌ها بر اساس منابع رسمی داده می‌شوند.',
   composerPlaceholder: 'سوال خود را بنویسید…',
   send: 'ارسال',
+  // Stable Persian errors (the page previously rendered corrupted bytes here).
+  errorList: 'خطا در دریافت فهرست گفتگوها. لطفاً دوباره تلاش کنید.',
+  errorAction: 'خطا در انجام عملیات. لطفاً دوباره تلاش کنید.',
+  errorSend: 'خطا در ارسال پیام. لطفاً دوباره تلاش کنید.',
+  renameTitle: 'ویرایش عنوان گفتگو',
+  deleteConversation: 'حذف گفتگو',
+  save: 'ذخیره',
   notReadyTitle: 'سرویس گفتگو هنوز فعال نشده است',
   notReadyBody:
     'پشتیبان گفتگو (تاریخچه و پاسخ هوشمند) در فاز ۱۰ راه‌اندازی می‌شود؛ تا آن زمان پاسخ‌ها از همین صفحه در دسترس نیستند.',
@@ -468,6 +475,7 @@ export const adminPage = {
   stubBody:
     'جدول مدیریتی این بخش روی APIهای نوشته‌شده پیاده می‌شود؛ آمار زنده و دسترسی سریع از نمای کلی مدیریت در دسترس است.',
   // Phase 13 — analytics dashboard (all values aggregate-only, Persian UI)
+  generatedAt: 'تولیدشده در',
   analyticsTitle: 'تحلیل و آمار',
   analyticsSubtitle: 'شاخص‌های واقعی استفاده از سامانه؛ فقط داده تجمعی، بدون متن گفتگوها',
   activeUsers: 'کاربران فعال',

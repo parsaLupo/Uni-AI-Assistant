@@ -12,6 +12,7 @@ import { useState, type FormEvent } from 'react'
 import { checkCourseSelection, type SelectionDecision } from '../../api/selection'
 import {
   Chip,
+  EmptyState,
   ErrorState,
   PageHeader,
   btnPrimaryCls,
@@ -94,9 +95,7 @@ export function CourseSelectionPage() {
       {error ? <ErrorState error={error} onRetry={() => void run()} /> : null}
 
       {!error && !decision && !loading ? (
-        <div className={`${cardCls} p-space-lg text-body-md text-on-surface-variant`}>
-          {selectionPage.emptyHint}
-        </div>
+        <EmptyState message={selectionPage.emptyHint} />
       ) : null}
 
       {decision ? <DecisionCard decision={decision} /> : null}

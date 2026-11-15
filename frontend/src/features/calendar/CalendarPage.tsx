@@ -24,6 +24,7 @@ import {
 } from '../../components/ui'
 import { useUrlState } from '../../hooks/useUrlState'
 import { calendarPage, common, coursesPage } from '../../i18n/fa'
+import { toPersianDigits } from '../../i18n/digits'
 import { formatJalaliDate, weekdayFa } from '../../i18n/jalali'
 import { eventTypeLabels } from '../../i18n/labels'
 import type { EventType, ListQuery } from '../../types/academic'
@@ -123,7 +124,7 @@ export function CalendarPage() {
 
         {events.data ? (
           <span className="ms-auto text-label-sm text-on-surface-variant tnum">
-            {common.resultsCount}: {events.data.count}
+            {common.resultsCount}: {toPersianDigits(events.data.count)}
           </span>
         ) : null}
       </FilterRow>

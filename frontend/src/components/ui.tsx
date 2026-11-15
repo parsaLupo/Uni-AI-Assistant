@@ -9,7 +9,7 @@
  */
 
 import type { ReactNode } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { ApiError } from '../api/client'
 import { common, persianErrorText } from '../i18n/fa'
 import { toPersianDigits } from '../i18n/digits'
@@ -294,13 +294,23 @@ export function Modal({
   /** Two-column forms pick the wider shell. */
   wide?: boolean
 }) {
+  const surfaceRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    // Keep the page behind the overlay still while the dialog is open.
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    // Move focus into the dialog so Escape/Tab behave from the right place.
+    surfaceRef.current?.focus()
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previousOverflow
+    }
   }, [open, onClose])
 
   if (!open) return null
@@ -318,6 +328,7 @@ export function Modal({
         className="absolute inset-0 cursor-default bg-[#0F172A]/45"
       />
       <div
+        ref={surfaceRef}
         tabIndex={-1}
         className={`relative z-10 max-h-[90vh] w-full overflow-y-auto rounded-xl border border-outline-variant bg-surface-container-lowest shadow-lg focus:outline-none ${
           wide ? 'max-w-3xl' : 'max-w-xl'

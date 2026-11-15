@@ -218,10 +218,10 @@ function NotificationRow({
       ) : null}
 
       <div className="flex flex-wrap items-center gap-space-md border-t border-outline-variant pt-space-sm text-label-sm text-on-surface-variant">
-        <span className="tnum">
-          <span className="material-symbols-outlined inline-flex align-middle text-[14px]">
+        <span className="inline-flex items-center gap-1 tnum">
+          <span className="material-symbols-outlined text-[14px]">
             calendar_today
-          </span>{' '}
+          </span>
           {formatJalaliDate(notification.created_at)}
         </span>
         <span className="tnum">

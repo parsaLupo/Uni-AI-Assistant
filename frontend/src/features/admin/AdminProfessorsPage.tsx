@@ -18,6 +18,7 @@ import { queryKeys } from '../../api/keys'
 import {
   Chip,
   ConfirmDialog,
+  EmptyState,
   ErrorState,
   FieldError,
   FilterRow,
@@ -249,9 +250,7 @@ export function AdminProfessorsPage() {
       ) : professors.isError ? (
         <ErrorState error={professors.error} onRetry={() => void professors.refetch()} />
       ) : rows.length === 0 ? (
-        <div className={`${cardCls} p-space-lg text-center text-body-md text-on-surface-variant`}>
-          {t.empty}
-        </div>
+        <EmptyState message={t.empty} />
       ) : (
         <>
           <div className={`${cardCls} overflow-x-auto`}>

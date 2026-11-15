@@ -54,7 +54,7 @@ export function LoginPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 alternate_email
@@ -87,7 +87,7 @@ export function LoginPage() {
                   aria-label={auth.togglePassword}
                   aria-pressed={reveal}
                   onClick={() => setReveal((value) => !value)}
-                  className="absolute right-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
+                  className="absolute right-space-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface flex items-center justify-center p-1"
                 >
                   <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                     {reveal ? 'visibility_off' : 'visibility'}
@@ -95,7 +95,7 @@ export function LoginPage() {
                 </button>
               ) : (
                 <span
-                  className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
+                  className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
                   aria-hidden="true"
                 >
                   key

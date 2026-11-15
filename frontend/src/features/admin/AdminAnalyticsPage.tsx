@@ -44,7 +44,7 @@ export function AdminAnalyticsPage() {
         actions={
           dashboard.data ? (
             <span className="text-label-sm text-outline tnum">
-              {common.page}: {toPersianDigits(dashboard.data.generated_at.slice(0, 10))}
+              {adminPage.generatedAt}: {formatJalaliDate(dashboard.data.generated_at.slice(0, 10))}
             </span>
           ) : undefined
         }
@@ -231,6 +231,11 @@ const AUDIT_ACTION_OPTIONS = [
   { value: 'DELETE', label: adminPage.auditDelete },
 ] as const
 
+/** Persian label per audit action; unknown server values fall through raw. */
+const AUDIT_ACTION_LABELS: Record<string, string> = Object.fromEntries(
+  AUDIT_ACTION_OPTIONS.filter((option) => option.value).map((option) => [option.value, option.label]),
+)
+
 function AuditLogSection() {
   const [page, setPage] = useUrlState<number>('auditPage', 1)
   const [action, setAction] = useUrlState<string>('auditAction', '')
@@ -295,7 +300,7 @@ function AuditLogSection() {
               {rows.map((row) => (
                 <tr key={row.id}>
                   <td className={`${tdCls} tnum`}>{formatJalaliDate(row.created_at)}</td>
-                  <td className={tdCls}>{row.action}</td>
+                  <td className={tdCls}>{AUDIT_ACTION_LABELS[row.action] ?? row.action}</td>
                   <td className={tdCls}>
                     {row.entity_type}
                     <span className="ms-1 tnum text-outline">#{row.entity_id}</span>

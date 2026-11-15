@@ -179,7 +179,7 @@ export function ProfessorsPage() {
                     </Chip>
                   ) : null}
                   <Chip tone="primary">
-                    <span dir="ltr">{professor.email}</span>
+                    <span dir="ltr" className="break-all">{professor.email}</span>
                   </Chip>
                 </div>
               </Link>

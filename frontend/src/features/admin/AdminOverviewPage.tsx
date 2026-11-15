@@ -30,6 +30,7 @@ import { queryKeys } from '../../api/keys'
 import { academicApi } from '../../api/resources'
 import {
   Chip,
+  EmptyState,
   ErrorState,
   SkeletonRows,
   cardCls,
@@ -300,7 +301,15 @@ function SystemStatusCard({ health }: { health: { data?: HealthStatus; isPending
 function ActionChip({ action }: { action: AuditLogRow['action'] }) {
   const tone =
     action === 'CREATE' ? 'success' : action === 'DELETE' ? 'danger' : action === 'UPDATE' ? 'primary' : 'neutral'
-  return <Chip tone={tone}>{action}</Chip>
+  const label =
+    action === 'CREATE'
+      ? adminPage.auditCreate
+      : action === 'DELETE'
+        ? adminPage.auditDelete
+        : action === 'UPDATE'
+          ? adminPage.auditUpdate
+          : action
+  return <Chip tone={tone}>{label}</Chip>
 }
 
 function RecentActivitiesCard() {
@@ -331,9 +340,7 @@ function RecentActivitiesCard() {
       ) : audit.isError ? (
         <ErrorState error={audit.error} onRetry={() => void audit.refetch()} />
       ) : rows.length === 0 ? (
-        <div className={`${cardCls} p-space-lg`}>
-          <p className="m-0 text-body-md text-on-surface-variant">{adminPage.auditEmpty}</p>
-        </div>
+        <EmptyState message={adminPage.auditEmpty} />
       ) : (
         <div className={`${cardCls} overflow-x-auto`}>
           <table className={tableCls}>

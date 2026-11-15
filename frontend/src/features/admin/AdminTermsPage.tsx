@@ -12,6 +12,7 @@ import { listAdminTerms, createAdminTerm, updateAdminTerm } from '../../api/admi
 import { queryKeys } from '../../api/keys'
 import {
   Chip,
+  EmptyState,
   ErrorState,
   FieldError,
   Modal,
@@ -29,6 +30,7 @@ import {
 import { useUrlState } from '../../hooks/useUrlState'
 import { toAsciiDigits, toPersianDigits } from '../../i18n/digits'
 import { adminTermsPage as t, common } from '../../i18n/fa'
+import { formatJalaliDate } from '../../i18n/jalali'
 import { semesterLabels } from '../../i18n/labels'
 import type { AcademicTerm, SemesterType } from '../../types/academic'
 
@@ -165,9 +167,7 @@ export function AdminTermsPage() {
       ) : terms.isError ? (
         <ErrorState error={terms.error} onRetry={() => void terms.refetch()} />
       ) : rows.length === 0 ? (
-        <div className={`${cardCls} p-space-lg text-center text-body-md text-on-surface-variant`}>
-          {t.empty}
-        </div>
+        <EmptyState message={t.empty} />
       ) : (
         <>
           <div className={`${cardCls} overflow-x-auto`}>
@@ -189,7 +189,7 @@ export function AdminTermsPage() {
                     <td className={`${tdCls} tnum`}>{toPersianDigits(row.academic_year)}</td>
                     <td className={tdCls}>{semesterLabels[row.semester_type]}</td>
                     <td className={`${tdCls} tnum`}>
-                      {row.starts_at} ← {row.ends_at}
+                      {formatJalaliDate(row.starts_at)} ← {formatJalaliDate(row.ends_at)}
                     </td>
                     <td className={tdCls}>
                       {row.is_current ? <Chip tone="success">{t.currentChip}</Chip> : '—'}

@@ -22,6 +22,7 @@ import { queryKeys } from '../../api/keys'
 import {
   Chip,
   ConfirmDialog,
+  EmptyState,
   ErrorState,
   FieldError,
   FilterRow,
@@ -346,10 +347,7 @@ export function AdminDocumentsPage() {
       ) : documents.isError ? (
         <ErrorState error={documents.error} onRetry={() => void documents.refetch()} />
       ) : rows.length === 0 ? (
-        <div className={`${cardCls} p-space-lg text-center text-body-md text-on-surface-variant`}>
-          <p className="m-0">{t.empty}</p>
-          <p className="m-0 text-label-sm text-outline">{t.emptyHint}</p>
-        </div>
+        <EmptyState message={t.empty} hint={t.emptyHint} />
       ) : (
         <>
           <div className={`${cardCls} overflow-x-auto`}>

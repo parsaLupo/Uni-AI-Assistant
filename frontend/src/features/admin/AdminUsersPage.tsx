@@ -22,6 +22,7 @@ import { academicApi } from '../../api/resources'
 import {
   Chip,
   ConfirmDialog,
+  EmptyState,
   ErrorState,
   FieldError,
   FilterRow,
@@ -543,9 +544,7 @@ export function AdminUsersPage() {
       ) : users.isError ? (
         <ErrorState error={users.error} onRetry={() => void users.refetch()} />
       ) : rows.length === 0 ? (
-        <div className={`${cardCls} p-space-lg text-center text-body-md text-on-surface-variant`}>
-          {t.empty}
-        </div>
+        <EmptyState message={t.empty} />
       ) : (
         <>
           <div className={`${cardCls} overflow-x-auto`}>

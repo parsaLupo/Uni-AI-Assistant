@@ -92,7 +92,7 @@ export function RegisterPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 alternate_email
@@ -117,12 +117,28 @@ export function RegisterPage() {
               {auth.password}
             </label>
             <div className="relative flex items-center">
-              <span
-                className="material-symbols-outlined absolute right-space-md text-outline text-[20px] pointer-events-none"
-                aria-hidden="true"
-              >
-                key
-              </span>
+              {/* One icon at a time in the same slot: the key while the field
+                  is empty, the show/hide toggle once the user starts typing. */}
+              {password ? (
+                <button
+                  type="button"
+                  aria-label={auth.togglePassword}
+                  aria-pressed={reveal}
+                  onClick={() => setReveal((value) => !value)}
+                  className="absolute right-space-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface flex items-center justify-center p-1"
+                >
+                  <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+                    {reveal ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
+              ) : (
+                <span
+                  className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
+                  aria-hidden="true"
+                >
+                  key
+                </span>
+              )}
               <input
                 id="register-password"
                 type={reveal ? 'text' : 'password'}
@@ -134,17 +150,6 @@ export function RegisterPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 required
               />
-              <button
-                type="button"
-                aria-label={auth.togglePassword}
-                aria-pressed={reveal}
-                onClick={() => setReveal((value) => !value)}
-                className="absolute right-space-md text-outline hover:text-on-surface flex items-center justify-center p-1"
-              >
-                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-                  {reveal ? 'visibility_off' : 'visibility'}
-                </span>
-              </button>
             </div>
           </div>
 

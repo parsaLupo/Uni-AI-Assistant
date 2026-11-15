@@ -8,7 +8,7 @@
  * without inventing a second design language.
  */
 
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth'
 import { homeForRole } from '../features/auth/ProtectedRoute'
@@ -152,6 +152,17 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
   const closeDrawer = () => setDrawerOpen(false)
+
+  // While the mobile drawer is open the page behind it stays still — same
+  // contract as the shared Modal.
+  useEffect(() => {
+    if (!drawerOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [drawerOpen])
 
   return (
     <div className="flex min-h-screen flex-col bg-background">

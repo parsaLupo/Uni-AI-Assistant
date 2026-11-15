@@ -15,8 +15,10 @@ import { academicApi } from '../../api/resources'
 import {
   Chip,
   ErrorState,
+  FieldError,
   LoadingState,
   PageHeader,
+  btnPrimaryCls,
   cardCls,
   inputCls,
 } from '../../components/ui'
@@ -25,15 +27,6 @@ import { profilePage } from '../../i18n/fa'
 import { toPersianDigits } from '../../i18n/digits'
 import { degreeLevelLabels } from '../../i18n/labels'
 import type { DegreeLevel } from '../../types/academic'
-
-function FieldError({ message }: { message?: string }) {
-  if (!message) return null
-  return (
-    <span role="alert" className="text-label-sm font-medium text-error">
-      {message}
-    </span>
-  )
-}
 
 function FactRow({ label, value, ltr = false }: { label: string; value: string; ltr?: boolean }) {
   return (
@@ -245,7 +238,7 @@ export function ProfilePage() {
             <div className="flex items-center gap-space-sm pt-space-xs">
               <button
                 type="submit"
-                className="rounded bg-primary-container px-space-lg py-space-sm text-label-lg font-semibold text-on-primary shadow-sm transition-all hover:bg-[#2563EB] active:scale-[0.99] disabled:opacity-75"
+                className={btnPrimaryCls}
                 disabled={change.isPending}
               >
                 {profilePage.changePasswordTitle}
