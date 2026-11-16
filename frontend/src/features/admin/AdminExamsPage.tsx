@@ -10,6 +10,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { fetchOfferingExam, saveOfferingExam } from '../../api/admin'
+import { localInputToUtcIso, utcIsoToLocalInput } from '../../api/dates'
 import { academicApi } from '../../api/resources'
 import { queryKeys } from '../../api/keys'
 import {
@@ -133,8 +134,8 @@ export function AdminExamsPage() {
     if (exam) {
       setForm({
         offering_id: String(exam.course_offering.id),
-        starts_at: exam.starts_at.slice(0, 16),
-        ends_at: exam.ends_at.slice(0, 16),
+        starts_at: utcIsoToLocalInput(exam.starts_at),
+        ends_at: utcIsoToLocalInput(exam.ends_at),
         classroom: exam.classroom,
         status: exam.status,
       })
@@ -161,8 +162,10 @@ export function AdminExamsPage() {
     setFieldErrors({})
     setFormError(null)
     const body = {
-      starts_at: form.starts_at,
-      ends_at: form.ends_at,
+      // Instant-preserving: the local wall time the admin picked, serialized
+      // as a UTC ISO instant (same contract the announcements form uses).
+      starts_at: localInputToUtcIso(form.starts_at) ?? '',
+      ends_at: localInputToUtcIso(form.ends_at) ?? '',
       classroom: form.classroom.trim(),
       status: form.status,
       // PUT requires the FK on the wire (serializer write field).

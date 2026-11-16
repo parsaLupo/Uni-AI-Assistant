@@ -8,6 +8,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
+import { localInputToUtcIso, utcIsoToLocalInput } from '../../api/dates'
 import {
   createAdminAnnouncement,
   deleteAdminAnnouncement,
@@ -59,9 +60,9 @@ interface AnnouncementFormState {
   is_published: boolean
 }
 
-/** ISO (UTC-with-offset) → the `datetime-local` value the input expects. */
+/** ISO (UTC) instant → the local `datetime-local` value the input expects. */
 function inputDateTime(iso: string | null): string {
-  return iso ? iso.slice(0, 16) : ''
+  return utcIsoToLocalInput(iso)
 }
 
 const EMPTY_FORM: AnnouncementFormState = {
@@ -204,10 +205,8 @@ export function AdminAnnouncementsPage() {
       audience_department_id: form.audience_department_id
         ? Number(form.audience_department_id)
         : null,
-      published_at: form.published_at
-        ? new Date(form.published_at).toISOString()
-        : null,
-      expires_at: form.expires_at ? new Date(form.expires_at).toISOString() : null,
+      published_at: localInputToUtcIso(form.published_at),
+      expires_at: localInputToUtcIso(form.expires_at),
       is_published: form.is_published,
     })
   }

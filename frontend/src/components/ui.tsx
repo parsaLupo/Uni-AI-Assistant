@@ -295,23 +295,36 @@ export function Modal({
   wide?: boolean
 }) {
   const surfaceRef = useRef<HTMLDivElement>(null)
+  // Inline `onClose` arrows change identity on every parent render (each
+  // keystroke in a controlled form field). Keeping the latest callback in a
+  // ref lets the open/close effects depend on `open` alone — otherwise the
+  // initial-focus call below would re-run and steal focus after every
+  // keystroke typed inside the dialog.
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
 
+  // Runs once per open/close transition: scroll lock + initial focus.
   useEffect(() => {
     if (!open) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', onKey)
     // Keep the page behind the overlay still while the dialog is open.
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     // Move focus into the dialog so Escape/Tab behave from the right place.
     surfaceRef.current?.focus()
     return () => {
-      window.removeEventListener('keydown', onKey)
       document.body.style.overflow = previousOverflow
     }
-  }, [open, onClose])
+  }, [open])
+
+  // Escape always closes through the freshest callback.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onCloseRef.current()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
   if (!open) return null
   return (
