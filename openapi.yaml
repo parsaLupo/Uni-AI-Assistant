@@ -6,6 +6,60 @@ info:
     from docs/04-api-specification.md section 3; codes are listed in docs/12-error-handling-observability.md.
     Generated source of truth: ADR-012.'
 paths:
+  /api/v1/admin/analytics/audit-log/:
+    get:
+      operationId: admin_analytics_audit_log_list
+      description: Read-only audit-log viewer over the append-only source (no writes).
+      summary: مشاهده‌گر گزارش حسابرسی (فقط خواندنی)
+      parameters:
+      - in: query
+        name: action
+        schema:
+          type: string
+      - in: query
+        name: actor
+        schema:
+          type: integer
+      - in: query
+        name: entity_type
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuditLogList'
+          description: ''
+  /api/v1/admin/analytics/dashboard/:
+    get:
+      operationId: admin_analytics_dashboard_retrieve
+      summary: داشبورد تحلیلی مدیر (فقط داده تجمعی)
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
   /api/v1/admin/announcements/:
     get:
       operationId: admin_announcements_list
@@ -721,6 +775,240 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/admin/documents/:
+    get:
+      operationId: admin_documents_list
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentList'
+          description: ''
+    post:
+      operationId: admin_documents_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/admin/documents/{id}/:
+    get:
+      operationId: admin_documents_retrieve
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    put:
+      operationId: admin_documents_update
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    patch:
+      operationId: admin_documents_partial_update
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    delete:
+      operationId: admin_documents_destroy
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/admin/documents/{id}/activate/:
+    post:
+      operationId: admin_documents_activate_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/admin/documents/{id}/retry/:
+    post:
+      operationId: admin_documents_retry_create
+      description: Override ``list`` to log duration, SQL query count and result count.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: یک مقداد عدد یکتا که این document را شناسایی میکند.
+        required: true
+      tags:
+      - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
   /api/v1/admin/enrollments/:
     get:
       operationId: admin_enrollments_list
@@ -1701,6 +1989,119 @@ paths:
               schema:
                 $ref: '#/components/schemas/StudentProfile'
           description: ''
+  /api/v1/admin/students/import/confirm/:
+    post:
+      operationId: admin_students_import_confirm_create
+      description: POST /api/v1/admin/students/import/confirm/ — execute a validated
+        plan.
+      tags:
+      - admin
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImportConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImportConfirm'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/admin/students/import/inspect/:
+    post:
+      operationId: admin_students_import_inspect_create
+      description: POST /api/v1/admin/students/import/inspect/ — sheets, headers,
+        samples.
+      tags:
+      - admin
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImportFile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImportFile'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/admin/students/import/reports/:
+    get:
+      operationId: admin_students_import_reports_retrieve
+      description: GET /api/v1/admin/students/import/reports/ — audit trail of imports.
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportReportPage'
+          description: ''
+  /api/v1/admin/students/import/template/:
+    get:
+      operationId: admin_students_import_template_retrieve
+      description: GET /api/v1/admin/students/import/template/ — the official .xlsx.
+      tags:
+      - admin
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+          description: قالب رسمی بارگذاری گروهی دانشجویان (xlsx).
+  /api/v1/admin/students/import/validate/:
+    post:
+      operationId: admin_students_import_validate_create
+      description: POST /api/v1/admin/students/import/validate/ — dry-run preview.
+      tags:
+      - admin
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImportValidate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImportValidate'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/admin/terms/:
     get:
       operationId: admin_terms_list
@@ -1972,6 +2373,28 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/ai/ask/:
+    post:
+      operationId: ai_ask_create
+      tags:
+      - ai
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/ai/ask/stream/:
+    post:
+      operationId: ai_ask_stream_create
+      tags:
+      - ai
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
   /api/v1/announcements/:
     get:
       operationId: announcements_list
@@ -2089,6 +2512,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/Me'
           description: ''
+  /api/v1/auth/password-change/:
+    post:
+      operationId: auth_password_change_create
+      description: |-
+        POST /api/v1/auth/password-change/ — self-service password change.
+
+        Available to every signed-in role (the student's only permitted self
+        change). The current password must be re-entered; Django's validators
+        guard the new one. The presented refresh-token family is revoked so a
+        stolen refresh token cannot outlive the credential change — the caller
+        keeps their short-lived access token and re-logs in afterwards.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/auth/refresh/:
     post:
       operationId: auth_refresh_create
@@ -2184,6 +2643,274 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AcademicEvent'
+          description: ''
+  /api/v1/conversations/:
+    get:
+      operationId: conversations_list
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      tags:
+      - conversations
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedConversationListList'
+          description: ''
+    post:
+      operationId: conversations_create
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      tags:
+      - conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationCreate'
+          description: ''
+  /api/v1/conversations/{id}/:
+    get:
+      operationId: conversations_retrieve
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationDetail'
+          description: ''
+    put:
+      operationId: conversations_update
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationCreate'
+          description: ''
+    patch:
+      operationId: conversations_partial_update
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedConversationCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedConversationCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedConversationCreate'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationCreate'
+          description: ''
+    delete:
+      operationId: conversations_destroy
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/conversations/{id}/messages/:
+    get:
+      operationId: conversations_messages_retrieve
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
+          description: ''
+    post:
+      operationId: conversations_messages_create
+      description: |-
+        Map database constraint violations on write to the documented 409.
+
+        Covers both single-field uniques (validators stripped by
+        `ConflictModelSerializer`) and composite ones the serializer never checks
+        (`(faculty, code)`, `(course, term, section_code)`, `(student, offering)`).
+        The inner atomic block saves the surrounding transaction - without it an
+        IntegrityError would poison the test runner's outer transaction.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationList'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConversationList'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConversationList'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
           description: ''
   /api/v1/course-offerings/:
     get:
@@ -2426,6 +3153,93 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorEnvelope'
           description: ''
+  /api/v1/notifications/:
+    get:
+      operationId: notifications_list
+      summary: یادآوری‌های فعال کاربر
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: یک شماره صفحه‌ در مجموعه نتایج صفحه‌بندی شده.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: تعداد نتایج برای نمایش در هر صفحه.
+        schema:
+          type: integer
+      - in: query
+        name: unread
+        schema:
+          type: boolean
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNotificationList'
+          description: ''
+  /api/v1/notifications/{id}/mark-read/:
+    post:
+      operationId: notifications_mark_read_create
+      summary: علامت‌گذاری یک یادآوری به‌عنوان خوانده‌شده
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/v1/notifications/mark-all-read/:
+    post:
+      operationId: notifications_mark_all_read_create
+      summary: علامت‌گذاری همه یادآوری‌های فعال به‌عنوان خوانده‌شده
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarkAllReadResponse'
+          description: ''
+  /api/v1/notifications/unread-count/:
+    get:
+      operationId: notifications_unread_count_retrieve
+      summary: تعداد یادآوری‌های ناخوانده
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadCountResponse'
+          description: ''
   /api/v1/professors/:
     get:
       operationId: professors_list
@@ -2481,7 +3295,13 @@ paths:
   /api/v1/students/me/:
     get:
       operationId: students_me_retrieve
-      description: GET/PATCH /students/me/ — onboarding profile of the caller.
+      description: |-
+        GET/PATCH /students/me/ — profile of the caller.
+
+        Academic identity fields (student number, major, faculty, degree level,
+        entry year, term number, GPA) are **registrar-owned**: students may read
+        them but never write them — direct PATCH attempts are rejected with 403.
+        Admins keep full write access via the admin student-profile surface.
       tags:
       - students
       security:
@@ -2496,7 +3316,13 @@ paths:
           description: ''
     patch:
       operationId: students_me_partial_update
-      description: GET/PATCH /students/me/ — onboarding profile of the caller.
+      description: |-
+        GET/PATCH /students/me/ — profile of the caller.
+
+        Academic identity fields (student number, major, faculty, degree level,
+        entry year, term number, GPA) are **registrar-owned**: students may read
+        them but never write them — direct PATCH attempts are rejected with 403.
+        Admins keep full write access via the admin student-profile surface.
       tags:
       - students
       requestBody:
@@ -2519,6 +3345,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StudentProfile'
+          description: ''
+  /api/v1/students/me/course-selection/:
+    post:
+      operationId: students_me_course_selection_create
+      description: |-
+        POST /students/me/course-selection/ — Phase 11 eligibility check.
+
+        Pure rules engine (``apps.students.course_selection``): the decision and
+        every machine-readable rejection reason come from PostgreSQL records only.
+        The response embeds a deterministic composed explanation (AGENTS.md section
+        8 — the LLM may explain, never decide; the assistant pipeline reuses
+        ``SelectionExplanationService`` for its verdict-safe verbalisation).
+      tags:
+      - students
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
           description: ''
   /api/v1/students/planner/:
     get:
@@ -2781,8 +3631,13 @@ components:
       - updated_at
     AdminUserCreate:
       type: object
-      description: 'Admin-provisioned account (ADR-014 decision 2: privileged roles
-        only here).'
+      description: |-
+        Admin-provisioned account (ADR-014 decision 2: privileged roles only here).
+
+        For ``role=STUDENT`` the academic identity fields are required and the
+        historical/current enrollments the admin selects are created atomically
+        with the account (user + StudentProfile + Enrollment rows); any failure
+        rolls the whole creation back (Part 4 of the profile-improvement spec).
       properties:
         id:
           type: integer
@@ -2800,7 +3655,27 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/RoleEnum'
+          $ref: '#/components/schemas/Role209Enum'
+        student_number:
+          type: string
+          maxLength: 16
+        department_id:
+          type: integer
+        degree_level:
+          oneOf:
+          - $ref: '#/components/schemas/DegreeLevelEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        entry_year:
+          type: string
+          maxLength: 9
+        passed_course_codes:
+          type: array
+          items:
+            type: string
+        current_offering_ids:
+          type: array
+          items:
+            type: integer
       required:
       - email
       - id
@@ -2824,7 +3699,7 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/RoleEnum'
+          $ref: '#/components/schemas/Role209Enum'
         is_active:
           type: boolean
       required:
@@ -2906,6 +3781,50 @@ components:
       - term
       - title
       - updated_at
+    AuditActionEnum:
+      enum:
+      - CREATE
+      - UPDATE
+      - DELETE
+      - RETRY
+      type: string
+      description: |-
+        * `CREATE` - Create
+        * `UPDATE` - Update
+        * `DELETE` - Delete
+        * `RETRY` - Retry
+    AuditLog:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        actor:
+          type: integer
+          nullable: true
+        actor_email:
+          type: string
+          readOnly: true
+        action:
+          $ref: '#/components/schemas/AuditActionEnum'
+        entity_type:
+          type: string
+          maxLength: 64
+        entity_id:
+          type: string
+          maxLength: 64
+        metadata: {}
+      required:
+      - action
+      - actor_email
+      - created_at
+      - entity_id
+      - entity_type
+      - id
     BlankEnum:
       enum:
       - ''
@@ -2950,6 +3869,79 @@ components:
       - start_time
       - weekday
       - weekday_display
+    ConversationCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+      required:
+      - id
+    ConversationDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archived_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          readOnly: true
+      required:
+      - archived_at
+      - created_at
+      - id
+      - messages
+      - title
+      - updated_at
+    ConversationList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        archived_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+      required:
+      - archived_at
+      - created_at
+      - id
+      - title
+      - updated_at
     Course:
       type: object
       description: |-
@@ -3295,6 +4287,115 @@ components:
       - id
       - name
       - updated_at
+    Document:
+      type: object
+      description: |-
+        ModelSerializer with generated UniqueValidators removed (→ 409 path).
+
+        `docs/api/admin.md` requires uniqueness conflicts to return
+        `409 CONFLICT`, but ModelSerializer injects `UniqueValidator`, which
+        field-level errors or machine-readable metadata (the Phase 03 duplicate-email
+        bug — accounts silenced it per field; Phase 04 generalizes). The database
+        constraint becomes the single source of truth; views convert its
+        `IntegrityError` with `common.mixins.ConflictOnIntegrityMixin`. Composite
+        uniques bring a `UniqueTogetherValidator`, which additionally breaks PATCH
+        (it demands every key field on partial updates) — stripped for the same
+        reason.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        document_type:
+          type: string
+          maxLength: 64
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+        status_url:
+          type: string
+          readOnly: true
+        academic_year:
+          type: string
+          maxLength: 32
+        effective_from:
+          type: string
+          format: date
+          nullable: true
+        effective_to:
+          type: string
+          format: date
+          nullable: true
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        checksum:
+          type: string
+          readOnly: true
+        storage_key:
+          type: string
+          readOnly: true
+        processing_error:
+          type: string
+          readOnly: true
+        failure_stage:
+          type: string
+          readOnly: true
+        attempt_count:
+          type: integer
+          readOnly: true
+        uploaded_by:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - attempt_count
+      - checksum
+      - created_at
+      - failure_stage
+      - file
+      - id
+      - processing_error
+      - status_url
+      - storage_key
+      - title
+      - updated_at
+      - uploaded_by
+    DocumentStatusEnum:
+      enum:
+      - UPLOADED
+      - VALIDATING
+      - PROCESSING
+      - INDEXED
+      - ACTIVE
+      - SUPERSEDED
+      - INACTIVE
+      - ARCHIVED
+      - FAILED
+      type: string
+      description: |-
+        * `UPLOADED` - آپلود شده
+        * `VALIDATING` - در حال اعتبارسنجی
+        * `PROCESSING` - در حال پردازش
+        * `INDEXED` - ایندکس شده
+        * `ACTIVE` - فعال
+        * `SUPERSEDED` - جایگزین شده
+        * `INACTIVE` - غیرفعال
+        * `ARCHIVED` - آرشیو شده
+        * `FAILED` - ناموفق
     Enrollment:
       type: object
       description: |-
@@ -3473,11 +4574,16 @@ components:
         section_code:
           type: string
           readOnly: true
+        term:
+          allOf:
+          - $ref: '#/components/schemas/AcademicTerm'
+          readOnly: true
       required:
       - course_code
       - course_title
       - id
       - section_code
+      - term
     ExamStatusEnum:
       enum:
       - SCHEDULED
@@ -3575,6 +4681,99 @@ components:
       - service
       - status
       - version
+    ImportConfirm:
+      type: object
+      description: 'Confirm step: the exact file/mapping that was previewed, plus
+        its hash.'
+      properties:
+        file:
+          type: string
+          format: uri
+        mapping:
+          type: string
+        mode:
+          type: string
+          default: create_only
+        expected_hash:
+          type: string
+          maxLength: 64
+        confirm:
+          type: boolean
+      required:
+      - confirm
+      - expected_hash
+      - file
+      - mapping
+    ImportFile:
+      type: object
+      description: 'Inspect step: only the workbook.'
+      properties:
+        file:
+          type: string
+          format: uri
+      required:
+      - file
+    ImportReportPage:
+      type: object
+      properties:
+        count:
+          type: integer
+        next:
+          type: string
+          nullable: true
+        previous:
+          type: string
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportReportRow'
+      required:
+      - count
+      - next
+      - previous
+      - results
+    ImportReportRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        actor:
+          type: string
+          nullable: true
+        file_hash:
+          type: string
+        mode:
+          type: string
+        summary:
+          type: object
+          additionalProperties: {}
+      required:
+      - actor
+      - created_at
+      - file_hash
+      - id
+      - mode
+      - summary
+    ImportValidate:
+      type: object
+      description: 'Validate step: workbook + the admin''s sheet/column mapping +
+        mode.'
+      properties:
+        file:
+          type: string
+          format: uri
+        mapping:
+          type: string
+        mode:
+          type: string
+          default: create_only
+      required:
+      - file
+      - mapping
     Login:
       type: object
       properties:
@@ -3587,6 +4786,13 @@ components:
       required:
       - email
       - password
+    MarkAllReadResponse:
+      type: object
+      properties:
+        updated:
+          type: integer
+      required:
+      - updated
     Me:
       type: object
       properties:
@@ -3606,7 +4812,7 @@ components:
           maxLength: 150
         role:
           allOf:
-          - $ref: '#/components/schemas/RoleEnum'
+          - $ref: '#/components/schemas/Role209Enum'
           readOnly: true
         is_active:
           type: boolean
@@ -3616,6 +4822,136 @@ components:
       - id
       - is_active
       - role
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        conversation:
+          type: integer
+          readOnly: true
+        role:
+          allOf:
+          - $ref: '#/components/schemas/MessageRoleEnum'
+          readOnly: true
+        content:
+          type: string
+          readOnly: true
+        retrieval_mode:
+          type: string
+          readOnly: true
+        insufficient_evidence:
+          type: boolean
+          readOnly: true
+        latency_ms:
+          type: integer
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageSource'
+          readOnly: true
+      required:
+      - content
+      - conversation
+      - created_at
+      - id
+      - insufficient_evidence
+      - latency_ms
+      - retrieval_mode
+      - role
+      - sources
+    MessageRoleEnum:
+      enum:
+      - USER
+      - ASSISTANT
+      - SYSTEM
+      type: string
+      description: |-
+        * `USER` - User
+        * `ASSISTANT` - Assistant
+        * `SYSTEM` - System
+    MessageSource:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        document_id:
+          type: integer
+          readOnly: true
+        source_label:
+          type: string
+          readOnly: true
+        page:
+          type: integer
+          readOnly: true
+        section:
+          type: string
+          readOnly: true
+        relevance_score:
+          type: number
+          format: double
+          readOnly: true
+        citation_text:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - citation_text
+      - created_at
+      - document_id
+      - id
+      - page
+      - relevance_score
+      - section
+      - source_label
+    Notification:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/TypeEnum'
+        title:
+          type: string
+          maxLength: 200
+        body:
+          type: string
+        link:
+          type: string
+          maxLength: 200
+        is_read:
+          type: boolean
+        read_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - read_at
+      - title
+      - type
     OfferingStatusEnum:
       enum:
       - OPEN
@@ -3695,6 +5031,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Announcement'
+    PaginatedAuditLogList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLog'
+    PaginatedConversationListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationList'
     PaginatedCourseList:
       type: object
       required:
@@ -3787,6 +5169,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Department'
+    PaginatedDocumentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
     PaginatedEnrollmentList:
       type: object
       required:
@@ -3879,6 +5284,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Me'
+    PaginatedNotificationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
     PaginatedProfessorList:
       type: object
       required:
@@ -3925,6 +5353,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StudentProfile'
+    PasswordChange:
+      type: object
+      description: POST /auth/password-change/ — the only self-service credential
+        change.
+      properties:
+        old_password:
+          type: string
+          writeOnly: true
+        new_password:
+          type: string
+          writeOnly: true
+      required:
+      - new_password
+      - old_password
     PatchedAcademicEvent:
       type: object
       description: |-
@@ -4034,7 +5476,7 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/RoleEnum'
+          $ref: '#/components/schemas/Role209Enum'
         is_active:
           type: boolean
     PatchedAnnouncement:
@@ -4139,6 +5581,15 @@ components:
         classroom:
           type: string
           maxLength: 100
+    PatchedConversationCreate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
     PatchedCourse:
       type: object
       description: |-
@@ -4288,6 +5739,80 @@ components:
           type: string
         is_active:
           type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDocument:
+      type: object
+      description: |-
+        ModelSerializer with generated UniqueValidators removed (→ 409 path).
+
+        `docs/api/admin.md` requires uniqueness conflicts to return
+        `409 CONFLICT`, but ModelSerializer injects `UniqueValidator`, which
+        field-level errors or machine-readable metadata (the Phase 03 duplicate-email
+        bug — accounts silenced it per field; Phase 04 generalizes). The database
+        constraint becomes the single source of truth; views convert its
+        `IntegrityError` with `common.mixins.ConflictOnIntegrityMixin`. Composite
+        uniques bring a `UniqueTogetherValidator`, which additionally breaks PATCH
+        (it demands every key field on partial updates) — stripped for the same
+        reason.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        document_type:
+          type: string
+          maxLength: 64
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+        status_url:
+          type: string
+          readOnly: true
+        academic_year:
+          type: string
+          maxLength: 32
+        effective_from:
+          type: string
+          format: date
+          nullable: true
+        effective_to:
+          type: string
+          format: date
+          nullable: true
+        version:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+        checksum:
+          type: string
+          readOnly: true
+        storage_key:
+          type: string
+          readOnly: true
+        processing_error:
+          type: string
+          readOnly: true
+        failure_stage:
+          type: string
+          readOnly: true
+        attempt_count:
+          type: integer
+          readOnly: true
+        uploaded_by:
+          type: integer
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -4578,7 +6103,7 @@ components:
         current_gpa:
           type: string
           format: decimal
-          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+          pattern: ^-?\d{0,2}(?:\.\d{0,2})?$
           readOnly: true
           nullable: true
         onboarding_complete:
@@ -4776,7 +6301,7 @@ components:
       required:
       - email
       - password
-    RoleEnum:
+    Role209Enum:
       enum:
       - STUDENT
       - PROFESSOR
@@ -4870,7 +6395,7 @@ components:
         current_gpa:
           type: string
           format: decimal
-          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+          pattern: ^-?\d{0,2}(?:\.\d{0,2})?$
           readOnly: true
           nullable: true
         onboarding_complete:
@@ -4911,6 +6436,25 @@ components:
       required:
       - id
       - user
+    TypeEnum:
+      enum:
+      - ANNOUNCEMENT
+      - DEADLINE
+      - EXAM
+      - SYSTEM
+      type: string
+      description: |-
+        * `ANNOUNCEMENT` - اطلاعیه
+        * `DEADLINE` - مهلت
+        * `EXAM` - امتحان
+        * `SYSTEM` - سیستمی
+    UnreadCountResponse:
+      type: object
+      properties:
+        unread_count:
+          type: integer
+      required:
+      - unread_count
     UserBrief:
       type: object
       properties:

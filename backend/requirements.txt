@@ -33,3 +33,8 @@ argon2-cffi==25.1.0
 # untrusted input, so this pin tracks the security fix stream: 6.21.4 clears
 # the 2026 pypdf CVE list reported by pip-audit (Phase 15).
 pypdf==6.21.4
+
+# Spreadsheet reading/writing for the admin bulk-student import (Phase 16):
+# openpyxl writes the official .xlsx template and reads registrar exports.
+# Workbooks are opened read_only + data_only so formulas are never evaluated.
+openpyxl==3.1.5

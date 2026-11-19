@@ -33,6 +33,77 @@ error envelope, and server-side authorization.
 | GET | `/admin/students/` | List student profiles | filters: `?faculty=`, `?department=`, `?search=` |
 | GET/PATCH | `/admin/students/{id}/` | Edit profile fields | grade/history edits go through enrollments |
 
+## Bulk student import (Phase 16)
+
+Admin → Users → «افزودن گروهی دانشجویان». Five `ADMIN`/`SUPERADMIN`-only
+endpoints under `/admin/students/import/`. Manual user creation above is
+unchanged; this is an additional, additive path for rosters.
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/admin/students/import/template/` | Download the official `.xlsx` template (binary, `Content-Disposition: attachment`) |
+| POST | `/admin/students/import/inspect/` | Read sheet names, headers, sample rows and *suggested* roles/mappings |
+| POST | `/admin/students/import/validate/` | Dry-run: full validation + preview (`file_hash`, summary, per-row issues, changes). Writes nothing |
+| POST | `/admin/students/import/confirm/` | Execute a previously previewed plan |
+| GET | `/admin/students/import/reports/` | Paginated summaries of past imports (from `AuditLog`) |
+
+### Request/response contract
+
+- `inspect`, `validate` and `confirm` are `multipart/form-data` with a `file`
+  field (`.xlsx` only, ≤ 5 MB, zip signature checked, opened read-only with
+  `data_only` so **formulas are never evaluated**).
+- The service is **stateless**: the file is re-sent on every step. `inspect`
+  and `validate` return `file_hash` (sha256 of the uploaded bytes); `confirm`
+  must send that `expected_hash` and a `confirm=true` flag, and re-validates the
+  same bytes. A different file returns `409 CONFLICT` — what executes is
+  provably what was reviewed.
+- `validate`/`confirm` also take `mode` (`create_only` default, `upsert`) and
+  `mapping` (JSON string of `{"sheets": [{"role", "sheet", "columns"}]}`,
+  where `columns` maps a canonical field to a physical header). Missing
+  required columns are a `400 VALIDATION_ERROR` naming the field.
+- Template sheets: `راهنما` (instructions, ignored on read), `Students`,
+  `PassedCourses`, `CurrentEnrollments`. External registrar files may use any
+  sheet/header names; inspect suggests roles only when a header maps to exactly
+  one field — ambiguous headers are left unmapped for the admin to resolve.
+
+### Preview payload
+
+`file_hash`, `mode`, `summary` (`students_total/valid/invalid/existing`,
+`will_create/update/skip`, `passed_*`, `enrollments_*`, `duplicate_rows`,
+`error_count`, `warning_count`), capped `students` / `passed_courses` /
+`enrollments` rows (`changes` for update mode), and the **complete**
+`errors[]` / `warnings[]` lists as `{sheet, row, field, code, message}` with
+Persian messages. There is no server-side error-report file: the admin UI
+exports the returned issues as CSV. Row detail is capped at 200 per list and
+`details_truncated` says so; error lists are never truncated.
+
+### Write semantics
+
+- Idempotent and additive: a student that already exists is **skipped** in
+  `create_only`; `upsert` updates only the profile fields shown in `changes`.
+  Existing passed/current enrollments are never overwritten or deleted, and
+  records absent from the file are never removed.
+- Each student is written in its own transaction: one bad row fails alone and
+  valid students still import (partial import by design). A file with **no**
+  valid student returns `400`.
+- `confirm` returns `summary`, per-row `results`, the remaining `errors`, the
+  `audit_id`, and `created_credentials` — a **unique** generated temporary
+  password per newly created account, returned exactly once and never stored in
+  plaintext or written to the audit log. The audit metadata masks student
+  emails.
+- `current_term` maps to `StudentProfile.current_term_number`, `degree`
+  accepts the enum values or Persian labels, and terms match
+  `AcademicTerm.name` (normalized; academic-year fallback only when unique).
+- A passed course with no offering in a past term gets a closed historical
+  offering (capacity 0); a missing offering in the current/future term is a
+  validation error. Passed courses may reference any department's course
+  (deliberate: historical records predate the current offering plan).
+
+Known limitations: there is no invite/first-login email flow, so the admin must
+deliver the one-time passwords out of band; the file is validated only against
+current reference data (a re-upload always re-validates), and the 5 MB / per-
+sheet row cap bounds very large rosters.
+
 ## Academic structure (Phase 04)
 
 | Method | Endpoint | Purpose |

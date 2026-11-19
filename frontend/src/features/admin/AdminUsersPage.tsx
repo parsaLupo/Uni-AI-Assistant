@@ -42,9 +42,10 @@ import {
 } from '../../components/ui'
 import { useUrlState } from '../../hooks/useUrlState'
 import { toAsciiDigits, toPersianDigits } from '../../i18n/digits'
-import { adminUsersPage as t, auth as authText, common } from '../../i18n/fa'
+import { adminUsersPage as t, adminStudentImport, auth as authText, common } from '../../i18n/fa'
 import { degreeLevelLabels, roleLabels } from '../../i18n/labels'
 import { useAuth } from '../auth'
+import { StudentImportWizard } from './StudentImportWizard'
 import type { Course, CourseOffering, Department } from '../../types/academic'
 import type { AdminUser, AdminUserUpdatePayload, AdminUsersQuery } from '../../types/admin'
 import type { UserRole } from '../../types/api'
@@ -243,6 +244,7 @@ export function AdminUsersPage() {
   const [stateFilter, setStateFilter] = useUrlState<string>('state', '')
 
   const [formOpen, setFormOpen] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const [editing, setEditing] = useState<AdminUser | null>(null)
   const [form, setForm] = useState<UserFormState>(EMPTY_FORM)
   const [studentForm, setStudentForm] = useState<StudentFormState>(EMPTY_STUDENT_FORM)
@@ -479,12 +481,25 @@ export function AdminUsersPage() {
         title={t.title}
         subtitle={t.subtitle}
         actions={
-          <button type="button" className={btnPrimaryCls} onClick={openCreate}>
-            <span aria-hidden="true" className="material-symbols-outlined text-[18px]">
-              person_add
-            </span>
-            {common.create}
-          </button>
+          <div className="flex flex-wrap items-center gap-space-sm">
+            <button
+              type="button"
+              className={btnSecondaryCls}
+              onClick={() => setImportOpen(true)}
+              data-testid="open-student-import"
+            >
+              <span aria-hidden="true" className="material-symbols-outlined text-[18px]">
+                group_add
+              </span>
+              {adminStudentImport.action}
+            </button>
+            <button type="button" className={btnPrimaryCls} onClick={openCreate}>
+              <span aria-hidden="true" className="material-symbols-outlined text-[18px]">
+                person_add
+              </span>
+              {common.create}
+            </button>
+          </div>
         }
       />
 
@@ -871,6 +886,12 @@ export function AdminUsersPage() {
         error={deactivate.error}
         onCancel={() => setTarget(null)}
         onConfirm={() => target && deactivate.mutate(target.id)}
+      />
+
+      <StudentImportWizard
+        open={importOpen}
+        onClose={() => setImportOpen(false)}
+        onImported={invalidate}
       />
     </div>
   )

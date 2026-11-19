@@ -55,6 +55,7 @@ PERMISSION_MATRIX: list[tuple[str, str, dict[str, int]]] = [
     ("/api/v1/auth/refresh/", "POST", CSRF_GATE),
     ("/api/v1/auth/logout/", "POST", CSRF_GATE),
     ("/api/v1/auth/me/", "GET", AUTH_ALLOWED),
+    ("/api/v1/auth/password-change/", "POST", AUTH_ALLOWED),
     # --- public academic reads (authentication required; no anonymous tier) --
     ("/api/v1/terms/", "GET", READS_AUTH),
     (f"/api/v1/terms/{FAKE_ID}/", "GET", READS_ALLOWED),
@@ -101,6 +102,12 @@ PERMISSION_MATRIX: list[tuple[str, str, dict[str, int]]] = [
     (f"/api/v1/admin/users/{FAKE_ID}/", "GET", DENIED_ROLES),
     (f"/api/v1/admin/users/{FAKE_ID}/", "PATCH", DENIED_ROLES),
     (f"/api/v1/admin/users/{FAKE_ID}/", "DELETE", DENIED_ROLES),
+    # --- admin: bulk student import (Phase 16) ---------------------------------
+    ("/api/v1/admin/students/import/template/", "GET", DENIED_ROLES),
+    ("/api/v1/admin/students/import/inspect/", "POST", DENIED_ROLES),
+    ("/api/v1/admin/students/import/validate/", "POST", DENIED_ROLES),
+    ("/api/v1/admin/students/import/confirm/", "POST", DENIED_ROLES),
+    ("/api/v1/admin/students/import/reports/", "GET", DENIED_ROLES),
     # --- admin: academics -----------------------------------------------------
     ("/api/v1/admin/faculties/", "GET", DENIED_ROLES),
     ("/api/v1/admin/faculties/", "POST", DENIED_ROLES),
