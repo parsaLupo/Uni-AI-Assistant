@@ -4,10 +4,13 @@
  *
  * The icon must sit inside the field's start edge and stay vertically
  * centered regardless of the input height: the glyph's wrapper is a
- * stretched flex container (`inset-y-0 start-3 flex items-center`), never
- * the old stretched `my-auto` span whose content rendered at the top, and
- * the control's text is padded on the icon side with logical `ps-10` so the
- * placeholder/typed text never slides under the icon (RTL and LTR alike).
+ * stretched flex container (`inset-y-0 right-3 flex! items-center`). The
+ * `!` is required because fonts.googleapis.com ships an unlayered
+ * `display: inline-block` rule for `.material-symbols-outlined`, which
+ * outranks Tailwind's utilities layer; without it the glyph renders at the
+ * top edge (the bug fixed across the panels). The control's text is padded
+ * on the icon side with physical `pr-10` so the placeholder/typed text never
+ * slides under the icon (RTL and LTR alike).
  */
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
@@ -34,7 +37,7 @@ describe('SearchInput', () => {
     const span = icon(container)
     expect(span.className).toContain('inset-y-0')
     expect(span.className).toContain('right-3')
-    expect(span.className).toContain('flex items-center')
+    expect(span.className).toContain('flex! items-center')
     // Regression: the old stretched span rendered its glyph at the top.
     expect(span.className).not.toContain('my-auto')
     // Regression: logical start-* utilities flip on Material Symbols spans,
@@ -74,7 +77,7 @@ describe('FilterSelect', () => {
     const span = icon(container)
     expect(span.className).toContain('inset-y-0')
     expect(span.className).toContain('right-3')
-    expect(span.className).toContain('flex items-center')
+    expect(span.className).toContain('flex! items-center')
     expect(span.className).not.toContain('my-auto')
     expect(span.className).not.toContain('start-')
 

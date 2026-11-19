@@ -43,7 +43,13 @@ body {
   min-height: 100vh;
 }
 
-/* Material Symbols glyph defaults (icon font from index.html). */
+/* Material Symbols glyph defaults (icon font from index.html).
+ *
+ * NOTE: fonts.googleapis.com ships its own unlayered rule for this class with
+ * `display: inline-block`. Unlayered CSS outranks *every* Tailwind layer, so a
+ * `flex` utility on the same element is silently dropped. Absolutely
+ * positioned icons (search/filter controls, login inputs) therefore use
+ * `flex!` to centre the glyph vertically. */
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;

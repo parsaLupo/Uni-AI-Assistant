@@ -92,7 +92,7 @@ export function RegisterPage() {
             </label>
             <div className="relative flex items-center">
               <span
-                className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
+                className="material-symbols-outlined absolute inset-y-0 right-space-md flex! items-center text-outline text-[20px] pointer-events-none"
                 aria-hidden="true"
               >
                 alternate_email
@@ -133,7 +133,7 @@ export function RegisterPage() {
                 </button>
               ) : (
                 <span
-                  className="material-symbols-outlined absolute inset-y-0 right-space-md flex items-center text-outline text-[20px] pointer-events-none"
+                  className="material-symbols-outlined absolute inset-y-0 right-space-md flex! items-center text-outline text-[20px] pointer-events-none"
                   aria-hidden="true"
                 >
                   key
