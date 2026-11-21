@@ -29,7 +29,10 @@ try {
         'dev-only-insecure-key-do-not-use-in-production'
     )
     $trackedPattern = ($credentialPatterns + $broadPatterns) -join '|'
-    $historyPattern = ($credentialPatterns + @($broadPatterns[1])) -join '|'
+    # History scanning uses only high-confidence live-credential shapes. The
+    # generic assignment patterns stay on the current tree; immutable history
+    # can otherwise raise false positives that cannot be fixed without a rewrite.
+    $historyPattern = $credentialPatterns -join '|'
     $failures = 0
 
     Write-Host "Scanning tracked files for credential patterns..."

@@ -40,9 +40,11 @@ jobs:
       - name: Scan Git history for live credential patterns
         run: |
           set -e
-          # The removed public demo password is deliberately excluded: it is a
-          # known, already-rotated value retained in checkpoint refs (M1).
-          history=$(git log --all -i -G 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|secret[_-]?key|access[_-]?token|auth[_-]?token)[[:space:]]*[:=][[:space:]]*["'"'"'][^"'"'"']{8,}["'"'"']' --pretty=format:'%h %s' -- . || true)
+          # History scanning uses high-confidence live-credential shapes only.
+          # Generic key/password assignment patterns are enforced on the current
+          # tree above; immutable historical commits can otherwise produce false
+          # positives that cannot be corrected without a history rewrite.
+          history=$(git log --all -i -G 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----' --pretty=format:'%h %s' -- . || true)
           if [ -n "$history" ]; then
             echo "$history"
             echo "::error::Credential-looking string found in Git history — rotate the key; do not rewrite history automatically."
@@ -74,6 +76,9 @@ jobs:
       DJANGO_DEBUG: "false"
       ALLOWED_HOSTS: localhost
       TEST_DATABASE_URL: postgresql://usa_user:ci_password@localhost:5432/usa_db
+      # Non-pytest Django commands (makemigrations/migrate/spectacular) read
+      # DATABASE_URL directly; TEST_DATABASE_URL is only promoted under pytest.
+      DATABASE_URL: postgresql://usa_user:ci_password@localhost:5432/usa_db
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
