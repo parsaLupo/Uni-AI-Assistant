@@ -15,17 +15,18 @@
 
 ## Current phase
 
-`PHASE_07` — (next).
+`PHASE_16` — Local Production-Ready Release & Demo Deployment — **DONE**.
 
-Completed: `PHASE_00` (baseline), `PHASE_01` (architecture & API contract),
-`PHASE_02` (environment verification), `PHASE_03` (authentication &
-authorization), `PHASE_04` (core academic data), `PHASE_05` (React foundation —
-Persian/RTL shell), `PHASE_06` (Academic User Experience) — each `DONE` with a
-verification record in `docs/phases/phase-00.md` … `phase-06.md`.
+Completed: `PHASE_00` … `PHASE_16`, each with a verification record in
+`docs/phases/phase-00.md` … `phase-16.md`.
+
+Phase 16 is the final phase in the current scope. No later phase has been
+started. The deployment runbook is [`../DEPLOYMENT.md`](../DEPLOYMENT.md).
 
 ## First objective
 
-در Phase 00 هیچ Feature کاربردی نساز. فقط baseline پروژه، دامنه، تصمیمات معماری و ساختار repository را مشخص کن.
+Phase 16 فقط برای آماده‌سازی انتشار محلی، دموی دانشگاهی، پشتیبان‌گیری و
+بازیابی است. استقرار عمومی/VPS، دامنه و HTTPS خارج از دامنه این فاز هستند.
 
 ## Agent operating mode
 

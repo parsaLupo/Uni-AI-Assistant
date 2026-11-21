@@ -24,6 +24,16 @@ class ApiSchemaView(SpectacularAPIView):
 
 
 urlpatterns = [
+    # Phase 16 release probes: the documented /health/... URLs are served by
+    # the reverse proxy and answered by Django. Both the slashless and slash
+    # forms exist so a probe never depends on APPEND_SLASH redirects.
+    path("health/live", views.RootHealthLiveView.as_view(), name="root-health-live"),
+    path("health/live/", views.RootHealthLiveView.as_view(), name="root-health-live-slash"),
+    path("health/ready", views.RootHealthReadyView.as_view(), name="root-health-ready"),
+    path("health/ready/", views.RootHealthReadyView.as_view(), name="root-health-ready-slash"),
+    path("health/deep", views.RootHealthDeepView.as_view(), name="root-health-deep"),
+    path("health/deep/", views.RootHealthDeepView.as_view(), name="root-health-deep-slash"),
+
     path("api/v1/", include("apps.common.urls")),
     path("api/v1/", include("apps.accounts.urls")),
     # Phase 04 — core academic data (docs/02 section 4.1, docs/api/admin.md).

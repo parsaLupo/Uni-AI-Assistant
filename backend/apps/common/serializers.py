@@ -45,6 +45,43 @@ class HealthResponseSerializer(serializers.Serializer):
     checks = HealthChecksSerializer()
 
 
+class HealthLiveResponseSerializer(serializers.Serializer):
+    status = serializers.CharField()
+    service = serializers.CharField()
+    version = serializers.CharField()
+    request_id = serializers.CharField(help_text="Correlation id (docs/12 section 4).")
+
+
+class HealthReadyChecksSerializer(serializers.Serializer):
+    database = serializers.CharField(help_text="'ok' or 'unavailable'.")
+    database_latency_ms = serializers.FloatField(allow_null=True)
+
+
+class HealthReadyResponseSerializer(HealthLiveResponseSerializer):
+    checks = HealthReadyChecksSerializer()
+
+
+class HealthDependencyStatusSerializer(serializers.Serializer):
+    status = serializers.CharField(help_text="'ok', 'unavailable', 'degraded' or 'eager'.")
+    latency_ms = serializers.FloatField(allow_null=True, required=False)
+
+
+class HealthWorkerStatusSerializer(serializers.Serializer):
+    status = serializers.CharField(help_text="'ok', 'unavailable' or 'eager'.")
+
+
+class HealthDeepChecksSerializer(serializers.Serializer):
+    database = HealthDependencyStatusSerializer()
+    redis = HealthDependencyStatusSerializer()
+    worker = HealthWorkerStatusSerializer()
+    storage = HealthWorkerStatusSerializer()
+    ai_provider = HealthWorkerStatusSerializer()
+
+
+class HealthDeepResponseSerializer(HealthLiveResponseSerializer):
+    checks = HealthDeepChecksSerializer()
+
+
 # --- Phase 04 write-path contract -------------------------------------------
 
 UNIQUE_CONFLICT_MESSAGE = "این مقدار قبلاً ثبت شده است؛ شناسه/کد باید یکتا باشد."

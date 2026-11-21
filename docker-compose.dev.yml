@@ -1,0 +1,62 @@
+# Development overlay — keeps the pre-Phase-16 workflow (bind mounts, Django
+# runserver, Vite dev server) while docker-compose.yml defaults to the release
+# stack. Usage:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+#
+# Ports: Vite http://localhost:5173, Django http://localhost:8000.
+# The release nginx container (`web`) and the Celery worker are disabled here;
+# CELERY_TASK_ALWAYS_EAGER=true runs ingestion inline for development.
+services:
+  web:
+    # Release-only: start it explicitly with `--profile release`.
+    profiles: ["release"]
+
+  worker:
+    # Start explicitly with `--profile worker` if you want a real worker in dev.
+    profiles: ["worker"]
+
+  backend:
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    environment:
+      DEPLOYMENT_MODE: dev
+      DJANGO_DEBUG: "true"
+      CELERY_TASK_ALWAYS_EAGER: "true"
+      COOKIE_SECURE: "false"
+      SECURE_SSL_REDIRECT: "false"
+      SECURE_HSTS_SECONDS: "0"
+      AI_PROVIDER: ${AI_PROVIDER:-mock}
+      DEMO_MODE: ${DEMO_MODE:-true}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+    volumes:
+      - ./backend:/app
+      - media_data:/app/media
+      - ./data:/data:ro
+    ports:
+      - "8000:8000"
+
+  frontend-dev:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    environment:
+      VITE_DEV_PROXY_TARGET: http://backend:8000
+      VITE_API_BASE_URL: /api/v1
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:5173/"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+volumes:
+  frontend_node_modules:

@@ -52,7 +52,9 @@ class AdminDocumentViewSet(
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        enqueue_document_processing(instance)
+        enqueue_document_processing(
+            instance, request_id=getattr(self.request, "request_id", None)
+        )
         record_audit(self.request.user, "CREATE", instance)
 
     def perform_update(self, serializer):
@@ -93,7 +95,7 @@ class AdminDocumentViewSet(
                 "updated_at",
             ]
         )
-        enqueue_document_processing(doc)
+        enqueue_document_processing(doc, request_id=getattr(request, "request_id", None))
         record_audit(request.user, "RETRY", doc)
         return Response(self.get_serializer(doc).data)
 

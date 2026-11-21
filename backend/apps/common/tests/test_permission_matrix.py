@@ -48,6 +48,11 @@ FAKE_ID = 999999
 PERMISSION_MATRIX: list[tuple[str, str, dict[str, int]]] = [
     # --- health + contract ---------------------------------------------------
     ("/api/v1/health/", "GET", PUBLIC_HEALTH),
+    # Phase 16 split probes are public; deep may legitimately return 503 when
+    # an optional dependency is unavailable (ALLOWED covers both).
+    ("/api/v1/health/live/", "GET", PUBLIC_ALLOWED),
+    ("/api/v1/health/ready/", "GET", PUBLIC_ALLOWED),
+    ("/api/v1/health/deep/", "GET", PUBLIC_ALLOWED),
     # --- auth (AllowAny; refresh/logout additionally CSRF-gated) -------------
     ("/api/v1/auth/register/", "POST", PUBLIC_ALLOWED),
     ("/api/v1/auth/login/", "POST", PUBLIC_ALLOWED),

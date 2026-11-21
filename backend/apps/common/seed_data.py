@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import date, datetime, time
+from decimal import Decimal
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -36,6 +37,7 @@ from apps.courses.models import (
     Weekday,
 )
 from apps.exams.models import Exam
+from apps.notifications.models import Notification, NotificationType
 from apps.professors.models import Professor
 from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 
@@ -140,9 +142,6 @@ SEMESTER_DATES = {
 # store the announced 10:00 exam as 10:00 UTC — 3:30 hours off for viewers in
 # Tehran — so every parsed exam instant is pinned to the Iran zone instead.
 TEHRAN_TZ = ZoneInfo("Asia/Tehran")
-
-DEMO_PASSWORD = "Demo-Passw0rd!"
-
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -449,12 +448,61 @@ class Seeder:
                     offering.save(update_fields=["professor"])
                 self._parse_schedule(row.get("schedule_details", []), offering)
 
+    def _demo_rag_document(self) -> None:
+        """One synthetic, source-citable rule document for local/E2E demos.
+
+        The private source PDFs are deliberately not part of the repository.
+        A tiny deterministic document with a page-numbered chunk keeps the RAG
+        and E2E journeys reproducible on a clean database without publishing
+        any real university document.
+        """
+        from apps.documents.models import Document, DocumentChunk, DocumentStatus
+        from apps.rag.embeddings import get_embedding_provider
+
+        title = "نمونه مقررات مشروطی (سند آزمونی)"
+        content = (
+            "شرایط مشروطی چیست؟ شرایط مشروطی دانشجو "
+            "در صورت کسب نمره کمتر از دوازده در سه درس یک نیمسال اعمال می‌شود."
+        )
+        document, created = Document.objects.get_or_create(
+            title=title,
+            defaults={
+                "document_type": "REGULATION",
+                "academic_year": "demo",
+                "status": DocumentStatus.ACTIVE,
+                "storage_key": "demo/synthetic-conditional-rules.txt",
+                "checksum": "demo-synthetic-conditional-rules",
+            },
+        )
+        if created:
+            self._bump("demo_documents")
+        if document.chunks.exists():
+            return
+        provider = get_embedding_provider()
+        embedding = provider.embed([content])[0]
+        DocumentChunk.objects.get_or_create(
+            document=document,
+            chunk_index=0,
+            defaults={
+                "content": content,
+                "normalized_content": normalize_persian(content),
+                "page_number": 1,
+                "section_title": "شرایط مشروطی",
+                "token_count": len(content.split()),
+                "embedding": embedding,
+                "embedding_model": provider.model_id,
+                "embedding_dimension": provider.dimension,
+                "metadata": {"demo": True, "source": "synthetic"},
+            },
+        )
+
     # --- demo content & accounts --------------------------------------------
     def demo_content(self) -> None:
         """Persian announcements/events for the current term (demo realism)."""
         from apps.announcements.models import Announcement, AnnouncementPriority
         from apps.calendar.models import AcademicEvent, EventType
 
+        self._demo_rag_document()
         current = AcademicTerm.objects.filter(is_current=True).first()
         if current is None:
             return
@@ -492,35 +540,54 @@ class Seeder:
         if created:
             self._bump("events")
 
-    def demo_accounts(self) -> list[str]:
-        """Development identities for terminal/Swagger flows (non-production)."""
-        if not settings.DEBUG:
+    def demo_accounts(
+        self,
+        *,
+        demo_password: str,
+        allow_in_release: bool = False,
+        reset_passwords: bool = False,
+        reveal_password: bool = True,
+    ) -> list[str]:
+        """Demo identities for local demos and terminal/Swagger flows.
+
+        Development (`manage.py seed`) runs this only with DEBUG on. The
+        dedicated `manage.py seed_demo` command opts in explicitly with
+        ``allow_in_release`` after checking DEMO_MODE, so the normal seed path
+        never creates identities in a release configuration.
+
+        ``demo_password`` is mandatory: there is deliberately no built-in
+        fallback, so a public password can never be seeded silently.
+        """
+        if not demo_password:
+            raise ValueError("demo_password is required to create demo accounts")
+        if len(demo_password) < 10:
+            raise ValueError("demo_password must be at least 10 characters")
+        if not settings.DEBUG and not allow_in_release:
             return []
         lines: list[str] = []
         specs = [
             ("root@semnan.local", Role.SUPERADMIN, "مدیر ارشد", "آزمایشی"),
             ("admin@semnan.local", Role.ADMIN, "مدیر", "آزمایشی"),
-            (
-                "student@semnan.local",
-                Role.STUDENT,
-                "سارا",
-                "محمدی",
-            ),
+            ("student@semnan.local", Role.STUDENT, "سارا", "محمدی"),
+            ("professor@semnan.local", Role.PROFESSOR, "رضا", "استادی"),
         ]
-        for spec in specs:
-            email, role, first, last = spec[0], spec[1], spec[2], spec[3] if len(spec) > 3 else ""
+        for email, role, first, last in specs:
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
                     "first_name": first,
-                    "last_name": last or "",
+                    "last_name": last,
                     "role": role,
                 },
             )
-            if created:
-                user.set_password(DEMO_PASSWORD)
+            if created or reset_passwords:
+                # The demo identities are reserved local-only accounts; rotating
+                # their password on an explicit seed_demo run keeps the documented
+                # credentials reproducible. Real accounts are never touched.
+                user.set_password(demo_password)
                 user.save(update_fields=["password"])
-                self._bump("demo_accounts")
+                if created:
+                    self._bump("demo_accounts")
             if role == Role.STUDENT:
                 department = Department.objects.filter(code="16").first()
                 profile, _ = StudentProfile.objects.get_or_create(
@@ -542,12 +609,112 @@ class Seeder:
                             course_offering=offering,
                             defaults={"status": EnrollmentStatus.PLANNED},
                         )
-            lines.append(f"  {role:<11} {email}  /  {DEMO_PASSWORD}")
+            suffix = f"  /  {demo_password}" if reveal_password else ""
+            lines.append(f"  {role:<11} {email}{suffix}")
         return lines
+
+    def demo_history(self, *, allow_in_release: bool = False) -> None:
+        """Reproducible academic history for the demo student (idempotent).
+
+        A few PASSED rows in the most recent past term make the course-selection
+        and planner screens meaningful during a presentation. Existing rows are
+        never overwritten; re-running the demo seed creates nothing new.
+        """
+        if not settings.DEBUG and not allow_in_release:
+            return
+        student_user = User.objects.filter(
+            email="student@semnan.local", role=Role.STUDENT
+        ).first()
+        if student_user is None:
+            return
+        profile = getattr(student_user, "student_profile", None)
+        if profile is None:
+            return
+
+        past_term = (
+            AcademicTerm.objects.filter(is_current=False)
+            .order_by("-starts_at")
+            .first()
+        )
+        if past_term is None:
+            # The official dataset only ships the current term. A presentation
+            # still needs a small, clearly demo-only history, so create one
+            # previous term and three sections for it. This runs only through
+            # the explicitly guarded `seed_demo` command, never the normal
+            # release seed, and get_or_create keeps re-runs idempotent.
+            current = AcademicTerm.objects.filter(is_current=True).first()
+            if current is not None:
+                year = int(current.academic_year.split("-")[0]) - 1
+                (start_month, start_day), (end_month, end_day) = SEMESTER_DATES[
+                    current.semester_type
+                ]
+                past_term, created = AcademicTerm.objects.get_or_create(
+                    academic_year=f"{year}-{year + 1}",
+                    semester_type=current.semester_type,
+                    defaults={
+                        "name": f"{current.get_semester_type_display()} {year}-{year + 1}",
+                        "starts_at": jalali_date(year, start_month, start_day),
+                        "ends_at": jalali_date(year, end_month, end_day),
+                        "is_current": False,
+                    },
+                )
+                if created:
+                    self._bump("demo_terms")
+                courses = Course.objects.filter(
+                    department=profile.department, active=True
+                ).order_by("code")[:3]
+                for course in courses:
+                    _, created = CourseOffering.objects.get_or_create(
+                        course=course,
+                        term=past_term,
+                        section_code="01",
+                        defaults={"capacity": 30},
+                    )
+                    if created:
+                        self._bump("demo_offerings")
+        if past_term is not None:
+            for offering in CourseOffering.objects.filter(
+                term=past_term, course__active=True
+            ).select_related("course")[:3]:
+                _, created = Enrollment.objects.get_or_create(
+                    student=profile,
+                    course_offering=offering,
+                    defaults={
+                        "status": EnrollmentStatus.PASSED,
+                        "grade": Decimal("18.50"),
+                    },
+                )
+                if created:
+                    self._bump("demo_history")
+
+        # One persistent notification so the badge/list survive a restart.
+        exists = Notification.objects.filter(
+            user=student_user,
+            type=NotificationType.SYSTEM,
+            title="خوش آمدید به دستیار هوشمند دانشگاه",
+        ).exists()
+        if not exists:
+            Notification.objects.create(
+                user=student_user,
+                type=NotificationType.SYSTEM,
+                title="خوش آمدید به دستیار هوشمند دانشگاه",
+                body="این یک یادآوری نمایشی است که پس از راه‌اندازی مجدد هم باقی می‌ماند.",
+                link="/dashboard",
+            )
+            self._bump("demo_notifications")
 
     # --- orchestration -------------------------------------------------------
     @transaction.atomic
-    def run(self, *, with_demo_accounts: bool = True) -> dict[str, int]:
+    def run(
+        self,
+        *,
+        with_demo_accounts: bool = True,
+        demo_password: str | None = None,
+        allow_demo_in_release: bool = False,
+        reset_demo_passwords: bool = False,
+        demo_history: bool = False,
+        reveal_demo_password: bool = True,
+    ) -> dict[str, int]:
         missing = [
             name
             for name in ("Faculty.json", "departments.json", "courses.json")
@@ -561,7 +728,23 @@ class Seeder:
         self.professors(departments)
         self.offerings(self._professor_index(), departments)
         self.demo_content()
-        self.credentials = self.demo_accounts() if with_demo_accounts else []
+        if with_demo_accounts and not demo_password:
+            raise ValueError(
+                "demo_password is required when with_demo_accounts=True; "
+                "set DEMO_PASSWORD or skip demo accounts."
+            )
+        self.credentials = (
+            self.demo_accounts(
+                demo_password=demo_password or "",
+                allow_in_release=allow_demo_in_release,
+                reset_passwords=reset_demo_passwords,
+                reveal_password=reveal_demo_password,
+            )
+            if with_demo_accounts
+            else []
+        )
+        if demo_history:
+            self.demo_history(allow_in_release=allow_demo_in_release)
         return self.counts
 
 

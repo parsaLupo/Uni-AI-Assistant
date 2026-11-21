@@ -93,3 +93,17 @@ It should report application availability and, where appropriate, database conne
 - [ ] rate limits
 - [ ] CORS/host restrictions
 - [ ] document storage configured
+
+## 9. Phase 16 local implementation
+
+The Phase 16 scope is a **local production-like deployment** on a laptop for
+university demonstrations, not a public/VPS deployment. The implemented stack
+uses nginx + Gunicorn + PostgreSQL/pgvector + Redis + Celery, with a separate
+migration step, live/ready/deep health probes, backups and a tested restore
+drill. HTTPS, domains and external alerting are explicitly out of scope for
+this phase.
+
+The complete runbook (prerequisites, environment variables, startup, demo
+accounts, migrations, backup/restore, rollback, troubleshooting and known
+limitations) is the repository-root [`DEPLOYMENT.md`](../../DEPLOYMENT.md).
+The verification record is `docs/phases/phase-16.md`.

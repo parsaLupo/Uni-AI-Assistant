@@ -6,7 +6,7 @@ against authenticated endpoints and reports p50/p95/p99 latency per endpoint.
 
     python backend/loadtest/load_probe.py \
         --base http://localhost:8000 \
-        --email student@semnan.local --password 'Demo-Passw0rd!' \
+        --email student@semnan.local --password "$DEMO_PASSWORD" \
         --users 20 --seconds 15
 
 Endpoints covered (seeded data):
@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import statistics
 import sys
 import threading
@@ -181,11 +182,17 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base", default="http://localhost:8000")
     parser.add_argument("--email", default="student@semnan.local")
-    parser.add_argument("--password", default="Demo-Passw0rd!")
+    parser.add_argument(
+        "--password",
+        default=os.environ.get("DEMO_PASSWORD", ""),
+        help="Demo password; defaults to the local DEMO_PASSWORD environment variable.",
+    )
     parser.add_argument("--users", type=int, default=20)
     parser.add_argument("--seconds", type=int, default=15)
     parser.add_argument("--report", default=None, help="Write a JSON report here.")
     args = parser.parse_args()
+    if not args.password:
+        parser.error("--password (or DEMO_PASSWORD) is required")
 
     report = run(args)
     if args.report:

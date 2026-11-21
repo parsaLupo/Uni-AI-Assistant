@@ -40,10 +40,21 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+!frontend/.env.example
 backend/.env
 frontend/.env
 *.pem
 *.key
+*.p12
+*.pfx
+
+# --- Database backups / local demo credentials (Phase 16) ---
+backups/
+local/
+*.dump
+*.bak
+*.sql
+*.sql.gz
 
 # --- Docker local state ---
 pgdata/
@@ -58,5 +69,27 @@ postgres-data/
 Thumbs.db
 desktop.ini
 
-# --- Agent scratch ---
-.probe_versions.py
+# --- Agent / local scratch (Phase 16 repository hygiene) ---
+.brud/
+activate_docs.py
+backend/activate_docs.py
+docker_up.txt
+edge_dom.txt
+pip_audit_full.txt
+test_rag*.py
+upload_pdfs.py
+pdfs/
+# Ad-hoc local browser scripts (not wired into npm/Playwright); kept locally,
+# never published. The real suite lives in frontend/e2e/.
+frontend/tests/
+frontend/fe_*.txt
+frontend/frontend.err
+frontend/frontend.out
+frontend/test-results/
+frontend/playwright-report/
+frontend/test-report/
+data/*.txt
+data/*.ps1
+data/*.py
+data/probe*.json
+data/gitstat.txt

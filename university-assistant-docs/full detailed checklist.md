@@ -538,35 +538,42 @@ pgvector; the CI run itself is pending the next push — registry/network was
 intermittent this session, and the docker image rebuild for pypdf 6.21.4 is
 deferred to Phase 16.)*
 
-### Phase 16 — Deployment, Observability & Release ⬜
+### Phase 16 — Deployment, Observability & Release ✅ (local-demo scope)
 
 **Objective.** Deployable, observable, recoverable production system (V-11, V-06).
 
+**Scope decision.** Phase 16 delivers a **local production-like stack**
+(`http://localhost:8080`) for university demos. Public/VPS deployment, a domain
+and HTTPS are explicitly out of scope. See
+`docs/phases/phase-16.md` for full evidence and the deviation table.
+
 **Tasks**
 
-- [ ] Production images: backend (gunicorn/uvicorn workers, non-root), frontend (static build), pinned digests.
-- [ ] Reverse proxy + HTTPS, security headers (HSTS, CSP, X-Content-Type-Options, Referrer-Policy), compression, static caching.
-- [ ] Environment configuration per environment; staging mirrors production.
-- [ ] **Separate migration step** in the release pipeline (not at container start on every replica).
-- [ ] Backups: automated, off-host, retention policy; **restore drill executed and documented**.
-- [ ] Health: `/health/live`, `/health/ready`, `/health/deep` wired to the proxy/orchestrator.
-- [ ] Observability: JSON logs shipped, Prometheus `/metrics` (internal only), dashboards (latency, error rate, DB, queue, AI provider), alerts with thresholds, SLOs documented.
-- [ ] Smoke tests after deploy (health, login, one read endpoint, one grounded answer).
-- [ ] Rollback procedure documented and rehearsed (previous image + migration compatibility).
-- [ ] Seeded staging environment for demos and E2E (V-13).
-- [ ] Release documentation: runbook, environment variables, known limitations, phase checkpoint tag.
+- [x] Production images: backend (Gunicorn, non-root), frontend (static build). Base images are pinned by version tag, not digest (documented deviation).
+- [~] Reverse proxy + security headers (`X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`), gzip, static caching. **HTTPS/HSTS deferred** with the local-only scope; flags exist and are enforced by `DEPLOYMENT_MODE=release`.
+- [x] Environment configuration per environment; startup validation rejects insecure defaults.
+- [x] **Separate migration step** in the release pipeline (not at container start).
+- [~] Backups: timestamped, validated, retention-pruned, outside the container. Automated scheduling/off-host shipping is manual (documented).
+- [x] Health: `/health/live`, `/health/ready`, `/health/deep` wired to Docker health checks and verified under induced dependency failure.
+- [~] Observability: structured request/task/provider logs with request-id correlation; Docker health status. **Prometheus/metrics/dashboards/alerts deferred** (no metrics endpoint; single-laptop scope; decision documented).
+- [x] Smoke tests after deploy (health, logins, read endpoints, course selection, persistence restart, grounded answer): 31/31.
+- [x] Rollback procedure documented and rehearsed (previous image tag + migration-compatibility guidance).
+- [x] Seeded demo environment for demos and E2E (V-13): idempotent `seed_demo`, four accounts, demo history.
+- [x] Release documentation: `DEPLOYMENT.md` runbook, environment table, known limitations. No checkpoint commit/tag was created (not authorised).
 
 **Acceptance criteria**
 
-- [ ] Production environment starts from the documented steps alone.
-- [ ] HTTPS enabled, HTTP redirects, security headers present.
-- [ ] Database backup exists **and** a restore has been tested.
-- [ ] Health endpoints monitored with alerting; an induced failure produces an alert.
-- [ ] Smoke tests pass after deployment.
-- [ ] Rollback rehearsed successfully.
+- [x] Production environment starts from the documented steps alone (verified on a clean isolated project).
+- [ ] HTTPS enabled, HTTP redirects, security headers present. **HTTPS deferred**; security headers are present.
+- [x] Database backup exists **and** a restore has been tested (real restore drill into a temp DB).
+- [~] Health endpoints monitored with alerting; an induced failure produces an alert. Health endpoints and induced-failure behaviour verified; **external alerting deferred**.
+- [x] Smoke tests pass after deployment (31/31).
+- [x] Rollback rehearsed successfully.
 
-**Exit evidence:** deploy log, header check, restore-drill record, dashboard
-screenshot, alert test, smoke-test output, tagged release.
+**Exit evidence:** deploy log, restore-drill record, smoke-test output
+(`local/`), induced-failure results and browser verification in
+`docs/phases/phase-16.md`. Dashboard screenshot and alert test are not
+applicable to the deferred monitoring scope.
 
 ---
 

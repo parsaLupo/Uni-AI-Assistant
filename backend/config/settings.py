@@ -214,6 +214,15 @@ SPECTACULAR_SETTINGS = {
         "EnrollmentStatusEnum": "apps.students.models.EnrollmentStatus",
         "ExamStatusEnum": "apps.exams.models.ExamStatus",
         "AuditActionEnum": "apps.analytics.models.AuditAction",
+        # Both the account role and the conversation-message role expose a
+        # `role` field. Name them explicitly so the contract never falls back
+        # to a generated suffix such as `Role209Enum`.
+        "AccountRoleEnum": "apps.accounts.models.Role",
+        "MessageRoleEnum": [
+            ("USER", "User"),
+            ("ASSISTANT", "Assistant"),
+            ("SYSTEM", "System"),
+        ],
     },
 }
 
@@ -317,6 +326,15 @@ LOGGING = {
         },
     },
     "loggers": {
+        # Root logger: application modules (app.ai.*, app.ingestion,
+        # app.metrics, app.router, …) propagate here, so their INFO lines reach
+        # `docker compose logs` instead of being dropped by Python's
+        # last-resort handler (Phase 16 local observability). Request access
+        # lines stay on the dedicated `app.access` logger below.
+        "": {
+            "handlers": ["console"],
+            "level": LOG_LEVEL,
+        },
         "django": {
             "handlers": ["console"],
             "level": LOG_LEVEL,
@@ -349,6 +367,9 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TIMEZONE = "UTC"
+# Keep Django's LOGGING config in the worker so the app.* loggers (including
+# ingestion stage/failure lines) emit the same structured format as the API.
+CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 DOCUMENT_STORAGE_ROOT = env_str("DOCUMENT_STORAGE_ROOT", str(BASE_DIR / "media"))
 
 

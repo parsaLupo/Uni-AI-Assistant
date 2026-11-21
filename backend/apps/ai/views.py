@@ -6,14 +6,18 @@ import json
 import time
 
 from django.http import StreamingHttpResponse
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.ai.answer import AnswerService
 from apps.ai.providers import build_llm_provider_from_env
+from apps.ai.serializers import AskRequestSerializer, AskResponseSerializer
 from apps.analytics.services import record_ai_request
 from apps.common.errors import VALIDATION_ERROR, ApiError
+from apps.common.serializers import ErrorEnvelopeSerializer
 from apps.common.throttles import AiAskRateThrottle
 
 
@@ -21,6 +25,12 @@ def _service() -> AnswerService:
     return AnswerService(provider=build_llm_provider_from_env())
 
 
+@extend_schema(
+    tags=["ai"],
+    summary="Ask the assistant (JSON answer)",
+    request=AskRequestSerializer,
+    responses={200: AskResponseSerializer, 400: ErrorEnvelopeSerializer},
+)
 class AskView(APIView):
     permission_classes = [IsAuthenticated]
     # Abuse control (docs/07-security.md section 4, Phase 15): a per-user
@@ -54,6 +64,12 @@ class AskView(APIView):
         return Response(result)
 
 
+@extend_schema(
+    tags=["ai"],
+    summary="Ask the assistant (server-sent events stream)",
+    request=AskRequestSerializer,
+    responses={200: OpenApiTypes.STR},
+)
 class AskStreamView(APIView):
     permission_classes = [IsAuthenticated]
     throttle_classes = [AiAskRateThrottle]

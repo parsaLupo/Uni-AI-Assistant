@@ -2,12 +2,13 @@
 
 Fixes a deterministic environment before Django settings are imported:
 
-* By default ``DATABASE_URL`` is forced empty so the suite uses SQLite even if a
-  local ``backend/.env`` points at a Docker PostgreSQL that is not running.
-* Setting ``TEST_DATABASE_URL`` opts that run into a real PostgreSQL database.
-  CI and the Phase 02 verification use it so pgvector/PostgreSQL behaviour is
-  actually exercised (pipeline.md section 6, improvement I-01); a plain local
-  ``pytest`` stays dependency-free.
+* PostgreSQL + pgvector is the only supported database engine (ADR-002), so the
+  suite needs a real PostgreSQL server. Point ``TEST_DATABASE_URL`` at a
+  disposable database; ``scripts/test-backend.ps1`` starts one automatically.
+  There is deliberately no SQLite fallback: a green suite must exercise the
+  engine the release stack actually runs.
+* The Django test runner creates and drops ``test_<name>`` inside that server,
+  so the configured database itself is never written to.
 * ``DJANGO_SECRET_KEY`` is a throwaway value; no secret is ever committed.
 """
 
@@ -15,11 +16,20 @@ import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
-_postgres_url = os.environ.pop("TEST_DATABASE_URL", None)
-if _postgres_url:
-    os.environ["DATABASE_URL"] = _postgres_url
-else:
-    os.environ["DATABASE_URL"] = ""
+# pytest-django imports Django settings (and therefore config.environment)
+# before this file runs. config.environment promotes TEST_DATABASE_URL to
+# DATABASE_URL at that point, so the promoted value is what we check here.
+if not os.environ.get("DATABASE_URL"):
+    raise RuntimeError(
+        "Backend tests require PostgreSQL + pgvector (SQLite is not supported).\n"
+        "Start a disposable database and set TEST_DATABASE_URL, for example:\n"
+        "  docker run --rm -d --name usa-test-db -p 55432:5432 "
+        "-e POSTGRES_DB=usa_test -e POSTGRES_USER=usa_test "
+        "-e POSTGRES_PASSWORD=test_password pgvector/pgvector:0.8.6-pg16\n"
+        "  $env:TEST_DATABASE_URL='postgresql://usa_test:test_password@localhost:55432/usa_test'\n"
+        "  python -m pytest\n"
+        "Or simply run: scripts/test-backend.ps1"
+    )
 
 os.environ.setdefault("DJANGO_SECRET_KEY", "test-only-key-not-a-real-secret")
 os.environ.setdefault("ALLOWED_HOSTS", "testserver,localhost")

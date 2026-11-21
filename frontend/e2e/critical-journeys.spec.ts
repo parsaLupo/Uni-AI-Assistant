@@ -11,16 +11,36 @@
  */
 import { expect, test, type Page } from "@playwright/test";
 
-const STUDENT = { email: "student@semnan.local", password: "Demo-Passw0rd!" };
-const ADMIN = { email: "admin@semnan.local", password: "Demo-Passw0rd!" };
+// The demo password is local-only and injected by CI/local env; there is no
+// committed default (the old public literal was removed in Phase 16).
+const DEMO_PASSWORD = process.env.DEMO_PASSWORD ?? "";
+if (!DEMO_PASSWORD) {
+  throw new Error("DEMO_PASSWORD must be set to run the E2E critical journeys");
+}
+
+const STUDENT = {
+  email: "student@semnan.local",
+  password: DEMO_PASSWORD,
+  landing: "**/dashboard",
+};
+const ADMIN = {
+  email: "admin@semnan.local",
+  password: DEMO_PASSWORD,
+  landing: "**/admin",
+};
 
 /** Login through the real /login form. */
-async function login(page: Page, account: { email: string; password: string }) {
+async function login(
+  page: Page,
+  account: { email: string; password: string; landing: string }
+) {
   await page.goto("/login");
   await page.fill("#login-email", account.email);
   await page.fill("#login-password", account.password);
   await page.getByRole("button", { name: "ورود" }).click();
-  await page.waitForURL("**/dashboard");
+  // Admins are sent to the admin console after login (post-login redirect),
+  // students land on their dashboard.
+  await page.waitForURL(account.landing);
 }
 
 test.describe.serial("critical journeys (docs/08 §3)", () => {

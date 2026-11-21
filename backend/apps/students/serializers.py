@@ -136,6 +136,22 @@ class EnrollmentSerializer(ConflictModelSerializer):
         return attrs
 
 
+class CourseSelectionRequestSerializer(serializers.Serializer):
+    """Body accepted by ``POST /students/me/course-selection/``.
+
+    ``course_query`` is the preferred field (code or Persian name);
+    ``course_code`` remains accepted for older clients. The response is the
+    rules-engine decision dict, documented as a free-form object because its
+    reason codes are versioned by the engine contract.
+    """
+
+    course_query = serializers.CharField(required=False, allow_blank=True)
+    course_code = serializers.CharField(required=False, allow_blank=True)
+    extra_course_codes = serializers.ListField(
+        child=serializers.CharField(), required=False
+    )
+
+
 class PlannerItemSerializer(serializers.ModelSerializer):
     """One row of the student's own planner (Enrollment)."""
 

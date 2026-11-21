@@ -17,21 +17,40 @@ Evaluate one course for the authenticated student's *current-term* plan.
 
 ```json
 {
-  "course_code": "1916003",
+  "course_query": "1916003",
   "extra_course_codes": ["1916001", "1916002"]
 }
 ```
 
-- `course_code` (required) — course code; Persian/Arabic digits and Arabic
-  yeh/kaf variants are normalized on the backend.
+- `course_query` (required) — a course code **or** a Persian course name:
+  `"1916003"` and `"نظریه زبان ها و ماشین ها"` are both accepted. Persian/Arabic
+  digits, Arabic yeh/kaf variants (`ي`/`ی`, `ك`/`ک`), ZWNJ vs spaces, extra
+  spaces and minor punctuation are normalized before matching.
+- `course_code` — legacy alias kept for existing clients; used only when
+  `course_query` is absent or empty.
 - `extra_course_codes` (optional) — what-if list: credits of these courses are
   added to the term total (`what-if credit totals`). Every code must exist;
   an unknown code is a `400 VALIDATION_ERROR`, not a silently ignored extra.
 
-### Output
+Name matching is deterministic and conservative, in this priority order:
+
+1. exact course code;
+2. exact normalized course title;
+3. unambiguous normalized-title containment (the query must be at least four
+   normalized characters and must match exactly one catalog row);
+4. otherwise `ambiguous` (several rows) or `404` (no reliable match).
+
+There is no fuzzy/distance matching: a name is never "probably" a course, and
+the eligibility engine only ever receives the resolved catalog code.
+
+### Output — resolved course
+
+The response is the engine decision (unchanged reason codes and credit totals)
+with `"status": "resolved"`:
 
 ```json
 {
+  "status": "resolved",
   "course": { "code": "1916003", "title": "…", "credits": 3 },
   "eligible": false,
   "reasons": [
@@ -63,6 +82,31 @@ Evaluate one course for the authenticated student's *current-term* plan.
 }
 ```
 
+### Output — ambiguous name
+
+When several catalog rows match, no verdict is produced and the engine does not
+run. The client must show the candidates and submit the chosen course's code:
+
+```json
+{
+  "status": "ambiguous",
+  "query": "نظریه زبان ها و ماشین ها",
+  "total": 3,
+  "candidates": [
+    {
+      "code": "1916008",
+      "title": "نظریه زبان ها و ماشین ها",
+      "credits": 3,
+      "department": "گروه مهندسی کامپیوتر",
+      "course_type": "اصلی"
+    }
+  ]
+}
+```
+
+`candidates` is capped at 20 rows; `total` is the full match count (the client
+tells the student to type a more specific name when `total` is larger).
+
 ### Stable reason codes
 
 | Code | Meaning |
@@ -83,9 +127,10 @@ display-ready; `params` carries raw values for programmatic use.
 
 | Situation | Response |
 |---|---|
-| Missing/empty `course_code` | `400 VALIDATION_ERROR` |
+| Missing/empty `course_query` and `course_code` | `400 VALIDATION_ERROR` |
 | `extra_course_codes` not a string list, or unknown extra code | `400 VALIDATION_ERROR` |
-| Unknown course code | `404 NOT_FOUND` |
+| Unknown course code or name (no reliable match) | `404 NOT_FOUND` |
+| Several courses match the typed name | `200` with `"status": "ambiguous"` and `candidates` (no verdict) |
 | Non-student caller | `403 PERMISSION_DENIED` |
 | Unauthenticated | `401 AUTHENTICATION_REQUIRED` |
 

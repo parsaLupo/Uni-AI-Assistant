@@ -23,13 +23,22 @@ from apps.accounts.models import Role
 from apps.accounts.permissions import IsAdmin
 from apps.ai.selection_explanation import SelectionExplanationService
 from apps.analytics.audit import AuditableViewSetMixin
-from apps.common.errors import CONFLICT, PERMISSION_DENIED, VALIDATION_ERROR, ApiError
+from apps.common.errors import (
+    CONFLICT,
+    NOT_FOUND,
+    PERMISSION_DENIED,
+    VALIDATION_ERROR,
+    ApiError,
+)
 from apps.common.metrics import ListObservabilityMixin
 from apps.common.mixins import ConflictOnIntegrityMixin
+from apps.common.serializers import ErrorEnvelopeSerializer
 from apps.courses.models import Course, CourseOffering
+from apps.students.course_lookup import candidate_payload, resolve_course
 from apps.students.course_selection import CourseSelectionEngine
 from apps.students.models import Enrollment, EnrollmentStatus, StudentProfile
 from apps.students.serializers import (
+    CourseSelectionRequestSerializer,
     EnrollmentSerializer,
     PlannerItemSerializer,
     StudentProfileSerializer,
@@ -306,23 +315,41 @@ class AdminEnrollmentViewSet(
         super().perform_destroy(instance)
 
 
+@extend_schema(
+    tags=["students"],
+    summary="Course selection eligibility check",
+    request=CourseSelectionRequestSerializer,
+    responses={200: dict, 400: ErrorEnvelopeSerializer, 404: ErrorEnvelopeSerializer},
+)
 class CourseSelectionView(APIView):
     """POST /students/me/course-selection/ — Phase 11 eligibility check.
 
-    Pure rules engine (``apps.students.course_selection``): the decision and
-    every machine-readable rejection reason come from PostgreSQL records only.
+    The student types a course code *or* a Persian course name in
+    ``course_query``; ``apps.students.course_lookup`` resolves it against the
+    real catalog first (exact code, exact normalized title, unique containment,
+    otherwise an ambiguity list / not-found). Only then does the pure rules
+    engine (``apps.students.course_selection``) run on the *resolved* code, so
+    the decision and every machine-readable rejection reason come from
+    PostgreSQL records only and no rule is bypassed.
+
     The response embeds a deterministic composed explanation (AGENTS.md section
     8 — the LLM may explain, never decide; the assistant pipeline reuses
     ``SelectionExplanationService`` for its verdict-safe verbalisation).
     """
 
-    @extend_schema(responses=dict)  # engine decision dict (phase11-rules-v1)
     def post(self, request):
         _get_profile(request.user, create=True)
-        course_code = str(request.data.get("course_code") or "").strip()
-        if not course_code:
+        # `course_query` accepts a code or a Persian name; `course_code` stays
+        # supported so existing clients keep working unchanged.
+        raw_query = request.data.get("course_query")
+        if not str(raw_query or "").strip():
+            raw_query = request.data.get("course_code")
+        course_query = str(raw_query or "").strip()
+        if not course_query:
             raise ApiError(
-                VALIDATION_ERROR, "کد درس نمی‌تواند خالی باشد.", http_status=400
+                VALIDATION_ERROR,
+                "کد یا نام درس نمی‌تواند خالی باشد.",
+                http_status=400,
             )
         extra_codes = request.data.get("extra_course_codes") or []
         if not isinstance(extra_codes, list) or not all(
@@ -342,15 +369,39 @@ class CourseSelectionView(APIView):
                     f"درس فرضی با کد «{code}» یافت نشد.",
                     http_status=400,
                 )
-        course = Course.objects.filter(code__iexact=course_code).first()
-        if course is None:
-            # Keep the course code in the message but not as an internal trace.
-            raise NotFound("درسی با این کد در پایگاه داده یافت نشد.")
+        match = resolve_course(course_query)
+        if match.status == "not_found":
+            # A clear, actionable message; the query stays in `details` for the
+            # client but is never used as an internal trace.
+            raise ApiError(
+                NOT_FOUND,
+                "درسی با این کد یا نام در پایگاه داده یافت نشد؛ "
+                "کد درس یا نام دقیق آن را وارد کنید.",
+                http_status=404,
+                details={"query": course_query},
+            )
+        if match.status == "ambiguous":
+            # Several catalog rows are plausible. Return them instead of
+            # picking one: the engine must never run on an arbitrary course.
+            return Response(
+                {
+                    "status": "ambiguous",
+                    "query": course_query,
+                    "candidates": [
+                        candidate_payload(course) for course in match.candidates
+                    ],
+                    "total": match.total,
+                }
+            )
 
+        assert match.course is not None  # "resolved" always carries the row
+        course = match.course
+        # The engine receives the *resolved* real code; every eligibility rule
+        # and reason code is untouched by the lookup layer.
         decision = CourseSelectionEngine().evaluate(
-            request.user, course_code, extra_course_codes=[
-                str(code).strip() for code in extra_codes
-            ]
+            request.user,
+            course.code,
+            extra_course_codes=[str(code).strip() for code in extra_codes],
         )
         result = decision.to_dict()
         # Deterministic, always-available explanation; the engine verdict is
@@ -361,6 +412,7 @@ class CourseSelectionView(APIView):
             "source": explanation["source"],
             "engine_eligible": explanation["engine_eligible"],
         }
+        result["status"] = "resolved"
         return Response(result)
 
 

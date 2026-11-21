@@ -2,55 +2,96 @@
  * /selection — Phase 11 Course Selection Assistant UI.
  *
  * The page is a thin client over `POST /students/me/course-selection/`
- * (docs/api/course-selection.md): it sends the course code (plus optional
- * what-if extras), then renders the engine's verdict, the machine-readable
- * reasons, the what-if credit totals and the backend-provided Persian
- * explanation — no eligibility logic lives in React (AGENTS.md §3, §8).
+ * (docs/api/course-selection.md): it sends the typed course code *or* Persian
+ * course name (plus optional what-if extras), then renders the engine's
+ * verdict, the machine-readable reasons, the what-if credit totals and the
+ * backend-provided Persian explanation — no eligibility logic lives in React
+ * (AGENTS.md §3, §8).
+ *
+ * Name resolution is backend-only and deterministic. When a name matches more
+ * than one catalog row the API returns `status: "ambiguous"` with the candidate
+ * list; this page shows that list and never evaluates a candidate until the
+ * student explicitly picks one (then the chosen *course code* is submitted, so
+ * the very same `CourseSelectionEngine` runs).
  */
 
-import { useState, type FormEvent } from 'react'
-import { checkCourseSelection, type SelectionDecision } from '../../api/selection'
+import { useRef, useState, type FormEvent } from 'react'
+import { ApiError } from '../../api/client'
+import {
+  checkCourseSelection,
+  type AmbiguousSelection,
+  type CourseCandidate,
+  type SelectionDecision,
+  type SelectionResult,
+} from '../../api/selection'
 import {
   Chip,
   EmptyState,
   ErrorState,
+  LoadingState,
   PageHeader,
   btnPrimaryCls,
+  btnSecondaryCls,
   inputCls,
   cardCls,
 } from '../../components/ui'
 import { toPersianDigits } from '../../i18n/digits'
 import { selectionPage } from '../../i18n/fa'
 
-export function CourseSelectionPage() {
-  const [courseCode, setCourseCode] = useState('')
-  const [extrasInput, setExtrasInput] = useState('')
-  const [decision, setDecision] = useState<SelectionDecision | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<unknown>(null)
+/** Split what-if codes on Arabic/Latin commas and newlines; drop empties. */
+function parseExtras(input: string): string[] {
+  return input
+    .split(/[,؛،\n]/)
+    .map((token) => token.trim())
+    .filter(Boolean)
+}
 
-  const run = async () => {
-    const code = courseCode.trim()
-    if (!code || loading) return
-    // Split on Arabic/Latin commas and newlines; empty tokens are dropped.
-    const extras = extrasInput
-      .split(/[,؛،\n]/)
-      .map((token) => token.trim())
-      .filter(Boolean)
+export function CourseSelectionPage() {
+  const [courseQuery, setCourseQuery] = useState('')
+  const [extrasInput, setExtrasInput] = useState('')
+  const [result, setResult] = useState<SelectionResult | null>(null)
+  const [loading, setLoading] = useState(false)
+  /** Candidate whose own evaluation is in flight (spinner on that row only). */
+  const [pendingCode, setPendingCode] = useState<string | null>(null)
+  const [error, setError] = useState<unknown>(null)
+  // A ref, not just `loading`: two clicks in the same tick both see the stale
+  // `loading === false` of the current render, so the synchronous guard is what
+  // actually prevents the second request.
+  const inFlight = useRef(false)
+
+  const notFound = error instanceof ApiError && error.code === 'NOT_FOUND'
+
+  /**
+   * Resolve + evaluate one query. `candidateCode` is set only when the student
+   * clicked a row in the ambiguity list; the ambiguity list stays visible until
+   * the engine answers so the page never flashes back to the empty state.
+   */
+  const run = async (query: string, candidateCode?: string) => {
+    const trimmed = query.trim()
+    // Guard both the form and rapid double clicks: one request at a time.
+    if (!trimmed || inFlight.current) return
+    inFlight.current = true
     setLoading(true)
+    setPendingCode(candidateCode ?? null)
     setError(null)
+    if (!candidateCode) {
+      setResult(null)
+    }
     try {
-      setDecision(await checkCourseSelection(code, extras))
+      setResult(await checkCourseSelection(trimmed, parseExtras(extrasInput)))
     } catch (err) {
+      setResult(null)
       setError(err)
     } finally {
+      inFlight.current = false
       setLoading(false)
+      setPendingCode(null)
     }
   }
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
-    void run()
+    void run(courseQuery)
   }
 
   return (
@@ -59,17 +100,18 @@ export function CourseSelectionPage() {
 
       <form onSubmit={submit} className={`${cardCls} flex flex-col gap-space-md p-space-lg`}>
         <div className="flex flex-col gap-2">
-          <label htmlFor="selection-course-code" className="text-label-lg font-bold text-on-surface">
-            {selectionPage.courseCodeLabel}
+          <label htmlFor="selection-course-query" className="text-label-lg font-bold text-on-surface">
+            {selectionPage.courseQueryLabel}
           </label>
           <input
-            id="selection-course-code"
-            value={courseCode}
-            onChange={(event) => setCourseCode(event.target.value)}
-            placeholder={selectionPage.courseCodePlaceholder}
+            id="selection-course-query"
+            value={courseQuery}
+            onChange={(event) => setCourseQuery(event.target.value)}
+            placeholder={selectionPage.courseQueryPlaceholder}
             autoComplete="off"
             className={`${inputCls} w-full max-w-sm`}
           />
+          <p className="m-0 text-label-sm text-outline">{selectionPage.courseQueryHint}</p>
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="selection-extras" className="text-label-lg font-bold text-on-surface">
@@ -86,20 +128,126 @@ export function CourseSelectionPage() {
           <p className="m-0 text-label-sm text-outline">{selectionPage.extrasHint}</p>
         </div>
         <div>
-          <button type="submit" disabled={loading || !courseCode.trim()} className={btnPrimaryCls}>
-            {loading ? selectionPage.checking : selectionPage.check}
+          <button
+            type="submit"
+            disabled={loading || !courseQuery.trim()}
+            className={btnPrimaryCls}
+          >
+            {loading && pendingCode === null ? selectionPage.checking : selectionPage.check}
           </button>
         </div>
       </form>
 
-      {error ? <ErrorState error={error} onRetry={() => void run()} /> : null}
-
-      {!error && !decision && !loading ? (
-        <EmptyState message={selectionPage.emptyHint} />
+      {notFound ? (
+        <EmptyState
+          message={selectionPage.notFoundTitle}
+          hint={selectionPage.notFoundMessage}
+        />
       ) : null}
 
-      {decision ? <DecisionCard decision={decision} /> : null}
+      {error && !notFound ? <ErrorState error={error} onRetry={() => void run(courseQuery)} /> : null}
+
+      {!error && !result && !loading ? <EmptyState message={selectionPage.emptyHint} /> : null}
+
+      {loading && pendingCode === null && !result ? (
+        <LoadingState label={selectionPage.checking} />
+      ) : null}
+
+      {result?.status === 'ambiguous' ? (
+        <AmbiguityCard
+          result={result}
+          loading={loading}
+          pendingCode={pendingCode}
+          onSelect={(code) => void run(code, code)}
+        />
+      ) : null}
+
+      {result?.status === 'resolved' ? <DecisionCard decision={result} /> : null}
     </div>
+  )
+}
+
+function AmbiguityCard({
+  result,
+  loading,
+  pendingCode,
+  onSelect,
+}: {
+  result: AmbiguousSelection
+  loading: boolean
+  pendingCode: string | null
+  onSelect: (code: string) => void
+}) {
+  return (
+    <section
+      aria-label={selectionPage.ambiguousAria}
+      className={`${cardCls} flex flex-col gap-space-md p-space-lg`}
+    >
+      <div className="flex flex-col gap-1">
+        <h2 className="m-0 text-title-md font-bold text-on-surface">{selectionPage.ambiguousTitle}</h2>
+        <p className="m-0 text-body-sm text-on-surface-variant">{selectionPage.ambiguousHint}</p>
+        {result.total > result.candidates.length ? (
+          <p className="m-0 text-label-sm text-outline">{selectionPage.ambiguousMore}</p>
+        ) : null}
+      </div>
+
+      <ul className="m-0 flex list-none flex-col gap-space-sm p-0">
+        {result.candidates.map((candidate) => (
+          <li key={candidate.code}>
+            <CandidateButton
+              candidate={candidate}
+              busy={pendingCode === candidate.code}
+              disabled={loading}
+              onSelect={onSelect}
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function CandidateButton({
+  candidate,
+  busy,
+  disabled,
+  onSelect,
+}: {
+  candidate: CourseCandidate
+  busy: boolean
+  disabled: boolean
+  onSelect: (code: string) => void
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={() => onSelect(candidate.code)}
+      className={`${btnSecondaryCls} w-full flex-col items-stretch gap-1 text-start disabled:opacity-60`}
+    >
+      <span className="flex flex-wrap items-center justify-between gap-space-sm">
+        <span className="font-bold">{candidate.title}</span>
+        <Chip tone="primary">{candidate.code}</Chip>
+      </span>
+      <span className="flex flex-wrap items-center justify-between gap-space-sm text-label-sm font-normal text-on-surface-variant">
+        <span className="flex flex-wrap items-center gap-space-sm">
+          {candidate.department ? <span>{candidate.department}</span> : null}
+          <span>
+            {toPersianDigits(candidate.credits)} {selectionPage.creditUnit}
+          </span>
+          {candidate.course_type ? <span>{candidate.course_type}</span> : null}
+        </span>
+        <span className="inline-flex items-center gap-1 text-primary">
+          {busy ? (
+            <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-primary/40 border-t-primary motion-reduce:animate-none" />
+          ) : null}
+          {selectionPage.selectCandidate}
+          <span aria-hidden="true" className="material-symbols-outlined text-[18px]">
+            chevron_left
+          </span>
+        </span>
+      </span>
+    </button>
   )
 }
 

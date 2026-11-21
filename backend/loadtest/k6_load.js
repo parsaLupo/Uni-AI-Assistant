@@ -1,7 +1,7 @@
 // Phase 14 load test for k6 (docs/08 §6). Equivalent to load_probe.py.
 //
 //   k6 run backend/loadtest/k6_load.js -e BASE=http://localhost:8000 \
-//       -e EMAIL=student@semnan.local -e PASSWORD='Demo-Passw0rd!'
+//       -e EMAIL=student@semnan.local -e PASSWORD="$DEMO_PASSWORD"
 //
 // Budgets mirror load_probe.py: non-AI reads p95 ≤ 500 ms, AI ask p95 ≤ 2 s
 // on the seeded development stack.
@@ -12,7 +12,9 @@ import { Trend } from "k6/metrics";
 
 const BASE = __ENV.BASE || "http://localhost:8000";
 const EMAIL = __ENV.EMAIL || "student@semnan.local";
-const PASSWORD = __ENV.PASSWORD || "Demo-Passw0rd!";
+// No built-in password: the public demo literal was removed. Pass the local
+// DEMO_PASSWORD from .env explicitly.
+const PASSWORD = __ENV.PASSWORD;
 
 const coursesLatency = new Trend("courses_latency_ms");
 const offeringsLatency = new Trend("offerings_latency_ms");
@@ -30,6 +32,9 @@ export const options = {
 };
 
 export function setup() {
+  if (!PASSWORD) {
+    throw new Error("PASSWORD is required: pass -e PASSWORD=\"$DEMO_PASSWORD\"");
+  }
   const login = http.post(
     `${BASE}/api/v1/auth/login/`,
     JSON.stringify({ email: EMAIL, password: PASSWORD }),

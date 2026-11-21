@@ -16,21 +16,39 @@ on:
 jobs:
   # Phase 15: fail the build if anything that looks like a live credential is
   # committed (AGENTS.md section 9, docs/07-security.md section 7). Patterns
-  # cover Groq keys, OpenAI-style keys, AWS access keys and private key blocks.
+  # cover Groq keys, OpenAI-style keys, AWS access keys, private key blocks,
+  # generic API/secret-key assignments and the removed public demo password.
   secret-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history so the same patterns can be checked across commits.
+          fetch-depth: 0
       - name: Scan tracked files for credential patterns
         run: |
           set -e
-          matches=$(git grep -nIE 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----' -- . || true)
+          matches=$(git grep -nIE -i 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|demo[-_ ]passw0rd|(api[_-]?key|secret[_-]?key|access[_-]?token|auth[_-]?token)[[:space:]]*[:=][[:space:]]*["'"'"'][^"'"'"']{8,}["'"'"']' -- . || true)
+          # The development fallback key is documented and non-secret.
+          matches=$(printf '%s\n' "$matches" | grep -v 'dev-only-insecure-key-do-not-use-in-production' || true)
           if [ -n "$matches" ]; then
             echo "$matches"
             echo "::error::Credential-looking string committed — rotate the key and remove it from history."
             exit 1
           fi
           echo "secret-scan clean"
+      - name: Scan Git history for live credential patterns
+        run: |
+          set -e
+          # The removed public demo password is deliberately excluded: it is a
+          # known, already-rotated value retained in checkpoint refs (M1).
+          history=$(git log --all -i -G 'gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|secret[_-]?key|access[_-]?token|auth[_-]?token)[[:space:]]*[:=][[:space:]]*["'"'"'][^"'"'"']{8,}["'"'"']' --pretty=format:'%h %s' -- . || true)
+          if [ -n "$history" ]; then
+            echo "$history"
+            echo "::error::Credential-looking string found in Git history — rotate the key; do not rewrite history automatically."
+            exit 1
+          fi
+          echo "history secret-scan clean"
 
   backend:
     runs-on: ubuntu-latest
@@ -78,7 +96,10 @@ jobs:
           git diff --exit-code -- ../openapi.yaml
       - name: Validate docker compose file
         working-directory: ${{ github.workspace }}
-        run: docker compose config --quiet
+        # No .env exists on a clean runner. Validate against the committed
+        # template so the required-variable check still exercises the real
+        # compose file without needing (or inventing) a live .env.
+        run: docker compose --env-file .env.example config --quiet
 
   frontend:
     runs-on: ubuntu-latest
@@ -124,6 +145,9 @@ jobs:
       DATABASE_URL: postgresql://usa_user:ci_password@localhost:5432/usa_db
       AI_PROVIDER: mock
       CELERY_TASK_ALWAYS_EAGER: "true"
+      # CI-only demo credential for the seeded identities. It is not a real
+      # secret and never matches the removed public demo literal.
+      DEMO_PASSWORD: ci-e2e-secret-16
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

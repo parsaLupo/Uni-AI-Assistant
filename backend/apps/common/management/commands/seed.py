@@ -6,12 +6,16 @@ can never be seeded with demo identities (improvements.md I-13).
 
 from __future__ import annotations
 
+import os
+import re
 from pathlib import Path
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from apps.common.seed_data import Seeder
+
+DEMO_PASSWORD_PATTERN = re.compile(r"demo[-_ ]?passw(?:or|0r)?d", re.IGNORECASE)
 
 
 class Command(BaseCommand):
@@ -46,10 +50,31 @@ class Command(BaseCommand):
         if not data_dir.is_dir():
             raise CommandError(f"data directory not found: {data_dir}")
 
+        demo_password = os.environ.get("DEMO_PASSWORD", "").strip()
+        with_demo_accounts = not options["no_demo_accounts"]
+        if with_demo_accounts and not demo_password:
+            self.stdout.write(
+                self.style.WARNING(
+                    "DEMO_PASSWORD is not set; skipping demo accounts. "
+                    "Set DEMO_PASSWORD to create them."
+                )
+            )
+            with_demo_accounts = False
+        elif with_demo_accounts and (
+            len(demo_password) < 10 or DEMO_PASSWORD_PATTERN.search(demo_password)
+        ):
+            raise CommandError(
+                "DEMO_PASSWORD must be a unique value of at least 10 characters "
+                "and must not reuse the old public demo password."
+            )
+
         seeder = Seeder(data_dir, self.stdout)
         try:
-            counts = seeder.run(with_demo_accounts=not options["no_demo_accounts"])
-        except FileNotFoundError as exc:
+            counts = seeder.run(
+                with_demo_accounts=with_demo_accounts,
+                demo_password=demo_password or None,
+            )
+        except (FileNotFoundError, ValueError) as exc:
             raise CommandError(str(exc)) from exc
 
         if counts:

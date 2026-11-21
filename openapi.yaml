@@ -8,7 +8,7 @@ info:
 paths:
   /api/v1/admin/analytics/audit-log/:
     get:
-      operationId: admin_analytics_audit_log_list
+      operationId: api_v1_admin_analytics_audit_log_list
       description: Read-only audit-log viewer over the append-only source (no writes).
       summary: مشاهده‌گر گزارش حسابرسی (فقط خواندنی)
       parameters:
@@ -50,7 +50,7 @@ paths:
           description: ''
   /api/v1/admin/analytics/dashboard/:
     get:
-      operationId: admin_analytics_dashboard_retrieve
+      operationId: api_v1_admin_analytics_dashboard_retrieve
       summary: داشبورد تحلیلی مدیر (فقط داده تجمعی)
       tags:
       - admin
@@ -62,7 +62,7 @@ paths:
           description: No response body
   /api/v1/admin/announcements/:
     get:
-      operationId: admin_announcements_list
+      operationId: api_v1_admin_announcements_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -78,7 +78,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -90,10 +90,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedAnnouncementList'
           description: ''
     post:
-      operationId: admin_announcements_create
+      operationId: api_v1_admin_announcements_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -118,7 +118,7 @@ paths:
           description: ''
   /api/v1/admin/announcements/{id}/:
     get:
-      operationId: admin_announcements_retrieve
+      operationId: api_v1_admin_announcements_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -128,7 +128,7 @@ paths:
         description: یک مقداد عدد یکتا که این announcement را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -140,7 +140,7 @@ paths:
                 $ref: '#/components/schemas/Announcement'
           description: ''
     put:
-      operationId: admin_announcements_update
+      operationId: api_v1_admin_announcements_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -150,7 +150,7 @@ paths:
         description: یک مقداد عدد یکتا که این announcement را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -174,7 +174,7 @@ paths:
                 $ref: '#/components/schemas/Announcement'
           description: ''
     patch:
-      operationId: admin_announcements_partial_update
+      operationId: api_v1_admin_announcements_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -184,7 +184,7 @@ paths:
         description: یک مقداد عدد یکتا که این announcement را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -207,7 +207,7 @@ paths:
                 $ref: '#/components/schemas/Announcement'
           description: ''
     delete:
-      operationId: admin_announcements_destroy
+      operationId: api_v1_admin_announcements_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -217,7 +217,7 @@ paths:
         description: یک مقداد عدد یکتا که این announcement را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -226,7 +226,7 @@ paths:
           description: No response body
   /api/v1/admin/calendar/events/:
     get:
-      operationId: admin_calendar_events_list
+      operationId: api_v1_admin_calendar_events_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -242,7 +242,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -254,10 +254,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedAcademicEventList'
           description: ''
     post:
-      operationId: admin_calendar_events_create
+      operationId: api_v1_admin_calendar_events_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -282,7 +282,7 @@ paths:
           description: ''
   /api/v1/admin/calendar/events/{id}/:
     get:
-      operationId: admin_calendar_events_retrieve
+      operationId: api_v1_admin_calendar_events_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -292,7 +292,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic event را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -304,7 +304,7 @@ paths:
                 $ref: '#/components/schemas/AcademicEvent'
           description: ''
     put:
-      operationId: admin_calendar_events_update
+      operationId: api_v1_admin_calendar_events_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -314,7 +314,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic event را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -338,7 +338,7 @@ paths:
                 $ref: '#/components/schemas/AcademicEvent'
           description: ''
     patch:
-      operationId: admin_calendar_events_partial_update
+      operationId: api_v1_admin_calendar_events_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -348,7 +348,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic event را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -371,7 +371,7 @@ paths:
                 $ref: '#/components/schemas/AcademicEvent'
           description: ''
     delete:
-      operationId: admin_calendar_events_destroy
+      operationId: api_v1_admin_calendar_events_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -381,7 +381,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic event را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -390,7 +390,7 @@ paths:
           description: No response body
   /api/v1/admin/courses/:
     get:
-      operationId: admin_courses_list
+      operationId: api_v1_admin_courses_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -406,7 +406,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -418,10 +418,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedCourseList'
           description: ''
     post:
-      operationId: admin_courses_create
+      operationId: api_v1_admin_courses_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -446,7 +446,7 @@ paths:
           description: ''
   /api/v1/admin/courses/{course_id}/prerequisites/:
     get:
-      operationId: admin_courses_prerequisites_list
+      operationId: api_v1_admin_courses_prerequisites_list
       description: GET/POST /admin/courses/{id}/prerequisites/ — read/add edges of
         a course.
       parameters:
@@ -456,7 +456,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -470,7 +470,7 @@ paths:
                   $ref: '#/components/schemas/CoursePrerequisite'
           description: ''
     post:
-      operationId: admin_courses_prerequisites_create
+      operationId: api_v1_admin_courses_prerequisites_create
       description: GET/POST /admin/courses/{id}/prerequisites/ — read/add edges of
         a course.
       parameters:
@@ -480,7 +480,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -505,7 +505,7 @@ paths:
           description: ''
   /api/v1/admin/courses/{id}/:
     get:
-      operationId: admin_courses_retrieve
+      operationId: api_v1_admin_courses_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -515,7 +515,7 @@ paths:
         description: یک مقداد عدد یکتا که این course را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -527,7 +527,7 @@ paths:
                 $ref: '#/components/schemas/Course'
           description: ''
     put:
-      operationId: admin_courses_update
+      operationId: api_v1_admin_courses_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -537,7 +537,7 @@ paths:
         description: یک مقداد عدد یکتا که این course را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -561,7 +561,7 @@ paths:
                 $ref: '#/components/schemas/Course'
           description: ''
     patch:
-      operationId: admin_courses_partial_update
+      operationId: api_v1_admin_courses_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -571,7 +571,7 @@ paths:
         description: یک مقداد عدد یکتا که این course را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -594,7 +594,7 @@ paths:
                 $ref: '#/components/schemas/Course'
           description: ''
     delete:
-      operationId: admin_courses_destroy
+      operationId: api_v1_admin_courses_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -604,7 +604,7 @@ paths:
         description: یک مقداد عدد یکتا که این course را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -613,7 +613,7 @@ paths:
           description: No response body
   /api/v1/admin/departments/:
     get:
-      operationId: admin_departments_list
+      operationId: api_v1_admin_departments_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -629,7 +629,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -641,10 +641,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedDepartmentList'
           description: ''
     post:
-      operationId: admin_departments_create
+      operationId: api_v1_admin_departments_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -669,7 +669,7 @@ paths:
           description: ''
   /api/v1/admin/departments/{id}/:
     get:
-      operationId: admin_departments_retrieve
+      operationId: api_v1_admin_departments_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -679,7 +679,7 @@ paths:
         description: یک مقداد عدد یکتا که این department را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -691,7 +691,7 @@ paths:
                 $ref: '#/components/schemas/Department'
           description: ''
     put:
-      operationId: admin_departments_update
+      operationId: api_v1_admin_departments_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -701,7 +701,7 @@ paths:
         description: یک مقداد عدد یکتا که این department را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -725,7 +725,7 @@ paths:
                 $ref: '#/components/schemas/Department'
           description: ''
     patch:
-      operationId: admin_departments_partial_update
+      operationId: api_v1_admin_departments_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -735,7 +735,7 @@ paths:
         description: یک مقداد عدد یکتا که این department را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -758,7 +758,7 @@ paths:
                 $ref: '#/components/schemas/Department'
           description: ''
     delete:
-      operationId: admin_departments_destroy
+      operationId: api_v1_admin_departments_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -768,7 +768,7 @@ paths:
         description: یک مقداد عدد یکتا که این department را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -777,7 +777,7 @@ paths:
           description: No response body
   /api/v1/admin/documents/:
     get:
-      operationId: admin_documents_list
+      operationId: api_v1_admin_documents_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -793,7 +793,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -805,10 +805,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedDocumentList'
           description: ''
     post:
-      operationId: admin_documents_create
+      operationId: api_v1_admin_documents_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -833,7 +833,7 @@ paths:
           description: ''
   /api/v1/admin/documents/{id}/:
     get:
-      operationId: admin_documents_retrieve
+      operationId: api_v1_admin_documents_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -843,7 +843,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -855,7 +855,7 @@ paths:
                 $ref: '#/components/schemas/Document'
           description: ''
     put:
-      operationId: admin_documents_update
+      operationId: api_v1_admin_documents_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -865,7 +865,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -889,7 +889,7 @@ paths:
                 $ref: '#/components/schemas/Document'
           description: ''
     patch:
-      operationId: admin_documents_partial_update
+      operationId: api_v1_admin_documents_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -899,7 +899,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -922,7 +922,7 @@ paths:
                 $ref: '#/components/schemas/Document'
           description: ''
     delete:
-      operationId: admin_documents_destroy
+      operationId: api_v1_admin_documents_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -932,7 +932,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -941,7 +941,7 @@ paths:
           description: No response body
   /api/v1/admin/documents/{id}/activate/:
     post:
-      operationId: admin_documents_activate_create
+      operationId: api_v1_admin_documents_activate_create
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -951,7 +951,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -976,7 +976,7 @@ paths:
           description: ''
   /api/v1/admin/documents/{id}/retry/:
     post:
-      operationId: admin_documents_retry_create
+      operationId: api_v1_admin_documents_retry_create
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -986,7 +986,7 @@ paths:
         description: یک مقداد عدد یکتا که این document را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1011,7 +1011,7 @@ paths:
           description: ''
   /api/v1/admin/enrollments/:
     get:
-      operationId: admin_enrollments_list
+      operationId: api_v1_admin_enrollments_list
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
@@ -1031,7 +1031,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1043,14 +1043,14 @@ paths:
                 $ref: '#/components/schemas/PaginatedEnrollmentList'
           description: ''
     post:
-      operationId: admin_enrollments_create
+      operationId: api_v1_admin_enrollments_create
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
         Grade corrections on past terms stay allowed (audited carve-out, D4);
         deleting a historical row is not — use a terminal status instead.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1075,7 +1075,7 @@ paths:
           description: ''
   /api/v1/admin/enrollments/{id}/:
     get:
-      operationId: admin_enrollments_retrieve
+      operationId: api_v1_admin_enrollments_retrieve
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
@@ -1089,7 +1089,7 @@ paths:
         description: یک مقداد عدد یکتا که این enrollment را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1101,7 +1101,7 @@ paths:
                 $ref: '#/components/schemas/Enrollment'
           description: ''
     put:
-      operationId: admin_enrollments_update
+      operationId: api_v1_admin_enrollments_update
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
@@ -1115,7 +1115,7 @@ paths:
         description: یک مقداد عدد یکتا که این enrollment را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1139,7 +1139,7 @@ paths:
                 $ref: '#/components/schemas/Enrollment'
           description: ''
     patch:
-      operationId: admin_enrollments_partial_update
+      operationId: api_v1_admin_enrollments_partial_update
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
@@ -1153,7 +1153,7 @@ paths:
         description: یک مقداد عدد یکتا که این enrollment را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1176,7 +1176,7 @@ paths:
                 $ref: '#/components/schemas/Enrollment'
           description: ''
     delete:
-      operationId: admin_enrollments_destroy
+      operationId: api_v1_admin_enrollments_destroy
       description: |-
         Manage enrollments/grades (`?student=`, `?term=`, `?status=`).
 
@@ -1190,7 +1190,7 @@ paths:
         description: یک مقداد عدد یکتا که این enrollment را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1199,7 +1199,7 @@ paths:
           description: No response body
   /api/v1/admin/faculties/:
     get:
-      operationId: admin_faculties_list
+      operationId: api_v1_admin_faculties_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -1215,7 +1215,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1227,10 +1227,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedFacultyList'
           description: ''
     post:
-      operationId: admin_faculties_create
+      operationId: api_v1_admin_faculties_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1255,7 +1255,7 @@ paths:
           description: ''
   /api/v1/admin/faculties/{id}/:
     get:
-      operationId: admin_faculties_retrieve
+      operationId: api_v1_admin_faculties_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1265,7 +1265,7 @@ paths:
         description: یک مقداد عدد یکتا که این faculty را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1277,7 +1277,7 @@ paths:
                 $ref: '#/components/schemas/Faculty'
           description: ''
     put:
-      operationId: admin_faculties_update
+      operationId: api_v1_admin_faculties_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1287,7 +1287,7 @@ paths:
         description: یک مقداد عدد یکتا که این faculty را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1311,7 +1311,7 @@ paths:
                 $ref: '#/components/schemas/Faculty'
           description: ''
     patch:
-      operationId: admin_faculties_partial_update
+      operationId: api_v1_admin_faculties_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1321,7 +1321,7 @@ paths:
         description: یک مقداد عدد یکتا که این faculty را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1344,7 +1344,7 @@ paths:
                 $ref: '#/components/schemas/Faculty'
           description: ''
     delete:
-      operationId: admin_faculties_destroy
+      operationId: api_v1_admin_faculties_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1354,7 +1354,7 @@ paths:
         description: یک مقداد عدد یکتا که این faculty را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1363,7 +1363,7 @@ paths:
           description: No response body
   /api/v1/admin/offerings/:
     get:
-      operationId: admin_offerings_list
+      operationId: api_v1_admin_offerings_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -1379,7 +1379,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1391,10 +1391,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedCourseOfferingList'
           description: ''
     post:
-      operationId: admin_offerings_create
+      operationId: api_v1_admin_offerings_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1419,7 +1419,7 @@ paths:
           description: ''
   /api/v1/admin/offerings/{offering_id}/exam/:
     get:
-      operationId: admin_offerings_exam_retrieve
+      operationId: api_v1_admin_offerings_exam_retrieve
       description: GET/PUT/PATCH /admin/offerings/{id}/exam/ — set the exam of an
         offering.
       parameters:
@@ -1429,7 +1429,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1441,7 +1441,7 @@ paths:
                 $ref: '#/components/schemas/Exam'
           description: ''
     put:
-      operationId: admin_offerings_exam_update
+      operationId: api_v1_admin_offerings_exam_update
       description: GET/PUT/PATCH /admin/offerings/{id}/exam/ — set the exam of an
         offering.
       parameters:
@@ -1451,7 +1451,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1475,7 +1475,7 @@ paths:
                 $ref: '#/components/schemas/Exam'
           description: ''
     patch:
-      operationId: admin_offerings_exam_partial_update
+      operationId: api_v1_admin_offerings_exam_partial_update
       description: GET/PUT/PATCH /admin/offerings/{id}/exam/ — set the exam of an
         offering.
       parameters:
@@ -1485,7 +1485,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1509,7 +1509,7 @@ paths:
           description: ''
   /api/v1/admin/offerings/{offering_id}/schedules/:
     get:
-      operationId: admin_offerings_schedules_list
+      operationId: api_v1_admin_offerings_schedules_list
       description: GET/POST /admin/offerings/{id}/schedules/ — weekly meeting rows.
       parameters:
       - in: path
@@ -1518,7 +1518,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1532,7 +1532,7 @@ paths:
                   $ref: '#/components/schemas/ClassSchedule'
           description: ''
     post:
-      operationId: admin_offerings_schedules_create
+      operationId: api_v1_admin_offerings_schedules_create
       description: GET/POST /admin/offerings/{id}/schedules/ — weekly meeting rows.
       parameters:
       - in: path
@@ -1541,7 +1541,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1566,7 +1566,7 @@ paths:
           description: ''
   /api/v1/admin/offerings/{id}/:
     get:
-      operationId: admin_offerings_retrieve
+      operationId: api_v1_admin_offerings_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1576,7 +1576,7 @@ paths:
         description: یک مقداد عدد یکتا که این course offering را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1588,7 +1588,7 @@ paths:
                 $ref: '#/components/schemas/CourseOfferingDetail'
           description: ''
     put:
-      operationId: admin_offerings_update
+      operationId: api_v1_admin_offerings_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1598,7 +1598,7 @@ paths:
         description: یک مقداد عدد یکتا که این course offering را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1622,7 +1622,7 @@ paths:
                 $ref: '#/components/schemas/CourseOffering'
           description: ''
     patch:
-      operationId: admin_offerings_partial_update
+      operationId: api_v1_admin_offerings_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1632,7 +1632,7 @@ paths:
         description: یک مقداد عدد یکتا که این course offering را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1655,7 +1655,7 @@ paths:
                 $ref: '#/components/schemas/CourseOffering'
           description: ''
     delete:
-      operationId: admin_offerings_destroy
+      operationId: api_v1_admin_offerings_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1665,7 +1665,7 @@ paths:
         description: یک مقداد عدد یکتا که این course offering را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1674,7 +1674,7 @@ paths:
           description: No response body
   /api/v1/admin/prerequisites/{id}/:
     delete:
-      operationId: admin_prerequisites_destroy
+      operationId: api_v1_admin_prerequisites_destroy
       description: DELETE /admin/prerequisites/{id}/ — remove one edge.
       parameters:
       - in: path
@@ -1683,7 +1683,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1692,7 +1692,7 @@ paths:
           description: No response body
   /api/v1/admin/professors/:
     get:
-      operationId: admin_professors_list
+      operationId: api_v1_admin_professors_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -1708,7 +1708,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1720,10 +1720,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedProfessorList'
           description: ''
     post:
-      operationId: admin_professors_create
+      operationId: api_v1_admin_professors_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1748,7 +1748,7 @@ paths:
           description: ''
   /api/v1/admin/professors/{id}/:
     get:
-      operationId: admin_professors_retrieve
+      operationId: api_v1_admin_professors_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1758,7 +1758,7 @@ paths:
         description: یک مقداد عدد یکتا که این professor را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1770,7 +1770,7 @@ paths:
                 $ref: '#/components/schemas/Professor'
           description: ''
     put:
-      operationId: admin_professors_update
+      operationId: api_v1_admin_professors_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1780,7 +1780,7 @@ paths:
         description: یک مقداد عدد یکتا که این professor را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1804,7 +1804,7 @@ paths:
                 $ref: '#/components/schemas/Professor'
           description: ''
     patch:
-      operationId: admin_professors_partial_update
+      operationId: api_v1_admin_professors_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1814,7 +1814,7 @@ paths:
         description: یک مقداد عدد یکتا که این professor را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1837,7 +1837,7 @@ paths:
                 $ref: '#/components/schemas/Professor'
           description: ''
     delete:
-      operationId: admin_professors_destroy
+      operationId: api_v1_admin_professors_destroy
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -1847,7 +1847,7 @@ paths:
         description: یک مقداد عدد یکتا که این professor را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1856,7 +1856,7 @@ paths:
           description: No response body
   /api/v1/admin/schedules/{id}/:
     patch:
-      operationId: admin_schedules_partial_update
+      operationId: api_v1_admin_schedules_partial_update
       description: PATCH/DELETE /admin/schedules/{id}/ — edit or remove one row.
       parameters:
       - in: path
@@ -1865,7 +1865,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1888,7 +1888,7 @@ paths:
                 $ref: '#/components/schemas/ClassSchedule'
           description: ''
     delete:
-      operationId: admin_schedules_destroy
+      operationId: api_v1_admin_schedules_destroy
       description: PATCH/DELETE /admin/schedules/{id}/ — edit or remove one row.
       parameters:
       - in: path
@@ -1897,7 +1897,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1906,7 +1906,7 @@ paths:
           description: No response body
   /api/v1/admin/students/:
     get:
-      operationId: admin_students_list
+      operationId: api_v1_admin_students_list
       description: GET/PATCH /admin/students/ — profiles are created by onboarding/seed.
       parameters:
       - name: page
@@ -1922,7 +1922,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1935,7 +1935,7 @@ paths:
           description: ''
   /api/v1/admin/students/{id}/:
     get:
-      operationId: admin_students_retrieve
+      operationId: api_v1_admin_students_retrieve
       description: GET/PATCH /admin/students/ — profiles are created by onboarding/seed.
       parameters:
       - in: path
@@ -1945,7 +1945,7 @@ paths:
         description: یک مقداد عدد یکتا که این student profile را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -1957,7 +1957,7 @@ paths:
                 $ref: '#/components/schemas/StudentProfile'
           description: ''
     patch:
-      operationId: admin_students_partial_update
+      operationId: api_v1_admin_students_partial_update
       description: GET/PATCH /admin/students/ — profiles are created by onboarding/seed.
       parameters:
       - in: path
@@ -1967,7 +1967,7 @@ paths:
         description: یک مقداد عدد یکتا که این student profile را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -1991,11 +1991,11 @@ paths:
           description: ''
   /api/v1/admin/students/import/confirm/:
     post:
-      operationId: admin_students_import_confirm_create
+      operationId: api_v1_admin_students_import_confirm_create
       description: POST /api/v1/admin/students/import/confirm/ — execute a validated
         plan.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           multipart/form-data:
@@ -2018,11 +2018,11 @@ paths:
           description: ''
   /api/v1/admin/students/import/inspect/:
     post:
-      operationId: admin_students_import_inspect_create
+      operationId: api_v1_admin_students_import_inspect_create
       description: POST /api/v1/admin/students/import/inspect/ — sheets, headers,
         samples.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           multipart/form-data:
@@ -2045,10 +2045,10 @@ paths:
           description: ''
   /api/v1/admin/students/import/reports/:
     get:
-      operationId: admin_students_import_reports_retrieve
+      operationId: api_v1_admin_students_import_reports_retrieve
       description: GET /api/v1/admin/students/import/reports/ — audit trail of imports.
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2061,10 +2061,10 @@ paths:
           description: ''
   /api/v1/admin/students/import/template/:
     get:
-      operationId: admin_students_import_template_retrieve
+      operationId: api_v1_admin_students_import_template_retrieve
       description: GET /api/v1/admin/students/import/template/ — the official .xlsx.
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2078,10 +2078,10 @@ paths:
           description: قالب رسمی بارگذاری گروهی دانشجویان (xlsx).
   /api/v1/admin/students/import/validate/:
     post:
-      operationId: admin_students_import_validate_create
+      operationId: api_v1_admin_students_import_validate_create
       description: POST /api/v1/admin/students/import/validate/ — dry-run preview.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           multipart/form-data:
@@ -2104,7 +2104,7 @@ paths:
           description: ''
   /api/v1/admin/terms/:
     get:
-      operationId: admin_terms_list
+      operationId: api_v1_admin_terms_list
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - name: page
@@ -2120,7 +2120,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2132,10 +2132,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedAcademicTermList'
           description: ''
     post:
-      operationId: admin_terms_create
+      operationId: api_v1_admin_terms_create
       description: Override ``list`` to log duration, SQL query count and result count.
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -2160,7 +2160,7 @@ paths:
           description: ''
   /api/v1/admin/terms/{id}/:
     get:
-      operationId: admin_terms_retrieve
+      operationId: api_v1_admin_terms_retrieve
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -2170,7 +2170,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic term را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2182,7 +2182,7 @@ paths:
                 $ref: '#/components/schemas/AcademicTerm'
           description: ''
     patch:
-      operationId: admin_terms_partial_update
+      operationId: api_v1_admin_terms_partial_update
       description: Override ``list`` to log duration, SQL query count and result count.
       parameters:
       - in: path
@@ -2192,7 +2192,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic term را شناسایی میکند.
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -2216,7 +2216,7 @@ paths:
           description: ''
   /api/v1/admin/users/:
     get:
-      operationId: admin_users_list
+      operationId: api_v1_admin_users_list
       description: GET/POST /api/v1/admin/users/ — ADMIN+ (docs/api/admin.md).
       parameters:
       - name: page
@@ -2232,7 +2232,7 @@ paths:
         schema:
           type: integer
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2244,10 +2244,10 @@ paths:
                 $ref: '#/components/schemas/PaginatedMeList'
           description: ''
     post:
-      operationId: admin_users_create
+      operationId: api_v1_admin_users_create
       description: GET/POST /api/v1/admin/users/ — ADMIN+ (docs/api/admin.md).
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -2272,7 +2272,7 @@ paths:
           description: ''
   /api/v1/admin/users/{id}/:
     get:
-      operationId: admin_users_retrieve
+      operationId: api_v1_admin_users_retrieve
       description: GET/PATCH/DELETE /api/v1/admin/users/{id}/ — soft delete = deactivate.
       parameters:
       - in: path
@@ -2281,7 +2281,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2293,7 +2293,7 @@ paths:
                 $ref: '#/components/schemas/Me'
           description: ''
     put:
-      operationId: admin_users_update
+      operationId: api_v1_admin_users_update
       description: GET/PATCH/DELETE /api/v1/admin/users/{id}/ — soft delete = deactivate.
       parameters:
       - in: path
@@ -2302,7 +2302,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -2325,7 +2325,7 @@ paths:
                 $ref: '#/components/schemas/AdminUserUpdate'
           description: ''
     patch:
-      operationId: admin_users_partial_update
+      operationId: api_v1_admin_users_partial_update
       description: GET/PATCH/DELETE /api/v1/admin/users/{id}/ — soft delete = deactivate.
       parameters:
       - in: path
@@ -2334,7 +2334,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       requestBody:
         content:
           application/json:
@@ -2357,7 +2357,7 @@ paths:
                 $ref: '#/components/schemas/Me'
           description: ''
     delete:
-      operationId: admin_users_destroy
+      operationId: api_v1_admin_users_destroy
       description: GET/PATCH/DELETE /api/v1/admin/users/{id}/ — soft delete = deactivate.
       parameters:
       - in: path
@@ -2366,7 +2366,7 @@ paths:
           type: integer
         required: true
       tags:
-      - admin
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2375,29 +2375,69 @@ paths:
           description: No response body
   /api/v1/ai/ask/:
     post:
-      operationId: ai_ask_create
+      operationId: api_v1_ai_ask_create
+      summary: Ask the assistant (JSON answer)
       tags:
       - ai
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+        required: true
       security:
       - jwtAuth: []
       - cookieAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AskResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
   /api/v1/ai/ask/stream/:
     post:
-      operationId: ai_ask_stream_create
+      operationId: api_v1_ai_ask_stream_create
+      summary: Ask the assistant (server-sent events stream)
       tags:
       - ai
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+        required: true
       security:
       - jwtAuth: []
       - cookieAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ''
   /api/v1/announcements/:
     get:
-      operationId: announcements_list
+      operationId: api_v1_announcements_list
       description: |-
         Public feed: published, not yet expired, audience matching the caller.
 
@@ -2418,7 +2458,7 @@ paths:
         schema:
           type: integer
       tags:
-      - announcements
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2431,7 +2471,7 @@ paths:
           description: ''
   /api/v1/announcements/{id}/:
     get:
-      operationId: announcements_retrieve
+      operationId: api_v1_announcements_retrieve
       description: |-
         Public feed: published, not yet expired, audience matching the caller.
 
@@ -2446,7 +2486,7 @@ paths:
         description: یک مقداد عدد یکتا که این announcement را شناسایی میکند.
         required: true
       tags:
-      - announcements
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2459,7 +2499,7 @@ paths:
           description: ''
   /api/v1/auth/login/:
     post:
-      operationId: auth_login_create
+      operationId: api_v1_auth_login_create
       description: POST /api/v1/auth/login/ — email + password (ADR-014 decision 1).
       tags:
       - auth
@@ -2487,7 +2527,7 @@ paths:
           description: ''
   /api/v1/auth/logout/:
     post:
-      operationId: auth_logout_create
+      operationId: api_v1_auth_logout_create
       description: POST /api/v1/auth/logout/ — revoke family + clear cookie, idempotent.
       tags:
       - auth
@@ -2498,7 +2538,7 @@ paths:
           description: No response body
   /api/v1/auth/me/:
     get:
-      operationId: auth_me_retrieve
+      operationId: api_v1_auth_me_retrieve
       description: GET /api/v1/auth/me/ — who the Bearer token belongs to.
       tags:
       - auth
@@ -2514,7 +2554,7 @@ paths:
           description: ''
   /api/v1/auth/password-change/:
     post:
-      operationId: auth_password_change_create
+      operationId: api_v1_auth_password_change_create
       description: |-
         POST /api/v1/auth/password-change/ — self-service password change.
 
@@ -2550,7 +2590,7 @@ paths:
           description: ''
   /api/v1/auth/refresh/:
     post:
-      operationId: auth_refresh_create
+      operationId: api_v1_auth_refresh_create
       description: POST /api/v1/auth/refresh/ — CSRF-protected, rotating (ADR-014).
       tags:
       - auth
@@ -2566,7 +2606,7 @@ paths:
           description: ''
   /api/v1/auth/register/:
     post:
-      operationId: auth_register_create
+      operationId: api_v1_auth_register_create
       description: POST /api/v1/auth/register/ — public, always creates role STUDENT.
       tags:
       - auth
@@ -2594,7 +2634,7 @@ paths:
           description: ''
   /api/v1/calendar/events/:
     get:
-      operationId: calendar_events_list
+      operationId: api_v1_calendar_events_list
       description: Public calendar (docs/04 section 6) — published events only.
       parameters:
       - name: page
@@ -2610,7 +2650,7 @@ paths:
         schema:
           type: integer
       tags:
-      - calendar
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2623,7 +2663,7 @@ paths:
           description: ''
   /api/v1/calendar/events/{id}/:
     get:
-      operationId: calendar_events_retrieve
+      operationId: api_v1_calendar_events_retrieve
       description: Public calendar (docs/04 section 6) — published events only.
       parameters:
       - in: path
@@ -2633,7 +2673,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic event را شناسایی میکند.
         required: true
       tags:
-      - calendar
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2646,7 +2686,7 @@ paths:
           description: ''
   /api/v1/conversations/:
     get:
-      operationId: conversations_list
+      operationId: api_v1_conversations_list
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2669,7 +2709,7 @@ paths:
         schema:
           type: integer
       tags:
-      - conversations
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2681,7 +2721,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedConversationListList'
           description: ''
     post:
-      operationId: conversations_create
+      operationId: api_v1_conversations_create
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2691,7 +2731,7 @@ paths:
         The inner atomic block saves the surrounding transaction - without it an
         IntegrityError would poison the test runner's outer transaction.
       tags:
-      - conversations
+      - api
       requestBody:
         content:
           application/json:
@@ -2715,7 +2755,7 @@ paths:
           description: ''
   /api/v1/conversations/{id}/:
     get:
-      operationId: conversations_retrieve
+      operationId: api_v1_conversations_retrieve
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2729,9 +2769,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2743,7 +2784,7 @@ paths:
                 $ref: '#/components/schemas/ConversationDetail'
           description: ''
     put:
-      operationId: conversations_update
+      operationId: api_v1_conversations_update
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2757,9 +2798,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       requestBody:
         content:
           application/json:
@@ -2782,7 +2824,7 @@ paths:
                 $ref: '#/components/schemas/ConversationCreate'
           description: ''
     patch:
-      operationId: conversations_partial_update
+      operationId: api_v1_conversations_partial_update
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2796,9 +2838,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       requestBody:
         content:
           application/json:
@@ -2821,7 +2864,7 @@ paths:
                 $ref: '#/components/schemas/ConversationCreate'
           description: ''
     delete:
-      operationId: conversations_destroy
+      operationId: api_v1_conversations_destroy
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2835,9 +2878,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2846,7 +2890,7 @@ paths:
           description: No response body
   /api/v1/conversations/{id}/messages/:
     get:
-      operationId: conversations_messages_retrieve
+      operationId: api_v1_conversations_messages_retrieve
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2860,9 +2904,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2874,7 +2919,7 @@ paths:
                 $ref: '#/components/schemas/ConversationList'
           description: ''
     post:
-      operationId: conversations_messages_create
+      operationId: api_v1_conversations_messages_create
       description: |-
         Map database constraint violations on write to the documented 409.
 
@@ -2888,9 +2933,10 @@ paths:
         name: id
         schema:
           type: string
+          pattern: ^[0-9]+$
         required: true
       tags:
-      - conversations
+      - api
       requestBody:
         content:
           application/json:
@@ -2914,7 +2960,7 @@ paths:
           description: ''
   /api/v1/course-offerings/:
     get:
-      operationId: course_offerings_list
+      operationId: api_v1_course_offerings_list
       description: Public offerings (`?term=current|<id>`, `?course=<id|code>`, `?professor=<id>`).
       parameters:
       - name: page
@@ -2930,7 +2976,7 @@ paths:
         schema:
           type: integer
       tags:
-      - course-offerings
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2943,7 +2989,7 @@ paths:
           description: ''
   /api/v1/course-offerings/{id}/:
     get:
-      operationId: course_offerings_retrieve
+      operationId: api_v1_course_offerings_retrieve
       description: Public offerings (`?term=current|<id>`, `?course=<id|code>`, `?professor=<id>`).
       parameters:
       - in: path
@@ -2953,7 +2999,7 @@ paths:
         description: یک مقداد عدد یکتا که این course offering را شناسایی میکند.
         required: true
       tags:
-      - course-offerings
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2966,7 +3012,7 @@ paths:
           description: ''
   /api/v1/courses/:
     get:
-      operationId: courses_list
+      operationId: api_v1_courses_list
       description: Public course catalog with prerequisites (docs/04 section 6).
       parameters:
       - name: page
@@ -2982,7 +3028,7 @@ paths:
         schema:
           type: integer
       tags:
-      - courses
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -2995,7 +3041,7 @@ paths:
           description: ''
   /api/v1/courses/{id}/:
     get:
-      operationId: courses_retrieve
+      operationId: api_v1_courses_retrieve
       description: Public course catalog with prerequisites (docs/04 section 6).
       parameters:
       - in: path
@@ -3005,7 +3051,7 @@ paths:
         description: یک مقداد عدد یکتا که این course را شناسایی میکند.
         required: true
       tags:
-      - courses
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3018,7 +3064,7 @@ paths:
           description: ''
   /api/v1/departments/:
     get:
-      operationId: departments_list
+      operationId: api_v1_departments_list
       description: |-
         Public active-department list (docs/04 section 6).
 
@@ -3039,7 +3085,7 @@ paths:
         schema:
           type: integer
       tags:
-      - departments
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3052,7 +3098,7 @@ paths:
           description: ''
   /api/v1/departments/{id}/:
     get:
-      operationId: departments_retrieve
+      operationId: api_v1_departments_retrieve
       description: |-
         Public active-department list (docs/04 section 6).
 
@@ -3067,7 +3113,7 @@ paths:
         description: یک مقداد عدد یکتا که این department را شناسایی میکند.
         required: true
       tags:
-      - departments
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3080,7 +3126,7 @@ paths:
           description: ''
   /api/v1/exams/:
     get:
-      operationId: exams_list
+      operationId: api_v1_exams_list
       description: Public exam schedule (docs/04 section 6).
       parameters:
       - name: page
@@ -3096,7 +3142,7 @@ paths:
         schema:
           type: integer
       tags:
-      - exams
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3109,7 +3155,7 @@ paths:
           description: ''
   /api/v1/exams/{id}/:
     get:
-      operationId: exams_retrieve
+      operationId: api_v1_exams_retrieve
       description: Public exam schedule (docs/04 section 6).
       parameters:
       - in: path
@@ -3119,7 +3165,7 @@ paths:
         description: یک مقداد عدد یکتا که این exam را شناسایی میکند.
         required: true
       tags:
-      - exams
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3132,7 +3178,7 @@ paths:
           description: ''
   /api/v1/health/:
     get:
-      operationId: health_retrieve
+      operationId: api_v1_health_retrieve
       description: '``GET /api/v1/health/`` — unauthenticated liveness + database
         check.'
       summary: Liveness and dependency health
@@ -3153,9 +3199,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorEnvelope'
           description: ''
+  /api/v1/health/deep/:
+    get:
+      operationId: api_v1_health_deep_retrieve
+      description: |-
+        ``GET /health/deep`` — database, Redis, Celery worker, storage, AI config.
+
+        Optional AI provider availability never fails the check (docs/12 section 5);
+        the demo's required dependencies (database, broker, worker, storage) do.
+      summary: Deep dependency health
+      tags:
+      - system
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthDeepResponse'
+          description: ''
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
+  /api/v1/health/live/:
+    get:
+      operationId: api_v1_health_live_retrieve
+      description: '``GET /health/live`` — process liveness only; no dependency checks.'
+      summary: Liveness probe
+      tags:
+      - system
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthLiveResponse'
+          description: ''
+  /api/v1/health/ready/:
+    get:
+      operationId: api_v1_health_ready_retrieve
+      description: '``GET /health/ready`` — 200 only when the required database is
+        reachable.'
+      summary: Readiness probe (required database)
+      tags:
+      - system
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthReadyResponse'
+          description: ''
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
   /api/v1/notifications/:
     get:
-      operationId: notifications_list
+      operationId: api_v1_notifications_list
       summary: یادآوری‌های فعال کاربر
       parameters:
       - name: page
@@ -3188,7 +3299,7 @@ paths:
           description: ''
   /api/v1/notifications/{id}/mark-read/:
     post:
-      operationId: notifications_mark_read_create
+      operationId: api_v1_notifications_mark_read_create
       summary: علامت‌گذاری یک یادآوری به‌عنوان خوانده‌شده
       parameters:
       - in: path
@@ -3210,7 +3321,7 @@ paths:
           description: ''
   /api/v1/notifications/mark-all-read/:
     post:
-      operationId: notifications_mark_all_read_create
+      operationId: api_v1_notifications_mark_all_read_create
       summary: علامت‌گذاری همه یادآوری‌های فعال به‌عنوان خوانده‌شده
       tags:
       - notifications
@@ -3226,7 +3337,7 @@ paths:
           description: ''
   /api/v1/notifications/unread-count/:
     get:
-      operationId: notifications_unread_count_retrieve
+      operationId: api_v1_notifications_unread_count_retrieve
       summary: تعداد یادآوری‌های ناخوانده
       tags:
       - notifications
@@ -3242,7 +3353,7 @@ paths:
           description: ''
   /api/v1/professors/:
     get:
-      operationId: professors_list
+      operationId: api_v1_professors_list
       description: Public professor catalog (docs/04 section 6).
       parameters:
       - name: page
@@ -3258,7 +3369,7 @@ paths:
         schema:
           type: integer
       tags:
-      - professors
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3271,7 +3382,7 @@ paths:
           description: ''
   /api/v1/professors/{id}/:
     get:
-      operationId: professors_retrieve
+      operationId: api_v1_professors_retrieve
       description: Public professor catalog (docs/04 section 6).
       parameters:
       - in: path
@@ -3281,7 +3392,7 @@ paths:
         description: یک مقداد عدد یکتا که این professor را شناسایی میکند.
         required: true
       tags:
-      - professors
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3294,7 +3405,7 @@ paths:
           description: ''
   /api/v1/students/me/:
     get:
-      operationId: students_me_retrieve
+      operationId: api_v1_students_me_retrieve
       description: |-
         GET/PATCH /students/me/ — profile of the caller.
 
@@ -3303,7 +3414,7 @@ paths:
         them but never write them — direct PATCH attempts are rejected with 403.
         Admins keep full write access via the admin student-profile surface.
       tags:
-      - students
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3315,7 +3426,7 @@ paths:
                 $ref: '#/components/schemas/StudentProfile'
           description: ''
     patch:
-      operationId: students_me_partial_update
+      operationId: api_v1_students_me_partial_update
       description: |-
         GET/PATCH /students/me/ — profile of the caller.
 
@@ -3324,7 +3435,7 @@ paths:
         them but never write them — direct PATCH attempts are rejected with 403.
         Admins keep full write access via the admin student-profile surface.
       tags:
-      - students
+      - api
       requestBody:
         content:
           application/json:
@@ -3348,17 +3459,35 @@ paths:
           description: ''
   /api/v1/students/me/course-selection/:
     post:
-      operationId: students_me_course_selection_create
+      operationId: api_v1_students_me_course_selection_create
       description: |-
         POST /students/me/course-selection/ — Phase 11 eligibility check.
 
-        Pure rules engine (``apps.students.course_selection``): the decision and
-        every machine-readable rejection reason come from PostgreSQL records only.
+        The student types a course code *or* a Persian course name in
+        ``course_query``; ``apps.students.course_lookup`` resolves it against the
+        real catalog first (exact code, exact normalized title, unique containment,
+        otherwise an ambiguity list / not-found). Only then does the pure rules
+        engine (``apps.students.course_selection``) run on the *resolved* code, so
+        the decision and every machine-readable rejection reason come from
+        PostgreSQL records only and no rule is bypassed.
+
         The response embeds a deterministic composed explanation (AGENTS.md section
         8 — the LLM may explain, never decide; the assistant pipeline reuses
         ``SelectionExplanationService`` for its verdict-safe verbalisation).
+      summary: Course selection eligibility check
       tags:
       - students
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseSelectionRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CourseSelectionRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CourseSelectionRequest'
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3370,12 +3499,24 @@ paths:
                 type: object
                 additionalProperties: {}
           description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+          description: ''
   /api/v1/students/planner/:
     get:
-      operationId: students_planner_list
+      operationId: api_v1_students_planner_list
       description: GET/POST /students/planner/ — list or add planner items for a term.
       tags:
-      - students
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3389,10 +3530,10 @@ paths:
                   $ref: '#/components/schemas/PlannerItem'
           description: ''
     post:
-      operationId: students_planner_create
+      operationId: api_v1_students_planner_create
       description: GET/POST /students/planner/ — list or add planner items for a term.
       tags:
-      - students
+      - api
       requestBody:
         content:
           application/json:
@@ -3417,7 +3558,7 @@ paths:
           description: ''
   /api/v1/students/planner/{id}/:
     patch:
-      operationId: students_planner_partial_update
+      operationId: api_v1_students_planner_partial_update
       description: PATCH/DELETE /students/planner/{id}/ — edit (swap) or remove a
         row.
       parameters:
@@ -3427,7 +3568,7 @@ paths:
           type: integer
         required: true
       tags:
-      - students
+      - api
       requestBody:
         content:
           application/json:
@@ -3450,7 +3591,7 @@ paths:
                 $ref: '#/components/schemas/PlannerItem'
           description: ''
     delete:
-      operationId: students_planner_destroy
+      operationId: api_v1_students_planner_destroy
       description: PATCH/DELETE /students/planner/{id}/ — edit (swap) or remove a
         row.
       parameters:
@@ -3460,7 +3601,7 @@ paths:
           type: integer
         required: true
       tags:
-      - students
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3469,7 +3610,7 @@ paths:
           description: No response body
   /api/v1/terms/:
     get:
-      operationId: terms_list
+      operationId: api_v1_terms_list
       description: Public term list/detail (docs/04 section 6).
       parameters:
       - name: page
@@ -3485,7 +3626,7 @@ paths:
         schema:
           type: integer
       tags:
-      - terms
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3498,7 +3639,7 @@ paths:
           description: ''
   /api/v1/terms/{id}/:
     get:
-      operationId: terms_retrieve
+      operationId: api_v1_terms_retrieve
       description: Public term list/detail (docs/04 section 6).
       parameters:
       - in: path
@@ -3508,7 +3649,7 @@ paths:
         description: یک مقداد عدد یکتا که این academic term را شناسایی میکند.
         required: true
       tags:
-      - terms
+      - api
       security:
       - jwtAuth: []
       - cookieAuth: []
@@ -3629,6 +3770,18 @@ components:
       - semester_type
       - starts_at
       - updated_at
+    AccountRoleEnum:
+      enum:
+      - STUDENT
+      - PROFESSOR
+      - ADMIN
+      - SUPERADMIN
+      type: string
+      description: |-
+        * `STUDENT` - Student
+        * `PROFESSOR` - Professor
+        * `ADMIN` - Admin
+        * `SUPERADMIN` - Superadmin
     AdminUserCreate:
       type: object
       description: |-
@@ -3655,7 +3808,7 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/Role209Enum'
+          $ref: '#/components/schemas/AccountRoleEnum'
         student_number:
           type: string
           maxLength: 16
@@ -3699,7 +3852,7 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/Role209Enum'
+          $ref: '#/components/schemas/AccountRoleEnum'
         is_active:
           type: boolean
       required:
@@ -3781,6 +3934,60 @@ components:
       - term
       - title
       - updated_at
+    AskRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          description: Persian question text.
+        message_id:
+          type: integer
+          nullable: true
+          description: Optional conversation message id to persist the routing mode
+            on.
+      required:
+      - question
+    AskResponse:
+      type: object
+      properties:
+        mode:
+          type: string
+          description: STRUCTURED, RAG, HYBRID, GENERAL or OUT_OF_SCOPE.
+        answer:
+          type: string
+        sources:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        structured_evidence:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        document_evidence:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        insufficient_evidence:
+          type: boolean
+        evidence_conflicts:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        provider:
+          type: object
+          additionalProperties: {}
+          description: Provider name/model id; never the API key.
+        latency_ms:
+          type: integer
+      required:
+      - answer
+      - insufficient_evidence
+      - mode
+      - provider
     AuditActionEnum:
       enum:
       - CREATE
@@ -4226,6 +4433,24 @@ components:
       - id
       - prerequisite_course
       - prerequisite_course_id
+    CourseSelectionRequest:
+      type: object
+      description: |-
+        Body accepted by ``POST /students/me/course-selection/``.
+
+        ``course_query`` is the preferred field (code or Persian name);
+        ``course_code`` remains accepted for older clients. The response is the
+        rules-engine decision dict, documented as a free-form object because its
+        reason codes are versioned by the engine contract.
+      properties:
+        course_query:
+          type: string
+        course_code:
+          type: string
+        extra_course_codes:
+          type: array
+          items:
+            type: string
     DegreeLevelEnum:
       enum:
       - BACHELOR
@@ -4661,6 +4886,107 @@ components:
       - ai_provider
       - database
       - database_latency_ms
+    HealthDeepChecks:
+      type: object
+      properties:
+        database:
+          $ref: '#/components/schemas/HealthDependencyStatus'
+        redis:
+          $ref: '#/components/schemas/HealthDependencyStatus'
+        worker:
+          $ref: '#/components/schemas/HealthWorkerStatus'
+        storage:
+          $ref: '#/components/schemas/HealthWorkerStatus'
+        ai_provider:
+          $ref: '#/components/schemas/HealthWorkerStatus'
+      required:
+      - ai_provider
+      - database
+      - redis
+      - storage
+      - worker
+    HealthDeepResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        service:
+          type: string
+        version:
+          type: string
+        request_id:
+          type: string
+          description: Correlation id (docs/12 section 4).
+        checks:
+          $ref: '#/components/schemas/HealthDeepChecks'
+      required:
+      - checks
+      - request_id
+      - service
+      - status
+      - version
+    HealthDependencyStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: '''ok'', ''unavailable'', ''degraded'' or ''eager''.'
+        latency_ms:
+          type: number
+          format: double
+          nullable: true
+      required:
+      - status
+    HealthLiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        service:
+          type: string
+        version:
+          type: string
+        request_id:
+          type: string
+          description: Correlation id (docs/12 section 4).
+      required:
+      - request_id
+      - service
+      - status
+      - version
+    HealthReadyChecks:
+      type: object
+      properties:
+        database:
+          type: string
+          description: '''ok'' or ''unavailable''.'
+        database_latency_ms:
+          type: number
+          format: double
+          nullable: true
+      required:
+      - database
+      - database_latency_ms
+    HealthReadyResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        service:
+          type: string
+        version:
+          type: string
+        request_id:
+          type: string
+          description: Correlation id (docs/12 section 4).
+        checks:
+          $ref: '#/components/schemas/HealthReadyChecks'
+      required:
+      - checks
+      - request_id
+      - service
+      - status
+      - version
     HealthResponse:
       type: object
       properties:
@@ -4681,6 +5007,14 @@ components:
       - service
       - status
       - version
+    HealthWorkerStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: '''ok'', ''unavailable'' or ''eager''.'
+      required:
+      - status
     ImportConfirm:
       type: object
       description: 'Confirm step: the exact file/mapping that was previewed, plus
@@ -4812,7 +5146,7 @@ components:
           maxLength: 150
         role:
           allOf:
-          - $ref: '#/components/schemas/Role209Enum'
+          - $ref: '#/components/schemas/AccountRoleEnum'
           readOnly: true
         is_active:
           type: boolean
@@ -5476,7 +5810,7 @@ components:
           type: string
           maxLength: 150
         role:
-          $ref: '#/components/schemas/Role209Enum'
+          $ref: '#/components/schemas/AccountRoleEnum'
         is_active:
           type: boolean
     PatchedAnnouncement:
@@ -6301,18 +6635,6 @@ components:
       required:
       - email
       - password
-    Role209Enum:
-      enum:
-      - STUDENT
-      - PROFESSOR
-      - ADMIN
-      - SUPERADMIN
-      type: string
-      description: |-
-        * `STUDENT` - Student
-        * `PROFESSOR` - Professor
-        * `ADMIN` - Admin
-        * `SUPERADMIN` - Superadmin
     SemesterTypeEnum:
       enum:
       - FIRST

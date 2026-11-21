@@ -123,7 +123,7 @@ export const nav = {
   calendar: 'تقویم آموزشی',
   exams: 'امتحانات',
   announcements: 'اطلاعیه‌ها',
-  selection: 'انتخاب درس',
+  selection: 'دستیار انتخاب درس',
   notifications: 'یادآوری‌ها',
   profile: 'پروفایل دانشجویی',
   admin: 'مدیریت',
@@ -137,13 +137,25 @@ export const selectionPage = {
   title: 'دستیار انتخاب واحد',
   subtitle:
     'بررسی قطعی شرایط برداشتن هر درس بر پایه پیش‌نیاز، ارائه ترم جاری، سقف واحد و برنامه فعلی شما.',
-  courseCodeLabel: 'کد درس',
-  courseCodePlaceholder: 'مثلاً 1916003',
+  courseQueryLabel: 'کد یا نام درس',
+  courseQueryPlaceholder: 'مثلاً 1916003 یا نظریه زبان‌ها و ماشین‌ها',
+  courseQueryHint:
+    'می‌توانید کد درس یا نام فارسی آن را وارد کنید؛ نیم‌فاصله، فاصله و ی/ک عربی هم پذیرفته می‌شود.',
   extrasLabel: 'درس‌های فرضی (اختیاری)',
   extrasPlaceholder: 'مثلاً 1916001، 1916002',
   extrasHint: 'برای محاسبه «اگر این درس‌ها را هم بردارم»، کدها را با کاما جدا کنید.',
   check: 'بررسی کنم',
   checking: 'در حال بررسی…',
+  ambiguousTitle: 'چند درس با این نام پیدا شد',
+  ambiguousHint:
+    'درس موردنظر را خودتان انتخاب کنید تا شرایطش بررسی شود؛ هیچ درسی به‌صورت خودکار انتخاب نمی‌شود.',
+  ambiguousAria: 'دروس یافت‌شده برای انتخاب',
+  ambiguousMore:
+    'تطابق‌های بیشتری هم وجود دارد؛ برای فهرست کوتاه‌تر، نام دقیق‌تری وارد کنید.',
+  selectCandidate: 'انتخاب و بررسی',
+  notFoundTitle: 'درسی پیدا نشد',
+  notFoundMessage:
+    'درسی با این کد یا نام پیدا نشد. کد درس یا نام دقیق آن را وارد کنید.',
   eligibleBadge: 'مجاز',
   ineligibleBadge: 'غیرمجاز',
   creditUnit: 'واحد',
@@ -160,7 +172,7 @@ export const selectionPage = {
   overLimit: 'بیشتر از سقف مجاز',
   engineLabel: 'نسخه موتور قواعد',
   emptyHint:
-    'کد درس را وارد کنید و «بررسی کنم» را بزنید؛ نتیجه مستقیماً از موتور قاعده‌محور سامانه می‌آید.',
+    'کد یا نام درس را وارد کنید و «بررسی کنم» را بزنید؛ نتیجه مستقیماً از موتور قاعده‌محور سامانه می‌آید.',
 } as const
 
 export const notificationsPage = {

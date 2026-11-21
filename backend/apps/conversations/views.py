@@ -27,6 +27,11 @@ from rest_framework.response import Response
 class ConversationViewSet(ConflictOnIntegrityMixin, viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     pagination_class = StandardResultsSetPagination
+    # Schema introspection needs a queryset; actual access still goes through
+    # get_queryset(), which scopes rows to the requesting user.
+    queryset = Conversation.objects.all()
+    serializer_class = ConversationListSerializer
+    lookup_value_regex = "[0-9]+"
 
     def get_queryset(self):
         qs = Conversation.objects.filter(user=self.request.user)

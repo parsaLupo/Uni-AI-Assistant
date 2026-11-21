@@ -28,16 +28,25 @@ def _transition(document: Document, status: str, **fields) -> None:
     max_retries=3,
     default_retry_delay=10,
 )
-def process_document(self, document_id: int, idempotency_key: str | None = None) -> dict:
+def process_document(
+    self,
+    document_id: int,
+    idempotency_key: str | None = None,
+    request_id: str | None = None,
+) -> dict:
+    # Correlation id from the HTTP request that enqueued this task (docs/12
+    # section 4). Outside a request it defaults to "-" like the API logs.
+    correlation_id = request_id or "-"
+    log = logging.LoggerAdapter(logger, {"request_id": correlation_id})
     started = timezone.now()
     try:
         document = Document.objects.get(pk=document_id)
     except Document.DoesNotExist:
-        logger.error("document_not_found document_id=%s", document_id)
+        log.error("document_not_found document_id=%s", document_id)
         return {"document_id": document_id, "status": "missing"}
 
     if document.status in {DocumentStatus.INDEXED, DocumentStatus.ACTIVE}:
-        logger.info("document_already_processed document_id=%s", document_id)
+        log.info("document_already_processed document_id=%s", document_id)
         return {"document_id": document_id, "status": document.status}
 
     adapter = get_storage_adapter()
@@ -46,7 +55,7 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
     document.save(update_fields=["attempt_count", "updated_at"])
 
     try:
-        logger.info("ingestion_stage stage=validating document_id=%s", document_id)
+        log.info("ingestion_stage stage=validating document_id=%s", document_id)
         _transition(document, DocumentStatus.VALIDATING)
         if not adapter.exists(document.storage_key):
             raise ValueError("stored file is missing")
@@ -58,13 +67,14 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
         if idempotency_key and document.checksum and idempotency_key != document.checksum:
             raise ValueError("checksum mismatch")
 
-        logger.info("ingestion_stage stage=processing document_id=%s", document_id)
+        log.info("ingestion_stage stage=processing document_id=%s", document_id)
         result = ingest_document(document_id)
         duration_ms = int((timezone.now() - started).total_seconds() * 1000)
         metrics_logger.info(
             "ingestion_metric",
             extra={
                 "event": "ingestion_completed",
+                "request_id": correlation_id,
                 "document_id": document_id,
                 "stage": "active",
                 "attempt": attempt,
@@ -86,11 +96,14 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
             document.save(
                 update_fields=["status", "processing_error", "failure_stage", "updated_at"]
             )
-        logger.exception("ingestion_failed document_id=%s stage=%s", document_id, failure_stage)
+        log.exception(
+            "ingestion_failed document_id=%s stage=%s", document_id, failure_stage
+        )
         metrics_logger.info(
             "ingestion_metric",
             extra={
                 "event": "ingestion_failed",
+                "request_id": correlation_id,
                 "document_id": document_id,
                 "stage": failure_stage,
                 "attempt": attempt,
@@ -99,4 +112,3 @@ def process_document(self, document_id: int, idempotency_key: str | None = None)
         if attempt < 3 and not isinstance(exc, ValueError):
             raise self.retry(exc=exc, countdown=min(60, 2 ** attempt)) from exc
         return {"document_id": document_id, "status": DocumentStatus.FAILED}
-
